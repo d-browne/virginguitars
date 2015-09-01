@@ -123,3 +123,16 @@ body {
 #menuList a:hover {
 	text-decoration: underline;
 }
+
+#contentBox {
+	border: 1px solid black;
+	border-top: none;
+	overflow: hidden;
+}
+
+#leftColumn {
+	float: left;
+	border: 1px solid green;
+	width: 350px;
+	height: 500px;
+}
