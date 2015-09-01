@@ -160,3 +160,20 @@ body {
 #rightColumn h1 {
 	background: linear-gradient(to right, #486D88 , #032136);
 }
+
+#categoryBox {
+
+	border: 1px solid black;
+	border-top: none;
+	background-color: #123752;
+}
+
+.categoryImage {
+	display: inline-block;
+	border: 1px solid #5A86FF;
+	width: 120px;
+	height: 30px;
+	margin-left: 8%;
+	border-radius: 8px;
+	margin-top: 4px;
+}
