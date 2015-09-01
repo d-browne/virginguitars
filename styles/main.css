@@ -128,26 +128,18 @@ body {
 	border: 1px solid black;
 	border-top: none;
 	overflow: hidden;
-	background-color: #486D88;
 }
 
 #leftColumn {
 	float: left;
-	border-right: 1px solid black;
-	width: 30%;
+	border: 1px solid green;
+	width: 337px;
 	height: 500px;
 }
 
 #rightColumn {
-	margin-left: 30%;
-	width: 70%;
-}
-
-#pageFooter {
-	border: 1px solid black;
-	border-top: none;
-	background: linear-gradient(to right, #123752 , #032137);
-	text-align: center;
-	color: white;
-	font-size: 70%;
+	float: right;
+	width: 512px;
+	height: 500px;
+	border: 1px solid red;
 }
