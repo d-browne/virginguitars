@@ -1,0 +1,125 @@
+@charset "utf-8";
+body {
+	background-color: #29516D;
+	font-family: Arial;
+}
+#mainBox {
+	margin: auto;
+	width: 855px;
+}
+
+.logoImage {
+	display: inline-block;
+	vertical-align: middle;
+}
+.mainHeader {
+	display: inline-block;
+	font-size: 72px;
+	font-family: Arial;
+	color: white;
+}
+
+#searchBox {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	border-radius: 10px;
+	padding-left: 3px;
+	border: 2px solid white;
+	background-color: white;
+}
+
+#checkOutBox {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+#cartIcon {
+	vertical-align: middle;
+}
+
+#cartItems {
+	background-color: red;
+	border: 1px red solid;
+	border-radius: 4px;
+	color: white;
+	font-family: Arial;
+	margin-right: 0px;
+}
+
+#checkOutBox #cartItems a:link {
+	color: white;
+	font-size: 15px;
+}
+
+#checkOutBox #cartItems a:hover {
+	color: white;
+	text-decoration: underline;
+	font-size: 15px;
+}
+
+
+#checkoutLink {
+	display: block;
+	padding-right: 1em;
+}
+
+#checkOutBox a:link {
+	color: #D4B96A;
+	text-decoration: none;
+	font-family: Arial;
+	font-size: 12px;
+}
+
+#checkOutBox a:hover {
+	color: #FFE9AA;
+}
+
+#headerBox {
+	border: 1px solid black;
+	background: linear-gradient(to right, #123752 , #032137);
+	position: relative;
+}
+
+#menuBox {
+	background-color: #708EA4;
+	border: 1px solid black;
+	border-top: none;
+}
+
+#menuList ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#menuList li {
+	display:inline-block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-right: 1px solid black;
+	padding-right: 1em;
+	margin-left: -4px;
+}
+
+#menuList #homeItem {
+	margin-left: 0px;
+}
+
+#menuList li:hover {
+	background-color: #486D88;
+}
+
+#menuList a:link {
+	text-decoration: none;
+	color: white;
+	margin-left: 11px;
+}
+
+#menuList a:hover {
+	text-decoration: underline;
+}
