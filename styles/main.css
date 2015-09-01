@@ -144,7 +144,7 @@ body {
 }
 
 #rightColumn {
-	margin-left: 30%;
+	margin-left: 31%;
 	width: 70%;
 }
 
@@ -155,4 +155,8 @@ body {
 	text-align: center;
 	color: white;
 	font-size: 70%;
+}
+
+#rightColumn h1 {
+	background: linear-gradient(to right, #486D88 , #032136);
 }
