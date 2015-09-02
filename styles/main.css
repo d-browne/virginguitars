@@ -259,6 +259,14 @@ footer a {
 	margin: auto;
 	margin-top: 1em;
 }
+.catalogLogoBox:hover {
+	border: 1px solid #FFE9AA;
+	width: 250px;
+	height: 100px;
+	margin: auto;
+	margin-top: 1em;
+}
+
 
 /*logo boxes*/
 #fenderCatalogLogo {
