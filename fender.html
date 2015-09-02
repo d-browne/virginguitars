@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Virgin Guitars - Fender</title>
+<link href="styles/main.css" rel="stylesheet" type="text/css">
+<link href="styles/js-image-slider.css" rel="stylesheet" type="text/css" />
+<script src="scripts/js-image-slider.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<div id="mainBox">
+    	<div id="headerBox">
+        	<a href="index.html"><img src="images/logo.png" width="213" height="200" alt="Virgin Guitars" class="logoImage"></a>
+			<h1 class="mainHeader">Virgin Guitars</h1>
+            <form action="search.html">
+            	<input type="text" id="searchBox" placeholder="Site Search..." />
+             </form>
+        	
+            <div id="checkOutBox">
+            	<span id="cartItems"><a href="cart.html">4</a></span>
+            	<a href="cart.html"><img src="images/cartIcon.png" id="cartIcon" width="32" height="42" alt="Cart"></a>
+                <a href="checkout.html" id="checkoutLink">checkout</a>
+            </div>
+      </div>
+        
+        <div id="menuBox">
+       	  <nav id="menuList">
+          	<ul>
+            	<li id="homeItem"><a href="index.html">Home</a></li>
+                <li><a href="catalog.html">Catalog</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="members.html">Members</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+          </nav>
+        </div>
+        
+        <div id="categoryBox">
+        	<a href="fender.html"><div class="categoryImage" id="fenderCategory"></div></a>
+            <a href="gibson.html"><div class="categoryImage" id="gibsonCategory"></div></a>
+            <a href="bcrich.html"><div class="categoryImage" id="bcRichCategory"></div></a>
+            <a href="jackson.html"><div class="categoryImage" id="jacksonLogo"></div></a>
+        </div>
+        
+        <div id="contentBox">
+            
+            <div id="leftColumn">
+            	<!-- Image slider code goes in here -->
+            	<div id="sliderFrame">
+        			<div id="slider">
+                		<img src="images/guitars/bcRichMockingBirdProX/resized3.jpg" alt=""/>
+            			<img src="images/guitars/bcRichMockingBirdProX/resized4.jpg" alt="" />
+            			<img src="images/guitars/bcRichMockingBirdProX/resized5.jpg" alt="" />
+            			<img src="images/guitars/bcRichMockingBirdProX/resized7.jpg" alt="" />
+        			</div>
+        			<div id="htmlcaption" style="display: none;">
+            			<em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
+        			</div>
+    			</div> 
+            </div>
+                
+            <div id="rightColumn">
+                <h1>Fender</h1>
+                <div class="productBannerLink"><a href="test.html"><div class="catalogLogoBox" 
+                style="background-image:url('images/guitars/fenderAmericanStandardStratocaster/1.jpg');background-size:250px 250px;
+                background-position:0px;"></div>American Standard Stratocaster</a></div>
+                
+                <div class="productBannerLink"><a href="test2.html"><div class="catalogLogoBox" 
+                style="background-image:url('images/guitars/fenderSquireMijStratocaster/1.jpg');background-size:250px 250px;
+                background-position:0px;"></div>Squire MIJ Stratocaster</a></div>
+                
+                <a id="returnToCatalogButton" href="catalog.html">Return to catalog</a>
+                
+            </div>
+        </div>
+            <footer id="pageFooter">Copyright © 2015 <a href="mailto:admin@virginguitars.com">Virgin Guitars</a></footer>
+            
+        </div>
+</body>
+</html>

@@ -296,3 +296,18 @@ footer a {
 #jacksonCatalogLogo:hover {
 	background-image: url('../images/catalog/jacksonLogoMo.png');
 }
+
+.productBannerLink {
+	text-align: center;
+}
+
+.productBannerLink a:link {
+	color: white;
+}
+.productBannerLink a:hover {
+	text-decoration: underline;
+}
+
+#returnToCatalogButton {
+	font-style: italic;
+}
