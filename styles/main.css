@@ -304,8 +304,12 @@ footer a {
 	text-align: center;
 }
 
+.productBannerLink a {
+	color: white
+}
+
 .productBannerLink a:link {
-	color: white;
+	color: white
 }
 .productBannerLink a:vistied {
 	color: white;
@@ -315,7 +319,6 @@ footer a {
 }
 .productBannerLink a:visited:hover {
 	color: white;
-	text-decoration: none;
 }
 
 #returnToCatalogButton {
