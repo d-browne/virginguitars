@@ -288,11 +288,3 @@ footer a {
 #jacksonCatalogLogo:hover {
 	background-image: url('../images/catalog/jacksonLogoMo.png');
 }
-
-/*The follow preloads the category box mouseover images so they don't need to be requsted on mouseover*/
-#categoryBoxImagePreloader {
-	background-image: url('../images/categoryBar/fenderLogoSmall2Mo.png');
-	background-image: url('../images/categoryBar/gibsonLogoSmallMo.png');
-	background-image: url('../images/categoryBar/bcRichLogoSmallMo.jpg');
-	background-image: url('../images/categoryBar/jacksonLogoSmallMo.png');
-}
