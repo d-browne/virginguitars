@@ -250,3 +250,41 @@ footer a {
 	padding-left: 5px;
 	margin-right: 2em;
 }
+
+/*catalog logo box*/
+.catalogLogoBox {
+	border: 1px solid black;
+	width: 250px;
+	height: 100px;
+	margin: auto;
+	margin-top: 1em;
+}
+
+/*logo boxes*/
+#fenderCatalogLogo {
+	background-image: url('../images/catalog/fenderLogo.png');
+}
+#fenderCatalogLogo:hover {
+	background-image: url('../images/catalog/fenderLogoMo.png');
+}
+
+#gibsonCatalogLogo {
+		background-image: url('../images/catalog/gibsonLogo.png');
+}
+#gibsonCatalogLogo:hover {
+		background-image: url('../images/catalog/gibsonLogoMo.png');
+}
+
+#bcRichCatalogLogo {
+	background-image: url('../images/catalog/bcRichLogo.jpg');
+}
+#bcRichCatalogLogo:hover {
+	background-image: url('../images/catalog/bcRichLogoMo.jpg');
+}
+
+#jacksonCatalogLogo {
+	background-image: url('../images/catalog/jacksonLogo.png');
+}
+#jacksonCatalogLogo:hover {
+	background-image: url('../images/catalog/jacksonLogoMo.png');
+}
