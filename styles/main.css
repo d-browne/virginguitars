@@ -177,3 +177,38 @@ body {
 	border-radius: 8px;
 	margin-top: 4px;
 }
+
+
+/* catagory bar logos */
+#fenderCategory {
+	background-image: url('../images/categoryBar/fenderLogoSmall2.png');
+	background-position: -1px -4px;
+}
+
+#fenderCategory:hover {
+	background-image: url('../images/categoryBar/fenderLogoSmall2Mo.png');
+	background-position: -1px -4px;
+}
+
+#gibsonCategory {
+	background-image: url('../images/categoryBar/gibsonLogoSmall.png');
+	background-position: -1px -15px;
+}
+#gibsonCategory:hover {
+	background-image: url('../images/categoryBar/gibsonLogoSmallMo.png');
+	background-position: -1px -15px;
+}
+
+#bcRichCategory {
+	background-image: url('../images/categoryBar/bcRichLogoSmall.jpg');background-position: 0px -8px;
+}
+#bcRichCategory:hover {
+	background-image: url('../images/categoryBar/bcRichLogoSmallMo.jpg');background-position: 0px -8px;
+}
+
+#jacksonLogo {
+	background-image: url('../images/categoryBar/jacksonLogoSmall.png');background-position: 1px -3px;
+}
+#jacksonLogo:hover {
+	background-image: url('../images/categoryBar/jacksonLogoSmallMo.png');background-position: 1px -3px;
+}
