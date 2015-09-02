@@ -229,6 +229,9 @@ a:visited {
 	color: #D4B96A;
 	text-decoration: none;
 }
+a:visited:hover {
+	color: #FFE9AA;
+}
 
 /*footer link*/
 footer a {
