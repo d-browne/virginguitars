@@ -307,8 +307,15 @@ footer a {
 .productBannerLink a:link {
 	color: white;
 }
+.productBannerLink a:vistied {
+	color: white;
+}
 .productBannerLink a:hover {
 	text-decoration: underline;
+}
+.productBannerLink a:visited:hover {
+	color: white;
+	text-decoration: none;
 }
 
 #returnToCatalogButton {
