@@ -332,6 +332,7 @@ em {
 .inputFieldSet {
 	border: 1px solid #FFE9AA;
 	margin-right: 1em;
+	margin-bottom: 1em;
 }
 
 .inputFieldSet legend {
@@ -353,7 +354,8 @@ em {
 }
 
 .inputField .submitButton {
-	margin-left: 470px;
+	margin-left: 35em;
+	margin-top: 1em;
 }
 
 .questionParagraph {
@@ -375,4 +377,20 @@ em {
 
 .questionBlock {
 	padding-bottom: 1em;
+}
+
+.guitarMainPicture {
+	border: 1px solid black;
+	width: 250px;
+	height: 100px;
+	margin: auto;
+}
+
+.featuresList li{
+	margin-bottom: .5em;
+	list-style:square;
+}
+
+.featuresList li em{
+	font-style: normal;
 }
