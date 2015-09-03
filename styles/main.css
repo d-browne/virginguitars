@@ -435,3 +435,19 @@ em {
 	background-color: #3A1355;
 	text-decoration: underline;
 }
+
+.resultTitle {
+	font-weight: bold;
+	font-style:italic;
+}
+.resultDescription {
+	display: block;
+	font-style: italic;
+}
+.searchResult {
+	margin-bottom: 1em;
+}
+
+#searchHr {
+	border-color:#734B8E;
+}
