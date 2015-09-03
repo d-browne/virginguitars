@@ -146,6 +146,7 @@ body {
 #rightColumn {
 	margin-left: 31%;
 	width: 70%;
+	position: relative;
 }
 
 #rightColumn p {
@@ -398,5 +399,39 @@ em {
 #sliderInstruction {
 	text-align:center;
 	color:#FFE9AA;
+	text-decoration: underline;
+}
+
+#priceTag {
+	font-weight: bold;
+	text-align: center;
+	color: #3A1355;
+}
+
+/*This element streches the bottom to make room for my button, hacky but can't think of a better way*/
+#stretcher {
+	width: 100px;
+	height: 25px;
+}
+
+#cartButton {
+	border: 1px solid black;
+	width: 100px;
+	height: 25px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin-bottom: 5px;
+	margin-right: 20px;
+	text-align: center;
+	border-radius: 10px;
+	color: #D4C16A;
+	font-weight: bold;
+	background-color: #230339;
+	padding-top:5px;
+}
+
+#cartButton:hover {
+	background-color: #3A1355;
 	text-decoration: underline;
 }
