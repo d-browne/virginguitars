@@ -352,8 +352,27 @@ em {
 	width: 24em;
 }
 
-
-
 .inputField .submitButton {
 	margin-left: 470px;
+}
+
+.questionParagraph {
+	margin-top:0;
+	margin-bottom:0;
+	font-weight: bold;
+}
+.answerParagraph {
+	margin-top:0;
+	margin-bottom:0;
+	font-style: italic;
+}
+
+.questionLetter {
+	font-size:24px;
+	font-weight: bold;
+	color: #551700;
+}
+
+.questionBlock {
+	padding-bottom: 1em;
 }
