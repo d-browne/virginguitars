@@ -324,3 +324,36 @@ footer a {
 #returnToCatalogButton {
 	font-style: italic;
 }
+
+em {
+	font-weight: bold;
+}
+
+.inputFieldSet {
+	border: 1px solid #FFE9AA;
+	margin-right: 1em;
+}
+
+.inputFieldSet legend {
+	color: #D4B96A;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.inputField label {
+	display: inline-block;
+	width: 12em;
+	text-align: right;
+	padding-right: 7px;
+	font-weight: bold;
+}
+
+.inputField .textBox {
+	width: 24em;
+}
+
+
+
+.inputField .submitButton {
+	margin-left: 470px;
+}
