@@ -62,6 +62,13 @@ body {
 	font-size: 15px;
 }
 
+#checkOutBox #cartItems a:visited {
+	color: white;
+	text-decoration: underline;
+	font-size: 15px;
+}
+
+
 
 #checkoutLink {
 	display: block;
@@ -450,4 +457,80 @@ em {
 
 #searchHr {
 	border-color:#734B8E;
+}
+
+.cartTable {
+	margin: auto;
+	width: 100%;
+	border-collapse: collapse;
+	border: 1px solid #123752;
+}
+
+.tableHeader {
+	font-weight: bold;
+	color: white;
+}
+
+.headerRow {
+	background: linear-gradient(to right, #123752 , #032137);
+}
+
+.altRow {
+	background-color: #123752;
+}
+
+.cartTable td {
+	position: static;
+}
+
+.delButton {
+	color: #670001;
+	font-weight: bold;
+}
+.delButton:hover {
+	text-decoration: underline;
+}
+
+#contentBox {
+	position: relative;
+}
+#totalLabelStretcher {
+	height:89px;
+}
+#totalLabel {
+	position: absolute;
+	bottom: 36px;
+	right: 0px;
+	border: 3px solid #123752;
+	width: 120px;
+	height: 30px;
+	border-radius: 5px;
+	color: white;
+	font-weight: bold;
+	padding-top: 8px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	padding-left: 4px;
+}
+
+#checkoutButton {
+	border: 1px solid black;
+	width: 100px;
+	height: 25px;
+	position: absolute;
+	bottom: 0;
+	right: -14px;
+	margin-bottom: 5px;
+	margin-right: 20px;
+	text-align: center;
+	border-radius: 10px;
+	color: #D4C16A;
+	font-weight: bold;
+	background-color: #230339;
+	padding-top:5px;
+}
+
+#checkoutButton:hover {
+	background-color: #3A1355;
+	text-decoration: underline;
 }
