@@ -394,3 +394,9 @@ em {
 .featuresList li em{
 	font-style: normal;
 }
+
+#sliderInstruction {
+	text-align:center;
+	color:#FFE9AA;
+	text-decoration: underline;
+}
