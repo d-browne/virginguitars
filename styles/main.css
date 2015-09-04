@@ -646,3 +646,73 @@ em {
 #signInLink a:visited {
 	font-style: italic;
 }
+
+#newUserBox {
+	display: inline-block;
+
+	height: 10em;
+	width: 50%;
+	float: left;
+}
+
+#signInBox {
+	display: inline-block;
+	height: 10em;
+	width: 50%;
+	float: right;
+}
+
+.signInFieldSet {
+	margin-left: 2%;
+	margin-right: 2%;
+	height: 8.5em;
+	border: 1px solid #FFE9AA;
+	position: relative;
+}
+
+.signInFieldSet legend {
+	color: #D4B96A;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.signInFieldSet label {
+	float: left;
+	text-align: right;
+	width: 5em;
+	font-weight: bold;
+	margin-right: 0.5em;
+	
+}
+
+.inputSpan {
+	display: block;
+	overflow: hidden;
+}
+
+.inputTextBox {
+	width:100%;
+}
+
+.formCSSButton {
+	border: 1px solid black;
+	width: 100px;
+	height: 25px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin-bottom: 1%;
+	margin-right:1%;
+	text-align: center;
+	border-radius: 10px;
+	color: #D4C16A;
+	font-weight: bold;
+	background-color: #230339;
+	padding-top:5px;
+}
+
+.formCSSButton:hover {
+	background-color: #3A1355;
+	text-decoration: underline;
+}
+
