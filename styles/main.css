@@ -534,3 +534,15 @@ em {
 	background-color: #3A1355;
 	text-decoration: underline;
 }
+
+
+#shippingDetailsFieldsetCheckout {
+	width: 50%;
+	margin-left:2%;
+}
+#shippingDetailsFieldsetCheckout label {
+	width: 8em;
+}
+#shippingDetailsFieldsetCheckout input {
+	width: 20em;
+}
