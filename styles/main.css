@@ -605,3 +605,33 @@ em {
 	background-color: #3A1355;
 	text-decoration: underline;
 }
+
+#summaryDetailsBox {
+	border: 1px solid black;
+	border-top:none;
+	height: 7em;
+	position: relative;
+}
+
+#summaryDetailsBox #totalLabel {
+	bottom: 0.5em;
+	border-color: #003B20;
+	background-color: #0F5837;
+}
+
+#shippingLabel {
+	position: absolute;
+	bottom: 3.5em;
+	right: 0px;
+	border: 3px solid #550400;
+	background-color: #801A15;
+	width: 120px;
+	height: 30px;
+	border-radius: 5px;
+	color: white;
+	font-weight: bold;
+	padding-top: 8px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	padding-left: 4px;
+}
