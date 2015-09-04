@@ -635,3 +635,14 @@ em {
 	margin-bottom: 5px;
 	padding-left: 4px;
 }
+
+#signInLink {
+	margin-left: 1%;
+}
+
+#signInLink a:link {
+	font-style: italic;
+}
+#signInLink a:visited {
+	font-style: italic;
+}
