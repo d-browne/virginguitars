@@ -129,18 +129,30 @@
                 </table>
             </div>
             
-            <fieldset class="inputFieldSet" id="shippingDetailsFieldsetCheckout">
-                	<legend>Shipping details</legend>
-                    <form id="shippingDetailsForm" action="members.html">
-                    	<div class="inputField"><label>Street Address:</label> <input class="textBox" type="text" value="26 Music Lane"/></div>
-                        <div class="inputField"><label>City:</label> <input class="textBox" type="text" value="Lismore" required/></div>
-                        <div class="inputField"><label>Post code:</label> <input class="textBox" type="text" value="2480" required/></div>
-                        <div class="inputField"><label>Country:</label> <input class="textBox" type="text" value="Australia" required/></div>
-                        <div class="inputField"><label>Telephone:</label> <input class="textBox" type="text" value="02 6690 156 " required/></div>
-                    </form>
-                </fieldset>
+            <div id="formsContainer">
+                <div id="leftForm" class="formDiv">
+                        <fieldset class="checkoutFieldSet" id="checkoutShippingDetails">
+                            <legend>Shipping Detials</legend>
+                            <div><label>Street Address:</label><input type="text" /></div>
+                            <div><label>City:</label><input type="text" /></div>
+                            <div><label>Post Code:</label><input type="text" /></div>
+                            <div><label>Country:</label><input type="text" /></div>
+                            <div><label>Telephone:</label><input type="text" /></div>
+                        </fieldset>
+                    </div>
+                    <div id="rightForm" class="formDiv">
+                        <fieldset class="checkoutFieldSet" id="checkoutPaymentMethod">
+                            <legend>Payment method</legend>
+                            <div><label>Method:</label> Bitcoin <input type="radio" name="payment" /> Paypal <input type="radio" name="payment" checked/></div>
+                            <div><label>Paypal Email: </label><input type="text" /></div>
+                            
+                           	<div id="payButton">Pay</div>
+                        </fieldset>
+                    </div>
+                </div>
             
         </div>
+        
             <footer id="pageFooter">Copyright © 2015 <a href="mailto:admin@virginguitars.com">Virgin Guitars</a></footer>
             
         </div>

@@ -535,14 +535,73 @@ em {
 	text-decoration: underline;
 }
 
+#leftForm {
+	width: 55%;
+	float: left;
+}
 
-#shippingDetailsFieldsetCheckout {
-	width: 50%;
-	margin-left:2%;
+#rightForm {
+
+	height: 20px;
+	width:44.5%;
+	float:right;
 }
-#shippingDetailsFieldsetCheckout label {
-	width: 8em;
+
+.checkoutFieldSet {
+	border: 1px solid #FFE9AA;
+	margin-right: 2%;
+	margin-left: 2%;
+	margin-bottom: 2%
 }
-#shippingDetailsFieldsetCheckout input {
-	width: 20em;
+
+.checkoutFieldSet legend {
+	color: #D4B96A;
+	font-style: italic;
+	font-weight: bold;
+}
+
+#checkoutShippingDetails label {
+	display: inline-block;
+	text-align: right;
+	width: 34%;
+	font-weight: bold;
+	padding-right: 0.5em;
+}
+
+#checkoutShippingDetails input {
+	width: 55%
+}
+
+#checkoutPaymentMethod label {
+	font-weight: bold;
+	text-align: right;
+	display: inline-block;
+	width: 35%;
+	padding-right: .5em;
+}
+
+.checkoutFieldSet {
+	height: 8em;
+}
+
+#payButton {
+	border: 1px solid black;
+	width: 100px;
+	height: 25px;
+	position: absolute;
+	bottom: 1em;
+	right: 0;
+	margin-bottom: 5px;
+	margin-right: 20px;
+	text-align: center;
+	border-radius: 10px;
+	color: #D4C16A;
+	font-weight: bold;
+	background-color: #230339;
+	padding-top:5px;
+}
+
+#payButton:hover {
+	background-color: #3A1355;
+	text-decoration: underline;
 }
