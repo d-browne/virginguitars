@@ -725,3 +725,29 @@ em {
 	text-decoration: underline;
 }
 
+.adminControl {
+	display: inline-block;
+	text-align: center;
+	margin-right: 1em;
+}
+
+.adminControl a {
+	font-style: normal;
+	color: #9B4600;
+}
+.adminControl a:hover {
+	color: #C65A00;
+}
+
+.adminControlIcon {
+	width: 128px;
+	height: 128px;
+	margin: auto;
+}
+
+#addStockIcon {
+	background-image: url('../images/adminIcons/addStockIcon.png');
+}
+#addStockIcon:hover {
+	background-image: url('../images/adminIcons/addStockIconMo.png');
+}
