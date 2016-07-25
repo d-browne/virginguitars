@@ -664,6 +664,13 @@ em {
 	float: right;
 }
 
+#signInBoxAdmin {
+	height: 10em;
+	width: 50%;
+	margin: auto;
+	padding-bottom: 1em;
+}
+
 .signInFieldSet {
 	margin-left: 2%;
 	margin-right: 2%;
