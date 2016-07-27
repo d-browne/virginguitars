@@ -751,3 +751,17 @@ em {
 #addStockIcon:hover {
 	background-image: url('../images/adminIcons/addStockIconMo.png');
 }
+
+#editUserIcon {
+	background-image: url('../images/adminIcons/editUserIcon.png');
+}
+#editUserIcon:hover {
+	background-image: url('../images/adminIcons/editUserIconMo.png');
+}
+
+#manageInvoicesIcon {
+	background-image: url('../images/adminIcons/manageInvoicesIcon.png');
+}
+#manageInvoicesIcon:hover {
+	background-image: url('../images/adminIcons/manageInvoicesIconMo.png');
+}
