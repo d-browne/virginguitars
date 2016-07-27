@@ -735,6 +735,8 @@ em {
 	border: 1px solid #D4B96A;
 	width: 75%;
 	margin: auto;
+	position: relative;
+	margin-bottom: 1em;
 }
 
 .adminControlIcon {
