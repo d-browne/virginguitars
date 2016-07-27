@@ -731,12 +731,10 @@ em {
 	margin-right: 1em;
 }
 
-.adminControl a {
-	font-style: normal;
-	color: #9B4600;
-}
-.adminControl a:hover {
-	color: #C65A00;
+#controlPanelIconsBox {
+	border: 1px solid #D4B96A;
+	width: 75%;
+	margin: auto;
 }
 
 .adminControlIcon {
