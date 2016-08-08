@@ -50,9 +50,11 @@
             // Otherwise display (include) admin login page
         include("/includes/adminlogin.php.inc");
         ?>
-            
-            <footer id="pageFooter">Copyright © 2015 <a href="mailto:admin@virginguitars.com">Virgin Guitars</a></footer>
-            
+            <?php
+            // Display the page footer
+            include("includes/pagefooter.php.inc");
+            ?>
+
         </div>
 </body>
 </html>

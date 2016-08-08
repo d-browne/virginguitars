@@ -1,0 +1,1 @@
+<footer id="pageFooter">Copyright © 2016 <a href="mailto:admin@virginguitars.com">Virgin Guitars</a></footer>
