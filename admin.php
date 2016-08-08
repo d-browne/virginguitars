@@ -1,3 +1,20 @@
+<?php
+$databaseAdminPassword = 'testPassword';    //Test password for pre-database testing
+
+$isAdminLoggedIn = FALSE;                   // Global Variable to check if logged in
+
+        //Check if post recieved
+if (isset($_POST['submit'])) {
+    // Get email and password from POST
+    $adminEmail = $_POST['adminEmail'];
+    $adminPassword = $_POST['adminPassword'];
+    
+    // Set logged in if true
+    if ($adminPassword == $databaseAdminPassword) {
+        $isAdminLoggedIn = TRUE;
+    }
+}
+?>
 <!doctype html>
 <html>
 <head>
@@ -46,9 +63,22 @@
         
         <?php
             // Check if admin is logged in
-            // If admin is logged in display (include) admin control panel
-            // Otherwise display (include) admin login page
-        include("/includes/adminlogin.php.inc");
+            if ($isAdminLoggedIn)
+            {
+                // If admin is logged in display (include) admin control panel
+                include("includes/adminControlPanel.php.inc");
+                
+            }
+            else
+            {
+                // Otherwise display (include) admin login page
+                include("/includes/adminlogin.php.inc");
+            }
+            
+            
+
+        
+        
         ?>
             <?php
             // Display the page footer
