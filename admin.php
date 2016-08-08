@@ -48,7 +48,7 @@
             // Check if admin is logged in
             // If admin is logged in display (include) admin control panel
             // Otherwise display (include) admin login page
-        include("adminlogin.php.inc");
+        include("/includes/adminlogin.php.inc");
         ?>
             
             <footer id="pageFooter">Copyright © 2015 <a href="mailto:admin@virginguitars.com">Virgin Guitars</a></footer>
