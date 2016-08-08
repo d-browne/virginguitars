@@ -45,6 +45,11 @@
         </div>
         
         <div id="contentBox">
+        <?php
+            // Check if admin is logged in
+            // If admin is logged in display (include) admin control panel
+            // Otherwise display (include) admin login page
+        ?>
         	<h1>Admin Area</h1>
             
             <div id="signInBoxAdmin">
