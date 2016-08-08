@@ -3,7 +3,7 @@ $databaseAdminPassword = 'testPassword';    //Test password for pre-database tes
 
 $isAdminLoggedIn = FALSE;                   // Global Variable to check if logged in
 
-        //Check if post recieved
+//Check if post recieved
 if (isset($_POST['submit'])) {
     // Get email and password from POST
     $adminEmail = $_POST['adminEmail'];
@@ -75,10 +75,6 @@ if (isset($_POST['submit'])) {
                 include("/includes/adminlogin.php.inc");
             }
             
-            
-
-        
-        
         ?>
             <?php
             // Display the page footer

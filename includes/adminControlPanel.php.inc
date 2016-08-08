@@ -22,7 +22,7 @@
                 <div class="adminControlCaption">Manage Invoices</div>
             </a>
 
-            <a href="adminSignin.html"><div class="formCSSButton">Sign Out</div></a>
+            <a href="admin.php"><div class="formCSSButton">Sign Out</div></a>
         </div>
     </div>
 </div>
