@@ -9,11 +9,11 @@ $isAdminLoggedIn = FALSE;                   // Global Variable to check if logge
 //Check if post recieved
 if (isset($_POST['submit'])) {
     // Get email and password from POST
-    $adminEmail = $_POST['adminEmail'];
+    $adminUsername = $_POST['adminUsername'];
     $adminPassword = $_POST['adminPassword'];
     
     // Check if username and password for admin are valid
-    $admin = new Admin($adminEmail, $adminPassword);
+    $admin = new Admin($adminUsername, $adminPassword);
     
     // If admin credentails check out set logged in flag to true
     if ($admin->getAuthenticated() == true)
