@@ -1,5 +1,6 @@
 <?php
 
+require 'classes/Database.php';
 
 class Admin 
 {
@@ -9,19 +10,11 @@ class Admin
     // Construct
     function __construct($username, $password)
     {
-        $dbservername = "localhost";
-        $dbuser = "root";
-        $dbpassword = "";
-        $dbname = "vgecw_db";
         
-        // Create connection
-        $conn = new mysqli($dbservername, $dbuser, $dbpassword, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+        $database = new Database();
         
-        $this->connection = $conn;
+        $this->connection = $database->getDataConnection();
+        
 
         return $this->authenticate($username, $password);
     }
