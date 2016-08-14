@@ -8,7 +8,7 @@ class Database extends GlobalSettings
     public function getDataConnection()
     {
         // Create connection
-        $conn = new mysqli($this->dbservername, $this->dbuser, $this->dbpassword, $this->dbname);
+        $conn = new mysqli(GlobalSettings::$dbservername, GlobalSettings::$dbuser, GlobalSettings::$dbpassword, GlobalSettings::$dbname);
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
