@@ -1,4 +1,7 @@
 <?php
+
+require "classes/Admin.php";
+
 $databaseAdminPassword = 'testPassword';    //Test password for pre-database testing
 
 $isAdminLoggedIn = FALSE;                   // Global Variable to check if logged in
@@ -9,9 +12,13 @@ if (isset($_POST['submit'])) {
     $adminEmail = $_POST['adminEmail'];
     $adminPassword = $_POST['adminPassword'];
     
-    // Set logged in if true
-    if ($adminPassword == $databaseAdminPassword) {
-        $isAdminLoggedIn = TRUE;
+    // Check if username and password for admin are valid
+    $admin = new Admin($adminEmail, $adminPassword);
+    
+    // If admin credentails check out set logged in flag to true
+    if ($admin->getAuthenticated() == true)
+    {
+        $isAdminLoggedIn = true;
     }
 }
 ?>
