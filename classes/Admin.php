@@ -3,10 +3,6 @@
 
 class Admin 
 {
-    
-    
-    private $username;
-    private $password;
     private $isAuthenticated;
     private $connection;
     
@@ -33,9 +29,6 @@ class Admin
     // Function to authenticate admin
     public function authenticate($username, $password)
     {
-        $this->email = $username;
-        $this->password = $password;
-        
         $query = "SELECT UserName,EncryptedPassword,Salt FROM administrator";
         $result = $this->connection->query($query);
            
