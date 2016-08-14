@@ -51,10 +51,6 @@ class Admin
             $$this->isAuthenticated = FALSE;
         }
         $this->connection->close();
-
-        // TODO 
-        // Check username and password against database
-        // If username and password match database set authenticated to true
     }
     
     // Function to get authenticated status
