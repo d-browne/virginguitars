@@ -2,7 +2,7 @@
 
 require 'classes/GlobalSettings.php';
 
-class Database extends GlobalSettings
+class Database
 {
     // Return handle to data connection
     public function getDataConnection()
