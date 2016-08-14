@@ -1,0 +1,23 @@
+DELIMITER //
+CREATE PROCEDURE GetOrdersByCustomerID 
+(
+    IN cust_id int(7)
+)
+BEGIN
+    SELECT 
+    c.CustomerID,
+    c.FirstName As 'First Name',
+    c.LastName As 'Last Name',
+    so.SalesOrderID,
+    so.InvoiceDate As 'Invoice Date',
+    so.SubTotal As 'Sub Total',
+    so.Shipping,
+    so.Total,
+    so.ShippedDate As 'Shipped Date',
+    so.ShippingRecord As 'Shipping Record',
+    so.OrderStatus As 'Order Status'
+    FROM Customer As c 
+    INNER JOIN Sales_Order As so ON so.Customer = c.CustomerID
+    WHERE c.CustomerID = cust_id;
+END//
+DELIMITER ;

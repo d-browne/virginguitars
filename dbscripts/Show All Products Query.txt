@@ -1,0 +1,25 @@
+SELECT 
+p.ProductID, 
+b.BrandName As 'Brand', 
+c.Type, 
+p.Quantity, 
+ps.Description As 'Status', 
+p.Description, 
+ap.Description As 'Condition',
+p.UnitPrice As 'Price', 
+ct.Description As 'Case Type',  
+m.Description As 'Model',
+a.UserName As 'Created By',
+a2.UserName As 'Modified by',
+p.CreationDate As 'Date Created',
+p.ModifiedDate As 'Date Modified'
+FROM Product As p
+INNER JOIN Brand As b ON p.Brand = b.BrandID
+INNER JOIN Classification As c ON p.Classification = c.ClassificationID
+INNER JOIN Product_Status As ps ON p.Status = ps.ProductStatusID
+INNER JOIN Appearence As ap ON p.Appearence = ap.AppearenceID
+INNER JOIN Case_Type As ct ON p.CaseType = ct.CaseTypeID
+INNER JOIN Model As m ON p.Model = m.ModelID
+INNER JOIN Administrator As a ON p.CreatedBy = a.AdministratorID
+INNER JOIN Administrator As a2 ON p.ModifiedBy = a.AdministratorID
+ORDER BY p.ProductID;
