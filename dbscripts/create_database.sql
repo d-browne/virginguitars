@@ -90,7 +90,7 @@ create table ADMINISTRATOR (
 	AdministratorID int(4) PRIMARY KEY AUTO_INCREMENT,
     UserName VarChar(40) NOT NULL,
     EncryptedPassword VarChar(60) NOT NULL,
-	Salt INT NOT NULL
+    Salt INT NOT NULL
 )ENGINE=InnoDB;
 
 create table PRODUCT (
