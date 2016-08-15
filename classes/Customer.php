@@ -14,6 +14,7 @@ class Customer
     private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
     
     
+    
     // function to set mailing list
     public function setMailingList($joinedMailingList)
     {
@@ -24,7 +25,7 @@ class Customer
         }
         
         // Check of incorrect input
-        if ($joinedMailingList != 1 or $joinedMailingList != 0)
+        if ($joinedMailingList != 1 && $joinedMailingList != 0)
         {
             return false; // Incorrect input
         }

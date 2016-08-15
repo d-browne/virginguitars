@@ -326,5 +326,29 @@ class CustomerTest extends TestCase
         $this->assertEquals($expected, $customer->setSalutation($data));
     }
     
+    public function setMailingListDataProvider()
+    {
+        return array(
+            array(1, true),
+            array(0, true),
+            array(2, false),
+            array(-1, false),
+            array("a", false),
+            array("b", false),
+            array("banana", false),
+        );
+    }
+    
+    /**
+     * @dataProvider setMailingListDataProvider
+     */
+    public function testSetMailingList($MailingList, $expected)
+    {
+        $customer = new Customer();
+        $customer->initialize("dominic@mail.com");
+        
+        $this->assertEquals($expected, $customer->setMailingList($MailingList));
+    }
+    
     
 }
