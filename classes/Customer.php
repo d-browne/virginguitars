@@ -13,6 +13,45 @@ class Customer
     private $salt;
     private $isInitialized; // Tells whether or not this object is initialized with data form the database
     
+    // Function to initialize the object
+    public function initialize($email)
+    {
+        // If email doesn't exist in database return null
+        if (!Customer::doesCustomerExist($email))
+        {
+            return NULL;
+        }
+        
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to get watned values
+        $query = "SELECT * FROM customer WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Get row
+        $row = $result->fetch_assoc();
+        
+        // Get values from row
+        $this->LastName = $row["LastName"];
+        $this->FirstName = $row["FirstName"];
+        $this->Salutation = $row["Salutation"];
+        $this->MailingList = $row["MailingList"];
+        $this->Email = $row["Email"];
+        $this->MobilePhone = $row["MobilePhone"];
+        $this->HomePhone = $row["HomePhone"];
+        $this->hashedPassword = $row["EncryptedPassword"];
+        $this->salt = $row["Salt"];
+        
+        // Set is initialized
+        $this->isInitialized = true;
+        
+        return $this; // Return a handle to this object
+    }
+    
     // Return the get initialized status
     public function getIsInitialized()
     {
@@ -103,6 +142,11 @@ class Customer
         {
             die(); // This should never happen.
         }
+    }
+    
+    public function getMailingList()
+    {
+        return $this->MailingList;
     }
     
     public function getHomePhone()

@@ -107,4 +107,108 @@ class CustomerTest extends TestCase
     {
         $this->assertEquals($expected, Customer::deleteCusomter($email));
     }
+    
+    // check initialize an email address not in the database
+    public function testInitializeWrongEmail()
+    {
+        $customer = new Customer();
+        
+        $this->assertEquals(NULL, $customer->initialize("notInDatabase@mail.com"));
+    }
+    
+    // check initialize an email address not in the database
+    public function testInitializeMalformedEmail()
+    {
+        $customer = new Customer();
+        
+        $this->assertEquals(NULL, $customer->initialize("notInDa@tabase@m@ail@.com"));
+    }
+    
+    // check initialize a blank email address
+    public function testInitializeBlank()
+    {
+        $customer = new Customer();
+        
+        $this->assertEquals(NULL, $customer->initialize(""));
+    }
+    
+    // check initialize an integer
+    public function testInitializeInteger()
+    {
+        $customer = new Customer();
+        
+        $this->assertEquals(NULL, $customer->initialize(-4));
+    }
+    
+    // check initialize a null value 
+    public function testInitializeNULL()
+    {
+        $customer = new Customer();
+        
+        $this->assertEquals(NULL, $customer->initialize(NULL));
+    }
+    
+    // check initialize for customer dominic
+    public function testInitializeDominic()
+    {
+        $customer = new Customer();
+        $customer->initialize("dominic@mail.com");
+        
+        $this->assertEquals("Dominic", $customer->getFirstName());
+        $this->assertEquals("Browne", $customer->getLastName());
+        $this->assertEquals("", $customer->getSalutation());
+        $this->assertEquals(0, $customer->getMailingList());
+        $this->assertEquals("dominic@mail.com", $customer->getEmail());
+        $this->assertEquals("3333444555", $customer->getMobilePhone());
+        $this->assertEquals("44445555", $customer->getHomePhone());
+        $this->assertEquals(true, $customer->getIsInitialized());
+    }
+    
+    // check initialize for customer warren
+    public function testInitializeWarren()
+    {
+        $customer = new Customer();
+        $customer->initialize("warren@mail.com");
+        
+        $this->assertEquals("Warren", $customer->getFirstName());
+        $this->assertEquals("Norris", $customer->getLastName());
+        $this->assertEquals("", $customer->getSalutation());
+        $this->assertEquals(1, $customer->getMailingList());
+        $this->assertEquals("warren@mail.com", $customer->getEmail());
+        $this->assertEquals("2222333444", $customer->getMobilePhone());
+        $this->assertEquals("33334444", $customer->getHomePhone());
+        $this->assertEquals(true, $customer->getIsInitialized());
+    }
+    
+    // check initialize for customer ben
+    public function testInitializeBen()
+    {
+        $customer = new Customer();
+        $customer->initialize("ben@mail.com");
+        
+        $this->assertEquals("Ben", $customer->getFirstName());
+        $this->assertEquals("Morrison", $customer->getLastName());
+        $this->assertEquals("", $customer->getSalutation());
+        $this->assertEquals(1, $customer->getMailingList());
+        $this->assertEquals("ben@mail.com", $customer->getEmail());
+        $this->assertEquals("0000111222", $customer->getMobilePhone());
+        $this->assertEquals("11112222", $customer->getHomePhone());
+        $this->assertEquals(true, $customer->getIsInitialized());
+    }
+    
+    // check initialize for customer dale
+    public function testInitializeDale()
+    {
+        $customer = new Customer();
+        $customer->initialize("dale@mail.com");
+        
+        $this->assertEquals("Dale", $customer->getFirstName());
+        $this->assertEquals("Hogan", $customer->getLastName());
+        $this->assertEquals("", $customer->getSalutation());
+        $this->assertEquals(0, $customer->getMailingList());
+        $this->assertEquals("dale@mail.com", $customer->getEmail());
+        $this->assertEquals("1111222333", $customer->getMobilePhone());
+        $this->assertEquals("22223333", $customer->getHomePhone());
+        $this->assertEquals(true, $customer->getIsInitialized());
+    }
 }
