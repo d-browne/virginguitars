@@ -51,17 +51,10 @@ if (isset($_GET["logout"]))
             include 'includes/pageheader.php.inc';
         ?>
         
-        <div id="menuBox">
-       	  <nav id="menuList">
-          	<ul>
-            	<li id="homeItem"><a href="index.html">Home</a></li>
-                <li><a href="catalog.html">Catalog</a></li>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="members.html">Members</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-            </ul>
-          </nav>
-        </div>
+        <?php
+            // Display menu bar
+            include 'includes/menubar.php.inc';
+        ?>
         
         <div id="categoryBox">
         	<a href="fender.html"><div class="categoryImage" id="fenderCategory"></div></a>
