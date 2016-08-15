@@ -73,7 +73,8 @@ class CustomerTest extends TestCase
             array("newguy@mail.com", "Passiwassi11", true),
             array("newguy2@mail.org", "Passiwassi11", true),
             array("newguy3@mail.net", "Passiwassi11", true),
-            array("newguy4@mail.com.au", "Passiwassi11", true)  
+            array("newguy4@mail.com.au", "Passiwassi11", true),
+            array("testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt@web.org.au", "Passiwassi11", "email too long"),
         );
     }
     

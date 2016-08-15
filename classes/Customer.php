@@ -190,6 +190,12 @@ class Customer
             return false;
         }
         
+        // Check if email is too long
+        if (iconv_strlen($email) > 60)
+        {
+            return "email too long";
+        }
+        
         // Check if email invalid
         if(filter_var($email, FILTER_VALIDATE_EMAIL) == false)
         {
