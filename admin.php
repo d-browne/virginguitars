@@ -46,19 +46,10 @@ if (isset($_GET["logout"]))
 
 <body>
 	<div id="mainBox">
-    	<div id="headerBox">
-        	<a href="index.html"><img src="images/logo.png" width="213" height="200" alt="Virgin Guitars" class="logoImage"></a>
-			<h1 class="mainHeader">Virgin Guitars</h1>
-            <form action="search.html">
-            	<input type="text" id="searchBox" placeholder="Site Search..." />
-             </form>
-        	
-            <div id="checkOutBox">
-            	<span id="cartItems"><a href="cart.html">4</a></span>
-            	<a href="cart.html"><img src="images/cartIcon.png" id="cartIcon" width="32" height="42" alt="Cart"></a>
-                <a href="checkout.html" id="checkoutLink">checkout</a>
-            </div>
-      </div>
+    	<?php
+            // Display Page header
+            include 'includes/pageheader.php.inc';
+        ?>
         
         <div id="menuBox">
        	  <nav id="menuList">
