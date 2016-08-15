@@ -239,5 +239,58 @@ class CustomerTest extends TestCase
         $this->assertEquals(NULL, $customer->getLastName());
     }
     
+    // Function to test getFirstName
+    public function testGetFirstName()
+    {
+        $customer = new Customer();
+        
+        // Check uninitalized FirstName
+        $this->assertEquals(NULL, $customer->getFirstName());
+        
+        // Check names
+        $customer->initialize("dominic@mail.com");
+        $this->assertEquals("Dominic", $customer->getFirstName());
+        
+        $customer->initialize("ben@mail.com");
+        $this->assertEquals("Ben", $customer->getFirstName());
+        
+        $customer->initialize("warren@mail.com");
+        $this->assertEquals("Warren", $customer->getFirstName());
+        
+        $customer->initialize("dale@mail.com");
+        $this->assertEquals("Dale", $customer->getFirstName());
+    }
+    
+    // Function to test setFirstName
+    public function testSetFirstName()
+    {
+        $customer = new Customer();
+        
+        // Attempt set on unitialized object
+        $this->assertEquals("member not initialized", $customer->setFirstName("Jeff"));
+        
+        // Initialize
+        $customer->initialize("dominic@mail.com");
+        
+        // True check if return true from set
+        $this->assertEquals(true, $customer->setFirstName("Jeff"));
+        
+        // Check if name changed on object
+        $this->assertEquals("Jeff", $customer->getFirstName());
+        
+        // Create new customer object 
+        $customer2 = new Customer();
+        $customer2->initialize("dominic@mail.com");
+        
+        // Check if name change persisted
+        $this->assertEquals("Jeff", $customer2->getFirstName());
+        
+        // Retore original FirstName
+        $this->assertEquals(true, $customer2->setFirstName("Dominic"));
+        
+        // Check if name restored in object
+        $this->assertEquals("Dominic", $customer2->getFirstName());
+    }
+    
     
 }

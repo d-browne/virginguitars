@@ -37,6 +37,8 @@ class Customer
         $customer->initialize($this->Email);
         
         $this->FirstName = $FirstName;
+        
+        return true;
     }
     
     // function to set LastName
@@ -63,6 +65,8 @@ class Customer
         $customer->initialize($this->Email);
         
         $this->LastName = $LastName;
+        
+        return true;
     }
     
     // Function to initialize the object
