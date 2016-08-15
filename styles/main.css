@@ -765,3 +765,8 @@ em {
 #manageInvoicesIcon:hover {
 	background-image: url('../images/adminIcons/manageInvoicesIconMo.png');
 }
+
+#signedInAsAdminLink {
+	font-size: 60%;
+	margin-left: .33em;
+}
