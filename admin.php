@@ -1,10 +1,16 @@
 <?php
 
+// Start session
+session_start();
+
 require "classes/Admin.php";
 
-$databaseAdminPassword = 'testPassword';    //Test password for pre-database testing
 
-$isAdminLoggedIn = FALSE;                   // Global Variable to check if logged in
+// Check if isAdmin session varible is set. If not, initialize
+if (!isset($_SESSION["isAdmin"]))
+{
+    $_SESSION["isAdmin"] = false;
+}
 
 //Check if post recieved
 if (isset($_POST['submit'])) {
@@ -18,8 +24,14 @@ if (isset($_POST['submit'])) {
     // If admin credentails check out set logged in flag to true
     if ($admin->getAuthenticated() == true)
     {
-        $isAdminLoggedIn = true;
+        $_SESSION["isAdmin"] = true;
     }
+}
+
+// Check if logout recieved and log out admin
+if (isset($_GET["logout"]))
+{
+    $_SESSION["isAdmin"] = false;
 }
 ?>
 <!doctype html>
@@ -70,11 +82,10 @@ if (isset($_POST['submit'])) {
         
         <?php
             // Check if admin is logged in
-            if ($isAdminLoggedIn)
+            if ($_SESSION["isAdmin"])
             {
                 // If admin is logged in display (include) admin control panel
                 include("includes/adminControlPanel.php.inc");
-                
             }
             else
             {
