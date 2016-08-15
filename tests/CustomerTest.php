@@ -230,4 +230,14 @@ class CustomerTest extends TestCase
         $this->assertEquals("Browne", $customer2->getLastName());
     }
     
+    // fuction to change set lastname on unititialized member
+    public function testSetLastNameUnitialized()
+    {
+        $customer = new Customer();
+        
+        $this->assertEquals("member not initialized", $customer->setLastName("Bowen"));
+        $this->assertEquals(NULL, $customer->getLastName());
+    }
+    
+    
 }
