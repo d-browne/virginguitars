@@ -8,7 +8,8 @@ create table CUSTOMER (
     Salutation VarChar(5) NOT NULL,
     MailingList int(1) DEFAULT 0 NOT NULL,
     Email VarChar(60) UNIQUE NOT NULL,
-    EncryptedPassword VarChar(60) NOT NULL,
+    EncryptedPassword VarChar(256) NOT NULL,
+    Salt INT NOT NULL,
     MobilePhone VarChar(15),
     HomePhone VarCHar(15)
 )ENGINE=InnoDB;
@@ -161,10 +162,10 @@ INSERT INTO PRODUCT VALUES (NULL, 1, 1, 5, 1, 'New Fender', 1, '1000.00', 1, 1, 
 INSERT INTO PRODUCT VALUES (NULL, 1, 1, 5, 1, 'Used Fender', 2, '750.00', 1, 1, 1, 1, CURDATE(), CURDATE());
 INSERT INTO PRODUCT VALUES (NULL, 1, 3, 5, 1, 'New Les Paul', 1, '750.00', 1, 2, 1, 1, CURDATE(), CURDATE());
 
-INSERT INTO CUSTOMER VALUES (NULL, 'Morrison', 'Ben', '', 1, 'ben@mail.com', 'password', '0000111222', '11112222');
-INSERT INTO CUSTOMER VALUES (NULL, 'Hogan', 'Dale', '', 1, 'dale@mail.com', 'password', '1111222333', '22223333');
-INSERT INTO CUSTOMER VALUES (NULL, 'Norris', 'Warren', '', 1, 'warren@mail.com', 'password', '2222333444', '33334444');
-INSERT INTO CUSTOMER VALUES (NULL, 'Browne', 'Dominic', '', 1, 'dominic@mail.com', 'password', '3333444555', '44445555');
+INSERT INTO CUSTOMER VALUES (NULL, 'Morrison', 'Ben', '', 1, 'ben@mail.com', 'password', 12, '0000111222', '11112222');
+INSERT INTO CUSTOMER VALUES (NULL, 'Hogan', 'Dale', '', 1, 'dale@mail.com', 'password', 665, '1111222333', '22223333');
+INSERT INTO CUSTOMER VALUES (NULL, 'Norris', 'Warren', '', 1, 'warren@mail.com', 'password', 928, '2222333444', '33334444');
+INSERT INTO CUSTOMER VALUES (NULL, 'Browne', 'Dominic', '', 1, 'dominic@mail.com', 'password', 923, '3333444555', '44445555');
 
 INSERT INTO HOMEADDRESS VALUES (NULL, 1, '123 Fake Street', 'Sydney', 'NSW', 0000, 'Australia');
 INSERT INTO HOMEADDRESS VALUES (NULL, 2, '456 Fake Street', 'Gosford', 'NSW', 1111, 'Australia');
