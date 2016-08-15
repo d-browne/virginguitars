@@ -292,5 +292,38 @@ class CustomerTest extends TestCase
         $this->assertEquals("Dominic", $customer2->getFirstName());
     }
     
+    public function testSetSalutationDataProvider()
+    {
+        return array(
+            array("dominic@mail.com", "Mr.", true),                     
+            array("ben@mail.com", "Master.", false),                    // Query will fail because too long
+            array("ben@mail.com", NULL, true),
+            array("ben@mail.com", 12345684, false),                     // Query will fail because too long
+            array("ben@mail.com", 12, true),
+            array("warren@mail.com", "Dr.", true),
+            array("dale@mail.com", "Mrs.", true),
+            array("fred@mail.com", "Mrs.", "member not initialized"),   
+            array("george@mail.com", 0, "member not initialized"),
+            array("jason@mail.com", NULL, "member not initialized"),
+            array(NULL, NULL, "member not initialized"),
+            array("dominic@mail.com", "", true),                        // Queries below rest database to standard
+            array("ben@mail.com", "", true),
+            array("warren@mail.com", "", true),
+            array("dale@mail.com", "", true),
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider testSetSalutationDataProvider
+     */
+    public function testSetSalutation($email, $data, $expected)
+    {
+        $customer = new Customer();
+        $customer->initialize($email);
+        
+        $this->assertEquals($expected, $customer->setSalutation($data));
+    }
+    
     
 }

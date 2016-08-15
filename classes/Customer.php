@@ -32,7 +32,13 @@ class Customer
                 . "WHERE Email = '". $this->Email ."';";
 
         // Execute query 
-        $dataConnection->query($query);
+        $result = $dataConnection->query($query);
+        
+        // Return false
+        if (!$result)
+        {
+            return false;
+        }
         
         $customer = new Customer();
         $customer->initialize($this->Email);
