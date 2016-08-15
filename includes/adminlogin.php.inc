@@ -5,7 +5,7 @@
     <div id="signInBoxAdmin">
         <fieldset class="signInFieldSet">
             <legend>Sign in</legend>
-            <form aciton="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <form action="admin.php" method="POST">
                 <div><label>Username:</label><span class="inputSpan"><input type="text" class="inputTextBox" name="adminUsername"/></span></div>
                 <div><label>Password:</label><span class="inputSpan"><input type="password" class="inputTextBox" name="adminPassword"/></span></div>
                 <div><label>Remmeber:</label><input type="checkbox" name="remember" checked/></div>
