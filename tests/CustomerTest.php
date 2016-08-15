@@ -211,4 +211,23 @@ class CustomerTest extends TestCase
         $this->assertEquals("22223333", $customer->getHomePhone());
         $this->assertEquals(true, $customer->getIsInitialized());
     }
+    
+    // fuction to change set lastname
+    public function testSetLastName()
+    {
+        $customer = new Customer();
+        $customer->initialize("dominic@mail.com");
+        
+        $customer->setLastName("Brownee");
+        
+        $this->assertEquals("Brownee", $customer->getLastName());
+        
+        $customer->setLastName("Browne");
+        
+        $customer2 = new Customer();
+        $customer2->initialize("dominic@mail.com");
+        
+        $this->assertEquals("Browne", $customer2->getLastName());
+    }
+    
 }

@@ -11,7 +11,59 @@ class Customer
     private $HomePhone;
     private $hashedPassword;
     private $salt;
-    private $isInitialized; // Tells whether or not this object is initialized with data form the database
+    private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
+    
+    // function to set FirstName
+    public function setFirstName($FirstName)
+    {
+        // Return error if not initialized member
+        if (!$this->isInitialized)
+        {
+            return "member not initialized";
+        }
+        
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to change LastName
+        $query = "UPDATE customer SET FirstName = '".mysqli_real_escape_string($dataConnection, $FirstName)."' "
+                . "WHERE Email = '". $this->Email ."';";
+
+        // Execute query 
+        $dataConnection->query($query);
+        
+        $customer = new Customer();
+        $customer->initialize($this->Email);
+        
+        $this->FirstName = $FirstName;
+    }
+    
+    // function to set LastName
+    public function setLastName($LastName)
+    {
+        // Return error if not initialized member
+        if (!$this->isInitialized)
+        {
+            return "member not initialized";
+        }
+        
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to change LastName
+        $query = "UPDATE customer SET LastName = '".mysqli_real_escape_string($dataConnection, $LastName)."' "
+                . "WHERE Email = '". $this->Email ."';";
+
+        // Execute query 
+        $dataConnection->query($query);
+        
+        $customer = new Customer();
+        $customer->initialize($this->Email);
+        
+        $this->LastName = $LastName;
+    }
     
     // Function to initialize the object
     public function initialize($email)
