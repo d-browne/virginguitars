@@ -13,6 +13,35 @@ class Customer
     private $salt;
     private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
     
+    
+    // Function to set Salutation
+    public function setSalutation($Salutation)
+    {
+        // Return error if not initialized member
+        if (!$this->isInitialized)
+        {
+            return "member not initialized";
+        }
+        
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to change LastName
+        $query = "UPDATE customer SET Salutation = '".mysqli_real_escape_string($dataConnection, $Salutation)."' "
+                . "WHERE Email = '". $this->Email ."';";
+
+        // Execute query 
+        $dataConnection->query($query);
+        
+        $customer = new Customer();
+        $customer->initialize($this->Email);
+        
+        $this->FirstName = $Salutation;
+        
+        return true;
+    }
+    
     // function to set FirstName
     public function setFirstName($FirstName)
     {
