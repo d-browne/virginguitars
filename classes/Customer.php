@@ -18,7 +18,29 @@ class Customer
         // Check if customer exists in database
         if(Customer::doesCustomerExist($email))
         {
+            // get data connection
+            $database = new Database();
+            $dataConnection = $database->getDataConnection();
             
+            // Query to delete customer
+            $query = "DELETE FROM customer WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."';";
+            
+            // Execute query 
+            $dataConnection->query($query);
+            
+            // Check if customer has been deleted
+            if (Customer::doesCustomerExist($email))
+            {
+                return "failed";
+            }
+            else
+            {
+                return "deleted";
+            }
+        }
+        else
+        {
+            return "doesn't exist";
         }
     }
     

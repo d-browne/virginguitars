@@ -84,4 +84,27 @@ class CustomerTest extends TestCase
     {
         $this->assertEquals($expected, Customer::newCustomer($email, $password));
     }
+    
+    public function deleteCustomerDataProvider()
+    {
+        return array(
+            array("newguy@mail.com", "deleted"),
+            array("newguy2@mail.org", "deleted"),
+            array("newguy3@mail.net", "deleted"),
+            array("newguy4@mail.com.au", "deleted"),
+            array("newguy@mail.com", "doesn't exist"),
+            array("'; ", "doesn't exist"),
+            array(0, "doesn't exist"),
+            array(NULL, "doesn't exist")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider deleteCustomerDataProvider
+     */
+    public function testDeleteCustomer($email, $expected)
+    {
+        $this->assertEquals($expected, Customer::deleteCusomter($email));
+    }
 }
