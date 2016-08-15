@@ -11,6 +11,13 @@ class Customer
     private $HomePhone;
     private $hashedPassword;
     private $salt;
+    private $isInitialized; // Tells whether or not this object is initialized with data form the database
+    
+    // Return the get initialized status
+    public function getIsInitialized()
+    {
+        return $this->isInitialized;
+    }
     
     // Function to delete customer from databse
     public static function deleteCusomter($email) 
