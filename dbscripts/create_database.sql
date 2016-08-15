@@ -162,10 +162,10 @@ INSERT INTO PRODUCT VALUES (NULL, 1, 1, 5, 1, 'New Fender', 1, '1000.00', 1, 1, 
 INSERT INTO PRODUCT VALUES (NULL, 1, 1, 5, 1, 'Used Fender', 2, '750.00', 1, 1, 1, 1, CURDATE(), CURDATE());
 INSERT INTO PRODUCT VALUES (NULL, 1, 3, 5, 1, 'New Les Paul', 1, '750.00', 1, 2, 1, 1, CURDATE(), CURDATE());
 
-INSERT INTO CUSTOMER VALUES (NULL, 'Morrison', 'Ben', '', 1, 'ben@mail.com', 'password', 12, '0000111222', '11112222');
-INSERT INTO CUSTOMER VALUES (NULL, 'Hogan', 'Dale', '', 1, 'dale@mail.com', 'password', 665, '1111222333', '22223333');
-INSERT INTO CUSTOMER VALUES (NULL, 'Norris', 'Warren', '', 1, 'warren@mail.com', 'password', 928, '2222333444', '33334444');
-INSERT INTO CUSTOMER VALUES (NULL, 'Browne', 'Dominic', '', 1, 'dominic@mail.com', 'password', 923, '3333444555', '44445555');
+INSERT INTO CUSTOMER VALUES (NULL, 'Morrison', 'Ben', '', 1, 'ben@mail.com', 'd46b5cd9c1456e3059258a411faf8bbb0253c190cc5acb488f999e1b1421f83b', 12, '0000111222', '11112222');
+INSERT INTO CUSTOMER VALUES (NULL, 'Hogan', 'Dale', '', 1, 'dale@mail.com', 'f55d74e275c773678f3750573bcd70b14d44e082045e227e5c1d571dccfab624', 665, '1111222333', '22223333');
+INSERT INTO CUSTOMER VALUES (NULL, 'Norris', 'Warren', '', 1, 'warren@mail.com', 'acec2d49992381a162de7b6b66ce9cbd3d3336de55abcc0cb3350b3335575f9c', 928, '2222333444', '33334444');
+INSERT INTO CUSTOMER VALUES (NULL, 'Browne', 'Dominic', '', 1, 'dominic@mail.com', 'cf3f90f70affced11fe6236c20b879447b54fe5779a8225d061a9b7c9b948fd3', 923, '3333444555', '44445555');
 
 INSERT INTO HOMEADDRESS VALUES (NULL, 1, '123 Fake Street', 'Sydney', 'NSW', 0000, 'Australia');
 INSERT INTO HOMEADDRESS VALUES (NULL, 2, '456 Fake Street', 'Gosford', 'NSW', 1111, 'Australia');
