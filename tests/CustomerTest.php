@@ -29,12 +29,12 @@ class CustomerTest extends TestCase
      * 
      * @dataProvider customerLoginDataProvider
      */
-    public function testLogin($username, $password, $expected)
+    public function testCheckDatabaseForUser($username, $password, $expected)
     {
         // Customer object to test logins
         $customer = new Customer();
         
         // Test logins
-        $this->assertEquals($expected, $customer->login($username, $password));
+        $this->assertEquals($expected, $customer->checkDatabaseForUser($username, $password));
     }
 }

@@ -3,13 +3,15 @@
 class customer
 {
     
+    
     // Class Constructor
     function __construct()
     {
         
     }
     
-    public function login($email, $password)
+    // Function to check if user exists in database
+    public function checkDatabaseForUser($email, $password)
     {
         // Get a data connection
         $database = new Database();
@@ -47,7 +49,5 @@ class customer
         {
             return false; // Customer not in table
         }
-
-        
     }
 }
