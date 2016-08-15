@@ -14,6 +14,45 @@ class Customer
     private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
     
     
+    // function to set mailing list
+    public function setMailingList($joinedMailingList)
+    {
+        // Return error if not initialized member
+        if (!$this->isInitialized)
+        {
+            return false;
+        }
+        
+        // Check of incorrect input
+        if ($joinedMailingList != 1 or $joinedMailingList != 0)
+        {
+            return false; // Incorrect input
+        }
+        
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to change LastName
+        $query = "UPDATE customer SET MailingList = '".mysqli_real_escape_string($dataConnection, $joinedMailingList)."' "
+                . "WHERE Email = '". $this->Email ."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return if query failed
+        if(!$result)
+        {
+            return false;
+        }
+        
+        // Update object MailingList
+        $this->MailingList = $joinedMailingList;
+        
+        // return true everything worked
+        return true;
+    }
+    
     // Function to set Salutation
     public function setSalutation($Salutation)
     {
@@ -27,7 +66,7 @@ class Customer
         $database = new Database();
         $dataConnection = $database->getDataConnection();
         
-        // Query to change LastName
+        // Query to change Salutation
         $query = "UPDATE customer SET Salutation = '".mysqli_real_escape_string($dataConnection, $Salutation)."' "
                 . "WHERE Email = '". $this->Email ."';";
 
