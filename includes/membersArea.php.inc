@@ -44,12 +44,12 @@
     <p>Welcome back to the members section! From here you can configure your members settings, change your shipping/billing information and your members details</p>
     <fieldset class="inputFieldSet" id="userDetailsFieldset">
         <legend>User details</legend>
-        <form id="userDetailsForm" action="members.html">
-            <div class="inputField"><label>Email:</label> <input class="textBox" type="email" value="<?php echo $_SESSION['currentCustomer']->getEmail(); ?>" required/></div>
-            <div class="inputField"><label>Password:</label> <input class="textBox" type="password" placeholder="••••••••••••••••" /></div>
-            <div class="inputField"><label>Re-Type Password:</label> <input class="textBox" type="password" placeholder="••••••••••••••••" /></div>
-            <div class="inputField"><label>Subscribe to newsletter:</label> <input type="checkbox" <?php if($_SESSION['currentCustomer']->getMailingList() == 1) {echo "checked";} ?>></div>
-            <div class="inputField"><input class="submitButton" type="submit" value="Submit" /></div>
+        <form id="userDetailsForm" action="members.php">
+            <div class="inputField"><label>Email:</label> <input class="textBox" type="email" name="email" value="<?php echo $_SESSION['currentCustomer']->getEmail(); ?>" required/></div>
+            <div class="inputField"><label>Password:</label> <input class="textBox" type="password" name="password" placeholder="••••••••••••••••" /></div>
+            <div class="inputField"><label>Re-Type Password:</label> <input class="textBox" type="password" name="passwordConfirm" placeholder="••••••••••••••••" /></div>
+            <div class="inputField"><label>Subscribe to newsletter:</label> <input type="checkbox" name="mailingList" <?php if($_SESSION['currentCustomer']->getMailingList() == 1) {echo "checked";} ?>></div>
+            <div class="inputField"><input class="submitButton" type="submit" name="updateMember" value="Submit" /></div>
         </form>
     </fieldset>
 
