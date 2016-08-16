@@ -17,6 +17,16 @@
             <div><label>Email:</label><span class="inputSpan"><input type="email" class="inputTextBox" name="email" placeholder="example@example.com" /></span></div>
             <div><label>Password:</label><span class="inputSpan"><input type="password" class="inputTextBox" name="password" placeholder="••••••••••"/></span></div>
             <div><label>Remember:</label><input type="checkbox" name="remember" checked/></div>
+            <span class="errorMessage">
+                <?php
+                    // Check if there was a signIn error
+                    if (isset($signInError))
+                    {
+                        // Show the error
+                        echo $signInError;
+                    }
+                ?>
+            </span>
             <button class="formCSSButtonButton" type="submit" name="signIn" value="signIn">Sign in</button>
         </form>
     </fieldset>

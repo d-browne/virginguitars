@@ -2,6 +2,8 @@
 // Global includes
 require 'includes/globalheader.php';
 
+$signInError; 
+
 // Check if signIn received
 if(isset($_POST['signIn']))
 {
@@ -14,8 +16,20 @@ if(isset($_POST['signIn']))
         // Initialize member to specified email addres
         $_SESSION['currentCustomer']->initialize($email);
     }
+    else
+    {
+        $signInError = "Invalid Username/Password....";
+    }
 }
 
+
+
+// Check if signOut recieved
+if(isset($_GET['signOut']))
+{
+    // Blank (unitialized customer)
+    $_SESSION['currentCustomer'] = new Customer();
+}
 
 ?>
 
@@ -55,7 +69,7 @@ if(isset($_POST['signIn']))
                 if ($_SESSION["currentCustomer"]->getIsInitialized())
                 {
                     // If signed in display members area
-                    
+                    include 'includes/membersArea.php.inc';
                 }
                 else
                 {
