@@ -802,3 +802,12 @@ em {
 .formCSSButtonButton:hover {
 	background-color: #3A1355;
 }
+
+#bottomButtonsBox {
+	margin-right: 1em;
+}
+
+#bottomButtonsBox button {
+	float: right;
+	position:inherit;
+}
