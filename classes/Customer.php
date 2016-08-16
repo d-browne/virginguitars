@@ -53,7 +53,7 @@ class Customer
         }
         
         // If everything went right update object and return true
-        $this->HomePhone = $newMobilePhone;
+        $this->MobilePhone = $newMobilePhone;
         return true;
     }
     

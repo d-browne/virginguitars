@@ -531,4 +531,64 @@ class CustomerTest extends TestCase
         // Resture original home phone number
         $customer->setHomePhone($originalHomePhone);
     }
+    
+    public function setMobilePhoneCallbackDataProvider()
+    {
+        return array(
+            array("dominic@mail.com", "12345678", true),
+            array("dominic@mail.com", "(02)22315658", true),
+            array("dominic@mail.com", "(02) 22 315 658", true),
+            array("dominic@mail.com", "2231 5658", true),
+            array("dominic2@mail.com", "2231 5658", "Member Not Initialized"),
+            array("warren@mail.com", "2231565888888888", "Too Long"),
+            array("warren@mail.com", "[02] 22315658", "Invalid Characters"),
+            array("warren@mail.com", "asdfbfgdf", "Invalid Characters"),
+            array("warren@mail.com", NULL, true),
+            array("warren@mail.com", -10, "Invalid Characters"),
+            array("warren@mail.com", 123, true),
+            array("dominic@mail.com", "3333444555", true),
+            array("warren@mail.com", "2222333444", true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setMobilePhoneCallbackDataProvider
+     */
+    public function testSetMobilePhoneCallback($email, $newMobilePhone, $result)
+    {
+        $customer = new Customer();
+        $customer->initialize($email);
+        
+        $this->assertEquals($result, $customer->setMobilePhone($newMobilePhone));
+    }
+    
+    /**
+     * 
+     * @dataProvider setHomePhoneChangesDataProvider
+     */
+    public function testSetMobilePhoneChanges($email, $newMobilePhone)
+    {
+        $customer = new Customer();
+        $customer->initialize($email);
+        
+        // Store original mobile phone number
+        $originalMobilePhone = $customer->getMobilePhone();
+        
+        // Update MobilePhone
+        $customer->setMobilePhone($newMobilePhone);
+        
+        // Test if object updated
+        $this->assertEquals($newMobilePhone, $customer->getMobilePhone());
+        
+        // Create a secondary object to test if persists
+        $customer2 = new Customer();
+        $customer2->initialize($email);
+        
+        // Test persistance
+        $this->assertEquals($newMobilePhone, $customer2->getMobilePhone());
+        
+        // Resture original mobile phone number
+        $customer->setMobilePhone($originalMobilePhone);
+    }
 }
