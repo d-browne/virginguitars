@@ -43,15 +43,18 @@ if (isset($_POST['create']))
             // Create new customer
             $creationStatus = Customer::newCustomer($email, $password);
             
+            // Check if creation status is boolean
+            
+            if (is_string($creationStatus))
+            {
+                // Show creation error
+                $createError = $creationStatus;
+            }
+            
             if ($creationStatus == true)
             {
                 // Login as newly created customer
                 $_SESSION['currentCustomer']->initialize($email);
-            }
-            else
-            {
-                // Show creation error
-                $createError = "iiii";
             }
         }
     }
