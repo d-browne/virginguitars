@@ -1,14 +1,8 @@
 <?php
-// Start session
-session_start();
+// Global includes
+require 'includes/globalheader.php';
 
-require "classes/Admin.php";
 
-// Check if isAdmin session varible is set. If not, initialize
-if (!isset($_SESSION["isAdmin"]))
-{
-    $_SESSION["isAdmin"] = false;
-}
 
 
 ?>
