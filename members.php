@@ -2,7 +2,19 @@
 // Global includes
 require 'includes/globalheader.php';
 
-
+// Check if signIn received
+if(isset($_POST['signIn']))
+{
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password'];
+    
+    // Check if username and password exist in the database
+    if(Customer::validateCustomer($email, $password))
+    {
+        // Initialize member to specified email addres
+        $_SESSION['currentCustomer']->initialize($email);
+    }
+}
 
 
 ?>
