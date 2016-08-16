@@ -13,7 +13,39 @@ class Customer
     private $salt;
     private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
     
-    
+    public function setPassword($newPassword)
+    {
+        // Return error (false) if not initialized member
+        if (!$this->isInitialized)
+        {
+            return "Member Not Initialized";
+        }
+        
+        // Generate hashed password and salt
+        $salt = mt_rand(-4000,2147483647); // Generate random salt for database
+        $hashedPassword = hash ("sha256", $newPassword . $salt);
+        
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to update password and salt
+        $query = "UPDATE customer SET EncryptedPassword = '".$hashedPassword."', Salt=".$salt." WHERE Email = '".$this->Email."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query fails
+        if(!$result)
+        {
+            return "Query Failed";
+        }
+        
+        // If everything went okay update object and return true
+        $this->hashedPassword = $hashedPassword;
+        $this->salt = $salt;
+        return true;
+    }
     
     public function setMobilePhone($newMobilePhone)
     {
@@ -461,7 +493,7 @@ class Customer
     
     public function getSalt()
     {
-        return $this->Salt;
+        return $this->salt;
     }
     
     // Class Constructor

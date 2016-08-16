@@ -591,4 +591,94 @@ class CustomerTest extends TestCase
         // Resture original mobile phone number
         $customer->setMobilePhone($originalMobilePhone);
     }
+    
+    public function setPasswordCallbackDataProvider()
+    {
+        return array(
+            array("8sdf-shdfsd", true),
+            array(NULL, true),
+            array(-1, true),
+            array("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAAAAAAAAAAAAAAAAa", true),
+            array("9999999999999x", true),
+            array("' DROP \\ \\", true)
+        );
+    }
+    /**
+     * 
+     * @dataProvider setPasswordCallbackDataProvider
+     */
+    public function testSetPasswordCallback($newPassword, $expected)
+    {
+        // Check if test customer doesn't exist
+        if (!Customer::doesCustomerExist("testCustomer@mail.com"))
+        {
+            // Create the test customer
+            Customer::newCustomer("testCustomer@mail.com", "password");
+        }
+        
+        $customer = new Customer();
+        $customer->initialize("testCustomer@mail.com");
+        
+        // test the callback
+        $this->assertEquals($expected, $customer->setPassword($newPassword));
+        
+        // Remove testcustomer from database
+        Customer::deleteCusomter("testCustomer@mail.com");
+    }
+    
+    // Test change password on uninitialized (non-existant) member
+    public function testSetPasswordNoMember()
+    {
+        // Check if test customer exists
+        if (Customer::doesCustomerExist("testCustomer@mail.com"))
+        {
+            // Delete test custome if it exists
+            Customer::deleteCusomter("testCustomer@mail.com");
+        }
+        
+        $customer = new Customer();
+
+        // Attempt password change uninitialized
+        $this->assertEquals("Member Not Initialized", $customer->setPassword("password"));
+        
+        // Attempt to initialize member that doesn't exist
+        $customer->initialize("testCustomer@mail.com");
+        
+        // Attempt password change on non existant member
+        $this->assertEquals("Member Not Initialized", $customer->setPassword("password"));
+    }
+    
+    public function setChangePasswordVarifyDataProvider()
+    {
+        return array(
+            array("testuser1@mail.com", "password1"),
+            array("testuser2@mail.com", "password2"),
+            array("testuser3@mail.com", 7),
+            array("testuser4@mail.com", NULL)
+        );
+    }
+    
+    /**
+     * Test that the changed passwords can be varified
+     * @dataProvider setChangePasswordVarifyDataProvider
+     */
+    public function testSetChangePasswordVarify($email, $newPassword)
+    {
+        if (!Customer::doesCustomerExist($email))
+        {
+            Customer::newCustomer($email, "defaultPassword");
+        }
+        
+        $customer = new Customer();
+        $customer->initialize($email);
+        
+        // Change password
+        $customer->setPassword($newPassword);
+        
+        // Check validate password
+        $this->assertEquals(true, Customer::validateCustomer($email, $newPassword));
+        
+        // Cleanup (delete) test customer
+        Customer::deleteCusomter($email);
+    }
 }
