@@ -39,9 +39,18 @@ require 'includes/globalheader.php';
         
         <div id="contentBox">
             <?php
-                // Check if member signed in
-                // If signed in display members area
-                // Otherwise display member signin/registration
+                // Check if  customer signed in
+                if ($_SESSION["currentCustomer"]->getIsInitialized())
+                {
+                    // If signed in display members area
+                    
+                }
+                else
+                {
+                    // Otherwise display member signin/registration
+                    include 'includes/memberSignin.php.inc';
+                }
+                
             ?>
         </div>
             
