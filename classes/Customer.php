@@ -13,6 +13,50 @@ class Customer
     private $salt;
     private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
     
+    public function setMobilePhone($newMobilePhone)
+    {
+        // Return error (false) if not initialized member
+        if (!$this->isInitialized)
+        {
+            return "Member Not Initialized";
+        }
+        
+        // Return error of phone number too long
+        if (iconv_strlen($newMobilePhone) > 15)
+        {
+            return "Too Long";
+        }
+        
+        // Return error if phone number contains anthing other than digits and ()
+        $regexPattern = '/[^\d\(\) ]/';
+        
+        if (preg_match($regexPattern, $newMobilePhone))
+        {
+            return "Invalid Characters";
+        }
+        
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to update MobilePhone
+        $query = "UPDATE customer SET MobilePhone = '".mysqli_real_escape_string($dataConnection, $newMobilePhone)."' "
+                . "WHERE Email = '". $this->Email ."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query fails
+        if(!$result)
+        {
+            return "Query Failed";
+        }
+        
+        // If everything went right update object and return true
+        $this->HomePhone = $newMobilePhone;
+        return true;
+    }
+    
     public function setHomePhone($newHomePhone)
     {
         // Return error (false) if not initialized member
