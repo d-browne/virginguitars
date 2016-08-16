@@ -811,3 +811,8 @@ em {
 	float: right;
 	position:inherit;
 }
+
+.errorMessage {
+	color:#AF0002;
+	font-style: italic;
+}
