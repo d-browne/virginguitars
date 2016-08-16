@@ -79,14 +79,20 @@ if (isset($_POST['updateMember']))
     $password = $_POST['password'];
     $confirmPassword = $_POST['passwordConfirm'];
     
-    // Check if passwords match
-    if ($password == $confirmPassword)
+    // If passwords blank don't change
+    if (!($password == "" && $confirmPassword == ""))
+    {
+        // Check if passwords match
+        if ($password == $confirmPassword)
+        {
+            // Set new password
+            $_SESSION['currentCustomer']->setPassword($password);
+        }
+    }
+    else
     {
         // Set new email address
         $_SESSION['currentCustomer']->setEmail($email);
-        
-        // Set new password
-        $_SESSION['currentCustomer']->setPassword($password);
         
         // Set MailingList
         if (isset($_POST['mailingList']))
