@@ -342,12 +342,56 @@ class CustomerTest extends TestCase
     /**
      * @dataProvider setMailingListDataProvider
      */
-    public function testSetMailingList($MailingList, $expected)
+    public function testSetMailingListCallback($MailingList, $expected)
     {
         $customer = new Customer();
         $customer->initialize("dominic@mail.com");
         
+        // Test if set callback working
         $this->assertEquals($expected, $customer->setMailingList($MailingList));
+    }
+    
+    public function setMailingChangesListDataProvider()
+    {
+        return array(
+            array(1, "dominic@mail.com"),
+            array(0, "dominic@mail.com"),
+            array(1, "warren@mail.com"),
+            array(0, "warren@mail.com"),
+            array(1, "ben@mail.com"),
+            array(0, "ben@mail.com"),
+            array(1, "dale@mail.com"),
+            array(0, "dale@mail.com")
+        );
+    }
+    
+    /** 
+     * 
+     * @dataProvider setMailingChangesListDataProvider
+     */
+    public function testSetMailingListChanges($data, $email)
+    {
+        $customer = new Customer();
+        $customer->initialize($email);
+        
+        // Store original value
+        $originalValue = $customer->getMailingList();
+        
+        // Change the mailing list value
+        $customer->setMailingList($data);
+        
+        // Check that the object has the updated value
+        $this->assertEquals($data, $customer->getMailingList());
+        
+        // Create new object to ensure that the change persits in new objects
+        $customer2 = new Customer();
+        $customer2->initialize($email);
+        
+        // Check if value persisted into new object (and database)
+        $this->assertEquals($data, $customer2->getMailingList());
+        
+        // Reset database back to original value
+        $customer2->setMailingList($originalValue);
     }
     
     
