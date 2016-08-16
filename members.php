@@ -2,7 +2,8 @@
 // Global includes
 require 'includes/globalheader.php';
 
-$signInError; 
+$signInError;   // Holds error for signNn
+$createError;   // Holds error for create
 
 // Check if signIn received
 if(isset($_POST['signIn']))
@@ -22,7 +23,44 @@ if(isset($_POST['signIn']))
     }
 }
 
-
+// Check if create recieved
+if (isset($_POST['create']))
+{
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $confirmEmail = filter_input(INPUT_POST, 'emailConfirm', FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password'];
+    
+    // Check if email matches the confirm
+    if ($email == $confirmEmail)
+    {
+        // Make sure email is not already in use
+        if (Customer::doesCustomerExist($email))
+        {
+            $createError = "Email already in use....";
+        }
+        else
+        {
+            // Create new customer
+            $creationStatus = Customer::newCustomer($email, $password);
+            
+            if ($creationStatus == true)
+            {
+                // Login as newly created customer
+                $_SESSION['currentCustomer']->initialize($email);
+            }
+            else
+            {
+                // Show creation error
+                $createError = "iiii";
+            }
+        }
+    }
+    else
+    {
+        // Emails don't match error
+        $createError = "Emails don't match....";
+    }
+}
 
 // Check if signOut recieved
 if(isset($_GET['signOut']))
