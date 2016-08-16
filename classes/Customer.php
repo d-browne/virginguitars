@@ -13,6 +13,8 @@ class Customer
     private $salt;
     private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
     
+    
+    
     public function setMobilePhone($newMobilePhone)
     {
         // Return error (false) if not initialized member
@@ -450,6 +452,16 @@ class Customer
     public function getLastName()
     {
         return $this->LastName;
+    }
+    
+    public function getHashedPassword()
+    {
+        return $this->hashedPassword;
+    }
+    
+    public function getSalt()
+    {
+        return $this->Salt;
     }
     
     // Class Constructor
