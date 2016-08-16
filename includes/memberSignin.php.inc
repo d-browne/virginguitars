@@ -16,7 +16,7 @@
         <form action="members.php" method="POST">
             <div><label>Email:</label><span class="inputSpan"><input type="email" class="inputTextBox" name="email" placeholder="example@example.com" /></span></div>
             <div><label>Password:</label><span class="inputSpan"><input type="password" class="inputTextBox" name="password" placeholder="••••••••••"/></span></div>
-            <div><label>Remmeber:</label><input type="checkbox" name="remember" checked/></div>
+            <div><label>Remember:</label><input type="checkbox" name="remember" checked/></div>
             <button class="formCSSButtonButton" type="submit" name="signIn" value="signIn">Sign in</button>
         </form>
     </fieldset>
