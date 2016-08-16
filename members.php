@@ -72,6 +72,34 @@ if(isset($_GET['signOut']))
     $_SESSION['currentCustomer'] = new Customer();
 }
 
+//Check for update member
+if (isset($_POST['updateMember']))
+{
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['passwordConfirm'];
+    
+    // Check if passwords match
+    if ($password == $confirmPassword)
+    {
+        // Set new email address
+        $_SESSION['currentCustomer']->setEmail($email);
+        
+        // Set new password
+        $_SESSION['currentCustomer']->setPassword($password);
+        
+        // Set MailingList
+        if (isset($_POST['mailingList']))
+        {
+            $_SESSION['currentCustomer']->setMailingList(1);
+        }
+        else
+        {
+            $_SESSION['currentCustomer']->setMailingList(0);
+        }
+    }
+}
+
 ?>
 
 <!doctype html>
