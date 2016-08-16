@@ -774,3 +774,7 @@ em {
 #memberSignInLabel {
 	margin-right: .33em;
 }
+
+#contentBox h1 {
+	padding-left: .2em;
+}
