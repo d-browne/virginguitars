@@ -13,25 +13,34 @@ class Customer
     private $salt;
     private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
     
+    public function setMobilePhone($newHomePhone)
+    {
+        // Return error (false) if not initialized member
+        if (!$this->isInitialized)
+        {
+            return "Member Not Initialized";
+        }
+    }
+    
     // Function to set/change email
     public function setEmail($email)
     {
         // Return error (false) if not initialized member
         if (!$this->isInitialized)
         {
-            return "Member not initialized";
-        }
-        
-        // Return error if email is not a valid email
-        if(filter_var($email, FILTER_VALIDATE_EMAIL) == false)
-        {
-            return "Invalid email address";
+            return "Member Not Initialized";
         }
         
         // Return error if email is too long
         if (iconv_strlen($email) > 60)
         {
-            return "Email address too long";
+            return "Too Long";
+        }
+        
+        // Return error if email is not a valid email
+        if(filter_var($email, FILTER_VALIDATE_EMAIL) == false)
+        {
+            return "Invalid Email";
         }
         
         // Create data connection
@@ -43,13 +52,13 @@ class Customer
                 . "WHERE Email = '". $this->Email ."';";
         
         // Execute query
-        $result = $dataConnection->quer($query);
+        $result = $dataConnection->query($query);
         
         // Error if query fails
         if (!$result)
         {
             // Restore object Email to original value
-            return "Update email query failed";
+            return "Query Failed";
         }
         
         // Everything went right set object email and return true

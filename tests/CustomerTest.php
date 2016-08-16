@@ -394,5 +394,71 @@ class CustomerTest extends TestCase
         $customer2->setMailingList($originalValue);
     }
     
+    public function setEmailCallbackDataProvider()
+    {
+        return array(
+            array("dominic@mail.com", "dominic2@mail.com", true),
+            array("dale@mail.com", "dale2@mail.com", true),
+            array("warren@mail.com", "warren2@mail.com", true),
+            array("ben@mail.com", "ben2@mail.com", true),
+            array("dominic2@mail.com", "dominic.mail.com", "Invalid Email"),
+            array("warren2@mail.com", "suggaMomma", "Invalid Email"),
+            array("dale@mail.com", "sugga@Momma.net", "Member Not Initialized"),
+            array("dominic2@mail.com", "dominiccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc@mail.com", "Too Long"),
+            array("dominic2@mail.com", "dominic@mail.com", true),
+            array("dale2@mail.com", "dale@mail.com", true),
+            array("warren2@mail.com", "warren@mail.com", true),
+            array("ben2@mail.com", "ben@mail.com", true)
+        );
+    }
     
+    /** 
+     * 
+     * @dataProvider setEmailCallbackDataProvider
+     */
+    public function testSetEmailCallback($email, $newEmail, $result)
+    {
+        $customer = new Customer();
+        $customer->initialize($email);
+        
+        $this->assertEquals($result, $customer->setEmail($newEmail));
+    }
+    
+    public function setMailChangesDataProvider()
+    {
+        return array(
+            array("dominic@mail.com", "dominic2@mail.com"),
+            array("warren@mail.com", "warren2@mail.com"),
+            array("ben@mail.com", "ben2@mail.com"),
+            array("dale@mail.com", "dale2@mail.com")
+        );
+    }
+    
+    /** 
+     * 
+     * @dataProvider setMailChangesDataProvider
+     */
+    public function testSetEmailChanges($email, $newEmail)
+    {
+        $customer = new Customer();
+        $customer->initialize($email);
+        
+        // Store original email
+        $originalEmail = $customer->getEmail();
+        
+        // Change email
+        $customer->setEmail($newEmail);
+        
+        // test changes
+        $this->assertEquals($newEmail, $customer->getEmail());
+        
+        // Check change in seconardy object
+        $customer2 = new Customer();
+        $customer2->initialize($newEmail);
+        
+        $this->assertEquals($newEmail, $customer2->getEmail());
+        
+        // Revert datbase back to original state
+        $customer->setEmail($originalEmail);
+    }
 }
