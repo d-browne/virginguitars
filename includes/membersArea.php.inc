@@ -45,10 +45,10 @@
     <fieldset class="inputFieldSet" id="userDetailsFieldset">
         <legend>User details</legend>
         <form id="userDetailsForm" action="members.html">
-            <div class="inputField"><label>Email:</label> <input class="textBox" type="email" placeholder="example@example.com" required/></div>
-            <div class="inputField"><label>Password:</label> <input class="textBox" type="password" value="123456789" required/></div>
-            <div class="inputField"><label>Re-Type Password:</label> <input class="textBox" type="password" value="123456789" required/></div>
-            <div class="inputField"><label>Subscribe to newsletter:</label> <input type="checkbox" checked></div>
+            <div class="inputField"><label>Email:</label> <input class="textBox" type="email" value="<?php echo $_SESSION['currentCustomer']->getEmail(); ?>" required/></div>
+            <div class="inputField"><label>Password:</label> <input class="textBox" type="password" placeholder="••••••••••••••••" /></div>
+            <div class="inputField"><label>Re-Type Password:</label> <input class="textBox" type="password" placeholder="••••••••••••••••" /></div>
+            <div class="inputField"><label>Subscribe to newsletter:</label> <input type="checkbox" <?php if($_SESSION['currentCustomer']->getMailingList() == 1) {echo "checked";} ?>></div>
             <div class="inputField"><input class="submitButton" type="submit" value="Submit" /></div>
         </form>
     </fieldset>
