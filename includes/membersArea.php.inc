@@ -62,6 +62,7 @@
             <div class="inputField"><label>City:</label> <input class="textBox" type="text" value="Lismore" required/></div>
             <div class="inputField"><label>Post code:</label> <input class="textBox" type="text" value="2480" required/></div>
             <div class="inputField"><label>Country:</label> <input class="textBox" type="text" value="Australia" required/></div>
+            <div class="inputField"><label>Telephone:</label> <input class="textBox" type="text" value="02 6690 156" required/></div>
             <div class="inputField"><input class="submitButton" type="submit" value="Submit" /></div>
         </form>
     </fieldset>
