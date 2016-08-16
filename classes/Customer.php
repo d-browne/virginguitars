@@ -13,7 +13,49 @@ class Customer
     private $salt;
     private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
     
-    
+    // Function to set/change email
+    public function setEmail($email)
+    {
+        // Return error (false) if not initialized member
+        if (!$this->isInitialized)
+        {
+            return "Member not initialized";
+        }
+        
+        // Return error if email is not a valid email
+        if(filter_var($email, FILTER_VALIDATE_EMAIL) == false)
+        {
+            return "Invalid email address";
+        }
+        
+        // Return error if email is too long
+        if (iconv_strlen($email) > 60)
+        {
+            return "Email address too long";
+        }
+        
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to change Email
+        $query = "UPDATE customer SET Email = '".mysqli_real_escape_string($dataConnection, $email)."' "
+                . "WHERE Email = '". $this->Email ."';";
+        
+        // Execute query
+        $result = $dataConnection->quer($query);
+        
+        // Error if query fails
+        if (!$result)
+        {
+            // Restore object Email to original value
+            return "Update email query failed";
+        }
+        
+        // Everything went right set object email and return true
+        $this->Email = $email;
+        return true;
+    }
     
     // function to set mailing list
     public function setMailingList($joinedMailingList)
