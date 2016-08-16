@@ -49,9 +49,11 @@
             <div id="newUserBox">
             	<fieldset class="signInFieldSet">
                 <legend>New User</legend>
-                	<div><label>Email:</label><span class="inputSpan"><input type="email" class="inputTextBox" /></span></div>
-                    <div><label>Password:</label><span class="inputSpan"><input type="password" class="inputTextBox" /></span></div>
-                    <a href="members.html"><div class="formCSSButton">Create</div></a>
+                	<form action="members.php" method="POST">
+                        <div><label>Email:</label><span class="inputSpan"><input type="email" class="inputTextBox" /></span></div>
+                        <div><label>Password:</label><span class="inputSpan"><input type="password" class="inputTextBox" /></span></div>
+                        <button class="formCSSButtonButton" name="create" value="create" type="submit">Create</button>
+                    </form>
                 </fieldset>
             </div>
             <div id="signInBox">
