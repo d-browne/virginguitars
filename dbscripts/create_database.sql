@@ -16,13 +16,13 @@ create table CUSTOMER (
 
 create table HOMEADDRESS (
 	HomeAddressID int(7) PRIMARY KEY AUTO_INCREMENT,
-    Customer int(7) NOT NULL,
+    CustomerFK int(7) NOT NULL,
     StreetAddress VarChar(50) NOT NULL,
     City VarChar(50) NOT NULL,
     State VarChar(50) NOT NULL,
     PostCode VarChar(4) NOT NULL,
     Country VarChar(15) NOT NULL,
-    FOREIGN KEY (Customer) REFERENCES Customer(CustomerID)
+    FOREIGN KEY (CustomerFK) REFERENCES Customer(CustomerID)
 )ENGINE=InnoDB;
 
 create table ORDER_STATUS (
@@ -32,27 +32,27 @@ create table ORDER_STATUS (
 
 create table SALES_ORDER (
 	SalesOrderID int(7) PRIMARY KEY AUTO_INCREMENT,
-    Customer int(7) NOT NULL,
+    CustomerFK int(7) NOT NULL,
     InvoiceDate DATE,
     SubTotal DECIMAL(6,2) NOT NULL,
     Shipping DECIMAL(6,2) NOT NULL,
     Total Decimal(6,2) NOT NULL,
     ShippedDate DATE,
     ShippingRecord VarChar(15),
-    OrderStatus int(2) NOT NULL,
-    FOREIGN KEY (Customer) REFERENCES CUSTOMER(CustomerID),
-    FOREIGN KEY (OrderStatus) REFERENCES ORDER_STATUS(OrderStatusID)
+    OrderStatusFK int(2) NOT NULL,
+    FOREIGN KEY (CustomerFK) REFERENCES CUSTOMER(CustomerID),
+    FOREIGN KEY (OrderStatusFK) REFERENCES ORDER_STATUS(OrderStatusID)
 )ENGINE=InnoDB;
 
 create table DELIVERYADDRESS (
 	DeliveryAddressID int(7) PRIMARY KEY AUTO_INCREMENT,
-    Customer int(7) NOT NULL,
+    CustomerFK int(7) NOT NULL,
     StreetAddress VarChar(50) NOT NULL,
     City VarChar(50) NOT NULL,
     State VarChar(50) NOT NULL,
     PostCode VarChar(4) NOT NULL,
     Country VarChar(15) NOT NULL,
-    FOREIGN KEY (Customer) REFERENCES CUSTOMER(CustomerID)
+    FOREIGN KEY (CustomerFK) REFERENCES CUSTOMER(CustomerID)
 )ENGINE=InnoDB;
 
 create table BRAND (
@@ -96,43 +96,44 @@ create table ADMINISTRATOR (
 
 create table PRODUCT (
 	ProductID int(7) PRIMARY KEY AUTO_INCREMENT,
-    Classification int(3) NOT NULL,
-    Brand int(4) NOT NULL,
+    ClassificationFK int(3) NOT NULL,
+    BrandFK int(4) NOT NULL,
     Quantity int(3) NOT NULL,
-    Status int(3) NOT NULL,
+    StatusFK int(3) NOT NULL,
     Description VarChar(100) NOT NULL,
-    Appearence int(3) NOT NULL,
+    AppearenceFK int(3) NOT NULL,
     UnitPrice DECIMAL(6,2) NOT NULL,
-    CaseType int(3) NOT NULL,
-    Model int(5) NOT NULL,
-    CreatedBy int(4) NOT NULL,
-    ModifiedBy int(4) NOT NULL,
+    CaseTypeFK int(3) NOT NULL,
+    ModelFK int(5) NOT NULL,
+    CreatedByFK int(4) NOT NULL,
+    ModifiedByFK int(4) NOT NULL,
     CreationDate DATE NOT NULL,
     ModifiedDate DATE,
-    FOREIGN KEY (Classification) REFERENCES CLASSIFICATION(ClassificationID),
-    FOREIGN KEY (Brand) REFERENCES Brand(BrandID),
-    FOREIGN KEY (Status) REFERENCES PRODUCT_STATUS(ProductStatusID),
-    FOREIGN KEY (CaseType) REFERENCES CASE_TYPE(CaseTypeID),
-    FOREIGN KEY (Model) REFERENCES MODEL(ModelID),
-    FOREIGN KEY (CreatedBy) REFERENCES ADMINISTRATOR(AdministratorID),
-    FOREIGN KEY (ModifiedBy) REFERENCES ADMINISTRATOR(AdministratorID)
+    FOREIGN KEY (AppearenceFK) REFERENCES APPEARENCE(AppearenceID),
+    FOREIGN KEY (ClassificationFK) REFERENCES CLASSIFICATION(ClassificationID),
+    FOREIGN KEY (BrandFK) REFERENCES Brand(BrandID),
+    FOREIGN KEY (StatusFK) REFERENCES PRODUCT_STATUS(ProductStatusID),
+    FOREIGN KEY (CaseTypeFK) REFERENCES CASE_TYPE(CaseTypeID),
+    FOREIGN KEY (ModelFK) REFERENCES MODEL(ModelID),
+    FOREIGN KEY (CreatedByFK) REFERENCES ADMINISTRATOR(AdministratorID),
+    FOREIGN KEY (ModifiedByFK) REFERENCES ADMINISTRATOR(AdministratorID)
 )ENGINE=InnoDB;
 
 create table ORDER_PRODUCT (
 	OrderProductID int(4) PRIMARY KEY AUTO_INCREMENT,
-    SalesOrder int(7) NOT NULL,
-    Product int(7) NOT NULL,
+    SalesOrderFK int(7) NOT NULL,
+    ProductFK int(7) NOT NULL,
     Quantity int(4) NOT NULL,
     Total DECIMAL(6,2) NOT NULL,
-    FOREIGN KEY (SalesOrder) REFERENCES SALES_ORDER(SalesOrderID),
-    FOREIGN KEY (Product) REFERENCES PRODUCT(ProductID)
+    FOREIGN KEY (SalesOrderFK) REFERENCES SALES_ORDER(SalesOrderID),
+    FOREIGN KEY (ProductFK) REFERENCES PRODUCT(ProductID)
 )ENGINE=InnoDB;
 
 create table PICTURE (
 	PictureID int(4) PRIMARY KEY AUTO_INCREMENT,
-    Product int(7) NOT NULL,
+    ProductFK int(7) NOT NULL,
     Image VarChar(100) NOT NULL,
-    FOREIGN KEY (Product) REFERENCES PRODUCT(ProductID)
+    FOREIGN KEY (ProductFK) REFERENCES PRODUCT(ProductID)
 )ENGINE=InnoDB;
 
 INSERT INTO CLASSIFICATION VALUES (NULL, 'Guitar', 6);
