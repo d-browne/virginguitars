@@ -6,18 +6,18 @@ CREATE PROCEDURE GetOrdersByCustomerID
 BEGIN
     SELECT 
     c.CustomerID,
-    c.FirstName As 'First Name',
-    c.LastName As 'Last Name',
+    c.FirstName,
+    c.LastName,
     so.SalesOrderID,
-    so.InvoiceDate As 'Invoice Date',
-    so.SubTotal As 'Sub Total',
+    so.InvoiceDate,
+    so.SubTotal,
     so.Shipping,
     so.Total,
-    so.ShippedDate As 'Shipped Date',
-    so.ShippingRecord As 'Shipping Record',
-    so.OrderStatus As 'Order Status'
+    so.ShippedDate,
+    so.ShippingRecord,
+    so.OrderStatusFK
     FROM Customer As c 
-    INNER JOIN Sales_Order As so ON so.Customer = c.CustomerID
+    INNER JOIN Sales_Order As so ON so.CustomerFK = c.CustomerID
     WHERE c.CustomerID = cust_id;
 END//
 DELIMITER ;

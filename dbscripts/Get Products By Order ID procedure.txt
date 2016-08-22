@@ -5,32 +5,32 @@ CREATE PROCEDURE GetProductsByOrderID
 )
 BEGIN
     SELECT 
-    so.SalesOrderID, 
-    p.ProductID, 
-    b.BrandName As 'Brand', 
-    c.Type, 
-    p.Quantity, 
-    ps.Description As 'Status', 
-    p.Description, 
-    ap.Description As 'Condition',
-    p.UnitPrice As 'Price', 
-    ct.Description As 'Case Type',  
+ 	so.SalesOrderID, 
+    p.ProductID,
+    b.BrandName,
+    c.Type,
+    p.Quantity,
+    ps.Description As 'ProductStatus',
+    p.Description,
+    ap.Description As 'Appearence',
+    p.UnitPrice,
+    ct.Description As 'CaseType',
     m.Description As 'Model',
-    a.UserName As 'Created By',
-    a2.UserName As 'Modified by',
-    p.CreationDate As 'Date Created',
-    p.ModifiedDate As 'Date Modified'
+    a.UserName As 'CreatedBy',
+    a2.UserName As 'ModifiedBy',
+    p.CreationDate,
+    p.ModifiedDate
     FROM SALES_ORDER As so
-    INNER JOIN ORDER_PRODUCT As op ON op.SalesOrder = so.SalesOrderID
-    INNER JOIN PRODUCT As p ON p.ProductID = op.Product
-    INNER JOIN Brand As b ON p.Brand = b.BrandID
-    INNER JOIN Classification As c ON p.Classification = c.ClassificationID
-    INNER JOIN Product_Status As ps ON p.Status = ps.ProductStatusID
-    INNER JOIN Appearence As ap ON p.Appearence = ap.AppearenceID
-    INNER JOIN Case_Type As ct ON p.CaseType = ct.CaseTypeID
-    INNER JOIN Model As m ON p.Model = m.ModelID
-    INNER JOIN Administrator As a ON p.CreatedBy = a.AdministratorID
-    INNER JOIN Administrator As a2 ON p.ModifiedBy = a.AdministratorID
+    INNER JOIN ORDER_PRODUCT As op ON op.SalesOrderFK = so.SalesOrderID
+    INNER JOIN PRODUCT As p on op.ProductFK = p.ProductID
+    INNER JOIN BRAND AS b on p.BrandFK = b.BrandID
+    INNER JOIN CLASSIFICATION As c on p.ClassificationFK = c.ClassificationID
+    INNER JOIN PRODUCT_STATUS As ps on p.StatusFK = ps.ProductStatusID
+    INNER JOIN APPEARENCE As ap on p.AppearenceFK = ap.AppearenceID
+    INNER JOIN CASE_TYPE As ct on p.CaseTypeFK = ct.CaseTypeID
+    INNER JOIN MODEL As m on p.ModelFK = m.ModelID
+    INNER JOIN ADMINISTRATOR As a ON p.CreatedByFk = a.AdministratorID
+    INNER JOIN ADMINISTRATOR As a2 ON p.ModifiedByFK = a2.AdministratorID
     WHERE so.SalesOrderID = order_id
     ORDER BY p.ProductID;
 END//
