@@ -324,7 +324,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to get watned values
-        $query = "SELECT * FROM customer WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."';";
+        $query = "SELECT * FROM CUSTOMER WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."';";
         
         // Execute query
         $result = $dataConnection->query($query);
@@ -366,7 +366,7 @@ class Customer
             $dataConnection = $database->getDataConnection();
             
             // Query to delete customer
-            $query = "DELETE FROM customer WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."';";
+            $query = "DELETE FROM CUSTOMER WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."';";
             
             // Execute query 
             $dataConnection->query($query);
@@ -514,7 +514,7 @@ class Customer
         
         
         // Query to select email address
-        $query = "SELECT Email FROM customer WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."'";
+        $query = "SELECT Email FROM CUSTOMER WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."'";
         $result = $dataConnection->query($query);
         
         // Check if result is set
