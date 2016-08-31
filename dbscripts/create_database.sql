@@ -22,7 +22,7 @@ create table HOMEADDRESS (
     State VarChar(50) NOT NULL,
     PostCode VarChar(4) NOT NULL,
     Country VarChar(15) NOT NULL,
-    FOREIGN KEY (CustomerFK) REFERENCES Customer(CustomerID)
+    FOREIGN KEY (CustomerFK) REFERENCES CUSTOMER(CustomerID)
 )ENGINE=InnoDB;
 
 create table ORDER_STATUS (
@@ -111,7 +111,7 @@ create table PRODUCT (
     ModifiedDate DATE,
     FOREIGN KEY (AppearenceFK) REFERENCES APPEARENCE(AppearenceID),
     FOREIGN KEY (ClassificationFK) REFERENCES CLASSIFICATION(ClassificationID),
-    FOREIGN KEY (BrandFK) REFERENCES Brand(BrandID),
+    FOREIGN KEY (BrandFK) REFERENCES BRAND(BrandID),
     FOREIGN KEY (StatusFK) REFERENCES PRODUCT_STATUS(ProductStatusID),
     FOREIGN KEY (CaseTypeFK) REFERENCES CASE_TYPE(CaseTypeID),
     FOREIGN KEY (ModelFK) REFERENCES MODEL(ModelID),
