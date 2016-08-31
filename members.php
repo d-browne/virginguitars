@@ -40,7 +40,6 @@ if (isset($_POST['create']))
         }
         else
         {
-            echo "triggered"; // Debug tag, please remove. 
             // Create new customer
             $creationStatus = Customer::newCustomer($email, $password);
             
