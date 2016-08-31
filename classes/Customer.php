@@ -533,7 +533,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // query for email password and salt
-        $query = "SELECT Email,EncryptedPassword,Salt FROM customer";
+        $query = "SELECT Email,EncryptedPassword,Salt FROM CUSTOMER";
         // Execute query
         $results = $dataConnection->query($query);
         
