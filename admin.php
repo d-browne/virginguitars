@@ -64,7 +64,7 @@ if (isset($_GET["logout"]))
             else
             {
                 // Otherwise display (include) admin login page
-                include("/includes/adminlogin.php.inc");
+                include("includes/adminlogin.php.inc");
             }
             
         ?>
