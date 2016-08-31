@@ -424,7 +424,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to add user to database
-        $query = "INSERT INTO customer VALUES (DEFAULT, '".
+        $query = "INSERT INTO CUSTOMER VALUES (DEFAULT, '".
                 mysqli_real_escape_string($dataConnection, $LastName) ."', '".
                 mysqli_real_escape_string($dataConnection, $FirstName) ."', '".
                 mysqli_real_escape_string($dataConnection, $Salutation) ."', ".
