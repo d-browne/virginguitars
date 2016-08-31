@@ -48,7 +48,7 @@ class Admin
         }
         else
         {
-            $$this->isAuthenticated = FALSE;
+            $this->isAuthenticated = FALSE;
         }
         $this->connection->close();
     }
