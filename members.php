@@ -43,8 +43,9 @@ if (isset($_POST['create']))
             // Create new customer
             $creationStatus = Customer::newCustomer($email, $password);
             
-            // Check if creation status is boolean
+            echo "Debug status: ".$creationStatus;
             
+            // Check if creation status is boolean
             if (is_string($creationStatus))
             {
                 // Show creation error
