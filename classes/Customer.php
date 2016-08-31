@@ -1,5 +1,7 @@
 <?php
 
+require_once 'classes/Database.php';
+
 class Customer
 {
     private $LastName;
@@ -322,7 +324,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to get watned values
-        $query = "SELECT * FROM customer WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."';";
+        $query = "SELECT * FROM CUSTOMER WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."';";
         
         // Execute query
         $result = $dataConnection->query($query);
@@ -364,7 +366,7 @@ class Customer
             $dataConnection = $database->getDataConnection();
             
             // Query to delete customer
-            $query = "DELETE FROM customer WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."';";
+            $query = "DELETE FROM CUSTOMER WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."';";
             
             // Execute query 
             $dataConnection->query($query);
@@ -422,7 +424,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to add user to database
-        $query = "INSERT INTO customer VALUES (DEFAULT, '".
+        $query = "INSERT INTO CUSTOMER VALUES (DEFAULT, '".
                 mysqli_real_escape_string($dataConnection, $LastName) ."', '".
                 mysqli_real_escape_string($dataConnection, $FirstName) ."', '".
                 mysqli_real_escape_string($dataConnection, $Salutation) ."', ".
@@ -512,7 +514,7 @@ class Customer
         
         
         // Query to select email address
-        $query = "SELECT Email FROM customer WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."'";
+        $query = "SELECT Email FROM CUSTOMER WHERE Email = '".mysqli_real_escape_string($dataConnection, $email)."'";
         $result = $dataConnection->query($query);
         
         // Check if result is set
@@ -531,7 +533,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // query for email password and salt
-        $query = "SELECT Email,EncryptedPassword,Salt FROM customer";
+        $query = "SELECT Email,EncryptedPassword,Salt FROM CUSTOMER";
         // Execute query
         $results = $dataConnection->query($query);
         

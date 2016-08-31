@@ -1,9 +1,10 @@
 DELIMITER //
 CREATE PROCEDURE GetProductsByOrderID 
 (
-    IN order_id int(7)
+    IN in_order_id int(7)
 )
 BEGIN
+<<<<<<< HEAD
     SELECT 
  	so.SalesOrderID, 
     p.ProductID,
@@ -32,6 +33,34 @@ BEGIN
     INNER JOIN ADMINISTRATOR As a ON p.CreatedByFk = a.AdministratorID
     INNER JOIN ADMINISTRATOR As a2 ON p.ModifiedByFK = a2.AdministratorID
     WHERE so.SalesOrderID = order_id
+=======
+SELECT 
+    so.SalesOrderID, 
+    p.ProductID, 
+    b.BrandName As 'Brand', 
+    c.Type, 
+    p.Quantity, 
+    ps.Description As 'Status', 
+    p.Description, 
+    ap.Description As 'Condition',
+    p.UnitPrice As 'Price', 
+    ct.Description As 'CaseType',  
+    m.Description As 'Model',
+    (select a.Username from Administrator as a where p.CreatedByFK = a.AdministratorID) as 'CreatedBy',  
+    (select a2.Username from Administrator as a2 where p.ModifiedByFK = a2.AdministratorID) as 'ModifiedBy',
+    p.CreationDate As 'DateCreated',
+    p.ModifiedDate As 'DateModified'
+    FROM SALES_ORDER As so
+    INNER JOIN ORDER_PRODUCT As op ON op.SalesOrderFK = so.SalesOrderID
+    INNER JOIN PRODUCT As p ON p.ProductID = op.ProductFK
+    INNER JOIN Brand As b ON p.BrandFK = b.BrandID
+    INNER JOIN Classification As c ON p.ClassificationFK = c.ClassificationID
+    INNER JOIN Product_Status As ps ON p.StatusFK = ps.ProductStatusID
+    INNER JOIN Appearence As ap ON p.AppearenceFK = ap.AppearenceID
+    INNER JOIN Case_Type As ct ON p.CaseTypeFK = ct.CaseTypeID
+    INNER JOIN Model As m ON p.ModelFK = m.ModelID
+    WHERE so.SalesOrderID = in_order_id
+>>>>>>> origin/master
     ORDER BY p.ProductID;
 END//
 DELIMITER ;

@@ -1,0 +1,12 @@
+CREATE PROCEDURE AuthenticateCustomer 
+(
+    IN email varchar(60),
+    IN encryptedPassword varchar(256),
+    IN salt int(11),
+    
+    OUT v_valid BOOLEAN
+)
+Set v_valid = EXISTS(SELECT 
+    	1
+        FROM Customer c
+        where email = c.Email && encryptedPassword = c.EncryptedPassword && salt = c.Salt);

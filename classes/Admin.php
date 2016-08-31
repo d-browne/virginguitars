@@ -1,6 +1,6 @@
 <?php
 
-require 'classes/Database.php';
+require_once 'classes/Database.php';
 
 class Admin 
 {
@@ -22,7 +22,7 @@ class Admin
     // Function to authenticate admin
     public function authenticate($username, $password)
     {
-        $query = "SELECT UserName,EncryptedPassword,Salt FROM administrator";
+        $query = "SELECT UserName,EncryptedPassword,Salt FROM ADMINISTRATOR";
         $result = $this->connection->query($query);
            
         
@@ -48,7 +48,7 @@ class Admin
         }
         else
         {
-            $$this->isAuthenticated = FALSE;
+            $this->isAuthenticated = FALSE;
         }
         $this->connection->close();
     }
