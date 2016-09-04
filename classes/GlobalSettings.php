@@ -8,5 +8,7 @@ class GlobalSettings
     static public $dbpassword = "";
     static public $dbname = "vgecw_db";
     
+    // path of FAQ data file 
+    const PATH_TO_FAQ = "includes/faq_data.html";
 }
 
