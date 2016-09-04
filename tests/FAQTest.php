@@ -6,6 +6,7 @@ require_once 'classes/FAQ.php';
 
 class FAQTest extends TestCase
 {
+    // Test creation of new faq
     public function testCreateFaqObject()
     {
         $backupData = ''; // Holds the file data for deltion test
