@@ -731,12 +731,23 @@ em {
 	margin-right: 1em;
 }
 
-#controlPanelIconsBox {
+.controlPanelSection {
 	border: 1px solid #29516D;
 	width: 75%;
 	margin: auto;
 	position: relative;
 	margin-bottom: 1em;
+}
+
+#firstControlPanelSection {
+	margin-bottom: 0px;
+}
+
+#signoutDiv {
+	height: 3em;
+	border: 0px;
+	padding-top: 0;
+	
 }
 
 .adminControlIcon {
@@ -762,6 +773,11 @@ em {
 #manageInvoicesIcon {
 	background-image: url('../images/adminIcons/manageInvoicesIcon.png');
 }
+
+#manageFaqIcon {
+	background-image: url('../images/adminIcons/manageInvoicesIcon.png');
+}
+
 #manageInvoicesIcon:hover {
 	background-image: url('../images/adminIcons/manageInvoicesIconMo.png');
 }
