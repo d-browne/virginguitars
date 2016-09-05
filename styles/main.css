@@ -743,6 +743,28 @@ em {
 	margin-bottom: 0px;
 }
 
+#faqEditorBox {
+	margin-bottom: 0px;
+	width: 95%;
+}
+
+#faqEditorButtons {
+	width: 95%;
+	height: 3em;
+	border: 0px;
+	padding-top: 0;
+}
+
+#faqEditorButtons button {
+	margin-top: 1em;
+	float: right;
+	position:inherit;
+}
+
+#faqClearButton {
+	float: left !important;
+}
+
 #signoutDiv {
 	height: 3em;
 	border: 0px;
