@@ -28,7 +28,7 @@
     </div>       
     <div id="signoutDiv" class="controlPanelSection">
         <form action="admin.php" method="GET">
-            <button class="formCSSButtonButton" name="logout">Sign out</button>
+            <button class="formCSSButtonButton" name="logout" value="logout">Sign out</button>
         </form>
     </div>    
 </div>
