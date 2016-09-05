@@ -6,7 +6,7 @@
             echo '<div id="signedInAsAdminLink"><a href="admin.php">[Signed in as admin]</a></div>';
         }
     ?>
-    <a href="index.html"><img src="images/logo.png" width="213" height="200" alt="Virgin Guitars" class="logoImage"></a>
+    <a href="index.php"><img src="images/logo.png" width="213" height="200" alt="Virgin Guitars" class="logoImage"></a>
     <h1 class="mainHeader">Virgin Guitars</h1>
     <form action="search.php" method="GET">
         <input type="text" id="searchBox" placeholder="Site Search..." />
