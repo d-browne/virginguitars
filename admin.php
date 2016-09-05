@@ -32,6 +32,8 @@ if (isset($_GET["logout"]))
 <link href="styles/main.css" rel="stylesheet" type="text/css">
 <link href="styles/js-image-slider.css" rel="stylesheet" type="text/css" />
 <script src="scripts/js-image-slider.js" type="text/javascript"></script>
+<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'textarea' });</script>
 </head>
 
 <body>
@@ -58,8 +60,15 @@ if (isset($_GET["logout"]))
             // Check if admin is logged in
             if ($_SESSION["isAdmin"])
             {
-                // If admin is logged in display (include) admin control panel
-                include("includes/adminControlPanel.php.inc");
+                if (isset($_GET['faq']))
+                {
+                    include("includes/editFaq.php.inc");
+                }
+                else
+                {
+                    // If admin is logged in and no control selected dispaly admin page
+                    include("includes/adminControlPanel.php.inc");
+                }
             }
             else
             {

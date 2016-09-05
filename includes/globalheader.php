@@ -6,6 +6,7 @@
 
 require "classes/Admin.php";
 require "classes/Customer.php";
+require_once "classes/FAQ.php";
 
 // Start session
 session_start();
