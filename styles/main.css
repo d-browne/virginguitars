@@ -796,11 +796,23 @@ em {
 	background-image: url('../images/adminIcons/manageInvoicesIcon.png');
 }
 
+#manageInvoicesIcon:hover {
+	background-image: url('../images/adminIcons/manageInvoicesIconMo.png');
+}
+
 #manageFaqIcon {
 	background-image: url('../images/adminIcons/manageInvoicesIcon.png');
 }
 
-#manageInvoicesIcon:hover {
+#manageFaqIcon:hover {
+	background-image: url('../images/adminIcons/manageInvoicesIconMo.png');
+}
+
+#manageAboutUsIcon {
+	background-image: url('../images/adminIcons/manageInvoicesIcon.png');
+}
+
+#manageAboutUsIcon:hover {
 	background-image: url('../images/adminIcons/manageInvoicesIconMo.png');
 }
 
