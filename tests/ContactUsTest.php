@@ -292,7 +292,7 @@ class ContactUsTest extends TestCase
             array("http://youtube.com/virgin.guitars", true),
             array("", true),
             array(NULL, true),
-            array("http://youtube.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "twitter too long"),
+            array("http://youtube.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "youtube too long"),
             array(-1, true),
         );
     }
