@@ -65,4 +65,21 @@ class ContactUsTest extends TestCase
         // Restore backup
         $contactUs->set_blurb_path($originalPath);
     }
+    
+    public function test_set_contact_email($email, $expected)
+    {
+        $contactUs = new ContactUs();
+        
+        // Backup original email
+        $originalEmail = $contactUs->get_contact_email();
+        
+        // Test callback matches expected
+        $this->assertEquals($expected, $contactUs->set_contact_email($email));
+        
+        // If expecteed result test that object updated in memory and database
+        if ($expected)
+        {
+            
+        }
+    }
 }
