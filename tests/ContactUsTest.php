@@ -204,4 +204,43 @@ class ContactUsTest extends TestCase
         // Restore backup of original address
         $contactUs->set_contact_address_line_3($originalAddress);
     }
+    
+    public function set_facebok_url_data_provider()
+    {
+        return array(
+            array("http://facebook.com/sdfosudafads.adsfupsdf", true),
+            array("http://facebook.com/virgin.guitars", true),
+            array("", true),
+            array(NULL, true),
+            array(-1, true),
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider set_facebok_url_data_provider
+     */
+    public function test_set_facebook_url($facebook, $expected)
+    {
+        $contactUs = new ContactUs();
+        
+        // Backup original facebook url
+        $original_facebook_url = $contactUs->get_facebook_url();
+        
+        // Test callback matches expected
+        $this->assertEquals($expected, $contactUs->set_facebook_url($facebook));
+        
+        // If expecteed result test that object updated in memory and database
+        if ($expected === true)
+        {
+            // check object updated (in memory)
+            $this->assertEquals($facebook, $contactUs->get_facebook_url());
+            // Check if object updated in databse (using new object)
+            $contactUs2 = new ContactUs();
+            $this->assertEquals($facebook, $contactUs2->get_facebook_url());
+        }
+        
+        // Restore backup of facebook url
+        $contactUs->set_facebook_url($original_facebook_url);
+    }
 }
