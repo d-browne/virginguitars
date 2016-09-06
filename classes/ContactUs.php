@@ -18,6 +18,40 @@ class ContactUs
     private $privacy_policy_path;
     private $isInitialized = false;         // Whether the class is initialized or not
     
+    public function set_youtube_url($youtubeInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Get safe input string
+        $youtube = mysqli_real_escape_string($dataConnection, $youtubeInput);
+        
+        // Check if address is too long
+        if (iconv_strlen($youtube) > 100)
+        {
+            return "youtube too long";
+        }
+        
+        // Query to update facebook_url
+        $query = "UPDATE CONTACT_US SET youtube_url='".$youtube."' WHERE ID=1";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result == false)
+        {
+            return "query failed";
+        }
+        
+        // Update youtube_url in memory
+        $this->youtube_url = $youtube;
+        
+        // All OK
+        return true;
+    }
+    
     public function set_twitter_url($twitterInput)
     {
         // Create data connection
@@ -45,7 +79,7 @@ class ContactUs
             return "query failed";
         }
         
-        // Update facebook_url in memory
+        // Update twitter_url in memory
         $this->twitter_url = $twitter;
         
         // All OK
