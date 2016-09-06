@@ -24,7 +24,13 @@
                 <div class="adminControlIcon" id="manageFaqIcon"></div>
                 <div class="adminControlCaption">Edit Faq</div>
             </a>
-        </div>            
+        </div>
+        <div class="adminControl" id="manageAboutUsControl">
+            <a href="admin.php?aboutus">
+                <div class="adminControlIcon" id="manageAboutUsIcon"></div>
+                <div class="adminControlCaption">Edit About Us</div>
+            </a>
+        </div>
     </div>       
     <div id="signoutDiv" class="controlPanelSection">
         <form action="admin.php" method="GET">
