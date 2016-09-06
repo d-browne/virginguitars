@@ -212,6 +212,7 @@ class ContactUsTest extends TestCase
             array("http://facebook.com/virgin.guitars", true),
             array("", true),
             array(NULL, true),
+            array("http://facebook.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "facebook too long"),
             array(-1, true),
         );
     }
@@ -242,5 +243,45 @@ class ContactUsTest extends TestCase
         
         // Restore backup of facebook url
         $contactUs->set_facebook_url($original_facebook_url);
+    }
+    
+    public function set_twitter_url_data_provider()
+    {
+        return array(
+            array("http://twitter.com/sdfosudafads.adsfupsdf", true),
+            array("http://twitter.com/virgin.guitars", true),
+            array("", true),
+            array(NULL, true),
+            array("http://twitter.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "twitter too long"),
+            array(-1, true),
+        );
+    }
+    
+    /** 
+     * 
+     * @dataProvider set_twitter_url_data_provider
+     */
+    public function test_set_twitter_url($twitter, $expected)
+    {
+        $contactUs = new ContactUs();
+        
+        // Backup original twitter url
+        $original_twitter_url = $contactUs->get_twitter_url();
+        
+        // Test callback matches expected
+        $this->assertEquals($expected, $contactUs->set_twitter_url($twitter));
+        
+        // If expecteed result test that object updated in memory and database
+        if ($expected === true)
+        {
+            // check object updated (in memory)
+            $this->assertEquals($twitter, $contactUs->get_twitter_url());
+            // Check if object updated in databse (using new object)
+            $contactUs2 = new ContactUs();
+            $this->assertEquals($twitter, $contactUs2->get_twitter_url());
+        }
+        
+        // Restore backup of twitter url
+        $contactUs->set_twitter_url($original_twitter_url);
     }
 }

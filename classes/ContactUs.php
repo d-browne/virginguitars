@@ -18,6 +18,40 @@ class ContactUs
     private $privacy_policy_path;
     private $isInitialized = false;         // Whether the class is initialized or not
     
+    public function set_twitter_url($twitterInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Get safe input string
+        $twitter = mysqli_real_escape_string($dataConnection, $twitterInput);
+        
+        // Check if address is too long
+        if (iconv_strlen($twitter) > 100)
+        {
+            return "twitter too long";
+        }
+        
+        // Query to update facebook_url
+        $query = "UPDATE CONTACT_US SET twitter_url='".$twitter."' WHERE ID=1";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result == false)
+        {
+            return "query failed";
+        }
+        
+        // Update facebook_url in memory
+        $this->twitter_url = $twitter;
+        
+        // All OK
+        return true;
+    }
+    
     public function set_facebook_url($facebookInput)
     {
         // Create data connection
