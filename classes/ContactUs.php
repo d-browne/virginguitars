@@ -18,6 +18,46 @@ class ContactUs
     private $privacy_policy_path;
     private $isInitialized = false;         // Whether the class is initialized or not
     
+    public function set_contact_email($emailInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Get safe input string
+        $email = mysqli_real_escape_string($dataConnection, $emailInput);
+        
+        // Check if email is too long
+        if (iconv_strlen($email) > 60)
+        {
+            return "email too long";
+        }
+        
+        // Check if email invalid
+        if(filter_var($email, FILTER_VALIDATE_EMAIL) == false)
+        {
+            return "invalid email";
+        }
+        
+        // Query to update contact_email
+        $query = "UPDATE CONTACT_US SET contact_email='".$email."' WHERE ID=1";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result == false)
+        {
+            return "query failed";
+        }
+        
+        // Update contact_email in memory
+        $this->contact_email = $email;
+        
+        // All OK
+        return true;
+    }
+    
     public function set_blurb_path($pathInput)
     {
         // Create data connection
