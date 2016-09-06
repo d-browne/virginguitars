@@ -66,6 +66,24 @@ class ContactUsTest extends TestCase
         $contactUs->set_blurb_path($originalPath);
     }
     
+    public function set_contact_email_data_provider()
+    {
+        return array(
+            array("zingas@mail.com", true),
+            array("zingas.mail.com", "invalid email"),
+            array("dominic@mail.com", true),
+            array(1, "invalid email"),
+            array(0, "invalid email"),
+            array(-11, "invalid email"),
+            array(NULL, "invalid email"),
+            array("dominiccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc@mail.com", "email too long")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider set_contact_email_data_provider
+     */
     public function test_set_contact_email($email, $expected)
     {
         $contactUs = new ContactUs();
@@ -77,9 +95,16 @@ class ContactUsTest extends TestCase
         $this->assertEquals($expected, $contactUs->set_contact_email($email));
         
         // If expecteed result test that object updated in memory and database
-        if ($expected)
+        if ($expected === true)
         {
-            
+            // check object updated (in memory)
+            $this->assertEquals($email, $contactUs->get_contact_email());
+            // Check if object updated in databse (using new object)
+            $contactUs2 = new ContactUs();
+            $this->assertEquals($email, $contactUs2->get_contact_email());
         }
+        
+        // Restore backup of original email address
+        $contactUs->set_contact_email($originalEmail);
     }
 }
