@@ -107,4 +107,45 @@ class ContactUsTest extends TestCase
         // Restore backup of original email address
         $contactUs->set_contact_email($originalEmail);
     }
+    
+    public function set_contact_address_line_1_data_provider()
+    {
+        return array(
+            array("1234 Fake Street", true),
+            array("5324 Cool St.", true),
+            array("99 Rocker Rd.", true),
+            array(NULL, true),
+            array(123, true),
+            array(-123, true),
+            array("123 something or other streeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet.", "address too long")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider set_contact_address_line_1_data_provider
+     */
+    public function test_set_contact_address_line_1($address, $expected)
+    {
+        $contactUs = new ContactUs();
+        
+        // Backup original address
+        $originalAddress = $contactUs->get_contact_address_line1();
+        
+        // Test callback matches expected
+        $this->assertEquals($expected, $contactUs->set_contact_address_line_1($address));
+        
+        // If expecteed result test that object updated in memory and database
+        if ($expected === true)
+        {
+            // check object updated (in memory)
+            $this->assertEquals($address, $contactUs->get_contact_address_line1());
+            // Check if object updated in databse (using new object)
+            $contactUs2 = new ContactUs();
+            $this->assertEquals($address, $contactUs2->get_contact_address_line1());
+        }
+        
+        // Restore backup of original address
+        $contactUs->set_contact_address_line_1($originalAddress);
+    }
 }
