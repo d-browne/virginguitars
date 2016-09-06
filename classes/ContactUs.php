@@ -18,6 +18,40 @@ class ContactUs
     private $privacy_policy_path;
     private $isInitialized = false;         // Whether the class is initialized or not
     
+    public function set_facebook_url($facebookInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Get safe input string
+        $facebook = mysqli_real_escape_string($dataConnection, $facebookInput);
+        
+        // Check if address is too long
+        if (iconv_strlen($facebook) > 100)
+        {
+            return "facebook too long";
+        }
+        
+        // Query to update facebook_url
+        $query = "UPDATE CONTACT_US SET facebook_url='".$facebook."' WHERE ID=1";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result == false)
+        {
+            return "query failed";
+        }
+        
+        // Update facebook_url in memory
+        $this->facebook_url = $facebook;
+        
+        // All OK
+        return true;
+    }
+    
     public function set_contact_address_line_3($addressInput)
     {
         // Create data connection
