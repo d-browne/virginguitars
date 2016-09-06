@@ -7,7 +7,7 @@
 <link href="styles/js-image-slider.css" rel="stylesheet" type="text/css" />
 <script src="scripts/js-image-slider.js" type="text/javascript"></script>
 <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'textarea' });</script>
+<script>tinymce.init({ selector:'textarea', plugins: 'textcolor colorpicker', toolbar: 'forecolor backcolor' });</script>
 </head>
 
 <body>
@@ -47,7 +47,7 @@
         </div>
         
         <div id="contentBox">
-        	<h1>Edit F.A.Q.</h1>
+        	<h1>Edit F.A.Q. <span class="updateSuccess">- Updated!</span></h1>
             
             <form action="admin.php" method="POST">
                 <div class="controlPanelSection" id="faqEditorBox">
