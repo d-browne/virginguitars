@@ -284,4 +284,44 @@ class ContactUsTest extends TestCase
         // Restore backup of twitter url
         $contactUs->set_twitter_url($original_twitter_url);
     }
+    
+    public function set_youtube_url_data_provider()
+    {
+        return array(
+            array("http://youtube.com/sdfosudafads.adsfupsdf", true),
+            array("http://youtube.com/virgin.guitars", true),
+            array("", true),
+            array(NULL, true),
+            array("http://youtube.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "twitter too long"),
+            array(-1, true),
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider set_youtube_url_data_provider
+     */
+    public function test_set_youtube_url($youtube, $expected)
+    {
+        $contactUs = new ContactUs();
+        
+        // Backup original youtube url
+        $original_youtube_url = $contactUs->get_youtube_url();
+        
+        // Test callback matches expected
+        $this->assertEquals($expected, $contactUs->set_youtube_url($youtube));
+        
+        // If expecteed result test that object updated in memory and database
+        if ($expected === true)
+        {
+            // check object updated (in memory)
+            $this->assertEquals($youtube, $contactUs->get_youtube_url());
+            // Check if object updated in databse (using new object)
+            $contactUs2 = new ContactUs();
+            $this->assertEquals($youtube, $contactUs2->get_youtube_url());
+        }
+        
+        // Restore backup of youtube url
+        $contactUs->set_youtube_url($original_youtube_url);
+    }
 }
