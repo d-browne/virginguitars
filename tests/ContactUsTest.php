@@ -324,4 +324,45 @@ class ContactUsTest extends TestCase
         // Restore backup of youtube url
         $contactUs->set_youtube_url($original_youtube_url);
     }
+    
+    public function set_privacy_policy_path_data_provider()
+    {
+        return array(
+            array("includes/asdfas.html", true),
+            array("kakakaka.html", true),
+            array("", true),
+            array(NULL, true),
+            array("includes/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "path too long"),
+            array(-1, true)
+        );
+    }
+    
+    
+    /**
+     * 
+     * @dataProvider set_privacy_policy_path_data_provider
+     */
+    public function test_set_privacy_policy_path($path, $expected)
+    {
+        $contactUs = new ContactUs();
+        
+        // Backup original privacy_policy_path
+        $original_privacy_policy_path = $contactUs->get_privacy_policy_path();
+        
+        // Test callback matches expected
+        $this->assertEquals($expected, $contactUs->set_privacy_policy_path($path));
+        
+        // If expecteed result test that object updated in memory and database
+        if ($expected === true)
+        {
+            // check object updated (in memory)
+            $this->assertEquals($path, $contactUs->get_privacy_policy_path());
+            // Check if object updated in databse (using new object)
+            $contactUs2 = new ContactUs();
+            $this->assertEquals($path, $contactUs2->get_privacy_policy_path());
+        }
+        
+        // Restore backup of privacy_policy_path
+        $contactUs->set_privacy_policy_path($original_privacy_policy_path);
+    }
 }
