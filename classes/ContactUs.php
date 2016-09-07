@@ -18,6 +18,32 @@ class ContactUs
     private $privacy_policy_path;
     private $isInitialized = false;         // Whether the class is initialized or not
     
+    public function setAboutUsBlurb($data)
+    {
+        try {
+            $aboutUsBlurb = fopen($this->blurb_path, "w");
+            return fwrite($aboutUsBlurb, $data);
+        } catch (Exception $ex) {
+            return $ex;
+        }
+    }
+    
+    public function getAboutUsBlurb()
+    {
+        try {
+            // If file doesn't exist create with default string
+            if (!file_exists($this->blurb_path))
+            {
+                $file = fopen($this->blurb_path, "w");
+                fwrite($file, "<b>Blurb goes here</b>");
+            }
+            $blurb = fopen($this->blurb_path, "r");
+            return fread($blurb, filesize(GlobalSettings::PATH_TO_FAQ));
+        } catch (Exception $ex) {
+            return $ex;
+        }
+    }
+    
     public function set_privacy_policy_path($pathInput)
     {
         // Create data connection

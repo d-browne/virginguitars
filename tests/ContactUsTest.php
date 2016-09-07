@@ -365,4 +365,43 @@ class ContactUsTest extends TestCase
         // Restore backup of privacy_policy_path
         $contactUs->set_privacy_policy_path($original_privacy_policy_path);
     }
+    
+    // Check read and write blurb
+    public function test_getAboutUsBlurb()
+    {
+        $contactUs = new ContactUs();
+        
+        // Backup current blurb
+        $blurbBackup = $contactUs->getAboutUsBlurb();
+        
+        // Define new blurb text
+        $newBlurb = "<p>new blurb</p>";
+        
+        // Set the new blurb
+        $this->assertEquals(true, $contactUs->setAboutUsBlurb($newBlurb));
+        
+        // Check that the new blurb has really been set
+        $this->assertEquals($newBlurb, $contactUs->getAboutUsBlurb());
+        
+        // Restore backuped up blurb
+        $contactUs->setAboutUsBlurb($blurbBackup);
+    }
+    
+    // Check default blurb creation
+    public function test_blurbCreation()
+    {
+        $contactUs = new contactUs();
+        
+        // Backup existing blurb
+        $blurbBackup = $contactUs->getAboutUsBlurb();
+        
+        // Delete the blurb
+        unlink($contactUs->get_blurb_path());
+        
+        // Read a non-existing blurb (creates new blurb)
+        $this->assertEquals("<b>Blurb goes here</b>", $contactUs->getAboutUsBlurb());
+        
+        // Restore blurb backup
+        $this->assertEquals(true, $contactUs->setAboutUsBlurb($blurbBackup));
+    }
 }
