@@ -18,6 +18,32 @@ class ContactUs
     private $privacy_policy_path;
     private $isInitialized = false;         // Whether the class is initialized or not
     
+    public function setPrivacyBlurb($data)
+    {
+        try {
+            $privacyBlurb = fopen($this->privacy_policy_path, "w");
+            return fwrite($privacyBlurb, $data);
+        } catch (Exception $ex) {
+            return $ex;
+        }
+    }
+    
+    public function getPrivacyBlurb()
+    {
+        try {
+            // If file doesn't exist create with default string
+            if (!file_exists($this->privacy_policy_path))
+            {
+                $file = fopen($this->privacy_policy_path, "w");
+                fwrite($file, "<b>Privacy Policy Goes here</b>");
+            }
+            $blurb = fopen($this->privacy_policy_path, "r");
+            return fread($blurb, filesize($this->privacy_policy_path));
+        } catch (Exception $ex) {
+            return $ex;
+        }
+    }
+    
     public function setAboutUsBlurb($data)
     {
         try {
@@ -38,7 +64,7 @@ class ContactUs
                 fwrite($file, "<b>Blurb goes here</b>");
             }
             $blurb = fopen($this->blurb_path, "r");
-            return fread($blurb, filesize(GlobalSettings::PATH_TO_FAQ));
+            return fread($blurb, filesize($this->blurb_path));
         } catch (Exception $ex) {
             return $ex;
         }
@@ -75,6 +101,47 @@ class ContactUs
         $this->privacy_policy_path = $path;
         
         // All OK
+        return true;
+    }
+    
+    public function set_contact_telephone($phoneInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Get safe telephone string
+        $phone = mysqli_real_escape_string($dataConnection, $phoneInput);
+        
+        // Check if phone is too long
+        if (iconv_strlen($phone) > 15)
+        {
+            return "phone too long";
+        }
+        
+        // Return error if phone number contains anthing other than digits and ()
+        $regexPattern = '/[^\d\(\) ]/';
+        
+        if (preg_match($regexPattern, $phone))
+        {
+            return "invalid characters";
+        }
+        
+        // Query to update phone number
+        $query = "UPDATE CONTACT_US SET contact_telephone='".$phone."' WHERE ID=1";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        if ($result == false)
+        {
+            return "query failed";
+        }
+        
+        // Update variable in object memory
+        $this->contact_telephone = $phone;
+        
+        // All OK return true
         return true;
     }
     

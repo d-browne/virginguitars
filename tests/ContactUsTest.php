@@ -404,4 +404,86 @@ class ContactUsTest extends TestCase
         // Restore blurb backup
         $this->assertEquals(true, $contactUs->setAboutUsBlurb($blurbBackup));
     }
+    
+    // Check read and write blurb
+    public function test_setPrivacyBlurb()
+    {
+        $contactUs = new ContactUs();
+        
+        // Backup current blurb
+        $blurbBackup = $contactUs->getPrivacyBlurb();
+        
+        // Define new blurb text
+        $newBlurb = "<p>new blurb</p>";
+        
+        // Set the new blurb
+        $this->assertEquals(true, $contactUs->setPrivacyBlurb($newBlurb));
+        
+        // Check that the new blurb has really been set
+        $this->assertEquals($newBlurb, $contactUs->getPrivacyBlurb());
+        
+        // Restore backuped up blurb
+        $contactUs->setPrivacyBlurb($blurbBackup);
+    }
+    
+    // Check create new privacy policy file
+    public function testCreateNewPrivacyFile()
+    {
+        $contactUs = new ContactUs();
+        
+        // Backup privacy policy
+        $privacyPolicyBackup = $contactUs->getPrivacyBlurb();
+        
+        // Delete privacy policy file
+        unlink($contactUs->get_privacy_policy_path());
+        
+        // Get the privacy policy file contents (new file will be created)
+        $this->assertEquals("<b>Privacy Policy Goes here</b>", $contactUs->getPrivacyBlurb());
+        
+        // Restore backed up blurb
+        $contactUs->setPrivacyBlurb($privacyPolicyBackup);
+    }
+    
+    public function set_contact_telephone_data_provider()
+    {
+        return array(
+            array("66231258", true),
+            array("(02) 32512569", true),
+            array("(02)02123256", true),
+            array("(02)02123256888888888888888", "phone too long"), // too long
+            array(668912354, true),
+            array(NULL, TRUE),
+            array("[02]81894583", "invalid characters"),
+            array(-1, "invalid characters")
+        );
+    }
+    
+    
+    /**
+     * 
+     * @dataProvider set_contact_telephone_data_provider
+     */
+    public function test_set_contact_telephone($telephone, $expected)
+    {
+        $contactUs = new ContactUs();
+        
+        // Backup original contact_telephone
+        $original_contact_telephone = $contactUs->get_contact_telephone();
+        
+        // Test callback matches expected
+        $this->assertEquals($expected, $contactUs->set_contact_telephone($telephone));
+        
+        // If expecteed result test that object updated in memory and database
+        if ($expected === true)
+        {
+            // check object updated (in memory)
+            $this->assertEquals($telephone, $contactUs->get_contact_telephone());
+            // Check if object updated in databse (using new object)
+            $contactUs2 = new ContactUs();
+            $this->assertEquals($telephone, $contactUs2->get_contact_telephone());
+        }
+        
+        // Restore backup of contact_telephone
+        $contactUs->set_contact_telephone($original_contact_telephone);
+    }
 }
