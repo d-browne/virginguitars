@@ -8,7 +8,7 @@
             <form action="admin.php" method="POST">
                 <div><label>Username:</label><span class="inputSpan"><input type="text" class="inputTextBox" name="adminUsername"/></span></div>
                 <div><label>Password:</label><span class="inputSpan"><input type="password" class="inputTextBox" name="adminPassword"/></span></div>
-                <div><label>Remmeber:</label><input type="checkbox" name="remember" checked/></div>
+                <div><label>Remember:</label><input type="checkbox" name="remember" checked/></div>
                 <button type="submit" class="formCSSButtonButton" name="submit" value="submit">Sign In</button>
             </form>
         </fieldset>
