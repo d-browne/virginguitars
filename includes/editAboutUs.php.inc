@@ -2,7 +2,7 @@
 $contactUs = new ContactUs();
 $isUpdated = false;
 $hasError = false;
-$updateResults = [];
+$updateResults = array();
 
 // Check if editAboutUsButton clicked
 if (isset($_POST['editAboutUsButton']))
