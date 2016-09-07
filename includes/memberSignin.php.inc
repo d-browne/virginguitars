@@ -6,6 +6,7 @@
             <div><label>Email:</label><span class="inputSpan"><input type="email" class="inputTextBox" name="email" placeholder="example@example.com" /></span></div>
             <div><label>Confirm:</label><span class="inputSpan"><input type="email" class="inputTextBox" name="emailConfirm" placeholder="Confirm email..."/></span></div>
             <div><label>Password:</label><span class="inputSpan"><input type="password" class="inputTextBox" name="password" placeholder="••••••••••"/></span></div>
+            <div><label>Confirm:</label><span class="inputSpan"><input type="password" class="inputTextBox" name="passwordConfirm" placeholder="Confirm Password"/></span></div>
             <span class="errorMessage">
                 <?php
                     // Check if there was a create error

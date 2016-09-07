@@ -29,32 +29,40 @@ if (isset($_POST['create']))
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $confirmEmail = filter_input(INPUT_POST, 'emailConfirm', FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];
+    $passwordConfirm = $_POST['passwordConfirm'];
     
     // Check if email matches the confirm
     if ($email == $confirmEmail)
     {
-        // Make sure email is not already in use
-        if (Customer::doesCustomerExist($email))
+        if ($password === $passwordConfirm)
         {
-            $createError = "Email already in use....";
+            // Make sure email is not already in use
+            if (Customer::doesCustomerExist($email))
+            {
+                $createError = "Email already in use....";
+            }
+            else
+            {
+                // Create new customer
+                $creationStatus = Customer::newCustomer($email, $password);
+
+                // Check if creation status is boolean
+                if (is_string($creationStatus))
+                {
+                    // Show creation error
+                    $createError = $creationStatus;
+                }
+
+                if ($creationStatus == true)
+                {
+                    // Login as newly created customer
+                    $_SESSION['currentCustomer']->initialize($email);
+                }
+            }
         }
         else
         {
-            // Create new customer
-            $creationStatus = Customer::newCustomer($email, $password);
-                      
-            // Check if creation status is boolean
-            if (is_string($creationStatus))
-            {
-                // Show creation error
-                $createError = $creationStatus;
-            }
-            
-            if ($creationStatus == true)
-            {
-                // Login as newly created customer
-                $_SESSION['currentCustomer']->initialize($email);
-            }
+            $createError = "Passwords don't match...";
         }
     }
     else
