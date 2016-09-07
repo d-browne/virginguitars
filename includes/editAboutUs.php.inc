@@ -10,7 +10,7 @@ $contactUs = new ContactUs();
         <fieldset class="inputFieldSet" id="aboutUsBlurbFieldSet">
             <legend>About Us Blurb</legend>
             <div class="controlPanelSection" id="faqEditorBox">
-                <textarea name="aboutUsBlurb"></textarea>
+                <textarea name="aboutUsBlurb"><?php echo $contactUs->getAboutUsBlurb(); ?></textarea>
             </div>
         </fieldset>
 
