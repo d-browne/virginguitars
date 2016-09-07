@@ -453,8 +453,8 @@ class ContactUsTest extends TestCase
             array("(02)02123256888888888888888", "phone too long"), // too long
             array(668912354, true),
             array(NULL, TRUE),
-            array("[02]81894583", "invalid characters"),
-            array(-1, "invalid characters")
+            array("[02]81894583", "invalid phone characters"),
+            array(-1, "invalid phone characters")
         );
     }
     

@@ -38,6 +38,11 @@ class ContactUs
                 fwrite($file, "<b>Privacy Policy Goes here</b>");
             }
             $blurb = fopen($this->privacy_policy_path, "r");
+            // If file empty return empty string
+            if (filesize($this->privacy_policy_path) === 0)
+            {
+                return "";
+            }
             return fread($blurb, filesize($this->privacy_policy_path));
         } catch (Exception $ex) {
             return $ex;
@@ -64,6 +69,11 @@ class ContactUs
                 fwrite($file, "<b>Blurb goes here</b>");
             }
             $blurb = fopen($this->blurb_path, "r");
+            // If file empty return empty string
+            if (filesize($this->blurb_path) === 0)
+            {
+                return "";
+            }
             return fread($blurb, filesize($this->blurb_path));
         } catch (Exception $ex) {
             return $ex;
@@ -124,7 +134,7 @@ class ContactUs
         
         if (preg_match($regexPattern, $phone))
         {
-            return "invalid characters";
+            return "invalid phone characters";
         }
         
         // Query to update phone number
