@@ -34,6 +34,11 @@ class FAQ
     {
         try {
             $faqDataFile = fopen(GlobalSettings::PATH_TO_FAQ, "r");
+            // Return blank string if file empty
+            if (filesize(GlobalSettings::PATH_TO_FAQ) == 0)
+            {
+                return "";
+            }
             return fread($faqDataFile, filesize(GlobalSettings::PATH_TO_FAQ));
         } catch (Exception $ex) {
             return $ex;
