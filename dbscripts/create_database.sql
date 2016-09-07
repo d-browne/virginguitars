@@ -136,6 +136,23 @@ create table PICTURE (
     FOREIGN KEY (ProductFK) REFERENCES PRODUCT(ProductID)
 )ENGINE=InnoDB;
 
+CREATE TABLE CONTACT_US (
+  `ID` int(7) PRIMARY KEY,
+  `blurb_path` varchar(60) DEFAULT NULL,
+  `contact_email` varchar(60) DEFAULT NULL,
+  `contact_telephone` varchar(15) DEFAULT NULL,
+  `contact_address_line_1` varchar(50) DEFAULT NULL,
+  `contact_address_line_2` varchar(50) DEFAULT NULL,
+  `contact_address_line_3` varchar(50) DEFAULT NULL,
+  `facebook_url` varchar(100) DEFAULT NULL,
+  `twitter_url` varchar(100) DEFAULT NULL,
+  `youtube_url` varchar(100) DEFAULT NULL,
+  `privacy_policy_path` varchar(60) DEFAULT NULL
+) ENGINE=InnoDB;
+
+INSERT INTO CONTACT_US (`ID`, `blurb_path`, `contact_email`, `contact_telephone`, `contact_address_line_1`, `contact_address_line_2`, `contact_address_line_3`, `facebook_url`, `twitter_url`, `youtube_url`, `privacy_policy_path`) VALUES
+(1, 'includes/contact_us_blurb.html', 'sales@virginguitars.com', '02 66 901 56', 'Virgin Guitars,', '26 Music Lane,', 'Lismore, NSW. 2480.', 'http://facebook.com/', 'http://twitter.com/', 'http://youtube.com/', 'includes/privacy_policy_blurb.html');
+
 INSERT INTO CLASSIFICATION VALUES (NULL, 'Acoustic Guitar', 6);
 INSERT INTO CLASSIFICATION VALUES (NULL, 'Electric Guitar', 6);
 INSERT INTO CLASSIFICATION VALUES (NULL, '7 String Electric Guitar', 7);
