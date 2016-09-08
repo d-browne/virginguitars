@@ -76,13 +76,15 @@
     <fieldset class="inputFieldSet" id="shippingDetailsFieldset">
         <legend>Shipping details</legend>
         <form id="shippingDetailsForm" action="members.html">
-            <div class="inputField"><label>First Name:</label> <input class="textBox" type="text" value="April"/></div>
-            <div class="inputField"><label>Last Name:</label> <input class="textBox" type="text" value="Frederick Stevenson"/></div>
-            <div class="inputField"><label>Street Address:</label> <input class="textBox" type="text" value="26 Music Lane"/></div>
-            <div class="inputField"><label>City:</label> <input class="textBox" type="text" value="Lismore" required/></div>
-            <div class="inputField"><label>Post code:</label> <input class="textBox" type="text" value="2480" required/></div>
-            <div class="inputField"><label>Country:</label> <input class="textBox" type="text" value="Australia" required/></div>
-            <div class="inputField"><label>Telephone:</label> <input class="textBox" type="text" value="02 6690 156" required/></div>
+            <div class="inputField"><label>Salutation:</label> <input class="textBox" type="text" placeholder="e.g. Mrs." value="<?php echo $_SESSION['currentCustomer']->getSalutation(); ?>"/></div>
+            <div class="inputField"><label>First Name:</label> <input class="textBox" type="text" placeholder="e.g. April" value="<?php echo $_SESSION['currentCustomer']->getFirstName(); ?>"/></div>
+            <div class="inputField"><label>Last Name:</label> <input class="textBox" type="text" placeholder="e.g. Frederick Stevenson" value="<?php echo $_SESSION['currentCustomer']->getLastName(); ?>"/></div>
+            <div class="inputField"><label>Street Address:</label> <input class="textBox" type="text" placeholder="e.g. 26 Music Lane" value=""/></div>
+            <div class="inputField"><label>City:</label> <input class="textBox" type="text" placeholder="e.g. Lismore"value="" /></div>
+            <div class="inputField"><label>Post code:</label> <input class="textBox" type="text" placeholder="e.g. 2480" value="" /></div>
+            <div class="inputField"><label>Country:</label> <input class="textBox" type="text" placeholder="e.g. Australia" value="" /></div>
+            <div class="inputField"><label>Home Telephone:</label> <input class="textBox" type="text" placeholder="e.g. (02) 6690 1566" value="<?php echo $_SESSION['currentCustomer']->getHomePhone(); ?>" /></div>
+            <div class="inputField"><label>Mobile Telephone:</label> <input class="textBox" type="text" placeholder="e.g. 0489 321 153" value="<?php echo $_SESSION['currentCustomer']->getMobilePhone(); ?>" /></div>
             <div class="inputField"><input class="submitButton" type="submit" value="Submit" /></div>
         </form>
     </fieldset>
