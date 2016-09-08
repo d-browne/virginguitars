@@ -41,11 +41,31 @@
 
 <div id="rightColumn">
     <h1>Members</h1>
-    <p>Welcome back to the members section! From here you can configure your members settings, change your shipping/billing information and your members details</p>
+            <p>Welcome back to the members section! From here you can configure your members settings, change your shipping/billing information and your members details.
+                <span id="updatedMemberLabel">
+                    <?php
+                        // Write updated if updated flag set
+                        if ($isUpdated)
+                        {
+                            echo " Updated!";
+                        }
+                    ?>
+                </span>
+                <span id="updatedMemberErrorLabel">
+                    <?php
+                        // Write the error message if there is an error updating member
+                        if (isset($updateMemberError))
+                        {
+                            echo " ".$updateMemberError;
+                        }
+                    ?>
+                </span>
+            </p>
     <fieldset class="inputFieldSet" id="userDetailsFieldset">
         <legend>User details</legend>
         <form id="userDetailsForm" action="members.php" method="POST">
             <div class="inputField"><label>Email:</label> <input class="textBox" type="email" name="email" value="<?php echo $_SESSION['currentCustomer']->getEmail(); ?>" required/></div>
+            <div class="inputField"><label>Re-Type Email:</label> <input class="textBox" type="email" name="emailConfirm" value="<?php echo $_SESSION['currentCustomer']->getEmail(); ?>" required/></div>
             <div class="inputField"><label>Password:</label> <input class="textBox" type="password" name="password" placeholder="••••••••••••••••" /></div>
             <div class="inputField"><label>Re-Type Password:</label> <input class="textBox" type="password" name="passwordConfirm" placeholder="••••••••••••••••" /></div>
             <div class="inputField"><label>Subscribe to newsletter:</label> <input type="checkbox" name="mailingList" <?php if($_SESSION['currentCustomer']->getMailingList() == 1) {echo "checked";} ?>></div>

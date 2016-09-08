@@ -2,8 +2,10 @@
 // Global includes
 require 'includes/globalheader.php';
 
-$signInError;   // Holds error for signNn
-$createError;   // Holds error for create
+$signInError;           // Holds error for signNn
+$createError;           // Holds error for create
+$isUpdated = false;     // has member been updated
+$updateMemberError;     // Hold the update member error
 
 // Check if signIn received
 if(isset($_POST['signIn']))
@@ -83,10 +85,16 @@ if(isset($_GET['signOut']))
 if (isset($_POST['updateMember']))
 {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $confirmEmail = filter_input(INPUT_POST, 'emailConfirm', FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];
     $confirmPassword = $_POST['passwordConfirm'];
     
-    // If passwords blank don't change
+    // if passwords are blank don't change
+    // Otherwise check that they match
+    // If they match update the password
+    // Create a message to indicate updated
+    
+    // If passwords are not blank, update them
     if (!($password == "" && $confirmPassword == ""))
     {
         // Check if passwords match
@@ -94,22 +102,40 @@ if (isset($_POST['updateMember']))
         {
             // Set new password
             $_SESSION['currentCustomer']->setPassword($password);
-        }
-    }
-    else
-    {
-        // Set new email address
-        $_SESSION['currentCustomer']->setEmail($email);
-        
-        // Set MailingList
-        if (isset($_POST['mailingList']))
-        {
-            $_SESSION['currentCustomer']->setMailingList(1);
+            
+            // Set updated flag
+            $isUpdated = true;
         }
         else
         {
-            $_SESSION['currentCustomer']->setMailingList(0);
+            // Set the error for passwords not matching
+            $updateMemberError = "Passwords don't match...";
         }
+    }
+    
+    // Check if emails match
+    // If they match update
+    if ($email === $confirmEmail)
+    {
+        // Set new email address
+        $_SESSION['currentCustomer']->setEmail($email);
+        $isUpdated = true; // sets is updated flag
+    }
+    else
+    {
+        $updateMemberError = "Email addresses don't match...";
+    }
+    
+    // Set MailingList
+    if (isset($_POST['mailingList']))
+    {
+        $_SESSION['currentCustomer']->setMailingList(1);
+        $isUpdated = true; // sets is updated flag
+    }
+    else
+    {
+        $_SESSION['currentCustomer']->setMailingList(0);
+        $isUpdated = true; // sets is updated flag
     }
 }
 
