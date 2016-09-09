@@ -75,7 +75,7 @@
 
     <fieldset class="inputFieldSet" id="personalDetailsFieldset">
         <legend>Personal Details</legend>
-        <form id="personalDetailsForm" action="members.html">
+        <form id="personalDetailsForm" action="members.php" method="POST">
             <div class="inputField"><label>Salutation:</label> <input class="textBox" name="salutation" type="text" placeholder="e.g. Mrs." value="<?php echo $_SESSION['currentCustomer']->getSalutation(); ?>"/></div>
             <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" placeholder="e.g. April" value="<?php echo $_SESSION['currentCustomer']->getFirstName(); ?>"/></div>
             <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" placeholder="e.g. Frederick Stevenson" value="<?php echo $_SESSION['currentCustomer']->getLastName(); ?>"/></div>
