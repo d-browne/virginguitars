@@ -37,13 +37,20 @@ if (isset($_GET["logout"]))
     selector:'textarea', 
             content_css : 'styles/main.css', 
             content_style: "body {background-color: #FFFFFF !important;",
-    toolbar: 'toolbar: undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | questionButton',
+    toolbar: 'toolbar: undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | questionButton answerButton',
     setup: function (editor) {
-        editor.addButton('questionButton', {
+        editor.addButton('questionButton', { // Function to add Question format to textarea
            text: false,
            image: 'images/editorIcons/q_icon.ico',
            onclick: function () {
                editor.insertContent('<p class="questionParagraph"><span class="questionLetter">Q:</span> Question</p>');
+           }
+        });
+        editor.addButton('answerButton', {
+           text: false,
+           image: 'images/editorIcons/a_icon.ico',
+           onclick: function () {
+               editor.insertContent('<p class="answerParagraph"><span class="questionLetter">A:</span> Answer</p>');
            }
         });
     }
