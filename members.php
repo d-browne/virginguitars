@@ -2,10 +2,10 @@
 // Global includes
 require 'includes/globalheader.php';
 
-$signInError;           // Holds error for signNn
-$createError;           // Holds error for create
-$isUpdated = false;     // has member been updated
-$updateMemberError;     // Hold the update member error
+$signInError;               // Holds error for signNn
+$createError;               // Holds error for create
+$isUpdated = false;         // has member been updated
+$updateMemberError = "";    // Hold the update member error
 
 // Check if signIn received
 if(isset($_POST['signIn']))
@@ -139,6 +139,44 @@ if (isset($_POST['updateMember']))
     }
 }
 
+
+// Check for update personal details
+if (isset($_POST['updatePersonalDetails']))
+{
+    // array to hold results of setting
+    $results = array();
+    
+    // Get all inputs
+    $salutation = $_POST['salutation'];
+    $firstName = $_POST['firstname'];
+    $lastName = $_POST['lastname'];
+    $streetAddress = $_POST['street'];
+    $city = $_POST['city'];
+    $postCode = $_POST['postcode'];
+    $country = $_POST['country'];
+    $homePhone = $_POST['homephone'];
+    $mobilePhone = $_POST['mobilephone'];
+    
+    array_push($results, $_SESSION['currentCustomer']->setSalutation($salutation));
+    array_push($results, $_SESSION['currentCustomer']->setFirstName($firstName));
+    array_push($results, $_SESSION['currentCustomer']->setLastName($lastName));
+    array_push($results, $_SESSION['currentCustomer']->getHomeAddress()->setStreetAddress($streetAddress));
+    array_push($results, $_SESSION['currentCustomer']->getHomeAddress()->setCity($city));
+    array_push($results, $_SESSION['currentCustomer']->getHomeAddress()->setPostCode($postCode));
+    array_push($results, $_SESSION['currentCustomer']->getHomeAddress()->setCountry($country));
+    array_push($results, $_SESSION['currentCustomer']->setHomePhone($homePhone));
+    array_push($results, $_SESSION['currentCustomer']->setMobilePhone($mobilePhone));
+    
+    // Display each error
+    foreach ($results as $result)
+    {
+        if ($result !== true) // Is an error
+        {
+            $updateMemberError += $result.", ";
+        }
+    }
+    $isUpdated = true;
+}
 ?>
 
 <!doctype html>
