@@ -17,6 +17,38 @@ class HomeAddress
     private $Country;
     
     // Setters
+    public function setCountry($CountryInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $Country = mysqli_real_escape_string($dataConnection, $CountryInput);
+        
+        // Check if Country is too long
+        if (iconv_strlen($Country) > 15)
+        {
+            return "Country too long";
+        }
+        
+        // Query to update Country
+        $query = "UPDATE HOMEADDRESS SET Country='".$Country."' WHERE HomeAddressID='".$this->HomeAddressID."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Throw if query error
+        if ($result === null)
+        {
+            throw new Exception("Error updating Country");
+        }
+        
+        // Update object memory
+        $this->Country = $Country;
+        // All okay
+        return true;
+    }
     
     public function setPostCode($PostCodeInput)
     {

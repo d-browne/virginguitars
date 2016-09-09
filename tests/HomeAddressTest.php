@@ -19,6 +19,43 @@ require_once 'classes/Customer.php';
 class HomeAddressTest extends TestCase
 {
     
+    public function setCountryDataProvider()
+    {
+        return array(
+            array(1, "Australia", true),
+            array(1, "Turkey", true),
+            array(1, "Finland", true),
+            array(1, NULL, true),
+            array(1, -1, true),
+            array(1, -167, true),
+            array(1, "Albanianianainaianianaiania", "Country too long")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setCountryDataProvider
+     */
+    public function testSetCountry($CustomerID, $newCountry, $expected)
+    {
+        $homeAddress = new HomeAddress($CustomerID);
+        // Backup old Country to be restored after test
+        $oldCountry = $homeAddress->getCountry();
+        
+        $this->assertEquals($expected, $homeAddress->setCountry($newCountry));
+        
+        // If true (all ok) check that Country was updated in both memory and database
+        if ($expected === true)
+        {
+            $this->assertEquals($newCountry, $homeAddress->getCountry()); // Check memory
+            $homeAddress2 = new HomeAddress($CustomerID);
+            $this->assertEquals($newCountry, $homeAddress2->getCountry()); // Get database persistence
+        }
+        
+        // Restore old Country
+        $homeAddress->setCountry($oldCountry);
+    }
+    
     public function setPostCodeDataProvider()
     {
         return array(
