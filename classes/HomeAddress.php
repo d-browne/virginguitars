@@ -18,8 +18,9 @@ class HomeAddress
     
     // Class Constructor
     // Creates object based on provided CustomerID
-    function __construct($CustomerID)
+    function __construct($CustomerIDInput)
     {
+       
         // Check if check if customer ID present in HOMEADDRESS table
         // If present create object using values
         // Otherwise create new record with blank values. 
@@ -28,8 +29,34 @@ class HomeAddress
         $database = new Database();
         $dataConnection = $database->getDataConnection();
         
+         // Sanitize input
+        $CustomerID = mysqli_real_escape_string($dataConnection, $CustomerIDInput);
+        
+        // throw if not integer
+        if (!is_numeric($CustomerID))
+        {
+            throw new Exception("CusomterID is not numeric");
+        }
+        
+        // Query check if customer exists
+        $query = "SELECT CustomerID FROM CUSTOMER WHERE CustomerID=".$CustomerID.";";
+        
+        // Execute query to check if customer exists
+        $result = $dataConnection->query($query);
+        
+        // Throw if query failed
+        if ($result === false)
+        {
+            throw new Exception("Query failed: check if customer exists");
+        }
+        
+        if ($result->num_rows < 1)
+        {
+            throw new Exception("No CustomerID found in DB");
+        }
+        
         // Query to find customer
-        $query = "SELECT * FROM HOMEADDRESS WHERE CustomerFK='".mysqli_real_escape_string($dataConnection, $CustomerID)."';";
+        $query = "SELECT * FROM HOMEADDRESS WHERE CustomerFK=".$CustomerID.";";
         
         // Execute query
         $result = $dataConnection->query($query);
@@ -37,7 +64,7 @@ class HomeAddress
         // Break execution if query fails
         if ($result === false)
         {
-            return;
+            throw new Exception("Query failed");
         }
         
         if ($result->num_rows > 0) 
