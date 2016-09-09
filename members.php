@@ -145,7 +145,7 @@ if (isset($_POST['updateMember']))
 <html>
 <head>
 <meta charset="utf-8">
-<title>Virgin Guitars</title>
+<title>Virgin Guitars - Members</title>
 <link href="styles/main.css" rel="stylesheet" type="text/css">
 <link href="styles/js-image-slider.css" rel="stylesheet" type="text/css" />
 <script src="scripts/js-image-slider.js" type="text/javascript"></script>
