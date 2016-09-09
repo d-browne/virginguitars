@@ -145,7 +145,7 @@ class HomeAddress
     }
     public function getStreetAddress()
     {
-        $this->StreetAddress;
+        return $this->StreetAddress;
     }
     public function getCity()
     {
