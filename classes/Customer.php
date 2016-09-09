@@ -1,6 +1,7 @@
 <?php
 
 require_once 'classes/Database.php';
+require_once 'classes/HomeAddress.php';
 
 class Customer
 {
@@ -15,6 +16,12 @@ class Customer
     private $hashedPassword;
     private $salt;
     private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
+    private $homeAddress;           // Holds home address object
+    
+    public function getHomeAddress()
+    {
+        return $this->homeAddress;
+    }
     
     public function getCustomerID()
     {
@@ -349,6 +356,9 @@ class Customer
         $this->HomePhone = $row["HomePhone"];
         $this->hashedPassword = $row["EncryptedPassword"];
         $this->salt = $row["Salt"];
+        
+        // set home address object
+        $this->homeAddress = new HomeAddress($this->CustomerID);
         
         // Set is initialized
         $this->isInitialized = true;
