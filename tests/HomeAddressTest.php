@@ -18,6 +18,20 @@ require_once 'classes/HomeAddress.php';
 class HomeAddressTest extends TestCase
 {
     
+    public function constructDataProvider()
+    {
+        return array(
+            array(1, "123 Fake Street", "Sydney", "NSW", "0", "Australia"),
+            array(2, "456 Fake Street", "Gosford", "NSW", "1111", "Australia"),
+            array(3, "789 Fake Street", "Newcastle", "NSW", "2222", "Australia"),
+            array(4, "789 Fake Street", "Sydney", "NSW", "3333", "Australia")
+        );
+    }
+    
+    /** 
+     * 
+     * @dataProvider constructDataProvider
+     */
     public function testConstruct($customerID, $expectedStreet, $expectedCity, $expectedState, $expectedPostCode, $expectedCountry)
     {
         $homeAddress = new HomeAddress($customerID);
