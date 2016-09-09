@@ -172,7 +172,7 @@ if (isset($_POST['updatePersonalDetails']))
     {
         if ($result !== true) // Is an error
         {
-            $updateMemberError += $result.", ";
+            $updateMemberError = $updateMemberError.$result.", ";
         }
     }
     $isUpdated = true;

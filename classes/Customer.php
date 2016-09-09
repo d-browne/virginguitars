@@ -242,6 +242,12 @@ class Customer
             return "member not initialized";
         }
         
+        // Check if email is too long
+        if (iconv_strlen($Salutation) > 5)
+        {
+            return "salutation too long";
+        }
+        
         // Create data connection
         $database = new Database();
         $dataConnection = $database->getDataConnection();
@@ -276,6 +282,12 @@ class Customer
             return "member not initialized";
         }
         
+        // Check if email is too long
+        if (iconv_strlen($FirstName) > 40)
+        {
+            return "first name too long";
+        }
+        
         // Create data connection
         $database = new Database();
         $dataConnection = $database->getDataConnection();
@@ -302,6 +314,12 @@ class Customer
         if (!$this->isInitialized)
         {
             return "member not initialized";
+        }
+        
+        // Check if email is too long
+        if (iconv_strlen($LastName) > 40)
+        {
+            return "last name too long";
         }
         
         // Create data connection
