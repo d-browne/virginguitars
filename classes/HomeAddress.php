@@ -4,6 +4,8 @@
  * This class represents the HomeAddress object
  */
 
+require_once 'classes/Database.php';
+
 class HomeAddress
 {
     private $HomeAddressID;
