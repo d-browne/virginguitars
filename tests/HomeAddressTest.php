@@ -14,9 +14,28 @@
 use PHPUnit\Framework\TestCase;
 
 require_once 'classes/HomeAddress.php';
+require_once 'classes/Customer.php';
 
 class HomeAddressTest extends TestCase
 {
+    
+    // This function tests creating a new member giving him a home address record
+    public function testNewMemberHomeAddress()
+    {
+        Customer::newCustomer("homeaddresstestcustomer@mail.com", "1234");
+        
+        $customer = new Customer();
+        $customer->initialize("homeaddresstestcustomer@mail.com");
+        
+        $CustomerId = $customer->getCustomerID();
+        
+        $homeAddress = new HomeAddress($CustomerId);
+        
+        $this->assertEquals($CustomerId, $homeAddress->getCustomerID());
+        
+        // Delete the newly created customer
+        Customer::deleteCusomter("homeaddresstestcustomer@mail.com");
+    }
     
     public function constructDataProvider()
     {

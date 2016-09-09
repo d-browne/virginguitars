@@ -4,6 +4,7 @@ require_once 'classes/Database.php';
 
 class Customer
 {
+    private $CustomerID;
     private $LastName;
     private $FirstName;
     private $Salutation;
@@ -14,6 +15,11 @@ class Customer
     private $hashedPassword;
     private $salt;
     private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
+    
+    public function getCustomerID()
+    {
+        return $this->CustomerID;
+    }
     
     public function setPassword($newPassword)
     {
@@ -333,6 +339,7 @@ class Customer
         $row = $result->fetch_assoc();
         
         // Get values from row
+        $this->CustomerID = $row["CustomerID"];
         $this->LastName = $row["LastName"];
         $this->FirstName = $row["FirstName"];
         $this->Salutation = $row["Salutation"];

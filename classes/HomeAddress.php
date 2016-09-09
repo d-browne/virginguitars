@@ -90,7 +90,7 @@ class HomeAddress
         else
         {
             // Create new record for customer
-            $query = "INSERT INTO HOMEADDRESS (CustomerFK) VALUES (".$CustomerID.");";
+            $query = "INSERT INTO HOMEADDRESS (HomeAddressID, CustomerFK, StreetAddress, City, State, PostCode, Country) VALUES (DEFAULT, ".$CustomerID.", '', '', '', '', '');";
             
             // Execute query 
             $result = $dataConnection->query($query);
