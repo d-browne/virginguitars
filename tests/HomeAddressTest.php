@@ -19,6 +19,41 @@ require_once 'classes/Customer.php';
 class HomeAddressTest extends TestCase
 {
     
+    public function setCityDataProvider()
+    {
+        return array(
+            array(1, "Big City", true),
+            array(1, "Fun Town", true),
+            array(1, -1, true),
+            array(1, -1000000000, true),
+            array(1, "Fake Ciiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiity", "city too long")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setCityDataProvider
+     */
+    public function testSetCity($CustomerID, $newCity, $expected)
+    {
+        $homeAddress = new HomeAddress($CustomerID);
+        // Backup old City to be restored after test
+        $oldCity = $homeAddress->getCity();
+        
+        $this->assertEquals($expected, $homeAddress->setCity($newCity));
+        
+        // If true (all ok) check that city was updated in both memory and database
+        if ($expected === true)
+        {
+            $this->assertEquals($newCity, $homeAddress->getCity()); // Check memory
+            $homeAddress2 = new HomeAddress($CustomerID);
+            $this->assertEquals($newCity, $homeAddress2->getCity()); // Get database persistence
+        }
+        
+        // Restore old city
+        $homeAddress->setCity($oldCity);
+    }
+    
     public function setStreetAddressDataProvider()
     {
         return array(

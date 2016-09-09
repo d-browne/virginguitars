@@ -17,6 +17,39 @@ class HomeAddress
     private $Country;
     
     // Setters
+    public function setCity($CityInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $City = mysqli_real_escape_string($dataConnection, $CityInput);
+        
+        // Check if City is too long
+        if (iconv_strlen($City) > 50)
+        {
+            return "city too long";
+        }
+        
+        // Query to update city
+        $query = "UPDATE HOMEADDRESS SET City='".$City."' WHERE HomeAddressID='".$this->HomeAddressID."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Throw if query error
+        if ($result === null)
+        {
+            throw new Exception("Error updating City");
+        }
+        
+        // Update object memory
+        $this->City = $City;
+        // All okay
+        return true;
+    }
+    
     public function setStreetAddress($StreetAddressInput)
     {
         // Create data connection
