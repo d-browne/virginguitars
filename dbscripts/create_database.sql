@@ -16,7 +16,7 @@ create table CUSTOMER (
 
 create table HOMEADDRESS (
 	HomeAddressID int(7) PRIMARY KEY AUTO_INCREMENT,
-    CustomerFK int(7) NOT NULL KEY,
+    CustomerFK int(7) NOT NULL,
     StreetAddress VarChar(50) NOT NULL,
     City VarChar(50) NOT NULL,
     State VarChar(50) NOT NULL,

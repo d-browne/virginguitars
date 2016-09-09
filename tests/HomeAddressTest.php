@@ -19,6 +19,41 @@ require_once 'classes/Customer.php';
 class HomeAddressTest extends TestCase
 {
     
+    public function setStreetAddressDataProvider()
+    {
+        return array(
+            array(1, "10/22 Long Street!", true),
+            array(1, "645 Plain St.", true),
+            array(1, -1, true),
+            array(1, -1000000000, true),
+            array(1, "123 fake streeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet", "street address too long")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setStreetAddressDataProvider
+     */
+    public function testSetStreetAddress($CustomerID, $newStreetAddress, $expected)
+    {
+        $homeAddress = new HomeAddress($CustomerID);
+        // Backup old street address to be restored after test
+        $oldStreetAddress = $homeAddress->getStreetAddress();
+        
+        $this->assertEquals($expected, $homeAddress->setStreetAddress($newStreetAddress));
+        
+        // If true (all ok) check that street address was updated in both memory and database
+        if ($expected === true)
+        {
+            $this->assertEquals($newStreetAddress, $homeAddress->getStreetAddress()); // Check memory
+            $homeAddress2 = new HomeAddress($CustomerID);
+            $this->assertEquals($newStreetAddress, $homeAddress2->getStreetAddress()); // Get database persistence
+        }
+        
+        // Restore old street address
+        $homeAddress->setStreetAddress($oldStreetAddress);
+    }
+    
     // This function tests creating a new member giving him a home address record
     public function testNewMemberHomeAddress()
     {

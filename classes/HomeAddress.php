@@ -16,6 +16,41 @@ class HomeAddress
     private $PostCode;
     private $Country;
     
+    // Setters
+    public function setStreetAddress($StreetAddressInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $StreetAddress = mysqli_real_escape_string($dataConnection, $StreetAddressInput);
+        
+        // Check if address is too long
+        if (iconv_strlen($StreetAddress) > 50)
+        {
+            return "street address too long";
+        }
+        
+        // Query to update street address 
+        $query = "UPDATE HOMEADDRESS SET StreetAddress='".$StreetAddress."' WHERE HomeAddressID='".$this->HomeAddressID."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Throw if query error
+        if ($result === null)
+        {
+            throw new Exception("Error updating Street Address");
+        }
+        
+        // Update object memory
+        $this->StreetAddress = $StreetAddress;
+        // All okay
+        return true;
+    }
+    // End setters
+    
     // Class Constructor
     // Creates object based on provided CustomerID
     function __construct($CustomerIDInput)
