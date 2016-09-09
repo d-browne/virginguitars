@@ -17,6 +17,73 @@ class HomeAddress
     private $Country;
     
     // Setters
+    
+    public function setPostCode($PostCodeInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $PostCode = mysqli_real_escape_string($dataConnection, $PostCodeInput);
+        
+        // Check if PostCode is too long
+        if (iconv_strlen($PostCode) > 4)
+        {
+            return "PostCode too long";
+        }
+        
+        // Query to update PostCode
+        $query = "UPDATE HOMEADDRESS SET PostCode='".$PostCode."' WHERE HomeAddressID='".$this->HomeAddressID."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Throw if query error
+        if ($result === null)
+        {
+            throw new Exception("Error updating PostCode");
+        }
+        
+        // Update object memory
+        $this->PostCode = $PostCode;
+        // All okay
+        return true;
+    }
+    
+    public function setState($StateInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $State = mysqli_real_escape_string($dataConnection, $StateInput);
+        
+        // Check if State is too long
+        if (iconv_strlen($State) > 50)
+        {
+            return "State too long";
+        }
+        
+        // Query to update State
+        $query = "UPDATE HOMEADDRESS SET State='".$State."' WHERE HomeAddressID='".$this->HomeAddressID."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Throw if query error
+        if ($result === null)
+        {
+            throw new Exception("Error updating State");
+        }
+        
+        // Update object memory
+        $this->State = $State;
+        // All okay
+        return true;
+    }
+    
     public function setCity($CityInput)
     {
         // Create data connection

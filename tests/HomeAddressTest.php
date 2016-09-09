@@ -19,6 +19,78 @@ require_once 'classes/Customer.php';
 class HomeAddressTest extends TestCase
 {
     
+    public function setPostCodeDataProvider()
+    {
+        return array(
+            array(1, 2480, true),
+            array(1, 2000, true),
+            array(1, 9989, true),
+            array(1, "9989", true),
+            array(1, -1, true),
+            array(1, -167, true),
+            array(1, "24812", "PostCode too long")
+        );
+    }
+    
+    /** 
+     * 
+     * @dataProvider setPostCodeDataProvider
+     */
+    public function testSetPostCode($CustomerID, $newPostCode, $expected)
+    {
+        $homeAddress = new HomeAddress($CustomerID);
+        // Backup old PostCode to be restored after test
+        $oldPostCode = $homeAddress->getPostCode();
+        
+        $this->assertEquals($expected, $homeAddress->setPostCode($newPostCode));
+        
+        // If true (all ok) check that PostCode was updated in both memory and database
+        if ($expected === true)
+        {
+            $this->assertEquals($newPostCode, $homeAddress->getPostCode()); // Check memory
+            $homeAddress2 = new HomeAddress($CustomerID);
+            $this->assertEquals($newPostCode, $homeAddress2->getPostCode()); // Get database persistence
+        }
+        
+        // Restore old PostCode
+        $homeAddress->setPostCode($oldPostCode);
+    }
+    
+    public function setStateDataProvider()
+    {
+        return array(
+            array(1, "QLD", true),
+            array(1, "VIC", true),
+            array(1, -1, true),
+            array(1, -1000000000, true),
+            array(1, "Looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Island", "State too long")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setStateDataProvider
+     */
+    public function testSetState($CustomerID, $newState, $expected)
+    {
+        $homeAddress = new HomeAddress($CustomerID);
+        // Backup old State to be restored after test
+        $oldState = $homeAddress->getState();
+        
+        $this->assertEquals($expected, $homeAddress->setState($newState));
+        
+        // If true (all ok) check that State was updated in both memory and database
+        if ($expected === true)
+        {
+            $this->assertEquals($newState, $homeAddress->getState()); // Check memory
+            $homeAddress2 = new HomeAddress($CustomerID);
+            $this->assertEquals($newState, $homeAddress2->getState()); // Get database persistence
+        }
+        
+        // Restore old State
+        $homeAddress->setState($oldState);
+    }
+    
     public function setCityDataProvider()
     {
         return array(
