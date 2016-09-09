@@ -16,13 +16,15 @@ create table CUSTOMER (
 
 create table HOMEADDRESS (
 	HomeAddressID int(7) PRIMARY KEY AUTO_INCREMENT,
-    CustomerFK int(7) NOT NULL,
+    CustomerFK int(7) NOT NULL KEY,
     StreetAddress VarChar(50) NOT NULL,
     City VarChar(50) NOT NULL,
     State VarChar(50) NOT NULL,
     PostCode VarChar(4) NOT NULL,
     Country VarChar(15) NOT NULL,
     FOREIGN KEY (CustomerFK) REFERENCES CUSTOMER(CustomerID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 )ENGINE=InnoDB;
 
 create table ORDER_STATUS (
