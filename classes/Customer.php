@@ -262,7 +262,7 @@ class Customer
         $customer = new Customer();
         $customer->initialize($this->Email);
         
-        $this->FirstName = $Salutation;
+        $this->Salutation = $Salutation;
         
         return true;
     }
