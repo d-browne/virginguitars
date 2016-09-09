@@ -14,6 +14,15 @@ class HomeAddress
     private $PostCode;
     private $Country;
     
+    // Class Constructor
+    // Creates object based on provided CustomerID
+    function __construct($CustomerID)
+    {
+        // Check if check if customer ID present in HOMEADDRESS table
+        // If present create object using values
+        // Otherwise create new record with blank values. 
+    }
+    
     // Start getters
     public function getHomeAddressID()
     {
