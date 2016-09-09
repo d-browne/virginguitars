@@ -33,7 +33,21 @@ if (isset($_GET["logout"]))
 <link href="styles/js-image-slider.css" rel="stylesheet" type="text/css" />
 <script src="scripts/js-image-slider.js" type="text/javascript"></script>
 <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'textarea', content_css : 'styles/main.css', content_style: "body {background-color: #FFFFFF !important;" });</script>
+<script>tinymce.init({ 
+    selector:'textarea', 
+            content_css : 'styles/main.css', 
+            content_style: "body {background-color: #FFFFFF !important;",
+    toolbar: 'toolbar: undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | questionButton',
+    setup: function (editor) {
+        editor.addButton('questionButton', {
+           text: false,
+           image: 'images/editorIcons/q_icon.ico',
+           onclick: function () {
+               editor.insertContent('<p class="questionParagraph"><span class="questionLetter">Q:</span> Question</p>');
+           }
+        });
+    }
+});</script>
 </head>
 
 <body>
