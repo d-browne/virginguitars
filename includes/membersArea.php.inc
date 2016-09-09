@@ -73,8 +73,8 @@
         </form>
     </fieldset>
 
-    <fieldset class="inputFieldSet" id="shippingDetailsFieldset">
-        <legend>Shipping details</legend>
+    <fieldset class="inputFieldSet" id="personalDetailsFieldset">
+        <legend>Personal Details</legend>
         <form id="shippingDetailsForm" action="members.html">
             <div class="inputField"><label>Salutation:</label> <input class="textBox" type="text" placeholder="e.g. Mrs." value="<?php echo $_SESSION['currentCustomer']->getSalutation(); ?>"/></div>
             <div class="inputField"><label>First Name:</label> <input class="textBox" type="text" placeholder="e.g. April" value="<?php echo $_SESSION['currentCustomer']->getFirstName(); ?>"/></div>
