@@ -33,7 +33,7 @@ if (isset($_GET["logout"]))
 <link href="styles/js-image-slider.css" rel="stylesheet" type="text/css" />
 <script src="scripts/js-image-slider.js" type="text/javascript"></script>
 <script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'textarea' });</script>
+<script>tinymce.init({ selector:'textarea', content_css : 'styles/main.css', content_style: "body {background-color: #FFFFFF !important;" });</script>
 </head>
 
 <body>
