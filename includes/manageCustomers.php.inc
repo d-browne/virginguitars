@@ -131,16 +131,16 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                         {
                             if ($desc !== false)
                             {
-                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=FirstName\">First Name</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=FirstName\">First Name</a></span>";
                             }
                             else
                             {
-                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=FirstName&desc\">First Name</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=FirstName&desc\">First Name</a></span>";
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=FirstName">First Name</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&'.$searchString.'&orderBy=FirstName">First Name</a></span>';
                         }
                     ?>
                 </td>
@@ -150,16 +150,16 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                         {
                             if ($desc !== false)
                             {
-                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=LastName\">Last Name</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=LastName\">Last Name</a></span>";
                             }
                             else
                             {
-                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=LastName&desc\">Last Name</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=LastName&desc\">Last Name</a></span>";
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=LastName">Last Name</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&'.$searchString.'&orderBy=LastName">Last Name</a></span>';
                         }
                     ?>
                 </td>
@@ -169,16 +169,16 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                         {
                             if ($desc!== false)
                             {
-                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=Email\">Email</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=Email\">Email</a></span>";
                             }
                             else
                             {
-                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=Email&desc\">Email</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=Email&desc\">Email</a></span>";
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=Email">Email</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&'.$searchString.'&orderBy=Email">Email</a></span>';
                         }
                     ?>
                 </td>
@@ -188,16 +188,16 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                         {
                             if ($desc !== false)
                             {
-                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=All Orders\">All Orders</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=All Orders\">All Orders</a></span>";
                             }
                             else
                             {
-                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=All Orders&desc\">All Orders</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=All Orders&desc\">All Orders</a></span>";
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=All Orders">All Orders</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&'.$searchString.'&orderBy=All Orders">All Orders</a></span>';
                         }
                     ?>
                 </td>
@@ -207,16 +207,16 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                         {
                             if ($desc !== false)
                             {
-                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=New Orders\">New Orders</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=New Orders\">New Orders</a></span>";
                             }
                             else
                             {
-                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=New Orders&desc\">New Orders</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=New Orders&desc\">New Orders</a></span>";
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=New Orders">New Orders</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&'.$searchString.'&orderBy=New Orders">New Orders</a></span>';
                         }
                     ?>
                 </td>
