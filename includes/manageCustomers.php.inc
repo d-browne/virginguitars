@@ -32,6 +32,58 @@ if (isset($_GET['desc']))
 {
     $desc = true;
 }
+
+// Search values
+$customerid = "";
+$firstname = "";
+$lastname = "";
+$email = "";
+
+// Try to set search values from get requests
+if (isset($_GET['CustomerID']))
+{
+        // Get search form values
+        //$customerid = $_GET['CustomerID'];
+        //$firstname = $_GET['FirstName'];
+        //$lastname = $_GET['LastName'];
+        //$email = $_GET['Email'];
+
+        try {
+            $customerid = mysqli_real_escape_string($dataConnection, $_GET['CustomerID']);
+        } catch (Exception $ex) {
+
+        }
+}
+
+if (isset($_GET['FirstName']))
+{
+    try {
+        $firstname = mysqli_real_escape_string($dataConnection, $_GET['FirstName']);
+    } catch (Exception $ex) {
+
+    }
+}
+
+if (isset($_GET['LastName']))
+{
+    try {
+        $lastname = mysqli_real_escape_string($dataConnection, $_GET['LastName']);
+    } catch (Exception $ex) {
+
+    }
+}
+
+if (isset($_GET['Email']))
+{
+    try {
+        $email = mysqli_real_escape_string($dataConnection, $_GET['Email']);
+    } catch (Exception $ex) {
+
+    }
+}
+// End setting search values from get requests. 
+
+$searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.$lastname.'&Email='.$email.'&searchButton';
 ?>
 
 <div id="contentBox">
@@ -41,11 +93,12 @@ if (isset($_GET['desc']))
     <div id="manageCustomersTopRight">
         <fieldset class="inputFieldSet" id="userDetailsFieldset">
             <legend>Search</legend>
-            <form id="userDetailsForm" action="admin.php?manageCustomers">
-                <div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="customerid" type="text" placeholder="e.g. 1"/></div>
-                <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" placeholder="e.g. Kev" value=""/></div>
-                <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" placeholder="e.g. Smith"/></div>
-                <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" placeholder="mail@ne.com"/></div>
+            <form id="userDetailsForm" action="admin.php">
+                <input type="hidden" name="manageCustomers" />
+                <div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="CustomerID" type="text" placeholder="e.g. 1" value="<?php echo $customerid; ?>"/></div>
+                <div class="inputField"><label>First Name:</label> <input class="textBox" name="FirstName" type="text" placeholder="e.g. Kev" value="<?php echo $firstname; ?>"/></div>
+                <div class="inputField"><label>Last Name:</label> <input class="textBox" name="LastName" type="text" placeholder="e.g. Smith" value="<?php echo $lastname; ?>"/></div>
+                <div class="inputField"><label>Email:</label> <input class="textBox" name="Email" type="Email" placeholder="mail@ne.com" value=""<?php echo $email; ?>"/></div>
                 <div class="inputField"><input class="submitButton" type="submit" name="searchButton" value="Search" /></div>
             </form>
         </fieldset>
@@ -59,16 +112,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false)
                             {
-                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=CustomerID\">Customer.ID</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=CustomerID\">Customer.ID</a></span>";
                             }
                             else
                             {
-                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=CustomerID&desc\">Customer.ID</a></span>";
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&".$searchString."&orderBy=CustomerID&desc\">Customer.ID</a></span>";
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=CustomerID">Customer.ID</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&'.$searchString.'&orderBy=CustomerID">Customer.ID</a></span>';
                         }
                     ?>
                 </td>
@@ -180,6 +233,53 @@ if (isset($_GET['desc']))
             $isOrdered = false;
             
             $query = "SELECT * FROM CUSTOMERS_AND_ORDERS_VIEW";
+            
+            $hasSearch = false;
+            
+            // Append the search options
+            if ($customerid !== "")
+            {
+                $query = $query." WHERE CustomerID LIKE '%".$customerid."%'";
+                $hasSearch = true;
+            }
+            if ($firstname !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND FirstName LIKE '%".$firstname."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE FirstName LIKE '%".$firstname."%'";
+                    $hasSearch = true;
+                }
+            }
+            if ($lastname !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND LastName LIKE '%".$lastname."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE LastName LIKE '%".$lastname."%'";
+                    $hasSearch = true;
+                }
+                
+            }
+            if ($email !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND Email LIKE '%".$email."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE Email LIKE '%".$email."%'";
+                    $hasSearch = true;
+                }
+            }
+            
             // Appened the order options
             switch ($orderBy)
             {
@@ -214,6 +314,8 @@ if (isset($_GET['desc']))
             {
                 $query = $query." desc";
             }
+            
+            
             
             // Execute query
             $result = $dataConnection->query($query);
