@@ -312,7 +312,7 @@ class HomeAddress
     }
     public function getStreetAddress()
     {
-        return $this->StreetAddress;
+        return htmlspecialchars($this->StreetAddress);
     }
     public function getCity()
     {
