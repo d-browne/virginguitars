@@ -474,6 +474,12 @@ em {
 .tableHeader a:link {
 	color: white;
 }
+.tableHeader a:visited {
+	color: white;
+}
+.tableHeader a:hover {
+	color: white;
+}
 
 .tableHeaderAsc {
 	font-weight: bold;
@@ -989,4 +995,8 @@ em {
 #manageCustomersTopRight .inputField .submitButton {
 	margin-left: 24.25em;
 	margin-top: 1em;
+}
+
+#manageCustomersTopLeft {
+	float:left;
 }

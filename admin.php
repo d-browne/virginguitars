@@ -89,6 +89,10 @@ if (isset($_GET["logout"]))
                 {
                     include("includes/editAboutUs.php.inc");
                 }
+                else if(isset($_GET['manageCustomers']))
+                {
+                    include("includes/manageCustomers.php.inc");
+                }
                 else
                 {
                     // If admin is logged in and no control selected dispaly admin page

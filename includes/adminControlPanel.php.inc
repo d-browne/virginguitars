@@ -8,9 +8,9 @@
             </a>
         </div>       
         <div class="adminControl" id="editUserControl">
-            <a href="">
+            <a href="admin.php?manageCustomers">
                 <div class="adminControlIcon" id="editUserIcon"></div>
-                <div class="adminControlCaption">Manage Members</div>
+                <div class="adminControlCaption">Manage Customers</div>
             </a>
         </div>             
         <div class="adminControl" id="manageInvoicesControl">
