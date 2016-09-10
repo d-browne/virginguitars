@@ -366,8 +366,8 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                 }
                 else
                 {
-                    // Display no results found message
-                    echo "No results found...";
+                    // Do nothing (no results)
+                    
                 }
             }
             else
