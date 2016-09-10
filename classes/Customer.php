@@ -125,7 +125,7 @@ class Customer
         
         if (preg_match($regexPattern, $newHomePhone))
         {
-            return "Invalid Characters";
+            return "Invalid Home Phone Characters";
         }
         
         // Create data connection
