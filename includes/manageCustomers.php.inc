@@ -9,6 +9,29 @@
  * 
  * Author: Dominic Browne
  */
+
+
+
+require_once 'classes/Database.php'; // Include the database
+
+// Create data connection
+$database = new Database();
+$dataConnection = $database->getDataConnection();
+
+$orderBy = "none";  // Determains how to order results
+$desc;              // Determins if results should be ordered descending
+
+if (isset($_GET['orderBy']))
+{
+    // Get sanitized input
+    $orderBy = mysqli_real_escape_string($dataConnection, $_GET['orderBy']);
+}
+
+// Determine if rows have been requested in descending order
+if (isset($_GET['desc']))
+{
+    $desc = true;
+}
 ?>
 
 <div id="contentBox">
@@ -30,183 +53,120 @@
     <div id="tableContainer">
         <table class="cartTable" border="1" >
             <tr class="headerRow">
-                <td><span class="tableHeader tableHeaderAsc"><a href="admin.php">Customer.ID</a></span></td>
-                <td><span class="tableHeader">First Name</span></td>
-                <td><span class="tableHeader">Last Name</span></td>
-                <td><span class="tableHeader tableHeaderDesc"><a href="admin.php">Email</a></span></td>
-                <td><span class="tableHeader">All Orders</span></td>
-                <td><span class="tableHeader">New Orders</span></td>
+                <td>
+                    <?php
+                        if ($orderBy === "CustomerID")
+                        {
+                            if (isset($desc))
+                            {
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=CustomerID\">Customer.ID</a></span>";
+                            }
+                            else
+                            {
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=CustomerID&desc\">Customer.ID</a></span>";
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=CustomerID">Customer.ID</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "FirstName")
+                        {
+                            if (isset($desc))
+                            {
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=FirstName\">First Name</a></span>";
+                            }
+                            else
+                            {
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=FirstName&desc\">First Name</a></span>";
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=FirstName">First Name</a></span>';
+                        }
+                    ?>
+                    <!--<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=FirstName">First Name</a></span>-->
+                </td>
+                <td><span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=LastName">Last Name</a></span></td>
+                <td><span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=Email">Email</a></span></td>
+                <td><span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=AllOrders">All Orders</a></span></td>
+                <td><span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=NewOrders">New Orders</a></span></td>
                 <td><span class="tableHeader">Edit</span></td>
                 <td><span class="tableHeader">Del</span></td>
             </tr>
-            <tr>
-                <td>
-                    <a href="admin.php">
-                        1
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Dominic
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Browne
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        dominic@mail.com
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        10
-                    </a>
-                </td>
-                <td>
-                    <a class="newOrdersButton" href="admin.php">
-                        2
-                    </a>
-                </td>
-                <td>
-                    <a class="editButton" href="admin.php">
-                        Edit
-                    </a>
-                </td>
-                <td>
-                    <a class="delButton" href="admin.php">
-                        Del
-                    </a>
-                </td>
-            </tr>
-            <tr class="altRow">
-                <td>
-                    <a href="admin.php">
-                        2
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Warren
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Norris
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        warren@mail.com
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        3
-                    </a>
-                </td>
-                <td>
-                    <a class="newOrdersButton" href="admin.php">
-                        1
-                    </a>
-                </td>
-                <td>
-                    <a class="editButton" href="admin.php">
-                        Edit
-                    </a>
-                </td>
-                <td>
-                    <a class="delButton" href="admin.php">
-                        Del
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <a href="admin.php">
-                        3
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Ben
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Hogan
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        ben@mail.com
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        5
-                    </a>
-                </td>
-                <td>
-                    <a class="newOrdersButton" href="admin.php">
-                        4
-                    </a>
-                </td>
-                <td>
-                    <a class="editButton" href="admin.php">
-                        Edit
-                    </a>
-                </td>
-                <td>
-                    <a class="delButton" href="admin.php">
-                        Del
-                    </a>
-                </td>
-            </tr>
-            <tr class="altRow">
-                <td>
-                    <a href="admin.php">
-                        4
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Dale
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Hogan
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        dale@mail.com
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        6
-                    </a>
-                </td>
-                <td>
-                    <a class="newOrdersButton" href="admin.php">
-                        0
-                    </a>
-                </td>
-                <td>
-                    <a class="editButton" href="admin.php">
-                        Edit
-                    </a>
-                </td>
-                <td>
-                    <a class="delButton" href="admin.php">
-                        Del
-                    </a>
-                </td>
-            </tr>
+            
+            <?php
+            // Query database for values and draw table rows
+            
+            // Query the databse
+            $query = "SELECT * FROM CUSTOMERS_AND_ORDERS_VIEW";
+            
+            // Execute query
+            $result = $dataConnection->query($query);
+            
+            // If query successfull
+            if ($result !== false)
+            {
+                // Check if results returns 
+                if ($result->num_rows > 0)
+                {
+                    $altRow = false; // Holds whether or not an alt row. Used in styling. Alt rows are darker. Creates a checkerboard effect
+                    // Loop throw through each row
+                    while ($row = $result->fetch_assoc())
+                    {
+                        // Print row header
+                        if ($altRow)
+                        {
+                           print "<tr class=\"altRow\">"; 
+                           $altRow = false;
+                        }
+                        else
+                        {
+                            print "<tr>";
+                            $altRow = true;
+                        }
+                        
+                        
+                        // Print CustomerID column
+                        print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".$row['CustomerID']."</a></td>";
+                        // Print First name Column
+                        print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".$row['FirstName']."</a></td>";
+                        // Print Last Name Column
+                        print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".$row['LastName']."</a></td>";
+                        // Print email column
+                        print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".$row['Email']."</a></td>";
+                        // Print All Orders
+                        print "<td><a href=\"admin.php?manageCustomers\">".$row['All Orders']."</a></td>";
+                        // Print All Orders
+                        print "<td><a class=\"newOrdersButton\" href=\"admin.php?manageCustomers\">".$row['New Orders']."</a></td>";
+                        // Print Edit button
+                        print "<td><a class=\"editButton\" href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">Edit</a></td>";
+                        // Print Delete button
+                        print "<td><a class=\"delButton\" href=\"admin.php?manageCustomers&del=".$row['CustomerID']."\">Del</a></td>";
+                        
+                        // Close table row
+                        print "</tr>";
+                    }
+                }
+                else
+                {
+                    // Display no results found message
+                    echo "No results found...";
+                }
+            }
+            else
+            {
+                // If query fails display error
+                echo "Error querying CUSTOMERS_AND_ORDERS_VIEW";
+            }
+            ?>
+            
+            
 
         </table>
     </div>
