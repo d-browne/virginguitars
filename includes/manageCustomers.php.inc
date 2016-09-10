@@ -98,7 +98,7 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                 <div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="CustomerID" type="text" placeholder="e.g. 1" value="<?php echo $customerid; ?>"/></div>
                 <div class="inputField"><label>First Name:</label> <input class="textBox" name="FirstName" type="text" placeholder="e.g. Kev" value="<?php echo $firstname; ?>"/></div>
                 <div class="inputField"><label>Last Name:</label> <input class="textBox" name="LastName" type="text" placeholder="e.g. Smith" value="<?php echo $lastname; ?>"/></div>
-                <div class="inputField"><label>Email:</label> <input class="textBox" name="Email" type="Email" placeholder="mail@ne.com" value=""<?php echo $email; ?>"/></div>
+                <div class="inputField"><label>Email:</label> <input class="textBox" name="Email" type="text" placeholder="mail@ne.com" value=""<?php echo $email; ?>"/></div>
                 <div class="inputField"><input class="submitButton" type="submit" name="searchButton" value="Search" /></div>
             </form>
         </fieldset>
