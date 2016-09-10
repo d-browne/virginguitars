@@ -470,7 +470,7 @@ class CustomerTest extends TestCase
             array("dominic@mail.com", "(02) 22 315 658", true),
             array("dominic@mail.com", "2231 5658", true),
             array("dominic2@mail.com", "2231 5658", "Member Not Initialized"),
-            array("warren@mail.com", "2231565888888888", "Too Long"),
+            array("warren@mail.com", "2231565888888888", "Home Phone Too Long"),
             array("warren@mail.com", "[02] 22315658", "Invalid Characters"),
             array("warren@mail.com", "asdfbfgdf", "Invalid Characters"),
             array("warren@mail.com", NULL, true),

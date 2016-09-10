@@ -117,7 +117,7 @@ class Customer
         // Return error of phone number too long
         if (iconv_strlen($newHomePhone) > 15)
         {
-            return "Too Long";
+            return "Home Phone Too Long";
         }
         
         // Return error if phone number contains anthing other than digits and ()
