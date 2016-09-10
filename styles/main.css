@@ -471,6 +471,22 @@ em {
 	color: white;
 }
 
+.tableHeader a:link {
+	color: white;
+}
+
+.tableHeaderAsc {
+	font-weight: bold;
+	color: white;
+	text-decoration:underline;
+}
+
+.tableHeaderDesc {
+	font-weight: bold;
+	color: white;
+	text-decoration:overline;
+}
+
 .headerRow {
 	background: linear-gradient(to right, #123752 , #032137);
 }
@@ -874,6 +890,10 @@ em {
 	position:inherit;
 }
 
+#topButtonsBox {
+	margin-right: 1em;
+}
+
 .errorMessage {
 	color:#AF0002;
 	font-style: italic;
@@ -930,4 +950,43 @@ em {
 #updatedMemberErrorLabel {
 	color: #AF0002;
 	font-style: italic;
+}
+
+#manageCustomersStretcher {
+	height:1em;
+}
+
+#manageCustomersTopRight {
+	float:right; 
+	width:50%;
+}
+
+#manageCustomersTopRight .inputFieldSet {
+	margin-top: .5em;
+	border: 1px solid #FFE9AA;
+	margin-right: 1em;
+	margin-bottom: 1em;
+}
+
+#manageCustomersTopRight .inputFieldSet legend {
+	color: #D4B96A;
+	font-style: italic;
+	font-weight: bold;
+}
+
+#manageCustomersTopRight .inputField label {
+	display: inline-block;
+	width: 12em;
+	text-align: right;
+	padding-right: 7px;
+	font-weight: bold;
+}
+
+#manageCustomersTopRight .inputField .textBox {
+	width: 13em;
+}
+
+#manageCustomersTopRight .inputField .submitButton {
+	margin-left: 24.25em;
+	margin-top: 1em;
 }
