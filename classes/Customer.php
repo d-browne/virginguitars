@@ -73,7 +73,7 @@ class Customer
         // Return error of phone number too long
         if (iconv_strlen($newMobilePhone) > 15)
         {
-            return "Too Long";
+            return "Mobile Phone Too Long";
         }
         
         // Return error if phone number contains anthing other than digits and ()
@@ -81,7 +81,7 @@ class Customer
         
         if (preg_match($regexPattern, $newMobilePhone))
         {
-            return "Invalid Characters";
+            return "Invalid Mobile Phone Characters";
         }
         
         // Create data connection
