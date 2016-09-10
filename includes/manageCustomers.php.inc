@@ -90,12 +90,83 @@ if (isset($_GET['desc']))
                             echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=FirstName">First Name</a></span>';
                         }
                     ?>
-                    <!--<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=FirstName">First Name</a></span>-->
                 </td>
-                <td><span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=LastName">Last Name</a></span></td>
-                <td><span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=Email">Email</a></span></td>
-                <td><span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=AllOrders">All Orders</a></span></td>
-                <td><span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=NewOrders">New Orders</a></span></td>
+                <td>
+                    <?php
+                        if ($orderBy === "LastName")
+                        {
+                            if (isset($desc))
+                            {
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=LastName\">Last Name</a></span>";
+                            }
+                            else
+                            {
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=LastName&desc\">Last Name</a></span>";
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=LastName">Last Name</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Email")
+                        {
+                            if (isset($desc))
+                            {
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=Email\">Email</a></span>";
+                            }
+                            else
+                            {
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=Email&desc\">Email</a></span>";
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=Email">Email</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "All Orders")
+                        {
+                            if (isset($desc))
+                            {
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=All Orders\">All Orders</a></span>";
+                            }
+                            else
+                            {
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=All Orders&desc\">All Orders</a></span>";
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=All Orders">All Orders</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "New Orders")
+                        {
+                            if (isset($desc))
+                            {
+                                echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=New Orders\">New Orders</a></span>";
+                            }
+                            else
+                            {
+                                echo "<span class=\"tableHeader tableHeaderAsc\"><a href=\"admin.php?manageCustomers&orderBy=New Orders&desc\">New Orders</a></span>";
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageCustomers&orderBy=New Orders">New Orders</a></span>';
+                        }
+                    ?>
+                </td>
                 <td><span class="tableHeader">Edit</span></td>
                 <td><span class="tableHeader">Del</span></td>
             </tr>
