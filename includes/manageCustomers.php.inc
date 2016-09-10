@@ -300,11 +300,11 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                     $isOrdered = true;
                     break;
                 case "All Orders":
-                    $query = $query." ORDER BY 'All Orders'";
+                    $query = $query." ORDER BY `All Orders`";
                     $isOrdered = true;
                     break;
                 case "New Orders":
-                    $query = $query." ORDER BY 'New Orders'";
+                    $query = $query." ORDER BY `New Orders`";
                     $isOrdered = true;
                     break;
             }
