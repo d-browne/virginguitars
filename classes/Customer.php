@@ -45,7 +45,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to update password and salt
-        $query = "UPDATE customer SET EncryptedPassword = '".$hashedPassword."', Salt=".$salt." WHERE Email = '".$this->Email."';";
+        $query = "UPDATE CUSTOMER SET EncryptedPassword = '".$hashedPassword."', Salt=".$salt." WHERE Email = '".$this->Email."';";
         
         // Execute query
         $result = $dataConnection->query($query);
@@ -89,7 +89,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to update MobilePhone
-        $query = "UPDATE customer SET MobilePhone = '".mysqli_real_escape_string($dataConnection, $newMobilePhone)."' "
+        $query = "UPDATE CUSTOMER SET MobilePhone = '".mysqli_real_escape_string($dataConnection, $newMobilePhone)."' "
                 . "WHERE Email = '". $this->Email ."';";
         
         // Execute query
@@ -133,7 +133,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to update HomePhone
-        $query = "UPDATE customer SET HomePhone = '".mysqli_real_escape_string($dataConnection, $newHomePhone)."' "
+        $query = "UPDATE CUSTOMER SET HomePhone = '".mysqli_real_escape_string($dataConnection, $newHomePhone)."' "
                 . "WHERE Email = '". $this->Email ."';";
         
         // Execute query
@@ -176,7 +176,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to change Email
-        $query = "UPDATE customer SET Email = '".mysqli_real_escape_string($dataConnection, $email)."' "
+        $query = "UPDATE CUSTOMER SET Email = '".mysqli_real_escape_string($dataConnection, $email)."' "
                 . "WHERE Email = '". $this->Email ."';";
         
         // Execute query
@@ -214,7 +214,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to change LastName
-        $query = "UPDATE customer SET MailingList = '".mysqli_real_escape_string($dataConnection, $joinedMailingList)."' "
+        $query = "UPDATE CUSTOMER SET MailingList = '".mysqli_real_escape_string($dataConnection, $joinedMailingList)."' "
                 . "WHERE Email = '". $this->Email ."';";
         
         // Execute query 
@@ -293,7 +293,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to change LastName
-        $query = "UPDATE customer SET FirstName = '".mysqli_real_escape_string($dataConnection, $FirstName)."' "
+        $query = "UPDATE CUSTOMER SET FirstName = '".mysqli_real_escape_string($dataConnection, $FirstName)."' "
                 . "WHERE Email = '". $this->Email ."';";
 
         // Execute query 
@@ -327,7 +327,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to change LastName
-        $query = "UPDATE customer SET LastName = '".mysqli_real_escape_string($dataConnection, $LastName)."' "
+        $query = "UPDATE CUSTOMER SET LastName = '".mysqli_real_escape_string($dataConnection, $LastName)."' "
                 . "WHERE Email = '". $this->Email ."';";
 
         // Execute query 
