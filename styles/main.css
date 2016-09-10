@@ -484,11 +484,23 @@ em {
 }
 
 .delButton {
-	color: #670001;
+	color: #670001 !important;
 	font-weight: bold;
 }
 .delButton:hover {
 	text-decoration: underline;
+}
+
+.editButton {
+	color: #81D832 !important;
+	font-weight: bold;
+}
+.editButton:hover {
+	text-decoration: underline;
+}
+
+.newOrdersButton {
+	font-weight: bold;
 }
 
 #contentBox {
