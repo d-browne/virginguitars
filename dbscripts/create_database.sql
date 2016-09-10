@@ -296,3 +296,14 @@ INSERT INTO ORDER_PRODUCT VALUES (NULL, 7, 13, 1, '750.00');
 INSERT INTO ORDER_PRODUCT VALUES (NULL, 7, 14, 1, '750.00');
 INSERT INTO ORDER_PRODUCT VALUES (NULL, 8, 15, 1, '750.00');
 INSERT INTO ORDER_PRODUCT VALUES (NULL, 8, 16, 1, '750.00');
+
+# Views #
+
+# This Query Reutrns a list of all Customers, their details and number of open and closed orders.
+# For use in displaying a list of customers in the Administration panel
+CREATE VIEW CUSTOMERS_AND_ORDERS_VIEW AS
+SELECT CustomerID, FirstName, LastName, Email, COUNT(CustomerID) as 'All Orders', SUM(case when order_status.Description = 'Requested' then 1 else 0 end) as 'New Orders'
+FROM CUSTOMER
+JOIN sales_order ON sales_order.CustomerFK = CustomerID
+LEFT JOIN order_status ON order_status.OrderStatusID = sales_order.OrderStatusFK
+GROUP BY CustomerID

@@ -45,14 +45,26 @@
         </div>
         
         <div id="contentBox">
-        	<h1>Manage Customers</h1>
+        	<h1 style="float:left;">Manage Customers</h1>
+            <div id="manageCustomersTopRight">
+            	<fieldset class="inputFieldSet" id="userDetailsFieldset">
+                	<legend>Search</legend>
+                    <form id="userDetailsForm" action="admin.php?manageCustomers">
+                    	<div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="customerid" type="text" placeholder="e.g. 1"/></div>
+                        <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" placeholder="e.g. Kev" value=""/></div>
+                        <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" placeholder="e.g. Smith"/></div>
+                        <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" placeholder="mail@ne.com"/></div>
+                        <div class="inputField"><input class="submitButton" type="submit" name="searchButton" value="Search" /></div>
+                    </form>
+                </fieldset>
+            </div>
             <div id="tableContainer">
-                <table class="cartTable" border="1">
+                <table class="cartTable" border="1" >
                     <tr class="headerRow">
-                        <td><span class="tableHeader">Customer.ID</span></td>
+                        <td><span class="tableHeader tableHeaderAsc"><a href="admin.php">Customer.ID</a></span></td>
                         <td><span class="tableHeader">First Name</span></td>
                         <td><span class="tableHeader">Last Name</span></td>
-                        <td><span class="tableHeader">Email</span></td>
+                        <td><span class="tableHeader tableHeaderDesc"><a href="admin.php">Email</a></span></td>
                         <td><span class="tableHeader">All Orders</span></td>
                         <td><span class="tableHeader">New Orders</span></td>
                         <td><span class="tableHeader">Edit</span></td>
@@ -230,9 +242,12 @@
                 </table>
             </div>
             
-            <div id="totalLabelStretcher"></div>
-            <div id="totalLabel">Total: 2828.75</div>
-            <a href="checkout.html"><div id="checkoutButton">Checkout</div></a>
+            
+            <div id="manageCustomersStretcher"></div>
+            <div id="bottomButtonsBox">
+                <form action="members.php?signout"><button class="formCSSButtonButton">New</button></form>
+                <form action="orders.html"><button class="formCSSButtonButton">Back</button></form>
+            </div>
             
         </div>
             <footer id="pageFooter">Copyright © 2015 <a href="mailto:admin@virginguitars.com">Virgin Guitars</a></footer>
