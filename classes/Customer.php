@@ -253,7 +253,7 @@ class Customer
         $dataConnection = $database->getDataConnection();
         
         // Query to change Salutation
-        $query = "UPDATE customer SET Salutation = '".mysqli_real_escape_string($dataConnection, $Salutation)."' "
+        $query = "UPDATE CUSTOMER SET Salutation = '".mysqli_real_escape_string($dataConnection, $Salutation)."' "
                 . "WHERE Email = '". $this->Email ."';";
 
         // Execute query 
