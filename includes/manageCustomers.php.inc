@@ -19,7 +19,7 @@ $database = new Database();
 $dataConnection = $database->getDataConnection();
 
 $orderBy = "none";  // Determains how to order results
-$desc;              // Determins if results should be ordered descending
+$desc = false;              // Determins if results should be ordered descending
 
 if (isset($_GET['orderBy']))
 {
@@ -57,7 +57,7 @@ if (isset($_GET['desc']))
                     <?php
                         if ($orderBy === "CustomerID")
                         {
-                            if (isset($desc))
+                            if ($desc !== false)
                             {
                                 echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=CustomerID\">Customer.ID</a></span>";
                             }
@@ -76,7 +76,7 @@ if (isset($_GET['desc']))
                     <?php
                         if ($orderBy === "FirstName")
                         {
-                            if (isset($desc))
+                            if ($desc !== false)
                             {
                                 echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=FirstName\">First Name</a></span>";
                             }
@@ -95,7 +95,7 @@ if (isset($_GET['desc']))
                     <?php
                         if ($orderBy === "LastName")
                         {
-                            if (isset($desc))
+                            if ($desc !== false)
                             {
                                 echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=LastName\">Last Name</a></span>";
                             }
@@ -114,7 +114,7 @@ if (isset($_GET['desc']))
                     <?php
                         if ($orderBy === "Email")
                         {
-                            if (isset($desc))
+                            if ($desc!== false)
                             {
                                 echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=Email\">Email</a></span>";
                             }
@@ -133,7 +133,7 @@ if (isset($_GET['desc']))
                     <?php
                         if ($orderBy === "All Orders")
                         {
-                            if (isset($desc))
+                            if ($desc !== false)
                             {
                                 echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=All Orders\">All Orders</a></span>";
                             }
@@ -152,7 +152,7 @@ if (isset($_GET['desc']))
                     <?php
                         if ($orderBy === "New Orders")
                         {
-                            if (isset($desc))
+                            if ($desc !== false)
                             {
                                 echo "<span class=\"tableHeader tableHeaderDesc\"><a href=\"admin.php?manageCustomers&orderBy=New Orders\">New Orders</a></span>";
                             }
@@ -174,8 +174,46 @@ if (isset($_GET['desc']))
             <?php
             // Query database for values and draw table rows
             
-            // Query the databse
+            // Query to get customers and orders from database
+            
+            // Fag to check if ordered
+            $isOrdered = false;
+            
             $query = "SELECT * FROM CUSTOMERS_AND_ORDERS_VIEW";
+            // Appened the order options
+            switch ($orderBy)
+            {
+                case "CustomerID":
+                    $query = $query." ORDER BY CustomerID";
+                    $isOrdered = true;
+                    break;
+                case "FirstName":
+                    $query = $query." ORDER BY FirstName";
+                    $isOrdered = true;
+                    break;
+                case "LastName":
+                    $query = $query." ORDER BY LastName";
+                    $isOrdered = true;
+                    break;
+                case "Email":
+                    $query = $query." ORDER BY Email";
+                    $isOrdered = true;
+                    break;
+                case "All Orders":
+                    $query = $query." ORDER BY 'All Orders'";
+                    $isOrdered = true;
+                    break;
+                case "New Orders":
+                    $query = $query." ORDER BY 'New Orders'";
+                    $isOrdered = true;
+                    break;
+            }
+            
+            // Append descending if descending
+            if ($desc && $isOrdered) // ensures table is ordered first or query will break
+            {
+                $query = $query." desc";
+            }
             
             // Execute query
             $result = $dataConnection->query($query);
