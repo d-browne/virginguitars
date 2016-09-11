@@ -110,8 +110,44 @@ if (isset($_GET['desc']))
                         }
                     ?>
                 </td>
-                <td><span class="tableHeader tableHeaderDesc"><a href="admin.php">Shipping</a></span></td>
-                <td><span class="tableHeader">Total Cost</span></td>
+                <td>
+                    <?php
+                        if ($orderBy === "Shipping")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Shipping">Shipping</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Shipping&desc">Shipping</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Shipping">Shipping</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Total")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Total">Total Cost</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Total&desc">Total Cost</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Total">Total Cost</a></span>';
+                        }
+                    ?>
+                </td>
                 <td><span class="tableHeader">Shipped Date</span></td>
                 <td><span class="tableHeader">Shipping Record</span></td>
                 <td><span class="tableHeader">Order Status</span></td>
