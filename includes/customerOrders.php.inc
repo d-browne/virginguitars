@@ -72,7 +72,26 @@ if (isset($_GET['desc']))
                         }
                     ?>
                 </td>
-                <td><span class="tableHeader">Invoice Date</span></td>
+                <td>
+                    <?php
+                        if ($orderBy === "InvoiceDate")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=InvoiceDate">Invoice Date</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=InvoiceDate&desc">Invoice Date</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=InvoiceDate">Invoice Date</a></span>';
+                        }
+                    ?>
+                    
+                </td>
                 <td><span class="tableHeader">Subtotal</span></td>
                 <td><span class="tableHeader tableHeaderDesc"><a href="admin.php">Shipping</a></span></td>
                 <td><span class="tableHeader">Total Cost</span></td>
