@@ -17,7 +17,22 @@ $dataConnection = $database->getDataConnection();
 // Get customer ID 
 $CustomerID = mysqli_real_escape_string($dataConnection, $_GET['CustomerID']);
 
+// Flags to determine how the columns should be ordered
+$orderBy = "none";  // Determains how to order results
+$desc = false;      // Determins if results should be ordered descending
 
+// Check request for column ordering
+if (isset($_GET['orderBy']))
+{
+    // Get sanitized input
+    $orderBy = mysqli_real_escape_string($dataConnection, $_GET['orderBy']);
+}
+
+// Determine if rows have been requested in descending order
+if (isset($_GET['desc']))
+{
+    $desc = true;
+}
 ?>
 
 
@@ -38,7 +53,25 @@ $CustomerID = mysqli_real_escape_string($dataConnection, $_GET['CustomerID']);
     <div id="tableContainer">
         <table class="cartTable" border="1" >
             <tr class="headerRow">
-                <td><span class="tableHeader tableHeaderAsc"><a href="admin.php">Order.ID</a></span></td>
+                <td>
+                    <?php
+                        if ($orderBy === "SalesOrderID")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=SalesOrderID">Order.ID</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=SalesOrderID&desc">Order.ID</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=SalesOrderID">Order.ID</a></span>';
+                        }
+                    ?>
+                </td>
                 <td><span class="tableHeader">Invoice Date</span></td>
                 <td><span class="tableHeader">Subtotal</span></td>
                 <td><span class="tableHeader tableHeaderDesc"><a href="admin.php">Shipping</a></span></td>
