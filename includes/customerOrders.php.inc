@@ -17,6 +17,15 @@ $dataConnection = $database->getDataConnection();
 // Get customer ID 
 $CustomerID = mysqli_real_escape_string($dataConnection, $_GET['CustomerID']);
 
+// Check if requested new (Requested) orders only
+$newOrders = false;
+$newOrdersUrl = ""; // Holds the string to append to url if new orders only
+if (isset($_GET['newOrders']))
+{
+    $newOrders = true;
+    $newOrdersUrl = "newOrders&";
+}
+
 // Flags to determine how the columns should be ordered
 $orderBy = "none";  // Determains how to order results
 $desc = false;      // Determins if results should be ordered descending
@@ -59,16 +68,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=SalesOrderID">Order.ID</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=SalesOrderID">Order.ID</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=SalesOrderID&desc">Order.ID</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=SalesOrderID&desc">Order.ID</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=SalesOrderID">Order.ID</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=SalesOrderID">Order.ID</a></span>';
                         }
                     ?>
                 </td>
@@ -78,16 +87,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=InvoiceDate">Invoice Date</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=InvoiceDate">Invoice Date</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=InvoiceDate&desc">Invoice Date</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=InvoiceDate&desc">Invoice Date</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=InvoiceDate">Invoice Date</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=InvoiceDate">Invoice Date</a></span>';
                         }
                     ?>
                 </td>
@@ -97,16 +106,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=SubTotal">SubTotal</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=SubTotal">SubTotal</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=SubTotal&desc">SubTotal</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=SubTotal&desc">SubTotal</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=SubTotal">SubTotal</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=SubTotal">SubTotal</a></span>';
                         }
                     ?>
                 </td>
@@ -116,16 +125,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Shipping">Shipping</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=Shipping">Shipping</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Shipping&desc">Shipping</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=Shipping&desc">Shipping</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Shipping">Shipping</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=Shipping">Shipping</a></span>';
                         }
                     ?>
                 </td>
@@ -135,16 +144,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Total">Total Cost</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=Total">Total Cost</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Total&desc">Total Cost</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=Total&desc">Total Cost</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=Total">Total Cost</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=Total">Total Cost</a></span>';
                         }
                     ?>
                 </td>
@@ -154,16 +163,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=ShippedDate">Shipped Date</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=ShippedDate">Shipped Date</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=ShippedDate&desc">Shipped Date</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=ShippedDate&desc">Shipped Date</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=ShippedDate">Shipped Date</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=ShippedDate">Shipped Date</a></span>';
                         }
                     ?>
                 </td>
@@ -173,16 +182,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=ShippingRecord">Shipping Record</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=ShippingRecord">Shipping Record</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=ShippingRecord&desc">Shipping Record</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=ShippingRecord&desc">Shipping Record</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=ShippingRecord">Shipping Record</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=ShippingRecord">Shipping Record</a></span>';
                         }
                     ?>
                 </td>
@@ -192,16 +201,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=OrderStatus">Order Status</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=OrderStatus">Order Status</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=OrderStatus&desc">Order Status</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=OrderStatus&desc">Order Status</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=OrderStatus">Order Status</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&'.$newOrdersUrl.'orderBy=OrderStatus">Order Status</a></span>';
                         }
                     ?>
                 </td>
@@ -213,6 +222,12 @@ if (isset($_GET['desc']))
             
             // Query to select orders
             $query = "SELECT * FROM ORDERS_STATUS WHERE CustomerFK=".$CustomerID."";
+            
+            // If new orders only (Requested) append where clause
+            if ($newOrders)
+            {
+                $query = $query." AND `Order Status`='Requested'";
+            }
             
             // Append order by
             switch($orderBy)
@@ -232,8 +247,8 @@ if (isset($_GET['desc']))
                 case "Total":
                     $query = $query." ORDER BY Total";
                     break;
-                case "Shipping":
-                    $query = $query." ORDER BY Shipping";
+                case "ShippingRecord":
+                    $query = $query." ORDER BY ShippingRecord";
                     break;
                 case "ShippedDate":
                     $query = $query." ORDER BY ShippedDate";
@@ -241,6 +256,12 @@ if (isset($_GET['desc']))
                 case "OrderStatus":
                     $query = $query." ORDER BY `Order Status`";
                     break;
+            }
+            
+            // Append descending to query if applicable
+            if ($desc === true)
+            {
+                $query = $query." DESC";
             }
             
             // Execute query
