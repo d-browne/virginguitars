@@ -56,7 +56,7 @@ $customer->initializeID($CustomerID);
 
     <div id="manageCustomersTopRight">
         <fieldset class="inputFieldSet" id="userDetailsFieldset">
-            <legend>Customer</legend>
+            <legend>Customer!test!</legend>
             <div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="customerid" type="text" value="<?php echo $customer->getCustomerID(); ?>" disabled="true"/></div>
             <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" value="<?php echo $customer->getFirstName(); ?>" disabled="true"/></div>
             <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" value="<?php echo $customer->getLastName(); ?>" disabled="true"/></div>
