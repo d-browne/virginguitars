@@ -214,6 +214,35 @@ if (isset($_GET['desc']))
             // Query to select orders
             $query = "SELECT * FROM ORDERS_STATUS WHERE CustomerFK=".$CustomerID."";
             
+            // Append order by
+            switch($orderBy)
+            {
+                case "SalesOrderID":
+                    $query = $query." ORDER BY SalesOrderID";
+                    break;
+                case "InvoiceDate":
+                    $query = $query." ORDER BY InvoiceDate";
+                    break;
+                case "SubTotal":
+                    $query = $query." ORDER BY SubTotal";
+                    break;
+                case "Shipping":
+                    $query = $query." ORDER BY Shipping";
+                    break;
+                case "Total":
+                    $query = $query." ORDER BY Total";
+                    break;
+                case "Shipping":
+                    $query = $query." ORDER BY Shipping";
+                    break;
+                case "ShippedDate":
+                    $query = $query." ORDER BY ShippedDate";
+                    break;
+                case "OrderStatus":
+                    $query = $query." ORDER BY `Order Status`";
+                    break;
+            }
+            
             // Execute query
             $result = $dataConnection->query($query);
             
