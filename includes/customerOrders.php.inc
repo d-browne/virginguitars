@@ -148,7 +148,25 @@ if (isset($_GET['desc']))
                         }
                     ?>
                 </td>
-                <td><span class="tableHeader">Shipped Date</span></td>
+                <td>
+                    <?php
+                        if ($orderBy === "ShippedDate")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=ShippedDate">Shipped Date</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=ShippedDate&desc">Shipped Date</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?customerOrders&CustomerID='.$CustomerID.'&orderBy=ShippedDate">Shipped Date</a></span>';
+                        }
+                    ?>
+                </td>
                 <td><span class="tableHeader">Shipping Record</span></td>
                 <td><span class="tableHeader">Order Status</span></td>
                 <td><span class="tableHeader">Edit</span></td>
