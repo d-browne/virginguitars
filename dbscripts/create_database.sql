@@ -306,7 +306,7 @@ SELECT CustomerID, FirstName, LastName, Email, COUNT(CustomerID) as 'All Orders'
 FROM CUSTOMER
 JOIN SALES_ORDER ON SALES_ORDER.CustomerFK = CustomerID
 LEFT JOIN ORDER_STATUS ON ORDER_STATUS.OrderStatusID = SALES_ORDER.OrderStatusFK
-GROUP BY CustomerID
+GROUP BY CustomerID;
 
 # This view gets each order and joins the order status description
 CREATE VIEW ORDERS_STATUS AS
