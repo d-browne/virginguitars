@@ -5,6 +5,6 @@
 
 SELECT CustomerID, FirstName, LastName, Email, COUNT(CustomerID) as 'All Orders', SUM(case when order_status.Description = 'Requested' then 1 else 0 end) as 'New Orders'
 FROM CUSTOMER
-JOIN sales_order ON sales_order.CustomerFK = CustomerID
+LEFT JOIN sales_order ON sales_order.CustomerFK = CustomerID
 LEFT JOIN order_status ON order_status.OrderStatusID = sales_order.OrderStatusFK
 GROUP BY CustomerID
