@@ -302,7 +302,7 @@ INSERT INTO ORDER_PRODUCT VALUES (NULL, 8, 16, 1, '750.00');
 # This Query Reutrns a list of all Customers, their details and number of open and closed orders.
 # For use in displaying a list of customers in the Administration panel
 CREATE VIEW CUSTOMERS_AND_ORDERS_VIEW AS
-SELECT CustomerID, FirstName, LastName, Email, COUNT(CustomerID) as 'All Orders', SUM(case when ORDER_STATUS.Description = 'Requested' then 1 else 0 end) as 'New Orders'
+SELECT CustomerID, FirstName, LastName, Email, COUNT(SALES_ORDER.CustomerFK) as 'All Orders', SUM(case when ORDER_STATUS.Description = 'Requested' then 1 else 0 end) as 'New Orders'
 FROM CUSTOMER
 LEFT JOIN SALES_ORDER ON SALES_ORDER.CustomerFK = CustomerID
 LEFT JOIN ORDER_STATUS ON ORDER_STATUS.OrderStatusID = SALES_ORDER.OrderStatusFK
