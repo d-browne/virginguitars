@@ -93,6 +93,31 @@ if (isset($_GET["logout"]))
                 {
                     include("includes/manageCustomers.php.inc");
                 }
+                else if(isset($_GET['customerOrders']))
+                {
+                    // Check if CustomerID specified
+                    if (isset($_GET['CustomerID']))
+                    {
+                        // Check if CustomerID is a real valid ID
+                        $customerExists = Customer::doesCustomerExistID($_GET['CustomerID']);
+                        
+                        // If customer exists display customer orders page
+                        if ($customerExists)
+                        {
+                            include("includes/customerOrders.php.inc");
+                        }
+                        else
+                        {
+                            // Display invalid customer id error
+                            echo '<div id="contentBox"><p>Specified customer ID not found...</p></div>';
+                        }
+                    }
+                    else
+                    {
+                        // Notify admin that a customer id must be specified
+                        echo '<div id="contentBox"><p>A customer id must be specified...</p></div>';
+                    }
+                }
                 else
                 {
                     // If admin is logged in and no control selected dispaly admin page

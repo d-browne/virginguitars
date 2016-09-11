@@ -539,6 +539,27 @@ class Customer
         
     }
     
+    // Function to check if customer exists (with ID)
+    public static function doesCustomerExistID($CustomerID)
+    {
+        // create a data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        
+        
+        // Query to select email address
+        $query = "SELECT Email FROM CUSTOMER WHERE CustomerID = '".mysqli_real_escape_string($dataConnection, $CustomerID)."'";
+        $result = $dataConnection->query($query);
+        
+        // Check if result is set
+        if ($result->num_rows > 0)
+        {
+            return true;
+        }
+        return false; 
+    }
+    
     // Function to check if customer exists
     public static function doesCustomerExist($email)
     {

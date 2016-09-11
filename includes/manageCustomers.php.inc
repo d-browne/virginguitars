@@ -352,7 +352,7 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                         // Print email column
                         print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".$row['Email']."</a></td>";
                         // Print All Orders
-                        print "<td><a href=\"admin.php?manageCustomers\">".$row['All Orders']."</a></td>";
+                        print "<td><a href=\"admin.php?customerOrders&CustomerID=".$row['CustomerID']."\">".$row['All Orders']."</a></td>";
                         // Print All Orders
                         print "<td><a class=\"newOrdersButton\" href=\"admin.php?manageCustomers\">".$row['New Orders']."</a></td>";
                         // Print Edit button
