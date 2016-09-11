@@ -341,6 +341,49 @@ class Customer
         return true;
     }
     
+    // Function to initialize the object from ID
+    public function initializeID($ID)
+    {
+        // If email doesn't exist in database return null
+        if (!Customer::doesCustomerExistID($ID))
+        {
+            return NULL;
+        }
+        
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to get watned values
+        $query = "SELECT * FROM CUSTOMER WHERE CustomerID = '".mysqli_real_escape_string($dataConnection, $ID)."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Get row
+        $row = $result->fetch_assoc();
+        
+        // Get values from row
+        $this->CustomerID = $row["CustomerID"];
+        $this->LastName = $row["LastName"];
+        $this->FirstName = $row["FirstName"];
+        $this->Salutation = $row["Salutation"];
+        $this->MailingList = $row["MailingList"];
+        $this->Email = $row["Email"];
+        $this->MobilePhone = $row["MobilePhone"];
+        $this->HomePhone = $row["HomePhone"];
+        $this->hashedPassword = $row["EncryptedPassword"];
+        $this->salt = $row["Salt"];
+        
+        // set home address object
+        $this->homeAddress = new HomeAddress($this->CustomerID);
+        
+        // Set is initialized
+        $this->isInitialized = true;
+        
+        return $this; // Return a handle to this object
+    }
+    
     // Function to initialize the object
     public function initialize($email)
     {
