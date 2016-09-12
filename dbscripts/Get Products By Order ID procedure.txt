@@ -4,36 +4,6 @@ CREATE PROCEDURE GetProductsByOrderID
     IN in_order_id int(7)
 )
 BEGIN
-<<<<<<< HEAD
-    SELECT 
- 	so.SalesOrderID, 
-    p.ProductID,
-    b.BrandName,
-    c.Type,
-    p.Quantity,
-    ps.Description As 'ProductStatus',
-    p.Description,
-    ap.Description As 'Appearence',
-    p.UnitPrice,
-    ct.Description As 'CaseType',
-    m.Description As 'Model',
-    a.UserName As 'CreatedBy',
-    a2.UserName As 'ModifiedBy',
-    p.CreationDate,
-    p.ModifiedDate
-    FROM SALES_ORDER As so
-    INNER JOIN ORDER_PRODUCT As op ON op.SalesOrderFK = so.SalesOrderID
-    INNER JOIN PRODUCT As p on op.ProductFK = p.ProductID
-    INNER JOIN BRAND AS b on p.BrandFK = b.BrandID
-    INNER JOIN CLASSIFICATION As c on p.ClassificationFK = c.ClassificationID
-    INNER JOIN PRODUCT_STATUS As ps on p.StatusFK = ps.ProductStatusID
-    INNER JOIN APPEARENCE As ap on p.AppearenceFK = ap.AppearenceID
-    INNER JOIN CASE_TYPE As ct on p.CaseTypeFK = ct.CaseTypeID
-    INNER JOIN MODEL As m on p.ModelFK = m.ModelID
-    INNER JOIN ADMINISTRATOR As a ON p.CreatedByFk = a.AdministratorID
-    INNER JOIN ADMINISTRATOR As a2 ON p.ModifiedByFK = a2.AdministratorID
-    WHERE so.SalesOrderID = order_id
-=======
 SELECT 
     so.SalesOrderID, 
     p.ProductID, 
@@ -60,7 +30,6 @@ SELECT
     INNER JOIN Case_Type As ct ON p.CaseTypeFK = ct.CaseTypeID
     INNER JOIN Model As m ON p.ModelFK = m.ModelID
     WHERE so.SalesOrderID = in_order_id
->>>>>>> origin/master
     ORDER BY p.ProductID;
 END//
 DELIMITER ;
