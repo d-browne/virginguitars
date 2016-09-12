@@ -111,7 +111,7 @@ create table PRODUCT (
     ModifiedByFK int(4) NOT NULL,
     CreationDate DATE NOT NULL,
     ModifiedDate DATE,
-    PrimraryPicture VarChar(200) NULL,
+    PrimaryPicturePath VarChar(200) NULL,
     FOREIGN KEY (AppearenceFK) REFERENCES APPEARENCE(AppearenceID),
     FOREIGN KEY (ClassificationFK) REFERENCES CLASSIFICATION(ClassificationID),
     FOREIGN KEY (BrandFK) REFERENCES BRAND(BrandID),
@@ -218,7 +218,7 @@ INSERT INTO PRODUCT_STATUS VALUES (NULL, 'status2');
 INSERT INTO ADMINISTRATOR VALUES (NULL, 'admin', 'd23c1038532dc71d0a60a7fb3d330d7606b7520e9e5ee0ddcdb27ee1bd5bc0cd', '22');
 INSERT INTO ADMINISTRATOR VALUES (NULL, 'zerox', '2efe70f52e3b1d8dbc8b5325cf96e16d1cfbdb3dbb56cfd9dab51c735b0266fc', '34');
 
-INSERT INTO PRODUCT VALUES (NULL, 2, 1, 4, 1, 'Specifications', 1, '1900.00', 1, 1, 1, 1, CURDATE(), CURDATE(), NULL);
+INSERT INTO PRODUCT VALUES (NULL, 2, 1, 4, 1, 'Specifications', 1, '1900.00', 1, 1, 1, 1, CURDATE(), CURDATE(), 'images/guitars/fenderLimitedEditionAmericanStandardTelecaster/1.jpg');
 INSERT INTO PRODUCT VALUES (NULL, 2, 1, 5, 1, 'Specifications', 1, '1100.00', 2, 2, 1, 1, CURDATE(), CURDATE(), NULL);
 INSERT INTO PRODUCT VALUES (NULL, 4, 1, 1, 1, 'Specifications', 1, '5000.00', 2, 3, 1, 1, CURDATE(), CURDATE(), NULL);
 INSERT INTO PRODUCT VALUES (NULL, 5, 1, 2, 1, 'Specifications', 1, '4990.00', 1, 4, 1, 1, CURDATE(), CURDATE(), NULL);
@@ -313,4 +313,44 @@ GROUP BY CustomerID;
 CREATE VIEW ORDERS_STATUS AS
 SELECT SalesOrderID, CustomerFK, InvoiceDate, SubTotal, Shipping, Total, ShippedDate, ShippingRecord, ORDER_STATUS.Description As 'Order Status'
 FROM SALES_ORDER
-JOIN ORDER_STATUS ON ORDER_STATUS.OrderStatusID = SALES_ORDER.OrderStatusFK
+JOIN ORDER_STATUS ON ORDER_STATUS.OrderStatusID = SALES_ORDER.OrderStatusFK;
+
+# This stored procedure is to all products given a specified OrderID
+# Usage:
+# CALL GetProductsByOrderID(n);
+DELIMITER //
+CREATE PROCEDURE GetProductsByOrderID 
+(
+    IN in_order_id int(7)
+)
+BEGIN
+SELECT 
+    so.SalesOrderID, 
+    p.ProductID,
+    p.PrimaryPicturePath,
+    b.BrandName As 'Brand', 
+    c.Type, 
+    p.Quantity, 
+    ps.Description As 'Status', 
+    p.Description, 
+    ap.Description As 'Condition',
+    p.UnitPrice As 'Price', 
+    ct.Description As 'CaseType',  
+    m.Description As 'Model',
+    (select a.Username from Administrator as a where p.CreatedByFK = a.AdministratorID) as 'CreatedBy',  
+    (select a2.Username from Administrator as a2 where p.ModifiedByFK = a2.AdministratorID) as 'ModifiedBy',
+    p.CreationDate As 'DateCreated',
+    p.ModifiedDate As 'DateModified'
+    FROM SALES_ORDER As so
+    INNER JOIN ORDER_PRODUCT As op ON op.SalesOrderFK = so.SalesOrderID
+    INNER JOIN PRODUCT As p ON p.ProductID = op.ProductFK
+    INNER JOIN Brand As b ON p.BrandFK = b.BrandID
+    INNER JOIN Classification As c ON p.ClassificationFK = c.ClassificationID
+    INNER JOIN Product_Status As ps ON p.StatusFK = ps.ProductStatusID
+    INNER JOIN Appearence As ap ON p.AppearenceFK = ap.AppearenceID
+    INNER JOIN Case_Type As ct ON p.CaseTypeFK = ct.CaseTypeID
+    INNER JOIN Model As m ON p.ModelFK = m.ModelID
+    WHERE so.SalesOrderID = in_order_id
+    ORDER BY p.ProductID;
+END//
+DELIMITER ;

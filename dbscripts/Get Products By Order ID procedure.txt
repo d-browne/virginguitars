@@ -13,7 +13,8 @@ CREATE PROCEDURE GetProductsByOrderID
 BEGIN
 SELECT 
     so.SalesOrderID, 
-    p.ProductID, 
+    p.ProductID,
+    p.PrimaryPicturePath,
     b.BrandName As 'Brand', 
     c.Type, 
     p.Quantity, 
