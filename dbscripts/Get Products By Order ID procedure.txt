@@ -1,3 +1,10 @@
+#Virgin Guitars E-Commerce Website 2016
+#Dominic Browne, Ben Morrison, Dale Hogan, Warren Norris
+#
+#This stored procedure is to all products given a specified OrderID
+#Usage:
+#CALL GetProductsByOrderID(n);
+
 DELIMITER //
 CREATE PROCEDURE GetProductsByOrderID 
 (
