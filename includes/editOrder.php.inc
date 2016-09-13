@@ -24,6 +24,8 @@ $order = new Order($SalesOrderID);
 ?>
 
 <div id="contentBox">
+    <form action="admin.php" method="POST">
+    <input type="hidden" name="orderid" value="<?php echo $order->getSalesOrderID(); ?>" />
     <div id="manageCustomersTopLeft">
         <h1>Edit Order</h1>
     </div>
@@ -49,7 +51,7 @@ $order = new Order($SalesOrderID);
             </tr>
             <tr>
                 <td>
-                    <input type="text" placeholder="e.g. 123 Fake Street" value="<?php echo $order->getStreetAddress(); ?>"/>
+                    <input type="text" name="streetaddress" placeholder="e.g. 123 Fake Street" value="<?php echo $order->getStreetAddress(); ?>"/>
                 </td>
                 <td>
                     <input type="text" placeholder="Sydney" value="<?php echo $order->getCity(); ?>"/>
@@ -58,7 +60,7 @@ $order = new Order($SalesOrderID);
                     <input type="text" placeholder="e.g. NSW" value="<?php echo $order->getState(); ?>" />
                 </td>
                 <td>
-                    <input type="text" placeholder="e.g. 2000" value="<?php echo $order->getPostCode(); ?>"/>
+                    <input type="text" name="postcode" placeholder="e.g. 2000" value="<?php echo $order->getPostCode(); ?>"/>
                 </td>
                 <td>
                     <input type="text" placeholder="Australia" value="<?php echo $order->getCountry(); ?>"/>
@@ -114,8 +116,8 @@ $order = new Order($SalesOrderID);
     <div id="manageCustomersStretcher"></div>
     <div id="bottomButtonsBox">
 
-        <form action="admin.php?back"><button class="formCSSButtonButton">Update</button></form>
-        <form action="admin.php?back"><button class="formCSSButtonButton">Back</button></form>
+        <button type="submit" class="formCSSButtonButton" name="updateOrderButton">Update</button>
+        <button class="formCSSButtonButton">Back</button>
     </div>
 
     <h2 id="productsHeader">Products</h2>
@@ -166,4 +168,5 @@ $order = new Order($SalesOrderID);
             </td>
         </tr>
     </table>
+    </form>
 </div>

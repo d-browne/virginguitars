@@ -81,6 +81,20 @@ if (isset($_GET["logout"]))
             // Check if admin is logged in
             if ($_SESSION["isAdmin"])
             {
+                // Check update order post received
+                if (isset($_POST['updateOrderButton']))
+                {
+                    // Create order instance
+                    require_once 'classes/Order.php';
+                    $order = new Order($_POST['orderid']);
+                    
+                    // Update street address
+                    $order->setStreetAddress($_POST['streetaddress']);
+                    
+                    // Redirect (back) to order page
+                    header('Location: admin.php?editOrder&id='.$_POST['orderid']);
+                }
+                
                 if (isset($_GET['faq']))
                 {
                     include("includes/editFaq.php.inc");
