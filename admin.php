@@ -98,6 +98,8 @@ if (isset($_GET["logout"]))
                     $order->setPostCode($_POST['postcode']);
                     // Update country
                     $order->setCountry($_POST['country']);
+                    // Update shipped date
+                    $order->setShippedDate($_POST['shippeddate']);
                     
                     // Redirect (back) to order page
                     header('Location: admin.php?editOrder&id='.$_POST['orderid']);
