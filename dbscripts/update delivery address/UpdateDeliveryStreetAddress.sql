@@ -12,8 +12,8 @@ CREATE PROCEDURE UpdateDeliveryStreetAddress
 )
 BEGIN
     UPDATE DELIVERYADDRESS
-    JOIN sales_order ON sales_order.DeliveryAddressFK = deliveryaddress.DeliveryAddressID
+    JOIN SALES_ORDER ON SALES_ORDER.DeliveryAddressFK = DELIVERYADDRESS.DeliveryAddressID
     SET StreetAddress=in_street_address
-    WHERE sales_order.SalesOrderID = in_order_id;
+    WHERE SALES_ORDER.SalesOrderID = in_order_id;
 END//
 DELIMITER ;
