@@ -95,7 +95,7 @@ $order = new Order($SalesOrderID);
                     <span class="tableText"><?php echo $order->getTotal(); ?></span>
                 </td>
                 <td>
-                    <input type="date" name="date" value="<?php echo $order->getShippedDate(); ?>" />
+                    <input type="date" name="date" placeholder="yyyy-mm-dd" value="<?php echo $order->getShippedDate(); ?>" />
                 </td>
                 <td>
                     <input type="text" placeholder="TN: 234823406" value="<?php echo $order->getShippingRecord(); ?>"/>
