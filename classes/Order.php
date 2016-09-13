@@ -27,6 +27,41 @@ class Order
     private $PostCode;
     private $Country;
     
+    function setState($StateInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $State = mysqli_real_escape_string($dataConnection, $StateInput);
+        
+        // Return too long error string if too long
+        if (iconv_strlen($State) > 50)
+        {
+            return "State too long";
+        }
+        
+        // Query to update State
+        //$query = "CALL UpdateDeliveryState('".$State."', '".$this->SalesOrderID."');"; // stored procedure
+        $query = "UPDATE DELIVERYADDRESS JOIN SALES_ORDER ON SALES_ORDER.DeliveryAddressFK = DELIVERYADDRESS.DeliveryAddressID"
+                . " SET State='".$State."' WHERE SALES_ORDER.SalesOrderID='".$this->SalesOrderID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return string error on query failure
+        if ($result === false)
+        {
+            return "Failed to update State";
+        }
+        
+        // Update object in memory
+        $this->State = $State;
+        // all ok return true
+        return true;
+    }
+    
     function setCity($CityInput)
     {
         // Create data connection

@@ -16,6 +16,48 @@ require_once 'classes/Order.php';
 class OrderTest extends TestCase 
 {
     
+    public function setStateDataProvider()
+    {
+        return array(
+            array(1, 'ga ga go', true),
+            array(2, 'ba ba bo', true),
+            array(3, 'da aa ao', true),
+            array(3, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', "State too long"),
+            array(4, 'ga ga go', true),
+            array(5, 'ga ga go', true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setStateDataProvider
+     */
+    public function testSetState($SalesOrderID, $newState, $expectedCallback)
+    {
+        // Instantiate object
+        $order = new Order($SalesOrderID);
+        
+        // Backup street address
+        $StateBackup = $order->getState();
+        
+        // Test
+        $this->assertEquals($expectedCallback, $order->setState($newState));
+        
+        // If true check in memory and in database
+        if ($expectedCallback === true)
+        {
+            // Check in memory
+            $this->assertEquals($newState, $order->getState());
+            
+            // Check in database (using new object)
+            $order2 = new Order($SalesOrderID);
+            $this->assertEquals($newState, $order2->getState());
+        }
+        
+        // Restore backup
+        $order->setState($StateBackup);
+    }
+    
     public function setCityDataProvider()
     {
         return array(
