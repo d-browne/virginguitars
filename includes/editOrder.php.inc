@@ -7,6 +7,29 @@
  * 
  * Author: Dominic Browne
  */
+
+// get the customer
+require_once 'classes/Customer.php';
+$customer = new Customer();
+
+// Initialize from id
+$customer->initializeID($result->fetch_assoc()['CustomerFK']);
+
+$deliveryAddress = "";
+
+// Query to get order address
+$query = $query = "SELECT * FROM DELIVERY_ADDRESS_BY_ORDER_ID WHERE SalesOrderID=".$SalesOrderID;
+
+// Execute Query
+$result = $dataConnection->query($query);
+if ($result !== false)
+{
+    if ($result->num_rows > 0)
+    {
+        $deliveryAddress = $result->fetch_assoc();
+    }
+}
+
 ?>
 
 <div id="contentBox">
@@ -17,10 +40,10 @@
     <div id="manageCustomersTopRight">
         <fieldset class="inputFieldSet" id="userDetailsFieldset">
             <legend>Customer</legend>
-            <div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="customerid" type="text" value="4" enabled="false"/></div>
-            <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" value="Dominic" enabled="false"/></div>
-            <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" value="Browne" enabled="false"/></div>
-            <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" value="dominic@mail.com" enabled="false"/></div>
+            <div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="customerid" type="text" value="<?php echo $customer->getCustomerID(); ?>" disable="true"/></div>
+            <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" value="<?php echo $customer->getFirstName(); ?>" disabled="true"/></div>
+            <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" value="<?php echo $customer->getLastName(); ?>" disabled="true"/></div>
+            <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" value="<?php echo $customer->getEmail(); ?>" disabled="true"/></div>
         </fieldset>
     </div>
     <div id="tableContainer">
@@ -35,7 +58,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="text" placeholder="e.g. 123 Fake Street" />
+                    <input type="text" placeholder="e.g. 123 Fake Street" value="<?php echo $deliveryAddress['StreetAddress']; ?>"/>
                 </td>
                 <td>
                     <input type="text" placeholder="Sydney" />
