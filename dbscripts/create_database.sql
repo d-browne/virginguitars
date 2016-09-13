@@ -317,6 +317,27 @@ SELECT SalesOrderID, CustomerFK, InvoiceDate, SubTotal, Shipping, Total, Shipped
 FROM SALES_ORDER
 JOIN ORDER_STATUS ON ORDER_STATUS.OrderStatusID = SALES_ORDER.OrderStatusFK;
 
+# This view returns the delivery address of each order
+CREATE VIEW DELIVERY_ADDRESS_BY_ORDER_ID AS
+SELECT sales_order.SalesOrderID, deliveryaddress.StreetAddress, deliveryaddress.City, deliveryaddress.State, deliveryaddress.PostCode, deliveryaddress.Country
+FROM sales_order
+LEFT JOIN deliveryaddress ON deliveryaddress.DeliveryAddressID = sales_order.DeliveryAddressFK;
+
+# The Purpose of this stored procedure is update the delivery address street address given the order ID
+DELIMITER //
+CREATE PROCEDURE UpdateDeliveryStreetAddress 
+(
+    IN in_street_address VarChar(50),
+    IN in_order_id int(7)
+)
+BEGIN
+    UPDATE DELIVERYADDRESS
+    JOIN sales_order ON sales_order.DeliveryAddressFK = deliveryaddress.DeliveryAddressID
+    SET StreetAddress=in_street_address
+    WHERE sales_order.SalesOrderID = in_order_id;
+END//
+DELIMITER ;
+
 # This stored procedure is to all products given a specified OrderID
 # Usage:
 # CALL GetProductsByOrderID(n);

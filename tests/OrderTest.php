@@ -16,6 +16,48 @@ require_once 'classes/Order.php';
 class OrderTest extends TestCase 
 {
     
+    public function setStreetAddressDataProvider()
+    {
+        return array(
+            array(1, 'ga ga go', true),
+            array(2, 'ba ba bo', true),
+            array(3, 'da aa ao', true),
+            array(3, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', "StreetAddress too long"),
+            array(4, 'ga ga go', true),
+            array(5, 'ga ga go', true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setStreetAddressDataProvider
+     */
+    public function testSetStreetAddress($SalesOrderID, $newStreetAddress, $expectedCallback)
+    {
+        // Instantiate object
+        $order = new Order($SalesOrderID);
+        
+        // Backup street address
+        $streetAddressBackup = $order->getStreetAddress();
+        
+        // Test
+        $this->assertEquals($expectedCallback, $order->setStreetAddress($newStreetAddress));
+        
+        // If true check in memory and in database
+        if ($expectedCallback === true)
+        {
+            // Check in memory
+            $this->assertEquals($newStreetAddress, $order->getStreetAddress());
+            
+            // Check in database (using new object)
+            $order2 = new Order($SalesOrderID);
+            $this->assertEquals($newStreetAddress, $order2->getStreetAddress());
+        }
+        
+        // Restore backup
+        $order->setStreetAddress($streetAddressBackup);
+    }
+    
     // Test data for delivery address test
     public function deliveryAddressDataProvider()
     {

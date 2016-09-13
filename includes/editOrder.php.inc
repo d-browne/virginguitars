@@ -29,7 +29,7 @@ $order = new Order($SalesOrderID);
     <div id="manageCustomersTopRight">
         <fieldset class="inputFieldSet" id="userDetailsFieldset">
             <legend>Customer</legend>
-            <div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="customerid" type="text" value="<?php echo $customer->getCustomerID(); ?>" disable="true"/></div>
+            <div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="customerid" type="text" value="<?php echo $customer->getCustomerID(); ?>" disabled="true"/></div>
             <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" value="<?php echo $customer->getFirstName(); ?>" disabled="true"/></div>
             <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" value="<?php echo $customer->getLastName(); ?>" disabled="true"/></div>
             <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" value="<?php echo $customer->getEmail(); ?>" disabled="true"/></div>

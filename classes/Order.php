@@ -27,6 +27,39 @@ class Order
     private $PostCode;
     private $Country;
     
+    function setStreetAddress($streetAddressInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $StreetAddress = mysqli_real_escape_string($dataConnection, $streetAddressInput);
+        
+        // Return too long error string if too long
+        if (iconv_strlen($StreetAddress) > 50)
+        {
+            return "StreetAddress too long";
+        }
+        
+        // Query to update street address
+        $query = "CALL UpdateDeliveryStreetAddress('".$StreetAddress."', '".$this->SalesOrderID."');";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return string error on query failure
+        if ($result === false)
+        {
+            return "Failed to call UpdateDeliveryStreetAddress stored procedure";
+        }
+        
+        // Update object in memory
+        $this->StreetAddress = $StreetAddress;
+        // all ok return true
+        return true;
+    }
+        
     // Class contructor
     public function __construct($SalesOrderID) 
     {
@@ -35,7 +68,7 @@ class Order
         $dataConnection = $database->getDataConnection();
         
         // Query to get order details
-        $query = "SELECT * FROM ORDERS_STATUS WHERE SalesOrderID='".$SalesOrderID."'";
+        $query = "SELECT * FROM ORDERS_STATUS WHERE SalesOrderID='".mysqli_real_escape_string($dataConnection, $SalesOrderID)."'";
         
         // Execute query
         $result = $dataConnection->query($query);
