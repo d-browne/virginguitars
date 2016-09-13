@@ -96,6 +96,8 @@ if (isset($_GET["logout"]))
                     $order->setState($_POST['state']);
                     // Update PostCode
                     $order->setPostCode($_POST['postcode']);
+                    // Update country
+                    $order->setCountry($_POST['country']);
                     
                     // Redirect (back) to order page
                     header('Location: admin.php?editOrder&id='.$_POST['orderid']);
