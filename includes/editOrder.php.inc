@@ -1,3 +1,14 @@
+<?php
+/*
+ * Virgin Guitars E-Commerce website 2016
+ * Dominic Browne, Warren Norris, Dale Hogan, Ben Morrison
+ * 
+ * The purpose of this include is to display a from where a specific order can be edited
+ * 
+ * Author: Dominic Browne
+ */
+?>
+
 <div id="contentBox">
     <div id="manageCustomersTopLeft">
         <h1>Edit Order</h1>
