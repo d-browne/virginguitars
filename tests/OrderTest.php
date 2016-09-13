@@ -16,6 +16,34 @@ require_once 'classes/Order.php';
 class OrderTest extends TestCase 
 {
     
+    // Test data for delivery address test
+    public function deliveryAddressDataProvider()
+    {
+        return array(
+            array(1, '123 Fake Street', 'Sydney', 'NSW', '0', 'Australia'),
+            array(5, '123 Fake Street', 'Sydney', 'NSW', '0', 'Australia'),
+            array(2, '456 Fake Street', 'Gosford', 'NSW', '1111', 'Australia')
+        );
+    }
+    
+    /** 
+     * 
+     * @dataProvider deliveryAddressDataProvider
+     */
+    public function testDeliveryAddressConstrutor($SalesOrderID, $expectedStreetAddress,
+            $expectedCity, $expectedState, $expectedPostCode, $expectedCountry)
+    {
+        // Instantiate the object
+        $order = new Order($SalesOrderID);
+        
+        // Test
+        $this->assertEquals($expectedStreetAddress, $order->getStreetAddress());
+        $this->assertEquals($expectedCity, $order->getCity());
+        $this->assertEquals($expectedState, $order->getState());
+        $this->assertEquals($expectedPostCode, $order->getPostCode());
+        $this->assertEquals($expectedCountry, $order->getCountry());
+    }
+            
     
     // Data for testing the constructor. Only need to test three. More can easily be added.
     public function testConstructorsDataProvidor()

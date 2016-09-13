@@ -65,6 +65,35 @@ class Order
         $this->ShippedDate = $row['ShippedDate'];
         $this->ShippingRecord = $row['ShippingRecord'];
         $this->OrderStatus = $row['Order Status'];
+        
+        // Populate the delivery address variables
+        // Query to find delivery address
+        $query = "SELECT * FROM DELIVERY_ADDRESS_BY_ORDER_ID WHERE SalesOrderID='".mysqli_real_escape_string($dataConnection, $SalesOrderID)."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Throw if query malformed
+        if ($result === false)
+        {
+            throw new Exception("Error querying for delivery details");
+        }
+        
+        // Throw delivery address doesn't exist for order (must have)
+        if ($result->num_rows < 1)
+        {
+            throw new Exception("Delivery address record for specified order not found");
+        }
+        
+        // Get record as row
+        $row = $result->fetch_assoc();
+        
+        // Populate the deliver address properties
+        $this->StreetAddress = $row['StreetAddress'];
+        $this->City = $row['City'];
+        $this->State = $row['State'];
+        $this->PostCode = $row['PostCode'];
+        $this->Country = $row['Country'];
     }
     
     // Method to check of order exists
