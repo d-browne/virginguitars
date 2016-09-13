@@ -1041,3 +1041,7 @@ textarea {
 .bottomTable td {
 	border-bottom:hidden;
 }
+
+.tableText {
+	color: white;
+}

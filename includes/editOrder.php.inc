@@ -15,20 +15,9 @@ $customer = new Customer();
 // Initialize from id
 $customer->initializeID($result->fetch_assoc()['CustomerFK']);
 
-$deliveryAddress = "";
-
-// Query to get order address
-$query = $query = "SELECT * FROM DELIVERY_ADDRESS_BY_ORDER_ID WHERE SalesOrderID=".$SalesOrderID;
-
-// Execute Query
-$result = $dataConnection->query($query);
-if ($result !== false)
-{
-    if ($result->num_rows > 0)
-    {
-        $deliveryAddress = $result->fetch_assoc();
-    }
-}
+// create order object
+require_once 'classes/Order.php';
+$order = new Order($SalesOrderID);
 
 ?>
 
@@ -58,19 +47,19 @@ if ($result !== false)
             </tr>
             <tr>
                 <td>
-                    <input type="text" placeholder="e.g. 123 Fake Street" value="<?php echo $deliveryAddress['StreetAddress']; ?>"/>
+                    <input type="text" placeholder="e.g. 123 Fake Street" value="<?php echo $order->getStreetAddress(); ?>"/>
                 </td>
                 <td>
-                    <input type="text" placeholder="Sydney" />
+                    <input type="text" placeholder="Sydney" value="<?php echo $order->getCity(); ?>"/>
                 </td>
                 <td>
-                    <input type="text" placeholder="e.g. NSW" />
+                    <input type="text" placeholder="e.g. NSW" value="<?php echo $order->getState(); ?>" />
                 </td>
                 <td>
-                    <input type="text" placeholder="e.g. 2000" />
+                    <input type="text" placeholder="e.g. 2000" value="<?php echo $order->getPostCode(); ?>"/>
                 </td>
                 <td>
-                    <input type="text" placeholder="Australia" />
+                    <input type="text" placeholder="Australia" value="<?php echo $order->getCountry(); ?>"/>
                 </td>
             </tr>
         </table>
@@ -87,43 +76,28 @@ if ($result !== false)
             </tr>
             <tr>
                 <td>
-                    <a href="admin.php">
-                        1
-                    </a>
+                    <span class="tableText"><?php echo $order->getSalesOrderID(); ?></span>
                 </td>
                 <td>
-                    <a href="admin.php">
-                        2016-6-11
-                    </a>
+                    <span class="tableText"><?php echo $order->getInvoiceDate(); ?></span>
                 </td>
                 <td>
-                    <a href="admin.php">
-                        $666
-                    </a>
+                    <span class="tableText"><?php echo $order->getSubTotal(); ?></span>
                 </td>
                 <td>
-                    <a href="admin.php">
-                        $333
-                    </a>
+                    <span class="tableText"><?php echo $order->getShipping(); ?></span>
                 </td>
                 <td>
-                    <a href="admin.php">
-                        $1000
-                    </a>
+                    <span class="tableText"><?php echo $order->getTotal(); ?></span>
                 </td>
                 <td>
-                    <input type="date" value="2016-6-13" />
+                    <input type="text" value="<?php echo $order->getShippedDate(); ?>" />
                 </td>
                 <td>
-                    <input type="text" placeholder="TN: 234823406" />
+                    <input type="text" placeholder="TN: 234823406" value="<?php echo $order->getShippingRecord(); ?>"/>
                 </td>
                 <td>
                     <select>
-                        <option>Requested</option>
-                        <option>Processing</option>
-                        <option>Shipped</option>
-                        <option>Completed</option>
-                        <option>Cancelled</option>
                     </select>
                 </td>
             </tr>
