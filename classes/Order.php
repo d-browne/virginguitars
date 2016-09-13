@@ -11,6 +11,7 @@ require_once 'classes/Database.php';
 class Order
 {
     private $SalesOrderID;
+    private $CustomerID;
     private $InvoiceDate;
     private $SubTotal;
     private $Shipping;
@@ -33,7 +34,37 @@ class Order
         $database = new Database();
         $dataConnection = $database->getDataConnection();
         
+        // Query to get order details
+        $query = "SELECT * FROM ORDER_STATUS WHERE SalesOrderID='".mysqli_real_escape_string($dataConnection, $SalesOrderID)."';";
         
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Throw if query fails
+        if ($result === false)
+        {
+            throw new Exception("Error querying for order details");
+        }
+        
+        // Throw if no results returned
+        if ($result->num_rows < 1)
+        {
+            throw new Exception("Specified Order ID does not exist");
+        }
+        
+        // Get the row from result
+        $row = $result->fetch_assoc();
+        
+        // Populate object properties
+        $this->SalesOrderID = $row['SalesOrderID'];
+        $this->CustomerFK = $row['CustomerFK'];
+        $this->InvoiceDate = $row['InvoiceDate'];
+        $this->SubTotal = $row['SubTotal'];
+        $this->Shipping = $row['Shipping'];
+        $this->Total = $row['Total'];
+        $this->ShippedDate = $row['ShippedDate'];
+        $this->ShippingRecord = $row['ShippingRecord'];
+        $this->OrderStatus = $row['Order Status'];
     }
     
     // Method to check of order exists
