@@ -98,7 +98,7 @@ $order = new Order($SalesOrderID);
                     <input type="text" name="shippeddate" placeholder="yyyy-mm-dd" value="<?php echo $order->getShippedDate(); ?>" />
                 </td>
                 <td>
-                    <input type="text" placeholder="TN: 234823406" value="<?php echo $order->getShippingRecord(); ?>"/>
+                    <input type="text" name="shippingrecord" placeholder="TN: 234823406" value="<?php echo $order->getShippingRecord(); ?>"/>
                 </td>
                 <td>
                     <select>
