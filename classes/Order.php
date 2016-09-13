@@ -27,6 +27,59 @@ class Order
     private $PostCode;
     private $Country;
     
+    function setOrderStatus($OrderStatusInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $OrderStatus = mysqli_real_escape_string($dataConnection, $OrderStatusInput);
+        
+        if ($OrderStatus !== "Requested" && $OrderStatus !== "Processing" && $OrderStatus !== "Shipped" && $OrderStatus !== "Completed" && $OrderStatus !== "Cancelled")
+        {
+            return "Invalid Order Status";
+        }
+        
+        $orderStatusID = 0;
+        
+        switch ($OrderStatus)
+        {
+            case "Requested":
+                $orderStatusID = 1;
+                break;
+            case "Processing":
+                $orderStatusID = 2;
+                break;
+            case "Shipped":
+                $orderStatusID = 3;
+                break;
+            case "Completed":
+                $orderStatusID = 4;
+                break;
+            case "Cancelled":
+                $orderStatusID = 5;
+                break;
+        }
+        
+        // Query to update Shipped Date
+        $query = "UPDATE SALES_ORDER SET OrderStatusFK=".$orderStatusID." WHERE SalesOrderID='".$this->SalesOrderID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return string error on query failure
+        if ($result === false)
+        {
+            return "Failed to update OrderStatus";
+        }
+        
+        // Update object in memory
+        $this->OrderStatus = $OrderStatus;
+        // all ok return true
+        return true;
+    }
+    
     function setShippingRecord($ShippingRecordInput)
     {
         // Create data connection

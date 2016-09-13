@@ -16,6 +16,52 @@ require_once 'classes/Order.php';
 class OrderTest extends TestCase 
 {
     
+    public function setOrderStatusDataProvider()
+    {
+        return array(
+            array(1, 'Requested', true),
+            array(1, 'Processing', true),
+            array(1, 'Shipped', true),
+            array(1, 'Completed', true),
+            array(1, 'Cancelled', true),
+            array(1, 'casd', "Invalid Order Status"),
+            array(1, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', "Invalid Order Status"),
+            array(1, 'againasdfsd', "Invalid Order Status"),
+            array(1, "agai'df'sd", "Invalid Order Status"),
+            array(1, "compledf", "Invalid Order Status")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setOrderStatusDataProvider
+     */
+    public function testSetOrderStatus($SalesOrderID, $newOrderStatus, $expectedCallback)
+    {
+        // Instantiate object
+        $order = new Order($SalesOrderID);
+        
+        // Backup street address
+        $OrderStatusBackup = $order->getOrderStatus();
+        
+        // Test
+        $this->assertEquals($expectedCallback, $order->setOrderStatus($newOrderStatus));
+        
+        // If true check in memory and in database
+        if ($expectedCallback === true)
+        {
+            // Check in memory
+            $this->assertEquals($newOrderStatus, $order->getOrderStatus());
+            
+            // Check in database (using new object)
+            $order2 = new Order($SalesOrderID);
+            $this->assertEquals($newOrderStatus, $order2->getOrderStatus());
+        }
+        
+        // Restore backup
+        $order->setOrderStatus($OrderStatusBackup);
+    }
+    
     public function setShippingRecordDataProvider()
     {
         return array(

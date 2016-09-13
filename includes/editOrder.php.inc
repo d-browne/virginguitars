@@ -101,12 +101,12 @@ $order = new Order($SalesOrderID);
                     <input type="text" name="shippingrecord" placeholder="TN: 234823406" value="<?php echo $order->getShippingRecord(); ?>"/>
                 </td>
                 <td>
-                    <select>
-                        <option <?php if($order->getOrderStatus() === "Requested") {echo "selected";} ?>>Requested</option>
-                        <option <?php if($order->getOrderStatus() === "Processing") {echo "selected";} ?>>Processing</option>
-                        <option <?php if($order->getOrderStatus() === "Shipped") {echo "selected";} ?>>Shipped</option>
-                        <option <?php if($order->getOrderStatus() === "Completed") {echo "selected";} ?>>Completed</option>
-                        <option> <?php if($order->getOrderStatus() === "Cancelled") {echo "selected";} ?>Cancelled</option>
+                    <select name="orderstatus">
+                        <option value="Requested" <?php if($order->getOrderStatus() === "Requested") {echo "selected";} ?>>Requested</option>
+                        <option value="Processing" <?php if($order->getOrderStatus() === "Processing") {echo "selected";} ?>>Processing</option>
+                        <option value="Shipped" <?php if($order->getOrderStatus() === "Shipped") {echo "selected";} ?>>Shipped</option>
+                        <option value="Completed" <?php if($order->getOrderStatus() === "Completed") {echo "selected";} ?>>Completed</option>
+                        <option value="Cancelled" <?php if($order->getOrderStatus() === "Cancelled") {echo "selected";} ?>>Cancelled</option>
                     </select>
                 </td>
             </tr>
