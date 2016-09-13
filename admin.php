@@ -102,6 +102,8 @@ if (isset($_GET["logout"]))
                     $order->setShippedDate($_POST['shippeddate']);
                     // Update shipping record
                     $order->setShippingRecord($_POST['shippingrecord']);
+                    // Update order status
+                    $order->setOrderStatus($_POST['orderstatus']);
                     
                     // Redirect (back) to order page
                     header('Location: admin.php?editOrder&id='.$_POST['orderid']);
