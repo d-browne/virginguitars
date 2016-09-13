@@ -27,6 +27,41 @@ class Order
     private $PostCode;
     private $Country;
     
+    function setPostCode($PostCodeInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $PostCode = mysqli_real_escape_string($dataConnection, $PostCodeInput);
+        
+        // Return too long error string if too long
+        if (iconv_strlen($PostCode) > 4)
+        {
+            return "PostCode too long";
+        }
+        
+        // Query to update PostCode
+        //$query = "CALL UpdateDeliveryPostCode('".$PostCode."', '".$this->SalesOrderID."');"; // stored procedure
+        $query = "UPDATE DELIVERYADDRESS JOIN SALES_ORDER ON SALES_ORDER.DeliveryAddressFK = DELIVERYADDRESS.DeliveryAddressID"
+                . " SET PostCode='".$PostCode."' WHERE SALES_ORDER.SalesOrderID='".$this->SalesOrderID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return string error on query failure
+        if ($result === false)
+        {
+            return "Failed to update PostCode";
+        }
+        
+        // Update object in memory
+        $this->PostCode = $PostCode;
+        // all ok return true
+        return true;
+    }
+    
     function setState($StateInput)
     {
         // Create data connection

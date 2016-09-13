@@ -16,6 +16,48 @@ require_once 'classes/Order.php';
 class OrderTest extends TestCase 
 {
     
+    public function setPostCodeDataProvider()
+    {
+        return array(
+            array(1, 'gaga', true),
+            array(2, '1234', true),
+            array(3, '6754', true),
+            array(3, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', "PostCode too long"),
+            array(4, 'aa', true),
+            array(5, 'ga b', true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setPostCodeDataProvider
+     */
+    public function testSetPostCode($SalesOrderID, $newPostCode, $expectedCallback)
+    {
+        // Instantiate object
+        $order = new Order($SalesOrderID);
+        
+        // Backup street address
+        $PostCodeBackup = $order->getPostCode();
+        
+        // Test
+        $this->assertEquals($expectedCallback, $order->setPostCode($newPostCode));
+        
+        // If true check in memory and in database
+        if ($expectedCallback === true)
+        {
+            // Check in memory
+            $this->assertEquals($newPostCode, $order->getPostCode());
+            
+            // Check in database (using new object)
+            $order2 = new Order($SalesOrderID);
+            $this->assertEquals($newPostCode, $order2->getPostCode());
+        }
+        
+        // Restore backup
+        $order->setPostCode($PostCodeBackup);
+    }
+    
     public function setStateDataProvider()
     {
         return array(
