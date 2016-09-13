@@ -43,7 +43,9 @@ class Order
         }
         
         // Query to update street address
-        $query = "CALL UpdateDeliveryStreetAddress('".$StreetAddress."', '".$this->SalesOrderID."');";
+        //$query = "CALL UpdateDeliveryStreetAddress('".$StreetAddress."', '".$this->SalesOrderID."');"; // stored procedure
+        $query = "UPDATE DELIVERYADDRESS JOIN SALES_ORDER ON SALES_ORDER.DeliveryAddressFK = DELIVERYADDRESS.DeliveryAddressID"
+                . " SET StreetAddress='".$StreetAddress."' WHERE SALES_ORDER.SalesOrderID='".$this->SalesOrderID."';";
         
         // Execute query 
         $result = $dataConnection->query($query);
