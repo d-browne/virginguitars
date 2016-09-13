@@ -16,6 +16,48 @@ require_once 'classes/Order.php';
 class OrderTest extends TestCase 
 {
     
+    public function setCountryDataProvider()
+    {
+        return array(
+            array(1, 'ga ga go', true),
+            array(2, 'ba ba bo', true),
+            array(3, 'da aa ao', true),
+            array(3, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', "Country too long"),
+            array(4, 'ga ga go', true),
+            array(5, 'ga ga go', true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setCountryDataProvider
+     */
+    public function testSetCountry($SalesOrderID, $newCountry, $expectedCallback)
+    {
+        // Instantiate object
+        $order = new Order($SalesOrderID);
+        
+        // Backup street address
+        $CountryBackup = $order->getCountry();
+        
+        // Test
+        $this->assertEquals($expectedCallback, $order->setCountry($newCountry));
+        
+        // If true check in memory and in database
+        if ($expectedCallback === true)
+        {
+            // Check in memory
+            $this->assertEquals($newCountry, $order->getCountry());
+            
+            // Check in database (using new object)
+            $order2 = new Order($SalesOrderID);
+            $this->assertEquals($newCountry, $order2->getCountry());
+        }
+        
+        // Restore backup
+        $order->setCountry($CountryBackup);
+    }
+    
     public function setPostCodeDataProvider()
     {
         return array(

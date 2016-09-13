@@ -63,7 +63,7 @@ $order = new Order($SalesOrderID);
                     <input type="text" name="postcode" placeholder="e.g. 2000" value="<?php echo $order->getPostCode(); ?>"/>
                 </td>
                 <td>
-                    <input type="text" placeholder="Australia" value="<?php echo $order->getCountry(); ?>"/>
+                    <input type="text" name="country" placeholder="Australia" value="<?php echo $order->getCountry(); ?>"/>
                 </td>
             </tr>
         </table>
