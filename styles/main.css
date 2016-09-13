@@ -1038,6 +1038,6 @@ textarea {
 	margin-bottom:0.2em;
 }
 
-.bottomTable {
-	border:hidden;
+.bottomTable td {
+	border-bottom:hidden;
 }

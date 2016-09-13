@@ -118,6 +118,48 @@ if (isset($_GET["logout"]))
                         echo '<div id="contentBox"><p>A customer id must be specified...</p></div>';
                     }
                 }
+                else if (isset($_GET['editOrder']))
+                {
+                    // Check if id specified
+                    if (isset($_GET['id']))
+                    {
+                        // Create data connection
+                        $database = new Database();
+                        $dataConnection = $database->getDataConnection();
+                        
+                        // Query to check if order exists
+                        $query = "SELECT * FROM sales_order WHERE sales_order.SalesOrderID=".mysqli_real_escape_string($dataConnection, $_GET['id'].";");
+                        echo $query;
+                        // Execute the query
+                        $result = $dataConnection->query($query);
+                        
+                        // Check if the query executed successfully
+                        if ($result !== false)
+                        {
+                            // Check if results returned
+                            if ($result->num_rows > 0)
+                            {
+                                // Include the edit order page
+                                include 'includes/editOrder.php.inc';
+                            }
+                            else
+                            {
+                                // Display invalid order error
+                                echo '<div id="contentBox"><p>Invalid order ID...</p></div>';
+                            }
+                        }
+                        else
+                        {
+                            // Display error to administrator
+                            echo '<div id="contentBox"><p>Unable to determine if order id exists... (query failed)</p></div>';
+                        }
+                    }
+                    else
+                    {
+                        // Tell administraotr that an order id must be specified 
+                        echo '<div id="contentBox"><p>An order ID must be specified...</p></div>';
+                    }
+                }
                 else
                 {
                     // If admin is logged in and no control selected dispaly admin page
