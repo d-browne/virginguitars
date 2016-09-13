@@ -98,6 +98,11 @@ $order = new Order($SalesOrderID);
                 </td>
                 <td>
                     <select>
+                        <option <?php if($order->getOrderStatus() === "Requested") {echo "selected";} ?>>Requested</option>
+                        <option <?php if($order->getOrderStatus() === "Processing") {echo "selected";} ?>>Processing</option>
+                        <option <?php if($order->getOrderStatus() === "Shipped") {echo "selected";} ?>>Shipped</option>
+                        <option <?php if($order->getOrderStatus() === "Completed") {echo "selected";} ?>>Completed</option>
+                        <option> <?php if($order->getOrderStatus() === "Cancelled") {echo "selected";} ?>Cancelled</option>
                     </select>
                 </td>
             </tr>
