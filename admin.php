@@ -90,6 +90,8 @@ if (isset($_GET["logout"]))
                     
                     // Update street address
                     $order->setStreetAddress($_POST['streetaddress']);
+                    // Update city
+                    $order->setCity($_POST['city']);
                     
                     // Redirect (back) to order page
                     header('Location: admin.php?editOrder&id='.$_POST['orderid']);

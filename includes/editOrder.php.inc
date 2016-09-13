@@ -54,7 +54,7 @@ $order = new Order($SalesOrderID);
                     <input type="text" name="streetaddress" placeholder="e.g. 123 Fake Street" value="<?php echo $order->getStreetAddress(); ?>"/>
                 </td>
                 <td>
-                    <input type="text" placeholder="Sydney" value="<?php echo $order->getCity(); ?>"/>
+                    <input type="text" name="city" placeholder="Sydney" value="<?php echo $order->getCity(); ?>"/>
                 </td>
                 <td>
                     <input type="text" placeholder="e.g. NSW" value="<?php echo $order->getState(); ?>" />
