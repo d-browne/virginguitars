@@ -50,7 +50,7 @@ create table SALES_ORDER (
     Shipping DECIMAL(6,2) NOT NULL,
     Total Decimal(6,2) NOT NULL,
     ShippedDate DATE,
-    ShippingRecord VarChar(15),
+    ShippingRecord VarChar(50),
     OrderStatusFK int(2) NOT NULL,
     FOREIGN KEY (CustomerFK) REFERENCES CUSTOMER(CustomerID),
     FOREIGN KEY (OrderStatusFK) REFERENCES ORDER_STATUS(OrderStatusID),
