@@ -15,6 +15,40 @@ require_once 'classes/Order.php';
 
 class OrderTest extends TestCase 
 {
+    
+    
+    // Data for testing the constructor. Only need to test three. More can easily be added.
+    public function testConstructorsDataProvidor()
+    {
+        return array(
+            array(1, 1, 1, date('Y-m-d'), 1750, 20, 1770, NULL, NULL, 'Requested'),
+            array(2, 2, 1, date('Y-m-d'), 1750, 20, 1770, NULL, NULL, 'Processing'),
+            array(7, 7, 4, date('Y-m-d'), 1750, 20, 1770, NULL, NULL, 'Requested')
+        );
+    }
+    
+    /**
+     * This unit test tests if the order values are as expected
+     * 
+     * @dataProvider testConstructorsDataProvidor
+     */
+    public function testConstructors($SalesOrderID, $expectedSalesOrderID,
+            $expectedCustomerID, $expectedInvoiceDate, $expectedSubtotal,
+            $expectedShipping, $expectedTotal, $expectedShippedDate,
+            $expectedShippingRecord, $expectedOrderStatus)
+    {
+        $order = new Order($SalesOrderID);
+        $this->assertEquals($expectedSalesOrderID, $order->getSalesOrderID());
+        $this->assertEquals($expectedCustomerID, $order->getCustomerID());
+        $this->assertEquals($expectedInvoiceDate, $order->getInvoiceDate());
+        $this->assertEquals($expectedSubtotal, $order->getSubTotal());
+        $this->assertEquals($expectedShipping, $order->getShipping());
+        $this->assertEquals($expectedTotal, $order->getTotal());
+        $this->assertEquals($expectedShippedDate, $order->getShippedDate());
+        $this->assertEquals($expectedShippingRecord, $order->getShippingRecord());
+        $this->assertEquals($expectedOrderStatus, $order->getOrderStatus());
+    }
+    
     public function checkIfExistsDataProvider()
     {
         return array(

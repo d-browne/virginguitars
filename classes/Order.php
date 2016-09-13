@@ -35,7 +35,7 @@ class Order
         $dataConnection = $database->getDataConnection();
         
         // Query to get order details
-        $query = "SELECT * FROM ORDER_STATUS WHERE SalesOrderID='".mysqli_real_escape_string($dataConnection, $SalesOrderID)."';";
+        $query = "SELECT * FROM ORDERS_STATUS WHERE SalesOrderID='".$SalesOrderID."'";
         
         // Execute query
         $result = $dataConnection->query($query);
@@ -57,7 +57,7 @@ class Order
         
         // Populate object properties
         $this->SalesOrderID = $row['SalesOrderID'];
-        $this->CustomerFK = $row['CustomerFK'];
+        $this->CustomerID = $row['CustomerFK'];
         $this->InvoiceDate = $row['InvoiceDate'];
         $this->SubTotal = $row['SubTotal'];
         $this->Shipping = $row['Shipping'];
@@ -100,7 +100,11 @@ class Order
     function getSalesOrderID() {
         return $this->SalesOrderID;
     }
-
+    
+    function getCustomerID() {
+        return $this->CustomerID;
+    }
+ 
     function getInvoiceDate() {
         return $this->InvoiceDate;
     }
