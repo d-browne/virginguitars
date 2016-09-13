@@ -127,8 +127,11 @@ if (isset($_GET["logout"]))
                         $database = new Database();
                         $dataConnection = $database->getDataConnection();
                         
+                        // Get and sanitize SalesOrderID
+                        $SalesOrderID = mysqli_real_escape_string($dataConnection, $_GET['id']);
+                        
                         // Query to check if order exists
-                        $query = "SELECT * FROM sales_order WHERE sales_order.SalesOrderID=".mysqli_real_escape_string($dataConnection, $_GET['id'].";");
+                        $query = "SELECT * FROM sales_order WHERE sales_order.SalesOrderID=".$SalesOrderID.";";
 
                         // Execute the query
                         $result = $dataConnection->query($query);
