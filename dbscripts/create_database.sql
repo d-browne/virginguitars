@@ -319,9 +319,9 @@ JOIN ORDER_STATUS ON ORDER_STATUS.OrderStatusID = SALES_ORDER.OrderStatusFK;
 
 # This view returns the delivery address of each order
 CREATE VIEW DELIVERY_ADDRESS_BY_ORDER_ID AS
-SELECT sales_order.SalesOrderID, deliveryaddress.StreetAddress, deliveryaddress.City, deliveryaddress.State, deliveryaddress.PostCode, deliveryaddress.Country
-FROM sales_order
-LEFT JOIN deliveryaddress ON deliveryaddress.DeliveryAddressID = sales_order.DeliveryAddressFK;
+SELECT SALES_ORDER.SalesOrderID, DELIVERYADDRESS.StreetAddress, DELIVERYADDRESS.City, DELIVERYADDRESS.State, DELIVERYADDRESS.PostCode, DELIVERYADDRESS.Country
+FROM SALES_ORDER
+LEFT JOIN DELIVERYADDRESS ON DELIVERYADDRESS.DeliveryAddressID = SALES_ORDER.DeliveryAddressFK;
 
 # The Purpose of this stored procedure is update the delivery address street address given the order ID
 DELIMITER //
@@ -332,9 +332,9 @@ CREATE PROCEDURE UpdateDeliveryStreetAddress
 )
 BEGIN
     UPDATE DELIVERYADDRESS
-    JOIN sales_order ON sales_order.DeliveryAddressFK = deliveryaddress.DeliveryAddressID
+    JOIN SALES_ORDER ON SALES_ORDER.DeliveryAddressFK = DELIVERYADDRESS.DeliveryAddressID
     SET StreetAddress=in_street_address
-    WHERE sales_order.SalesOrderID = in_order_id;
+    WHERE SALES_ORDER.SalesOrderID = in_order_id;
 END//
 DELIMITER ;
 
