@@ -117,7 +117,20 @@ $order = new Order($SalesOrderID);
     <div id="bottomButtonsBox">
 
         <button type="submit" class="formCSSButtonButton" name="updateOrderButton">Update</button>
-        <button class="formCSSButtonButton">Back</button>
+        <script> 
+            function back() 
+            { 
+                <?php
+                // Will cause the browser to go back
+                // In the event javascript is disabled
+                // or the browser doesn't support javascript
+                // the back button will return the user to 
+                // the admin panel
+                ?>
+                window.history.back(); 
+            } 
+        </script>
+        <button class="formCSSButtonButton" onclick="back()">Back</button>
     </div>
 
     <h2 id="productsHeader">Products</h2>
