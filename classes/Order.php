@@ -44,7 +44,7 @@ class Order
         $dataConnection = $database->getDataConnection();
         
         // Query to check if exists
-        $query = "SELECT * FROM sales_order WHERE sales_order.SalesOrderID=".mysqli_real_escape_string($dataConnection, $SalesOrderID).";";
+        $query = "SELECT * FROM sales_order WHERE sales_order.SalesOrderID='".mysqli_real_escape_string($dataConnection, $SalesOrderID)."';";
         
         // Execute query 
         $result = $dataConnection->query($query);

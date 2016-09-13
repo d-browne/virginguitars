@@ -15,5 +15,30 @@ require_once 'classes/Order.php';
 
 class OrderTest extends TestCase 
 {
+    public function checkIfExistsDataProvider()
+    {
+        return array(
+            array(1, true),
+            array(2, true),
+            array(3, true),
+            array(4, true),
+            array(5, true),
+            array(6, true),
+            array(7, true),
+            array(8, true),
+            array(9, false),
+            array(-1, false),
+            array(NULL, false),
+            array("'dsfa''sdf", false)
+        );
+    }
     
+    /**
+     * 
+     * @dataProvider checkIfExistsDataProvider
+     */
+    public function testCheckIfExists($SalesOrderID, $expected)
+    {
+        $this->assertEquals($expected, Order::CheckIfExists($SalesOrderID));
+    }
 }
