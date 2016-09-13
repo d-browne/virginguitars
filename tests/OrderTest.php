@@ -16,6 +16,50 @@ require_once 'classes/Order.php';
 class OrderTest extends TestCase 
 {
     
+    public function setShippedDateDataProvider()
+    {
+        return array(
+            array(1, '1984-11-13', true),
+            array(1, '', true),
+            array(1, NULL, true),
+            array(1, "NULL", "ShippedDate incorrect date format"),
+            array(1, -1, "ShippedDate incorrect date format"),
+            array(1, 10000, "ShippedDate incorrect date format"),
+            array(1, "2016-34-12", "ShippedDate incorrect date format"),
+            array(1, "2016-09-14", true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setShippedDateDataProvider
+     */
+    public function testSetShippedDate($SalesOrderID, $newShippedDate, $expectedCallback)
+    {
+        // Instantiate object
+        $order = new Order($SalesOrderID);
+        
+        // Backup street address
+        $ShippedDateBackup = $order->getShippedDate();
+        
+        // Test
+        $this->assertEquals($expectedCallback, $order->setShippedDate($newShippedDate));
+        
+        // If true check in memory and in database
+        if ($expectedCallback === true)
+        {
+            // Check in memory
+            $this->assertEquals($newShippedDate, $order->getShippedDate());
+            
+            // Check in database (using new object)
+            $order2 = new Order($SalesOrderID);
+            $this->assertEquals($newShippedDate, $order2->getShippedDate());
+        }
+        
+        // Restore backup
+        $order->setShippedDate($ShippedDateBackup);
+    }
+    
     public function setCountryDataProvider()
     {
         return array(

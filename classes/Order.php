@@ -27,6 +27,58 @@ class Order
     private $PostCode;
     private $Country;
     
+    function setShippedDate($ShippedDateInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $ShippedDate = mysqli_real_escape_string($dataConnection, $ShippedDateInput);
+        
+        // Return too long error string if too long
+        if (iconv_strlen($ShippedDate) > 10)
+        {
+            return "ShippedDate too long";
+        }
+        
+        $query = ""; // Hold the query string
+        
+        if ($ShippedDate === NULL || $ShippedDate === "")
+        {
+            // Query to update Shipped Date
+            $query = "UPDATE SALES_ORDER SET ShippedDate=NULL WHERE SalesOrderID='".$this->SalesOrderID."';";
+        }
+        else
+        {
+            // Ensure shipped date matches the format yyyy-mm-dd
+            $regexPattern = "/^\d\d\d\d\-[0-1]\d\-[0-3]\d$/";
+            
+            if (preg_match($regexPattern, $ShippedDate) !== 1)
+            {
+                return "ShippedDate incorrect date format";
+            }
+
+            // Query to update Shipped Date
+            $query = "UPDATE SALES_ORDER SET ShippedDate='".$ShippedDate."' WHERE SalesOrderID='".$this->SalesOrderID."';";
+        }
+        
+
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return string error on query failure
+        if ($result === false)
+        {
+            return "Failed to update ShippedDate";
+        }
+        
+        // Update object in memory
+        $this->ShippedDate = $ShippedDate;
+        // all ok return true
+        return true;
+    }
+    
     function setCountry($CountryInput)
     {
         // Create data connection
