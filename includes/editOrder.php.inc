@@ -52,7 +52,7 @@ if ($result !== false)
                 <td><span class="tableHeader">Street</span></td>
                 <td><span class="tableHeader">City</span></td>
                 <td><span class="tableHeader">State</span></td>
-                <td><span class="tableHeader">Post code</span></td>
+                <td><span class="tableHeader">Post Code</span></td>
                 <td><span class="tableHeader">Country</span></td>
 
             </tr>
