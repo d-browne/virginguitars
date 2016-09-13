@@ -27,6 +27,41 @@ class Order
     private $PostCode;
     private $Country;
     
+    function setCity($CityInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $City = mysqli_real_escape_string($dataConnection, $CityInput);
+        
+        // Return too long error string if too long
+        if (iconv_strlen($City) > 50)
+        {
+            return "City too long";
+        }
+        
+        // Query to update city
+        //$query = "CALL UpdateDeliveryCity('".$City."', '".$this->SalesOrderID."');"; // stored procedure
+        $query = "UPDATE DELIVERYADDRESS JOIN SALES_ORDER ON SALES_ORDER.DeliveryAddressFK = DELIVERYADDRESS.DeliveryAddressID"
+                . " SET City='".$City."' WHERE SALES_ORDER.SalesOrderID='".$this->SalesOrderID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return string error on query failure
+        if ($result === false)
+        {
+            return "Failed to update city";
+        }
+        
+        // Update object in memory
+        $this->City = $City;
+        // all ok return true
+        return true;
+    }
+    
     function setStreetAddress($streetAddressInput)
     {
         // Create data connection

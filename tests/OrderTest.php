@@ -16,6 +16,48 @@ require_once 'classes/Order.php';
 class OrderTest extends TestCase 
 {
     
+    public function setCityDataProvider()
+    {
+        return array(
+            array(1, 'ga ga go', true),
+            array(2, 'ba ba bo', true),
+            array(3, 'da aa ao', true),
+            array(3, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', "City too long"),
+            array(4, 'ga ga go', true),
+            array(5, 'ga ga go', true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setCityDataProvider
+     */
+    public function testSetCity($SalesOrderID, $newCity, $expectedCallback)
+    {
+        // Instantiate object
+        $order = new Order($SalesOrderID);
+        
+        // Backup street address
+        $CityBackup = $order->getCity();
+        
+        // Test
+        $this->assertEquals($expectedCallback, $order->setCity($newCity));
+        
+        // If true check in memory and in database
+        if ($expectedCallback === true)
+        {
+            // Check in memory
+            $this->assertEquals($newCity, $order->getCity());
+            
+            // Check in database (using new object)
+            $order2 = new Order($SalesOrderID);
+            $this->assertEquals($newCity, $order2->getCity());
+        }
+        
+        // Restore backup
+        $order->setCity($CityBackup);
+    }
+    
     public function setStreetAddressDataProvider()
     {
         return array(
@@ -63,7 +105,7 @@ class OrderTest extends TestCase
     {
         return array(
             array(1, '123 Fake Street', 'Sydney', 'NSW', '0', 'Australia'),
-            array(5, '123 Fake Street', 'Sydney', 'NSW', '0', 'Australia'),
+            array(5, '334 Big Creek Rd', 'Gold Coast', 'QLD', '4142', 'Australia'),
             array(2, '456 Fake Street', 'Gosford', 'NSW', '1111', 'Australia')
         );
     }
