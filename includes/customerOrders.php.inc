@@ -320,23 +320,23 @@ $customer->initializeID($CustomerID);
                         }
                         
                         // Create order ID row
-                        echo '<td><a href="admin.php?editOrder&id='.$CustomerID.'">'.$row['SalesOrderID'].'</a></td>';
+                        echo '<td><a href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.$row['SalesOrderID'].'</a></td>';
                         // Create Invoice date row
-                        echo '<td><a  href="admin.php?editOrder&id='.$CustomerID.'">'.$row['InvoiceDate'].'</a></td>';
+                        echo '<td><a  href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.$row['InvoiceDate'].'</a></td>';
                         // Create subtotal row
-                        echo '<td><a href="admin.php?editOrder&id='.$CustomerID.'">$'.$row['SubTotal'].'</a></td>';
+                        echo '<td><a href="admin.php?editOrder&id='.$row['SalesOrderID'].'">$'.$row['SubTotal'].'</a></td>';
                         // Create Shipping row
-                        echo '<td><a href="admin.php?editOrder&id='.$CustomerID.'">$'.$row['Shipping'].'</a></td>';
+                        echo '<td><a href="admin.php?editOrder&id='.$row['SalesOrderID'].'">$'.$row['Shipping'].'</a></td>';
                         // Create total cost row
-                        echo '<td><a href="admin.php?editOrder&id='.$CustomerID.'">$'.$row['Total'].'</a></td>';
+                        echo '<td><a href="admin.php?editOrder&id='.$row['SalesOrderID'].'">$'.$row['Total'].'</a></td>';
                         // Create shipped Date row
-                        echo '<td><a  href="admin.php?editOrder&id='.$CustomerID.'">'.$row['ShippedDate'].'</a></td>';
+                        echo '<td><a  href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.$row['ShippedDate'].'</a></td>';
                         // Create shipped Date row
-                        echo '<td><a href="admin.php?editOrder&id='.$CustomerID.'">'.$row['ShippingRecord'].'</a></td>';
+                        echo '<td><a href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.$row['ShippingRecord'].'</a></td>';
                         // Create order status row
-                        echo '<td><a class="'.$orderColor.'"href="admin.php?editOrder&id='.$CustomerID.'">'.$row['Order Status'].'</a></td>';
+                        echo '<td><a class="'.$orderColor.'"href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.$row['Order Status'].'</a></td>';
                         // Draw edit row
-                        echo '<td><a class="editButton" href="admin.php?editOrder&id='.$CustomerID.'">Edit</a></td>';
+                        echo '<td><a class="editButton" href="admin.php?editOrder&id='.$row['SalesOrderID'].'">Edit</a></td>';
                     }
                 }
             }
