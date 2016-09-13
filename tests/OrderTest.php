@@ -16,6 +16,48 @@ require_once 'classes/Order.php';
 class OrderTest extends TestCase 
 {
     
+    public function setShippingRecordDataProvider()
+    {
+        return array(
+            array(1, 'ga ga go', true),
+            array(2, 'ba ba bo', true),
+            array(3, 'da aa ao', true),
+            array(3, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', "ShippingRecord too long"),
+            array(4, 'ga ga go', true),
+            array(5, 'ga ga go', true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setShippingRecordDataProvider
+     */
+    public function testSetShippingRecord($SalesOrderID, $newShippingRecord, $expectedCallback)
+    {
+        // Instantiate object
+        $order = new Order($SalesOrderID);
+        
+        // Backup street address
+        $ShippingRecordBackup = $order->getShippingRecord();
+        
+        // Test
+        $this->assertEquals($expectedCallback, $order->setShippingRecord($newShippingRecord));
+        
+        // If true check in memory and in database
+        if ($expectedCallback === true)
+        {
+            // Check in memory
+            $this->assertEquals($newShippingRecord, $order->getShippingRecord());
+            
+            // Check in database (using new object)
+            $order2 = new Order($SalesOrderID);
+            $this->assertEquals($newShippingRecord, $order2->getShippingRecord());
+        }
+        
+        // Restore backup
+        $order->setShippingRecord($ShippingRecordBackup);
+    }
+    
     public function setShippedDateDataProvider()
     {
         return array(

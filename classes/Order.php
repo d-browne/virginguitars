@@ -27,6 +27,39 @@ class Order
     private $PostCode;
     private $Country;
     
+    function setShippingRecord($ShippingRecordInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $ShippingRecord = mysqli_real_escape_string($dataConnection, $ShippingRecordInput);
+        
+        // Return too long error string if too long
+        if (iconv_strlen($ShippingRecord) > 50)
+        {
+            return "ShippingRecord too long";
+        }
+        
+        // Query to update Shipped Date
+        $query = "UPDATE SALES_ORDER SET ShippingRecord='".$ShippingRecord."' WHERE SalesOrderID='".$this->SalesOrderID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return string error on query failure
+        if ($result === false)
+        {
+            return "Failed to update ShippingRecord";
+        }
+        
+        // Update object in memory
+        $this->ShippingRecord = $ShippingRecord;
+        // all ok return true
+        return true;
+    }
+    
     function setShippedDate($ShippedDateInput)
     {
         // Create data connection
