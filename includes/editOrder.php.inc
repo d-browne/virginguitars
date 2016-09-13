@@ -13,7 +13,9 @@ require_once 'classes/Customer.php';
 $customer = new Customer();
 
 // Initialize from id
-$customer->initializeID($result->fetch_assoc()['CustomerFK']);
+$customerIdRow = $result->fetch_assoc();
+
+$customer->initializeID($customer['CustomerFK']);
 
 // create order object
 require_once 'classes/Order.php';
