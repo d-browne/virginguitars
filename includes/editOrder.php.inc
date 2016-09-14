@@ -201,41 +201,6 @@ $order = new Order($SalesOrderID);
             echo "Error querying for order products";
         }
         ?>
-        <tr>
-            <td>
-                <img src="images/guitars/fenderLimitedEditionAmericanStandardTelecaster/1.jpg" width="100" alt="American Standard Strat" />
-            </td>
-            <td>
-                <a href="admin.php">
-                    American Standard Stat
-                </a>
-            </td>
-            <td>
-                <a href="admin.php">
-                    1
-                </a>
-            </td>
-            <td>
-                <a href="admin.php">
-                    1
-                </a>
-            </td>
-            <td>
-                <a href="admin.php">
-                    $1000
-                </a>
-            </td>
-            <td>
-                <a href="admin.php">
-                    $50
-                </a>
-            </td>
-            <td>
-                <a href="admin.php">
-                    $1050
-                </a>
-            </td>
-        </tr>
     </table>
     </form>
 </div>
