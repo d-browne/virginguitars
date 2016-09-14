@@ -202,6 +202,6 @@ $order = new Order($SalesOrderID);
         }
         ?>
     </table>
-    <br />
+    <div id="manageCustomersStretcher"></div>
     </form>
 </div>
