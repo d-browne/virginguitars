@@ -16,7 +16,7 @@
         <div class="adminControl" id="manageInvoicesControl">
             <a href="">
                 <div class="adminControlIcon" id="manageInvoicesIcon"></div>
-                <div class="adminControlCaption">Manage Invoices</div>
+                <div class="adminControlCaption">Manage Orders</div>
             </a>
         </div>           
         <div class="adminControl" id="manageFaqControl">
