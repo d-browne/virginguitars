@@ -176,7 +176,7 @@ $order = new Order($SalesOrderID);
                     }
                     
                     // Draw image column
-                    echo '<td><img src="'.$row['PrimaryPicturePath'].'" alt="'.$row['Description'].'" width="100" /></td>';
+                    echo '<td><a href="'.$row['PrimaryPicturePath'].'"><img src="'.$row['PrimaryPicturePath'].'" alt="'.$row['Description'].'" width="100" /></a></td>';
                     // Draw Model column
                     echo '<td><a href="admin.php">'.$row['Description'].'</a></td>';
                     // Draw Product ID column
