@@ -15,6 +15,23 @@ require_once 'classes/Database.php'; // Include the database
 $database = new Database();
 $dataConnection = $database->getDataConnection();
 
+// Flags to determine how the columns should be ordered
+$orderBy = "none";  // Determains how to order results
+$desc = false;      // Determins if results should be ordered descending
+
+// Check request for column ordering
+if (isset($_GET['orderBy']))
+{
+    // Get sanitized input
+    $orderBy = mysqli_real_escape_string($dataConnection, $_GET['orderBy']);
+}
+
+// Determine if rows have been requested in descending order
+if (isset($_GET['desc']))
+{
+    $desc = true;
+}
+
 ?>
 
 
@@ -48,14 +65,158 @@ $dataConnection = $database->getDataConnection();
     <div id="tableContainer">
         <table class="cartTable" border="1" >
             <tr class="headerRow">
-                <td><span class="tableHeader tableHeaderAsc"><a href="admin.php">Order.ID</a></span></td>
-                <td><span class="tableHeader">Invoice Date</span></td>
-                <td><span class="tableHeader">Subtotal</span></td>
-                <td><span class="tableHeader tableHeaderDesc"><a href="admin.php">Shipping</a></span></td>
-                <td><span class="tableHeader">Total Cost</span></td>
-                <td><span class="tableHeader">Shipped Date</span></td>
-                <td><span class="tableHeader">Shipping Record</span></td>
-                <td><span class="tableHeader">Order Status</span></td>
+                <td>
+                    <?php
+                        if ($orderBy === "SalesOrderID")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=SalesOrderID">Order.ID</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=SalesOrderID&desc">Order.ID</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=SalesOrderID">Order.ID</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "InvoiceDate")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=InvoiceDate">Invoice Date</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=InvoiceDate&desc">Invoice Date</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=InvoiceDate">Invoice Date</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "SubTotal")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=SubTotal">SubTotal</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=SubTotal&desc">SubTotal</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=SubTotal">SubTotal</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Shipping")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=Shipping">Shipping</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=Shipping&desc">Shipping</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=Shipping">Shipping</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Total")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=Total">Total Cost</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=Total&desc">Total Cost</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=Total">Total Cost</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "ShippedDate")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=ShippedDate">Shipped Date</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=ShippedDate&desc">Shipped Date</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=ShippedDate">Shipped Date</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "ShippingRecord")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=ShippingRecord">Shipping Record</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=ShippingRecord&desc">Shipping Record</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=ShippingRecord">Shipping Record</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "OrderStatus")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=OrderStatus">Order Status</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=OrderStatus&desc">Order Status</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=OrderStatus">Order Status</a></span>';
+                        }
+                    ?>
+                </td>
                 <td><span class="tableHeader">Edit</span></td>
             </tr>
             <?php
