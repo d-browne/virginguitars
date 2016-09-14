@@ -130,7 +130,7 @@ $order = new Order($SalesOrderID);
                 window.history.back(); 
             } 
         </script>
-        <button class="formCSSButtonButton" onclick="back()">Back</button>
+        <button type="button" class="formCSSButtonButton" onclick="back()">Back</button>
     </div>
 
     <h2 id="productsHeader">Products</h2>
