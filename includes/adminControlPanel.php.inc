@@ -14,7 +14,7 @@
             </a>
         </div>             
         <div class="adminControl" id="manageInvoicesControl">
-            <a href="">
+            <a href="admin.php?manageOrders">
                 <div class="adminControlIcon" id="manageInvoicesIcon"></div>
                 <div class="adminControlCaption">Manage Orders</div>
             </a>

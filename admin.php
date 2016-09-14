@@ -191,6 +191,11 @@ if (isset($_GET["logout"]))
                         echo '<div id="contentBox"><p>An order ID must be specified...</p></div>';
                     }
                 }
+                else if(isset($_GET['manageOrders']))
+                {
+                    // Show manage orders section
+                    include("includes/manageOrders.php.inc");
+                }
                 else
                 {
                     // If admin is logged in and no control selected dispaly admin page
