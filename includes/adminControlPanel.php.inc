@@ -4,19 +4,19 @@
         <div class="adminControl" id="addStockControl">
             <a href="">
                 <div class="adminControlIcon" id="addStockIcon"></div>
-                <div class="adminControlCaption">New Stock</div>
+                <div class="adminControlCaption">Stock</div>
             </a>
         </div>       
         <div class="adminControl" id="editUserControl">
             <a href="admin.php?manageCustomers">
                 <div class="adminControlIcon" id="editUserIcon"></div>
-                <div class="adminControlCaption">Manage Customers</div>
+                <div class="adminControlCaption">Customers</div>
             </a>
         </div>             
         <div class="adminControl" id="manageInvoicesControl">
             <a href="admin.php?manageOrders">
                 <div class="adminControlIcon" id="manageInvoicesIcon"></div>
-                <div class="adminControlCaption">Manage Orders</div>
+                <div class="adminControlCaption">Orders</div>
             </a>
         </div>           
         <div class="adminControl" id="manageFaqControl">
