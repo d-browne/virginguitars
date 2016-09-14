@@ -202,5 +202,6 @@ $order = new Order($SalesOrderID);
         }
         ?>
     </table>
+    <br />
     </form>
 </div>
