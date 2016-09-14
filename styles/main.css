@@ -1049,3 +1049,7 @@ textarea {
 .editOrderTotalLabelStretcher {
 	height: 49px !important;
 }
+
+.viewButton {
+	margin-left: 25.25em !important;
+}

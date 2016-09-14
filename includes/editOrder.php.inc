@@ -37,6 +37,7 @@ $order = new Order($SalesOrderID);
             <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" value="<?php echo $customer->getFirstName(); ?>" disabled="true"/></div>
             <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" value="<?php echo $customer->getLastName(); ?>" disabled="true"/></div>
             <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" value="<?php echo $customer->getEmail(); ?>" disabled="true"/></div>
+            <div class="inputField"><input class="submitButton viewButton" type="button" value="View" /></div>
         </fieldset>
     </div>
     <div id="tableContainer">
