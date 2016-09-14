@@ -278,6 +278,64 @@ $searchString = "orderid=".$orderid."&invoicedate=".$invoicedate."&shippeddate="
             // Query to get orders
             $query = "SELECT * FROM ORDERS_STATUS";
             
+            $hasSearch = false; // falg to determine if search appended
+            
+            // Append the search options
+            if ($orderid !== "")
+            {
+                $query = $query." WHERE SalesOrderID LIKE '%".$orderid."%'";
+                $hasSearch = true;
+            }
+            if ($invoicedate !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND InvoiceDate LIKE '%".$invoicedate."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE InvoiceDate LIKE '%".$invoicedate."%'";
+                    $hasSearch = true;
+                }
+            }
+            if ($shippeddate !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND ShippedDate LIKE '%".$shippeddate."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE ShippedDate LIKE '%".$shippeddate."%'";
+                    $hasSearch = true;
+                }
+            }
+            if ($shippingrecord !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND ShippingRecord LIKE '%".$shippingrecord."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE ShippingRecord LIKE '%".$shippingrecord."%'";
+                    $hasSearch = true;
+                }
+            }
+            if ($orderstatus !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND `Order Status` LIKE '%".$orderstatus."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE `Order Status` LIKE '%".$orderstatus."%'";
+                    $hasSearch = true;
+                }
+            }
+            
+            
             // Append order by
             switch($orderBy)
             {
