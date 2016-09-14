@@ -145,6 +145,62 @@ $order = new Order($SalesOrderID);
             <td><span class="tableHeader">Shipping</span></td>
             <td><span class="tableHeader">Total</span></td>
         </tr>
+        <?php
+        // Loop draw a table row for each product in this order
+        
+        // Query to get products in order
+        $query = "SELECT * FROM PRODUCTS_BY_ORDER_VIEW WHERE SalesOrderFK='".$order->getSalesOrderID()."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        if ($result !== false)
+        {
+            // Check that products are returned
+            if ($result->num_rows > 0) 
+            {
+                // Print each row
+                $isAltRow = false;
+                while ($row = $result->fetch_assoc())
+                {
+                    // start row
+                    if ($isAltRow)
+                    {
+                        echo '<tr class="altRow">';
+                        $isAltRow = false;
+                    }
+                    else
+                    {
+                        echo '<tr>';
+                        $isAltRow = true;
+                    }
+                    
+                    // Draw image column
+                    echo '<td><img src="'.$row['PrimaryPicturePath'].'" alt="'.$row['Description'].'" width="100" /></td>';
+                    // Draw Model column
+                    echo '<td><a href="admin.php">'.$row['Description'].'</a></td>';
+                    // Draw Product ID column
+                    echo '<td><a href="admin.php">'.$row['ProductID'].'</a></td>';
+                    // Draw Quantity column
+                    echo '<td><a href="admin.php">'.$row['Quantity'].'</a></td>';
+                    // Draw Price
+                    echo '<td><a href="admin.php">$'.$row['SubTotal'].'</a></td>';
+                    // Draw Shipping
+                    echo '<td><a href="admin.php">$'.$row['TotalShipping'].'</a></td>';
+                    // Draw Total price
+                    echo '<td><a href="admin.php">$'.$row['Total'].'</a></td>';
+                    
+                    // End row
+                    echo '</tr>';
+                }
+            }
+        }
+        else
+        {
+            // Display error that query could could execute
+            echo "Error querying for order products";
+        }
+        ?>
         <tr>
             <td>
                 <img src="images/guitars/fenderLimitedEditionAmericanStandardTelecaster/1.jpg" width="100" alt="American Standard Strat" />
