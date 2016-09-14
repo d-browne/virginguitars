@@ -1041,3 +1041,11 @@ textarea {
 .tableText {
 	color: white;
 }
+
+.editOrderTotalLabel {
+	margin-bottom: -33px !important;
+}
+
+.editOrderTotalLabelStretcher {
+	height: 49px !important;
+}

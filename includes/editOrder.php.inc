@@ -92,7 +92,7 @@ $order = new Order($SalesOrderID);
                     <span class="tableText"><?php echo $order->getShipping(); ?></span>
                 </td>
                 <td>
-                    <span class="tableText"><?php echo $order->getTotal(); ?></span>
+                    <span class="tableText greenLink"><?php echo $order->getTotal(); ?></span>
                 </td>
                 <td>
                     <input type="text" name="shippeddate" placeholder="yyyy-mm-dd" value="<?php echo $order->getShippedDate(); ?>" />
@@ -176,7 +176,7 @@ $order = new Order($SalesOrderID);
                     }
                     
                     // Draw image column
-                    echo '<td><a href="'.$row['PrimaryPicturePath'].'"><img src="'.$row['PrimaryPicturePath'].'" alt="'.$row['Description'].'" width="100" /></a></td>';
+                    echo '<td><a href="'.$row['PrimaryPicturePath'].'"><img src="'.$row['PrimaryPicturePath'].'" alt="'.$row['Description'].'" width="70"/></a></td>';
                     // Draw Model column
                     echo '<td><a href="admin.php">'.$row['Description'].'</a></td>';
                     // Draw Product ID column
@@ -184,7 +184,7 @@ $order = new Order($SalesOrderID);
                     // Draw Quantity column
                     echo '<td><a href="admin.php">'.$row['Quantity'].'</a></td>';
                     // Draw Price
-                    echo '<td><a href="admin.php">$'.$row['SubTotal'].'</a></td>';
+                    echo '<td><a href="admin.php">$'.$row['UnitPrice'].'</a></td>';
                     // Draw Shipping
                     echo '<td><a href="admin.php">$'.$row['TotalShipping'].'</a></td>';
                     // Draw Total price
@@ -202,6 +202,7 @@ $order = new Order($SalesOrderID);
         }
         ?>
     </table>
-    <div id="manageCustomersStretcher"></div>
+    <div id="totalLabelStretcher" class="editOrderTotalLabelStretcher"><div id="totalLabel" class="editOrderTotalLabel">Total: <?php echo $order->getTotal(); ?></div></div>
+    
     </form>
 </div>
