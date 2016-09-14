@@ -32,6 +32,57 @@ if (isset($_GET['desc']))
     $desc = true;
 }
 
+// search values
+$orderid = "";
+$invoicedate = "";
+$shippeddate = "";
+$shippingrecord = "";
+$orderstatus = "";
+
+// Get search values from get request
+if (isset($_GET['orderid']))
+{
+    try {
+        $orderid = mysqli_real_escape_string($dataConnection, $_GET['orderid']);
+    } catch (Exception $ex) {
+
+    }
+}
+if (isset($_GET['invoicedate']))
+{
+    try {
+        $invoicedate = mysqli_real_escape_string($dataConnection, $_GET['invoicedate']);
+    } catch (Exception $ex) {
+
+    }
+}
+if (isset($_GET['shippeddate']))
+{
+    try {
+        $shippeddate = mysqli_real_escape_string($dataConnection, $_GET['shippeddate']);
+    } catch (Exception $ex) {
+
+    }
+}
+if (isset($_GET['shippingrecord']))
+{
+    try {
+        $shippingrecord = mysqli_real_escape_string($dataConnection, $_GET['shippingrecord']);
+    } catch (Exception $ex) {
+
+    }
+}
+if (isset($_GET['orderstatus']))
+{
+    try {
+        $orderstatus = mysqli_real_escape_string($dataConnection, $_GET['orderstatus']);
+    } catch (Exception $ex) {
+
+    }
+}
+
+// Set search string
+$searchString = "orderid=".$orderid."&invoicedate=".$invoicedate."&shippeddate=".$shippeddate."&shippingrecord=".$shippingrecord."&orderstatus=".$orderstatus."&SearchButton";
 ?>
 
 
@@ -43,19 +94,21 @@ if (isset($_GET['desc']))
     <div id="manageCustomersTopRight">
         <fieldset class="inputFieldSet" id="userDetailsFieldset">
             <legend>Search</legend>
-            <form id="userDetailsForm" action="admin.php?manageCustomers">
-                <div class="inputField"><label>Order.ID:</label> <input class="textBox" name="orderid" type="text" placeholder="e.g. 1"/></div>
-                <div class="inputField"><label>Invoice Date:</label> <input class="textBox" name="invoicedate" type="text" placeholder="e.g. 2016" value=""/></div>
-                <div class="inputField"><label>Shipped Date:</label> <input class="textBox" name="shippeddate" type="text" placeholder="e.g. 12"/></div>
-                <div class="inputField"><label>Shipping Record:</label> <input class="textBox" name="shippingrecord" type="text" placeholder="e.g. 23532"/></div>
+            <form id="userDetailsForm" action="admin.php">
+                <input type="hidden" name="manageOrders" />
+                <div class="inputField"><label>Order.ID:</label> <input class="textBox" name="orderid" type="text" placeholder="e.g. 1" value="<?php echo $orderid ?>"/></div>
+                <div class="inputField"><label>Invoice Date:</label> <input class="textBox" name="invoicedate" type="text" placeholder="e.g. 2016" value="<?php echo $invoicedate ?>"/></div>
+                <div class="inputField"><label>Shipped Date:</label> <input class="textBox" name="shippeddate" type="text" placeholder="e.g. 12" value="<?php echo $shippeddate ?>"/></div>
+                <div class="inputField"><label>Shipping Record:</label> <input class="textBox" name="shippingrecord" type="text" placeholder="e.g. 23532" value="<?php echo $shippingrecord ?>"/></div>
                 <div class="inputField">
                     <label>Order Status:</label> 
-                    <select>
-                        <option>Requested</option>
-                        <option>Processing</option>
-                        <option>Shipped</option>
-                        <option>Completed</option>
-                        <option>Cancelled</option>
+                    <select name="orderstatus">
+                        <option value="">Select...</option>
+                        <option value="Requested" <?php if ($orderstatus === "Requested") {echo "selected";} ?>>Requested</option>
+                        <option value="Processing" <?php if ($orderstatus === "Processing") {echo "selected";} ?>>Processing</option>
+                        <option value="Shipped" <?php if ($orderstatus === "Shipped") {echo "selected";} ?>>Shipped</option>
+                        <option value="Completed" <?php if ($orderstatus === "Completed") {echo "selected";} ?>>Completed</option>
+                        <option value="Cancelled" <?php if ($orderstatus === "Cancelled") {echo "selected";} ?>>Cancelled</option>
                     </select>
                 </div>
                 <div class="inputField"><input class="submitButton" type="submit" name="searchButton" value="Search" /></div>
@@ -71,16 +124,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=SalesOrderID">Order.ID</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=SalesOrderID">Order.ID</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=SalesOrderID&desc">Order.ID</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=SalesOrderID&desc">Order.ID</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=SalesOrderID">Order.ID</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=SalesOrderID">Order.ID</a></span>';
                         }
                     ?>
                 </td>
@@ -90,16 +143,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=InvoiceDate">Invoice Date</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=InvoiceDate">Invoice Date</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=InvoiceDate&desc">Invoice Date</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=InvoiceDate&desc">Invoice Date</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=InvoiceDate">Invoice Date</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=InvoiceDate">Invoice Date</a></span>';
                         }
                     ?>
                 </td>
@@ -109,16 +162,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=SubTotal">SubTotal</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=SubTotal">SubTotal</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=SubTotal&desc">SubTotal</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=SubTotal&desc">SubTotal</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=SubTotal">SubTotal</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=SubTotal">SubTotal</a></span>';
                         }
                     ?>
                 </td>
@@ -128,16 +181,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=Shipping">Shipping</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=Shipping">Shipping</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=Shipping&desc">Shipping</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=Shipping&desc">Shipping</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=Shipping">Shipping</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=Shipping">Shipping</a></span>';
                         }
                     ?>
                 </td>
@@ -147,16 +200,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=Total">Total Cost</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=Total">Total Cost</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=Total&desc">Total Cost</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=Total&desc">Total Cost</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=Total">Total Cost</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=Total">Total Cost</a></span>';
                         }
                     ?>
                 </td>
@@ -166,16 +219,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=ShippedDate">Shipped Date</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=ShippedDate">Shipped Date</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=ShippedDate&desc">Shipped Date</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=ShippedDate&desc">Shipped Date</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=ShippedDate">Shipped Date</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=ShippedDate">Shipped Date</a></span>';
                         }
                     ?>
                 </td>
@@ -185,16 +238,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=ShippingRecord">Shipping Record</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=ShippingRecord">Shipping Record</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=ShippingRecord&desc">Shipping Record</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=ShippingRecord&desc">Shipping Record</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=ShippingRecord">Shipping Record</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=ShippingRecord">Shipping Record</a></span>';
                         }
                     ?>
                 </td>
@@ -204,16 +257,16 @@ if (isset($_GET['desc']))
                         {
                             if ($desc !== false) // Is descending
                             {
-                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&orderBy=OrderStatus">Order Status</a></span>';
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=OrderStatus">Order Status</a></span>';
                             }
                             else
                             {
-                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&orderBy=OrderStatus&desc">Order Status</a></span>';
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=OrderStatus&desc">Order Status</a></span>';
                             }
                         }
                         else
                         {
-                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&orderBy=OrderStatus">Order Status</a></span>';
+                            echo '<span class="tableHeader"><a href="admin.php?manageOrders&'.$searchString.'&orderBy=OrderStatus">Order Status</a></span>';
                         }
                     ?>
                 </td>
