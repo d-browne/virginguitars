@@ -92,6 +92,6 @@
     <div id="bottomButtonsBox">
         <form action="members.php" method="GET"><button class="formCSSButtonButton" name="signOut" value="signOut">Signout</button></form>
         <form action="cart.html"><button class="formCSSButtonButton">Cart</button></form>
-        <form action="orders.html"><button class="formCSSButtonButton">Orders</button></form>
+        <form action="orders.php"><button class="formCSSButtonButton">Orders</button></form>
     </div>
 </div>
