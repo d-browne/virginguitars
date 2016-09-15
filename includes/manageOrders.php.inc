@@ -270,7 +270,7 @@ $searchString = "orderid=".$orderid."&invoicedate=".$invoicedate."&shippeddate="
                         }
                     ?>
                 </td>
-                <td><span class="tableHeader">Edit</span></td>
+                <td><span class="tableHeader"></span></td>
             </tr>
             <?php
             // Query database for a list of orders
