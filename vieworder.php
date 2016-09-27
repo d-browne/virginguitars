@@ -22,6 +22,27 @@ if (isset($_GET['id']))
 {
     // Get order id from get request
     $orderID = mysqli_real_escape_string($dataConnection, $_GET['id']);
+    
+    // Check if order exists
+
+    // Query for the specified order
+    $orderQuery = "SELECT * FROM PRODUCTS_BY_ORDER_VIEW WHERE SalesOrderFK ='".$orderID."' AND CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
+    
+    // Execute query
+    $orderQueryResult = $dataConnection->query($orderQuery);
+
+    // Check if query failed
+    if ($orderQueryResult === false)
+    {
+        $errorString = "Query Failed....";
+    }
+    
+    // Check if result returned (order exists)
+    if ($orderQueryResult->num_rows < 0)
+    {
+        // Set order flag on (order exists)
+        $errorString = "Order not found...";
+    }
 }
 else
 {
@@ -34,24 +55,9 @@ if ($_SESSION["currentCustomer"]->getIsInitialized() !== true)
     header('Location: members.php');
 }
 
-// Check if order exists
 
-// Query for the specified order
-$orderQuery = "SELECT * FROM PRODUCTS_BY_ORDER_VIEW WHERE SalesOrderFK ='".$orderID."' AND CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
 
-// Execute query
-$orderQueryResult = $dataConnection->query($orderQuery);
 
-// Check if query failed
-if ($orderQueryResult === false)
-{
-    $errorString = "Query Failed....";
-}
 
-// Check if result returned
-if ($orderQueryResult->num_rows < 0)
-{
-    // Set order flag on (order exists)
-    $errorString = "Order not found...";
-}
+
 ?>
