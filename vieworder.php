@@ -99,6 +99,9 @@ else
         </div>
 
 <div id="contentBox">
+    <?php // Show if no error
+    if ($errorString === ''): ?>
+    
     <form action="admin.php" method="POST">
     <div id="manageCustomersTopLeft">
         <h1>View Order</h1>
@@ -296,6 +299,11 @@ else
     <div id="totalLabelStretcher" class="editOrderTotalLabelStretcher"><div id="totalLabel" class="editOrderTotalLabel">Total: <?php echo $order->getTotal(); ?></div></div>
     
     </form>
+    
+    <?php else: // Show if there is an error ?>
+    Error: <?php echo $errorString; ?>
+    <?php endif; ?>
+    
 </div>
             
             
