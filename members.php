@@ -177,6 +177,19 @@ if (isset($_POST['updatePersonalDetails']))
     }
     $isUpdated = true;
 }
+
+// refresh customer object on each pageload
+// This ensures that the customer objects is always up-to-date 
+// Check if customer is in session
+if (isset($_SESSION["currentCustomer"]))
+{
+    // Check if customer initialized
+    if ($_SESSION["currentCustomer"]->getIsInitialized())
+    {
+        // Reinitialize 
+        $_SESSION["currentCustomer"]->initializeID($_SESSION["currentCustomer"]->getCustomerID());
+    }
+}
 ?>
 
 <!doctype html>
