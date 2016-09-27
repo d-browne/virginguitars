@@ -122,6 +122,9 @@ if (isset($_GET["logout"]))
                     // Check if requesting the edit customer page
                     if (isset($_GET['edit']))
                     {
+                        // Hold isUpdated flag
+                        $isUpdated = false;
+                        
                         // Show the edit customer page
                         include("includes/editCustomer.php.inc");
                     }

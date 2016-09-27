@@ -1,6 +1,4 @@
 <?php
-$isUpdated = false;
-
 // Create data connection
 $database = new Database();
 $dataConnection = $database->getDataConnection();
@@ -48,7 +46,75 @@ else
     $errorString = "Need to specify a customer ID....";
 }
 
+//Check for update member post
+if (isset($_POST['updateMember']))
+{
+    // Ensure customer is initialized
+    if ($customer->getIsInitialized())
+    {
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+        $confirmEmail = filter_input(INPUT_POST, 'emailConfirm', FILTER_SANITIZE_EMAIL);
+        $password = $_POST['password'];
+        $confirmPassword = $_POST['passwordConfirm'];
+
+        // if passwords are blank don't change
+        // Otherwise check that they match
+        // If they match update the password
+        // Create a message to indicate updated
+
+        // If passwords are not blank, update them
+        if (!($password == "" && $confirmPassword == ""))
+        {
+            // Check if passwords match
+            if ($password == $confirmPassword)
+            {
+                // Set new password
+                $customer->setPassword($password);
+
+                // Set updated flag
+                $isUpdated = true;
+            }
+            else
+            {
+                // Set the error for passwords not matching
+                $updateMemberError = "Passwords don't match...";
+            }
+        }
+
+        // Check if emails match
+        // If they match update
+        if ($email === $confirmEmail)
+        {
+            // Set new email address
+            $customer->setEmail($email);
+            $isUpdated = true; // sets is updated flag
+        }
+        else
+        {
+            $updateMemberError = "Email addresses don't match...";
+        }
+
+        // Set MailingList
+        if (isset($_POST['mailingList']))
+        {
+            $customer->setMailingList(1);
+            $isUpdated = true; // sets is updated flag
+        }
+        else
+        {
+            $customer->setMailingList(0);
+            $isUpdated = true; // sets is updated flag
+        }
+    }
+    else
+    {
+        // set error string
+        $errorString = "Unable to recieve updateMember POST, customer not initialized";
+    }
+}
 ?>
+
+
 <div id="contentBox">
 <?php if ($errorString === ''): // Display if no errors ?>
 <div id="leftColumn" style="border-bottom: 1px solid #D4B96A;">
@@ -89,7 +155,7 @@ else
             </p>
     <fieldset class="inputFieldSet" id="userDetailsFieldset">
         <legend>Edit Customer User details</legend>
-        <form id="userDetailsForm" action="members.php" method="POST">
+        <form id="userDetailsForm" action="admin.php?manageCustomers&edit=<?php echo $customerID; ?>" method="POST">
             <div class="inputField"><label>ID:</label> <input class="textBox" type="text" name="id" value="<?php echo $customer->getCustomerID(); ?>" disabled="true"/></div>
             <div class="inputField"><label>Email:</label> <input class="textBox" type="email" name="email" value="<?php echo $customer->getEmail(); ?>" required/></div>
             <div class="inputField"><label>Re-Type Email:</label> <input class="textBox" type="email" name="emailConfirm" value="<?php echo $customer->getEmail(); ?>" required/></div>
