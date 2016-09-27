@@ -170,11 +170,9 @@ else
                 </td>
                 <td>
                     <span class="tableText"><?php echo $order->getShippedDate(); ?></span>
-                    <?php /*<input type="text" name="shippeddate" placeholder="yyyy-mm-dd" value="<?php echo $order->getShippedDate(); ?>" /> */?>
                 </td>
                 <td>
                     <span class="tableText"><?php echo $order->getShippingRecord(); ?></span>
-                    <?php /*<input type="text" name="shippingrecord" placeholder="TN: 234823406" value="<?php echo $order->getShippingRecord(); ?>"/> */?>
                 </td>
                 <td>
                     <?php
