@@ -17,47 +17,64 @@ $dataConnection = $database->getDataConnection();
 
 $errorString = ''; // Contain error string
 
-// Check if id get received
-if (isset($_GET['id']))
-{
-    // Get order id from get request
-    $orderID = mysqli_real_escape_string($dataConnection, $_GET['id']);
-    
-    // Check if order exists
-
-    // Query for the specified order
-    $orderQuery = "SELECT * FROM PRODUCTS_BY_ORDER_VIEW WHERE SalesOrderFK ='".$orderID."' AND CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
-    
-    // Execute query
-    $orderQueryResult = $dataConnection->query($orderQuery);
-
-    // Check if query failed
-    if ($orderQueryResult === false)
-    {
-        $errorString = "Query Failed....";
-    }
-    
-    // Check if result returned (order exists)
-    if ($orderQueryResult->num_rows < 0)
-    {
-        // Set order flag on (order exists)
-        $errorString = "Order not found...";
-    }
-}
-else
-{
-    $errorString = "Order must be specified...";
-}
-
 // If member is not signed in redirect to sign in page
 if ($_SESSION["currentCustomer"]->getIsInitialized() !== true)
 {
     header('Location: members.php');
 }
 
+// Hold the error
+$errorString = '';
 
+// Check if id is set
+if (isset($_GET['id']))
+{
+    // Sanitize the order id
+    $orderId = mysqli_real_escape_string($dataConnection, $_GET['id']);
+    
+    // Check if order exists
 
+    // Query for the specified order
+    $orderQuery = "SELECT * FROM PRODUCTS_BY_ORDER_VIEW WHERE SalesOrderFK ='".$orderId."' AND CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
+    
+    //echo $orderQuery; //debug
+    
+    // Execute query
+    $orderQueryResult = $dataConnection->query($orderQuery);
+    
+    // Check if no errors
+    if ($orderQueryResult !== false)
+    {
+        // Check if results returned
+        if ($orderQueryResult->num_rows > 0)
+        {
+            
+        }
+        else
+        {
+            // Order not found error
+            $errorString = "Order '".$orderId."' not found...";
+        }
+    }
+    else
+    {
+        // Query error
+        $errorString = "Query Error";
+    }
+}
+else
+{
+    $errorString = 'ID must be specified';
+}
 
-
+// Display error
+if ($errorString !== '')
+{
+    echo $errorString;
+}
+else
+{
+    echo 'no error';
+}
 
 ?>
