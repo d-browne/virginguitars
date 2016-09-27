@@ -15,13 +15,17 @@ require_once 'classes/Database.php'; // Include the database
 $database = new Database();
 $dataConnection = $database->getDataConnection();
 
-$errorString; // Contain error string
+$errorString = ''; // Contain error string
 
 // Check if id get received
-if (isset($_GET[id]))
+if (isset($_GET['id']))
 {
     // Get order id from get request
     $orderID = mysqli_real_escape_string($dataConnection, $_GET['id']);
+}
+else
+{
+    $errorString = "Order must be specified...";
 }
 
 // If member is not signed in redirect to sign in page
@@ -30,8 +34,7 @@ if ($_SESSION["currentCustomer"]->getIsInitialized() !== true)
     header('Location: members.php');
 }
 
-// check if specified order exists
-$orderExists = false; // Flag
+// Check if order exists
 
 // Query for the specified order
 $orderQuery = "SELECT * FROM PRODUCTS_BY_ORDER_VIEW WHERE SalesOrderFK ='".$orderID."' AND CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
@@ -50,14 +53,5 @@ if ($orderQueryResult->num_rows < 0)
 {
     // Set order flag on (order exists)
     $errorString = "Order not found...";
-}
-
-if ($orderExists)
-{
-    echo 'success';
-}
-else
-{
-    
 }
 ?>
