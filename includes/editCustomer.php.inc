@@ -94,7 +94,7 @@ else
 
 <div id="rightColumn">
     <h1>Edit Customer - ID: <?php echo $customer->getCustomerID(); ?></h1>
-            <p>From here you may edit the details of customer <?php echo $customer->getCustomerID(); ?>.........
+            <p>From here you may edit the details of customer <?php echo $customer->getCustomerID(); ?>...
                 <span id="updatedMemberLabel">
                     <?php
                         // Write updated if updated flag set
@@ -144,8 +144,8 @@ else
     </fieldset>
 
     <div id="bottomButtonsBox">
-        <form action="orders.php"><button class="formCSSButtonButton">Orders</button></form>
-        <form action="cart.html"><button class="formCSSButtonButton">Back</button></form>
+        <form action="admin.php" method="GET"><input type="hidden" name="CustomerID" value="<?php echo $customer->getCustomerID(); ?>" /><button name="customerOrders" class="formCSSButtonButton">Orders</button></form>
+        <button type="button" onclick="window.history.back()" class="formCSSButtonButton">Back</button>
     </div>
 </div>
 <?php else: // Display error message ?>
