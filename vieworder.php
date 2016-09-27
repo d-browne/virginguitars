@@ -101,7 +101,7 @@ else
 <div id="contentBox">
     <form action="admin.php" method="POST">
     <div id="manageCustomersTopLeft">
-        <h1>Edit Order</h1>
+        <h1>View Order</h1>
     </div>
 
     <div id="manageCustomersTopRight">
@@ -125,19 +125,19 @@ else
             </tr>
             <tr>
                 <td>
-                    <input type="text" name="streetaddress" placeholder="e.g. 123 Fake Street" value="<?php echo $order->getStreetAddress(); ?>"/>
+                    <input type="text" name="streetaddress" placeholder="e.g. 123 Fake Street" value="<?php echo $order->getStreetAddress(); ?>" disabled="true"/>
                 </td>
                 <td>
-                    <input type="text" name="city" placeholder="Sydney" value="<?php echo $order->getCity(); ?>"/>
+                    <input type="text" name="city" placeholder="Sydney" value="<?php echo $order->getCity(); ?>" disabled="true"/>
                 </td>
                 <td>
-                    <input type="text" name="state" placeholder="e.g. NSW" value="<?php echo $order->getState(); ?>" />
+                    <input type="text" name="state" placeholder="e.g. NSW" value="<?php echo $order->getState(); ?>" disabled="true"/>
                 </td>
                 <td>
-                    <input type="text" name="postcode" placeholder="e.g. 2000" value="<?php echo $order->getPostCode(); ?>"/>
+                    <input type="text" name="postcode" placeholder="e.g. 2000" value="<?php echo $order->getPostCode(); ?>" disabled="true"/>
                 </td>
                 <td>
-                    <input type="text" name="country" placeholder="Australia" value="<?php echo $order->getCountry(); ?>"/>
+                    <input type="text" name="country" placeholder="Australia" value="<?php echo $order->getCountry(); ?>" disabled="true"/>
                 </td>
             </tr>
         </table>
@@ -169,19 +169,38 @@ else
                     <span class="tableText greenLink"><?php echo $order->getTotal(); ?></span>
                 </td>
                 <td>
-                    <input type="text" name="shippeddate" placeholder="yyyy-mm-dd" value="<?php echo $order->getShippedDate(); ?>" />
+                    <span class="tableText"><?php echo $order->getShippedDate(); ?></span>
+                    <?php /*<input type="text" name="shippeddate" placeholder="yyyy-mm-dd" value="<?php echo $order->getShippedDate(); ?>" /> */?>
                 </td>
                 <td>
-                    <input type="text" name="shippingrecord" placeholder="TN: 234823406" value="<?php echo $order->getShippingRecord(); ?>"/>
+                    <span class="tableText"><?php echo $order->getShippingRecord(); ?></span>
+                    <?php /*<input type="text" name="shippingrecord" placeholder="TN: 234823406" value="<?php echo $order->getShippingRecord(); ?>"/> */?>
                 </td>
                 <td>
-                    <select name="orderstatus">
-                        <option value="Requested" <?php if($order->getOrderStatus() === "Requested") {echo "selected";} ?>>Requested</option>
-                        <option value="Processing" <?php if($order->getOrderStatus() === "Processing") {echo "selected";} ?>>Processing</option>
-                        <option value="Shipped" <?php if($order->getOrderStatus() === "Shipped") {echo "selected";} ?>>Shipped</option>
-                        <option value="Completed" <?php if($order->getOrderStatus() === "Completed") {echo "selected";} ?>>Completed</option>
-                        <option value="Cancelled" <?php if($order->getOrderStatus() === "Cancelled") {echo "selected";} ?>>Cancelled</option>
-                    </select>
+                    <?php
+                        // Check the order status to get color
+                        switch ($order->getOrderStatus())
+                        {
+                            case "Shipped":
+                                $orderColor = "greenLink";
+                                break;
+                            case "Completed":
+                                $orderColor = "greenLink";
+                                break;
+                            case "Requested": 
+                                $orderColor = "orangeLink";
+                                break;
+                            case "Processing":
+                                $orderColor = "orangeLink";
+                                break;
+                            case "Cancelled":
+                                $orderColor = "redLink";
+                                break;
+                            default:
+                                $orderColor = "";
+                        }
+                        echo '<span class="tableText '.$orderColor.'">'.$order->getOrderStatus().'</span>';
+                    ?>
                 </td>
             </tr>
         </table>
