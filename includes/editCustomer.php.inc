@@ -112,6 +112,54 @@ if (isset($_POST['updateMember']))
         $errorString = "Unable to recieve updateMember POST, customer not initialized";
     }
 }
+
+// Check for update personal details POST
+if (isset($_POST['updatePersonalDetails']))
+{
+    // Ensure customer is initialized
+    if ($customer->getIsInitialized())
+    {
+        // array to hold results of setting
+        $results = array();
+
+        // Get all inputs
+        $salutation = $_POST['salutation'];
+        $firstName = $_POST['firstname'];
+        $lastName = $_POST['lastname'];
+        $streetAddress = $_POST['street'];
+        $city = $_POST['city'];
+        $postCode = $_POST['postcode'];
+        $country = $_POST['country'];
+        $homePhone = $_POST['homephone'];
+        $mobilePhone = $_POST['mobilephone'];
+
+        array_push($results, $customer->setSalutation($salutation));
+        array_push($results, $customer->setFirstName($firstName));
+        array_push($results, $customer->setLastName($lastName));
+        array_push($results, $customer->getHomeAddress()->setStreetAddress($streetAddress));
+        array_push($results, $customer->getHomeAddress()->setCity($city));
+        array_push($results, $customer->getHomeAddress()->setPostCode($postCode));
+        array_push($results, $customer->getHomeAddress()->setCountry($country));
+        array_push($results, $customer->setHomePhone($homePhone));
+        array_push($results, $customer->setMobilePhone($mobilePhone));
+
+        // Display each error
+        foreach ($results as $result)
+        {
+            if ($result !== true) // Is an error
+            {
+                $updateMemberError = $updateMemberError.$result.", ";
+            }
+        }
+        $isUpdated = true;
+    }
+    else
+    {
+        // set error string (unable to update personal details)
+        $errorString = "Unable to recieve updatePersonalDetails POST, customer not initialized";
+    }
+    
+}
 ?>
 
 
@@ -168,7 +216,7 @@ if (isset($_POST['updateMember']))
 
     <fieldset class="inputFieldSet" id="personalDetailsFieldset">
         <legend>Edit Customer Personal Details</legend>
-        <form id="personalDetailsForm" action="members.php" method="POST">
+        <form id="personalDetailsForm" action="admin.php?manageCustomers&edit=<?php echo $customerID; ?>" method="POST">
             <div class="inputField"><label>Salutation:</label> <input class="textBox" name="salutation" type="text" placeholder="e.g. Mrs." value="<?php echo $customer->getSalutation(); ?>"/></div>
             <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" placeholder="e.g. April" value="<?php echo $customer->getFirstName(); ?>"/></div>
             <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" placeholder="e.g. Frederick Stevenson" value="<?php echo $customer->getLastName(); ?>"/></div>
