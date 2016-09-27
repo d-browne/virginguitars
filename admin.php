@@ -119,7 +119,17 @@ if (isset($_GET["logout"]))
                 }
                 else if(isset($_GET['manageCustomers']))
                 {
-                    include("includes/manageCustomers.php.inc");
+                    // Check if requesting the edit customer page
+                    if (isset($_GET['edit']))
+                    {
+                        // Show the edit customer page
+                        include("includes/editCustomer.php.inc");
+                    }
+                    else
+                    {
+                        // Show the customers list/search page
+                        include("includes/manageCustomers.php.inc");
+                    }
                 }
                 else if(isset($_GET['customerOrders']))
                 {
