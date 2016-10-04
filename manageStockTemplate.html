@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Virgin Guitars - Cart</title>
+<link href="styles/main.css" rel="stylesheet" type="text/css">
+<link href="styles/js-image-slider.css" rel="stylesheet" type="text/css" />
+<script src="scripts/js-image-slider.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<div id="mainBox">
+    	<div id="headerBox">
+        	<a href="index.html"><img src="images/logo.png" width="213" height="200" alt="Virgin Guitars" class="logoImage"></a>
+			<h1 class="mainHeader">Virgin Guitars</h1>
+            <form action="search.html">
+            	<input type="text" id="searchBox" placeholder="Site Search..." />
+             </form>
+        	
+            <div id="checkOutBox">
+            	<span id="cartItems"><a href="cart.html">4</a></span>
+            	<a href="cart.html"><img src="images/cartIcon.png" id="cartIcon" width="32" height="42" alt="Cart"></a>
+                <a href="checkout.html" id="checkoutLink">checkout</a>
+            </div>
+      </div>
+        
+        <div id="menuBox">
+       	  <nav id="menuList">
+          	<ul>
+            	<li id="homeItem"><a href="index.html">Home</a></li>
+                <li><a href="catalog.html">Catalog</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="members.html">Members</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+          </nav>
+        </div>
+        
+        <div id="categoryBox">
+        	<a href="fender.html"><div class="categoryImage" id="fenderCategory"></div></a>
+            <a href="gibson.html"><div class="categoryImage" id="gibsonCategory"></div></a>
+            <a href="bcrich.html"><div class="categoryImage" id="bcRichCategory"></div></a>
+            <a href="jackson.html"><div class="categoryImage" id="jacksonLogo"></div></a>
+            
+        </div>
+        
+        <div id="contentBox">
+        	<div id="manageCustomersTopLeft">
+            	<h1>Manage Stock</h1>
+            </div>
+        	
+            <div id="manageCustomersTopRight">
+            	<fieldset class="inputFieldSet" id="userDetailsFieldset">
+                	<legend>Search</legend>
+                    <form id="userDetailsForm" action="admin.php?manageCustomers">
+                    	<div class="inputField"><label>Product ID:</label> <input class="textBox" name="productid" type="text" placeholder="e.g. 1"/></div>
+                        <div class="inputField"><label>Model:</label> <input class="textBox" name="model" type="text" placeholder="e.g. American" value=""/></div>
+                        <div class="inputField"><label>Brand:</label> <input class="textBox" name="brand" type="text" placeholder="e.g. Fender"/></div>
+                        <div class="inputField"><label>Type:</label> <input class="textBox" name="type" type="text" placeholder="e.g. Electric"/></div>
+                        <div class="inputField"><label>Condition:</label> <input class="textBox" name="condition" type="text" placeholder="e.g. Used"/></div>
+                        <div class="inputField"><label>Case:</label> <input class="textBox" name="case" type="text" placeholder="e.g. Hard"/></div>
+                        <div class="inputField"><label>Status:</label> <input class="textBox" name="status" type="text" placeholder="e.g. Back"/></div>
+                        <div class="inputField"><label>Quantity:</label> <input class="textBox" name="quantity" type="text" placeholder="e.g. 1"/></div>
+                        <div class="inputField"><input class="submitButton" type="submit" name="searchButton" value="Search" /></div>
+                    </form>
+                </fieldset>
+            </div>
+            <div id="tableContainer">
+                <table class="cartTable bottomTable" border="1" >
+                    <tr class="headerRow">
+                        <td><span class="tableHeader">Image</span></td>
+                        <td><span class="tableHeader">Prod.ID</span></td>
+                        <td><span class="tableHeader">Model</span></td>
+                        <td><span class="tableHeader">Brand</span></td>
+                        <td><span class="tableHeader">Type</span></td>
+                        <td><span class="tableHeader">Condition</span></td>
+                        <td><span class="tableHeader">Case</span></td>
+                        <td><span class="tableHeader">Status</span></td>
+                        <td><span class="tableHeader">Quantity</span></td>
+                        <td><span class="tableHeader">Price</span></td>
+                        <td><span class="tableHeader"></span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                        	<img src="images/guitars/fenderLimitedEditionAmericanStandardTelecaster/1.jpg" width="100" alt="American Standard Strat" />
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	1
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	Amertican Standard Strat
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	Fender
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	Electric
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	Brand new
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	Hard Case
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	In Stock
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	3
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	$2000
+                            </a>
+                        </td>
+                        <td>
+                        	<a class="delButton" href="admin.php">
+                            	Del
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="altRow">
+                        <td>
+                        	<img src="images/guitars/fenderLimitedEditionAmericanStandardTelecaster/1.jpg" width="100" alt="American Standard Strat" />
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	2
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	Amertican Non-Standard Strat
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	Fender
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	Acoustic
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	Used
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	Soft case
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	Backorder
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	0
+                            </a>
+                        </td>
+                        <td>
+                        	<a href="admin.php">
+                            	$1800
+                            </a>
+                        </td>
+                        <td>
+                        	<a class="delButton" href="admin.php">
+                            	Del
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    
+                </table>
+            </div>
+            
+            
+            <div id="manageCustomersStretcher"></div>
+            <div id="bottomButtonsBox">
+                <form action="admin.php?manageCustomers&newCustomer"><button class="formCSSButtonButton">New</button></form>
+                <form action="admin.php?back"><button class="formCSSButtonButton">Back</button></form>
+            </div>
+            
+        </div>
+            <footer id="pageFooter">Copyright © 2015 <a href="mailto:admin@virginguitars.com">Virgin Guitars</a></footer>
+            
+        </div>
+</body>
+</html>
