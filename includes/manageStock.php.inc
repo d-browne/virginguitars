@@ -10,6 +10,24 @@
 $database = new Database();
 $dataConnection = $database->getDataConnection();
 
+$searchString = '';
+
+// Flags to determine how the columns should be ordered
+$orderBy = "none";  // Determains how to order results
+$desc = false;      // Determins if results should be ordered descending
+
+// Check request for column ordering
+if (isset($_GET['orderBy']))
+{
+    // Get sanitized input
+    $orderBy = mysqli_real_escape_string($dataConnection, $_GET['orderBy']);
+}
+
+// Determine if rows have been requested in descending order
+if (isset($_GET['desc']))
+{
+    $desc = true;
+}
 
 ?>
 
@@ -38,15 +56,177 @@ $dataConnection = $database->getDataConnection();
         <table class="cartTable bottomTable" border="1" >
             <tr class="headerRow">
                 <td><span class="tableHeader">Image</span></td>
-                <td><span class="tableHeader">Prod.ID</span></td>
-                <td><span class="tableHeader">Model</span></td>
-                <td><span class="tableHeader">Brand</span></td>
-                <td><span class="tableHeader">Type</span></td>
-                <td><span class="tableHeader">Condition</span></td>
-                <td><span class="tableHeader">Case</span></td>
-                <td><span class="tableHeader">Status</span></td>
-                <td><span class="tableHeader">Quantity</span></td>
-                <td><span class="tableHeader">Price</span></td>
+                <td>
+                    <?php
+                        if ($orderBy === "ProductID")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=ProductID">Prod.ID</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=ProductID&desc">Prod.ID</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageStock&'.$searchString.'&orderBy=ProductID">Prod.ID</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Model")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Model">Model</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Model&desc">Model</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Model">Model</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Brand")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Brand">Brand</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Brand&desc">Brand</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Brand">Brand</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Type")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Type">Type</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Type&desc">Type</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Type">Type</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Condition")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Condition">Condition</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Condition&desc">Condition</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Condition">Condition</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Case")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Case">Case</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Case&desc">Case</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Case">Case</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Status")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Status">Status</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Status&desc">Status</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Status">Status</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Quantity")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Quantity">Quantity</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Quantity&desc">Quantity</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Quantity">Quantity</a></span>';
+                        }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                        if ($orderBy === "Price")
+                        {
+                            if ($desc !== false) // Is descending
+                            {
+                                echo '<span class="tableHeader tableHeaderDesc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Price">Price</a></span>';
+                            }
+                            else
+                            {
+                                echo '<span class="tableHeader tableHeaderAsc"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Price&desc">Price</a></span>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<span class="tableHeader"><a href="admin.php?manageStock&'.$searchString.'&orderBy=Price">Price</a></span>';
+                        }
+                    ?>
+                </td>
                 <td><span class="tableHeader"></span></td>
             </tr>
             
