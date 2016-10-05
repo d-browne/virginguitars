@@ -2,7 +2,7 @@
     <h1>Admin Area</h1>
     <div class="controlPanelSection" id="firstControlPanelSection">
         <div class="adminControl" id="addStockControl">
-            <a href="">
+            <a href="admin.php?manageStock">
                 <div class="adminControlIcon" id="addStockIcon"></div>
                 <div class="adminControlCaption">Stock</div>
             </a>

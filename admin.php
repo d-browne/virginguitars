@@ -134,6 +134,10 @@ if (isset($_GET["logout"]))
                         include("includes/manageCustomers.php.inc");
                     }
                 }
+                else if(isset($_GET['manageStock']))
+                {
+                    echo "manage stock page";
+                }
                 else if(isset($_GET['customerOrders']))
                 {
                     // Check if CustomerID specified
