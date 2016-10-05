@@ -314,6 +314,99 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
             // Query to get stock items
             $query = "SELECT * FROM MANAGE_STOCK_VIEW";
             
+            $hasSearch = false; // falg to determine if search appended
+            
+            // Append the search options
+            if ($productid !== "")
+            {
+                $query = $query." WHERE ProductID LIKE '%".$productid."%'";
+                $hasSearch = true;
+            }
+            if ($model !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND Model LIKE '%".$model."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE Model LIKE '%".$model."%'";
+                    $hasSearch = true;
+                }
+            }
+            if ($brand !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND Brand LIKE '%".$brand."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE Brand LIKE '%".$brand."%'";
+                    $hasSearch = true;
+                }
+            }
+            if ($type !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND Type LIKE '%".$type."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE Type LIKE '%".$type."%'";
+                    $hasSearch = true;
+                }
+            }
+            if ($condition !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND Condition LIKE '%".$condition."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE Condition LIKE '%".$condition."%'";
+                    $hasSearch = true;
+                }
+            }
+            if ($case !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND CaseType LIKE '%".$case."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE CaseType LIKE '%".$case."%'";
+                    $hasSearch = true;
+                }
+            }
+            if ($status !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND Status LIKE '%".$status."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE Status LIKE '%".$status."%'";
+                    $hasSearch = true;
+                }
+            }
+            if ($quantity !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND Quantity LIKE '%".$quantity."%'";
+                }
+                else
+                {
+                    $query = $query." WHERE Quantity LIKE '%".$quantity."%'";
+                    $hasSearch = true;
+                }
+            }
+            
             // Append order by
             switch($orderBy)
             {
