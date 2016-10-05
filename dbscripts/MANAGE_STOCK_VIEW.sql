@@ -1,3 +1,4 @@
+# This view returns a list of products for the manage stock page
 CREATE VIEW MANAGE_STOCK_VIEW AS
 SELECT 
 p.PrimaryPicturePath,
