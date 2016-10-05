@@ -5,6 +5,12 @@
  * the ability to edit each item. This area also faciliates the creation and
  * deletion of stock items.
  */
+
+// Create data connection
+$database = new Database();
+$dataConnection = $database->getDataConnection();
+
+
 ?>
 
 <div id="contentBox">
@@ -43,118 +49,75 @@
                 <td><span class="tableHeader">Price</span></td>
                 <td><span class="tableHeader"></span></td>
             </tr>
-            <tr>
-                <td>
-                    <img src="images/guitars/fenderLimitedEditionAmericanStandardTelecaster/1.jpg" width="100" alt="American Standard Strat" />
-                </td>
-                <td>
-                    <a href="admin.php">
-                        1
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Amertican Standard Strat
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Fender
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Electric
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Brand new
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Hard Case
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        In Stock
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        3
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        $2000
-                    </a>
-                </td>
-                <td>
-                    <a class="delButton" href="admin.php">
-                        Del
-                    </a>
-                </td>
-            </tr>
-            <tr class="altRow">
-                <td>
-                    <img src="images/guitars/fenderLimitedEditionAmericanStandardTelecaster/1.jpg" width="100" alt="American Standard Strat" />
-                </td>
-                <td>
-                    <a href="admin.php">
-                        2
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Amertican Non-Standard Strat
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Fender
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Acoustic
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Used
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Soft case
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        Backorder
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        0
-                    </a>
-                </td>
-                <td>
-                    <a href="admin.php">
-                        $1800
-                    </a>
-                </td>
-                <td>
-                    <a class="delButton" href="admin.php">
-                        Del
-                    </a>
-                </td>
-            </tr>
+            
+            <?php // Draw each stock item as table row
+            // Query to get stock items
+            $query = "SELECT * FROM MANAGE_STOCK_VIEW";
 
+            // Execute query
+            $result = $dataConnection->query($query);
 
+            // if query succeeded
+            if ($result !== false)
+            {
+                // Check if stock items returned
+                if ($result->num_rows > 0)
+                {
+                    $isAltRow = false;
+                    
+                    while ($row = $result->fetch_assoc())
+                    {
+                        // Print row header
+                        if ($isAltRow)
+                        {
+                           print "<tr class=\"altRow\">"; 
+                           $isAltRow = false;
+                        }
+                        else
+                        {
+                            print "<tr>";
+                            $isAltRow = true;
+                        }
+
+                        // Draw image column
+                        echo '<td><img src="'.$row['PrimaryPicturePath'].'" width="100" alt="'.$row['Model'].'" /></td>';
+                        // Draw product id column
+                        echo '<td><a href="admin.php">'.$row['ProductID'].'</a></td>';
+                        // Draw model name column
+                        echo '<td><a href="admin.php">'.$row['Model'].'</a></td>';
+                        // Draw brand column
+                        echo '<td><a href="admin.php">'.$row['Brand'].'</a></td>';
+                        // Draw type column
+                        echo '<td><a href="admin.php">'.$row['Type'].'</a></td>';
+                        // Draw condition column
+                        echo '<td><a href="admin.php">'.$row['Condition'].'</a></td>';
+                        // Draw case column
+                        echo '<td><a href="admin.php">'.$row['CaseType'].'</a></td>';
+                        // Draw status column
+                        echo '<td><a href="admin.php">'.$row['Status'].'</a></td>';
+                        // Draw quantity column
+                        echo '<td><a href="admin.php">'.$row['Quantity'].'</a></td>';
+                        // Draw price column
+                        echo '<td><a href="admin.php">'.$row['Price'].'</a></td>';
+                        // Draw del button
+                        echo '<td><a href="admin.php" class="delButton">Del</a></td>';
+                        
+                        // Close table row
+                        echo '</tr>';
+                    }
+                }
+                else
+                {
+                    // Show no stock items returned error
+                    echo "No stock items to show...";
+                }
+            }
+            else
+            {
+                // Show message that query failed
+                echo "Unable to query MANAGE_STOCK_VIEW";
+            }
+            ?>
         </table>
     </div>
 
