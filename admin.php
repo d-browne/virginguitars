@@ -136,7 +136,7 @@ if (isset($_GET["logout"]))
                 }
                 else if(isset($_GET['manageStock']))
                 {
-                    echo "manage stock page";
+                    include("includes/manageStock.php.inc");
                 }
                 else if(isset($_GET['customerOrders']))
                 {
