@@ -471,7 +471,7 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
                         }
 
                         // Draw image column
-                        echo '<td><img src="'.$row['PrimaryPicturePath'].'" width="100" alt="'.$row['Model'].'" /></td>';
+                        echo '<td><a href="'.$row['PrimaryPicturePath'].'"><img src="'.$row['PrimaryPicturePath'].'" width="100" alt="'.$row['Model'].'" /></a></td>';
                         // Draw product id column
                         echo '<td><a href="admin.php">'.$row['ProductID'].'</a></td>';
                         // Draw model name column
