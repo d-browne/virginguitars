@@ -444,7 +444,9 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
             {
                 $query = $query." DESC";
             }
-
+            
+            echo $query; // display the query (debug)
+            
             // Execute query
             $result = $dataConnection->query($query);
 
