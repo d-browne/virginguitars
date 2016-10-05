@@ -516,7 +516,7 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
     <div id="manageCustomersStretcher"></div>
     <div id="bottomButtonsBox">
         <form action="admin.php?manageCustomers&newCustomer"><button class="formCSSButtonButton">New</button></form>
-        <form action="admin.php?back"><button class="formCSSButtonButton">Back</button></form>
+        <button type="button" onclick="window.history.back()" class="formCSSButtonButton">Back</button>
     </div>
 
 </div>
