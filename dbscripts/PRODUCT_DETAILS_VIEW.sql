@@ -13,7 +13,7 @@ p.UnitPrice As 'Price',
 ct.Description As 'CaseType',  
 m.Description As 'Model',
 a.UserName As 'CreatedBy',
-a2.UserName As 'Modifiedby',
+a2.UserName As 'ModifiedBy',
 p.CreationDate,
 p.ModifiedDate
 FROM Product As p
