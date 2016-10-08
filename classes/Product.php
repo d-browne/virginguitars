@@ -56,5 +56,25 @@ class Product
         {
             throw new Exception("ProductID not found");
         }
+        
+        // Get the returned result 
+        $row = $result->fetch_assoc();
+        
+        // Extract the values from the row and populate the data object
+        $this->ProductID = $row['ProductID'];
+        $this->PrimaryPicturePath = $row['PrimaryPicturePath'];
+        $this->Brand = $row['Brand'];
+        $this->Type = $row['Type'];
+        $this->Quantity = $row['Quantity'];
+        $this->Status = $row['Status'];
+        $this->Description = $row['Description'];
+        $this->Condition = $row['Condition'];
+        $this->Price = $row['Price'];
+        $this->CaseType = $row['CaseType'];
+        $this->Model = $row['Model'];
+        $this->CreatedBy = $row['CreatedBy'];
+        $this->ModifiedBy = $row['ModifiedBy'];
+        $this->CreationDate = $row['CreationDate'];
+        $this->ModifiedDate = $row['ModifiedDate'];
     }
 }
