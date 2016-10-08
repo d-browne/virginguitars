@@ -500,13 +500,13 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
                 else
                 {
                     // Show no stock items returned error
-                    echo "No stock items to show...";
+                    echo "</table>No stock items to show...";
                 }
             }
             else
             {
                 // Show message that query failed
-                echo "Unable to query MANAGE_STOCK_VIEW";
+                echo "</table>Unable to query MANAGE_STOCK_VIEW";
             }
             ?>
         </table>
