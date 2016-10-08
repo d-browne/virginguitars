@@ -77,4 +77,63 @@ class Product
         $this->CreationDate = $row['CreationDate'];
         $this->ModifiedDate = $row['ModifiedDate'];
     }
+    function getProductID() {
+        return $this->ProductID;
+    }
+
+    function getPrimaryPicturePath() {
+        return $this->PrimaryPicturePath;
+    }
+
+    function getBrand() {
+        return $this->Brand;
+    }
+
+    function getType() {
+        return $this->Type;
+    }
+
+    function getQuantity() {
+        return $this->Quantity;
+    }
+
+    function getStatus() {
+        return $this->Status;
+    }
+
+    function getDescription() {
+        return $this->Description;
+    }
+
+    function getCondition() {
+        return $this->Condition;
+    }
+
+    function getPrice() {
+        return $this->Price;
+    }
+
+    function getCaseType() {
+        return $this->CaseType;
+    }
+
+    function getModel() {
+        return $this->Model;
+    }
+
+    function getCreatedBy() {
+        return $this->CreatedBy;
+    }
+
+    function getModifiedBy() {
+        return $this->ModifiedBy;
+    }
+
+    function getCreationDate() {
+        return $this->CreationDate;
+    }
+
+    function getModifiedDate() {
+        return $this->ModifiedDate;
+    }
 }
