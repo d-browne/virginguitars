@@ -6,6 +6,29 @@
 <link href="styles/main.css" rel="stylesheet" type="text/css">
 <link href="styles/js-image-slider.css" rel="stylesheet" type="text/css" />
 <script src="scripts/js-image-slider.js" type="text/javascript"></script>
+<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ 
+    selector:'textarea', 
+            content_css : 'styles/main.css', 
+            content_style: "body {background-color: #FFFFFF !important;",
+    toolbar: 'toolbar: undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | questionButton answerButton',
+    setup: function (editor) {
+        editor.addButton('questionButton', { // Function to add Question format to textarea
+           text: false,
+           image: 'images/editorIcons/q_icon.ico',
+           onclick: function () {
+               editor.insertContent('<p class="questionParagraph"><span class="questionLetter">Q:</span> Question</p>');
+           }
+        });
+        editor.addButton('answerButton', {
+           text: false,
+           image: 'images/editorIcons/a_icon.ico',
+           onclick: function () {
+               editor.insertContent('<p class="answerParagraph"><span class="questionLetter">A:</span> Answer</p>');
+           }
+        });
+    }
+});</script>
 </head>
 
 <body>
@@ -87,7 +110,8 @@
     			</div> 
                 <div id="underRotatorDiv">
                 <fieldset class="inputFieldSet" id="underRotatorFieldSet">
-                	<legend>Upload Images</legend>
+                	<legend>Upload Rotator Images</legend>
+                    <span class="imageInstructions">Images should be 255x600px</span>
                     <form id="userDetailsForm" action="members.html">
                         <input type="file" name="imageFiles" />
                     </form>
@@ -97,7 +121,7 @@
                 
             <div id="rightColumn">
                 <h1>Edit Product</h1>
-                <p>Welcome back to the members section <em>user01</em>! From here you can configure your members settings, change your shipping/billing information and your members details</p>
+                <p></p>
                 <fieldset class="inputFieldSet">
                 	<legend>Admin Details</legend>
                     <form id="userDetailsForm" action="members.html">
@@ -113,36 +137,43 @@
                 <fieldset class="inputFieldSet">
                 	<legend>Product Details</legend>
                     <form id="userDetailsForm" action="members.html">
-                        <div class="inputField"><label>Model:</label> <input class="textBox" type="email" placeholder="e.g. 1" required/></div>
-                        <div class="inputField"><label>Brand:</label> <input class="textBox" type="email" placeholder="e.g. 1" required/></div>
-                        <div class="inputField"><label>Type:</label> <input class="textBox" type="email" placeholder="e.g. 1" required/></div>
-                        <div class="inputField"><label>Condition:</label> <input class="textBox" type="email" placeholder="e.g. 1" required/></div>
-                        <div class="inputField"><label>Case:</label> <input class="textBox" type="email" placeholder="e.g. 1" required/></div>
-                        <div class="inputField"><input class="submitButton" type="submit" value="Submit" /></div>
+                    	<div class="inputField"><label>Primary Image :</label><img src="images/guitars/gibsonEpiphoneLimitedEditionLesPaulCustom/1.jpg" alt="Gibson Epiphone Limited Edition Les Paul Custom" width="100"><span class="imageInstructions"> (use landscape orientation)</span></div>
+                    	<div class="inputField"><label>Upload :</label> <input type="file" /></div>
+                        <div class="inputField"><label>Model:</label> <input class="textBox" type="email" placeholder="e.g. Fender Standard Stratocaster" required/></div>
+                        <div class="inputField"><label>Brand:</label> <select><option>Fender</option></select></div>
+                        <div class="inputField"><label>Type:</label> <select><option>Electric Guitar</option></select></div>
+                        <div class="inputField"><label>Condition:</label> <select><option>Brand New</option></select></div>
+                        <div class="inputField"><label>Case:</label> <select><option>Hard Case</option></select></div>
+                        <div class="inputField"><input class="submitButton" type="submit" value="Update" /></div>
                     </form>
                 </fieldset>
                 
-                <fieldset class="inputFieldSet" id="shippingDetailsFieldset">
-                	<legend>Shipping details</legend>
-                    <form id="shippingDetailsForm" action="members.html">
-                    	<div class="inputField"><label>First Name:</label> <input class="textBox" type="text" value="April"/></div>
-                        <div class="inputField"><label>Last Name:</label> <input class="textBox" type="text" value="Frederick Stevenson"/></div>
-                        <div class="inputField"><label>Street Address:</label> <input class="textBox" type="text" value="26 Music Lane"/></div>
-                        <div class="inputField"><label>City:</label> <input class="textBox" type="text" value="Lismore" required/></div>
-                        <div class="inputField"><label>Post code:</label> <input class="textBox" type="text" value="2480" required/></div>
-                        <div class="inputField"><label>Country:</label> <input class="textBox" type="text" value="Australia" required/></div>
-                        <div class="inputField"><label>Telephone:</label> <input class="textBox" type="text" value="02 6690 156 " required/></div>
-                        <div class="inputField"><input class="submitButton" type="submit" value="Submit" /></div>
+                <fieldset class="inputFieldSet" id="stockDetailsFieldSet">
+                	<legend>Stock Details</legend>
+                    <form id="userDetailsForm" action="members.html">
+                        <div class="inputField"><label>Status:</label> <select><option>In Stock</option></select></div>
+                        <div class="inputField"><label>Price:</label> <input class="textBox" type="email" placeholder="e.g. 1001.20" required/></div>
+                        <div class="inputField"><label>Quantity:</label> <input class="textBox" type="email" placeholder="e.g. 1" required/></div>
+                        <div class="inputField"><input class="submitButton" type="submit" value="Update" /></div>
                     </form>
                 </fieldset>
                 
-                <div id="bottomButtonsBox">
-                	<form action="members.php?signout"><button class="formCSSButtonButton">Signout</button></form>
-                    <form action="cart.html"><button class="formCSSButtonButton">Cart</button></form>
-                    <form action="orders.html"><button class="formCSSButtonButton">Orders</button></form>
-                </div>
+                
                 
             </div>
+            <div class="centerBottomColumn">
+            	<fieldset class="inputFieldSet" id="aboutUsBlurbFieldSet">
+                	<legend>Edit Product Description</legend>
+                        <div class="controlPanelSection" id="faqEditorBox">
+                            <textarea name="aboutUsBlurb"></textarea>
+                        </div>
+                </fieldset>
+            </div>
+            <div id="bottomButtonsBox">
+                	<form action="members.php?signout"><button class="formCSSButtonButton">Update</button></form>
+                    <form action="cart.html"><button class="formCSSButtonButton">View</button></form>
+                    <form action="orders.html"><button class="formCSSButtonButton">Back</button></form>
+                </div>
         </div>
             <footer id="pageFooter">Copyright © 2015 <a href="mailto:admin@virginguitars.com">Virgin Guitars</a></footer>
             

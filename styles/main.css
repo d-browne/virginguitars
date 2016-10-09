@@ -338,7 +338,18 @@ em {
 }
 
 #underRotatorDiv {
-	border: 1px solid black;
+	padding-top: .5em;
+}
+
+.centerBottomColumn {
+	height: 18em;
+	margin-top: 3em;
+}
+
+
+.imageInstructions {
+	font-size: 80%;
+	font-style: italic;
 }
 
 #underRotatorFieldSet {
@@ -369,6 +380,10 @@ em {
 }
 
 .inputField .textBox {
+	width: 24em;
+}
+
+.inputField select {
 	width: 24em;
 }
 
