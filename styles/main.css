@@ -337,6 +337,17 @@ em {
 	font-weight: bold;
 }
 
+#underRotatorDiv {
+	border: 1px solid black;
+}
+
+#underRotatorFieldSet {
+	margin-left: .5em;
+}
+#underRotatorFieldSet input {
+	width: 50%;
+}
+
 .inputFieldSet {
 	border: 1px solid #FFE9AA;
 	margin-right: 1em;
