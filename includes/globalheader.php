@@ -9,6 +9,7 @@ require "classes/Customer.php";
 require_once "classes/FAQ.php";
 require_once "classes/ContactUs.php";
 require_once "classes/Order.php";
+require_once "classes/Product.php";
 
 // Start session
 session_start();
