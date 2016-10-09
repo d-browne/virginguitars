@@ -163,6 +163,11 @@ if (isset($_GET["logout"]))
                         echo '<div id="contentBox"><p>A customer id must be specified...</p></div>';
                     }
                 }
+                else if (isset($_GET['editProduct'])) // Display the edit product page
+                {
+                    // Include the edit product page
+                    include 'includes/editProduct.php.inc';
+                }
                 else if (isset($_GET['editOrder']))
                 {
                     // Check if id specified
