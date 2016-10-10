@@ -87,7 +87,7 @@ else
 
     <div id="rightColumn">
         <h1>Edit Product</h1>
-        <p></p>
+        <p><span id="updatedMemberLabel">Success placeholder</span> <span id="updatedMemberErrorLabel">Error placeholder</span></p>
         <fieldset class="inputFieldSet">
             <legend>Admin Details</legend>
             <form id="userDetailsForm" action="members.html">
