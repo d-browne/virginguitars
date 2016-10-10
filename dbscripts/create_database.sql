@@ -104,7 +104,7 @@ create table PRODUCT (
     BrandFK int(4) NOT NULL,
     Quantity int(3) NOT NULL,
     StatusFK int(3) NOT NULL,
-    Description VarChar(100) NOT NULL,
+    Description TEXT NOT NULL,
     AppearenceFK int(3) NOT NULL,
     UnitPrice DECIMAL(6,2) NOT NULL,
     CaseTypeFK int(3) NOT NULL,
