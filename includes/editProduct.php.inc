@@ -108,7 +108,7 @@ else
         <fieldset class="inputFieldSet">
             <legend>Product Details</legend>
             <form id="userDetailsForm" action="members.html">
-                <div class="inputField"><label>Primary Image :</label><img src="<?php echo $product->getPrimaryPicturePath(); ?>" alt="<?php echo $product->getModel(); ?>" width="100"><span class="imageInstructions"> (use landscape orientation)</span></div>
+                <div class="inputField"><label>Primary Image :</label><img src="<?php echo $product->getPrimaryPicturePath(); ?>" alt="<?php echo $product->getModel(); ?>" width="100"><span class="imageInstructions"> (preferably square ratio)</span></div>
                 <div class="inputField"><label>Upload :</label> <input type="file" /></div>
                 <div class="inputField"><label>Model:</label> <input class="textBox" type="text" value="<?php echo $product->getModel(); ?>" placeholder="e.g. Fender Standard Stratocaster" /></div>
                 <div class="inputField"><label>Brand:</label> 
