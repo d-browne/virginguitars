@@ -503,23 +503,23 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
                         // Draw image column
                         echo '<td><a href="'.$row['PrimaryPicturePath'].'"><img src="'.$row['PrimaryPicturePath'].'" width="100" alt="'.$row['Model'].'" /></a></td>';
                         // Draw product id column
-                        echo '<td><a href="index.php">'.$row['ProductID'].'</a></td>';
+                        echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['ProductID'].'</a></td>';
                         // Draw model name column
-                        echo '<td><a href="index.php">'.$row['Model'].'</a></td>';
+                        echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Model'].'</a></td>';
                         // Draw brand column
-                        echo '<td><a href="index.php">'.$row['Brand'].'</a></td>';
+                        echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Brand'].'</a></td>';
                         // Draw type column
-                        echo '<td><a href="index.php">'.$row['Type'].'</a></td>';
+                        echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Type'].'</a></td>';
                         // Draw condition column
-                        echo '<td><a href="index.php">'.$row['Condition'].'</a></td>';
+                        echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Condition'].'</a></td>';
                         // Draw case column
-                        echo '<td><a href="index.php">'.$row['CaseType'].'</a></td>';
+                        echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['CaseType'].'</a></td>';
                         // Draw status column
-                        echo '<td><a href="index.php">'.$row['Status'].'</a></td>';
+                        echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Status'].'</a></td>';
                         // Draw quantity column
-                        echo '<td><a href="index.php">'.$row['Quantity'].'</a></td>';
+                        echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Quantity'].'</a></td>';
                         // Draw price column
-                        echo '<td><a href="index.php">'.$row['Price'].'</a></td>';
+                        echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Price'].'</a></td>';
                         
                         // Close table row
                         echo '</tr>';
