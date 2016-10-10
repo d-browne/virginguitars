@@ -143,7 +143,7 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
 
 <div id="contentBox">
     <div id="manageCustomersTopLeft">
-        <h1>Search</h1>
+        <h1>Search Catalog</h1>
     </div>
 
     <div id="manageCustomersTopRight">
