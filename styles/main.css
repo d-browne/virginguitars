@@ -434,7 +434,7 @@ em {
 	text-decoration: underline;
 }
 
-#priceTag {
+.stockDetailsTag {
 	font-weight: bold;
 	text-align: center;
 	color: #3A1355;
