@@ -5,6 +5,12 @@
  * images used in the rotator. 
  */
 
+// redirect to product page if view product button pressed
+if (isset($_POST['viewProductButton']))
+{
+    header("Location: product.php?id=".$_POST['viewProductButton']);
+}
+
 // get a data connection
 $database = new Database();
 $dataConnection = $database->getDataConnection();
@@ -38,6 +44,7 @@ else
 
 <div id="contentBox">
     <?php if (!isset($errorString)): // Display page if no erros ?>
+    <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST">
     <div id="leftColumn">
         <!-- Image slider code goes in here -->
         <div id="sliderFrame">
@@ -77,32 +84,27 @@ else
             <fieldset class="inputFieldSet" id="underRotatorFieldSet">
                 <legend>Upload Rotator Images</legend>
                 <span class="imageInstructions">Images should be 255x600px</span>
-                <form id="userDetailsForm" action="members.html">
                     <input type="file" name="imageFiles" />
                     <button>Clear</button>
-                </form>
             </fieldset>
         </div>
     </div>
-
+    
     <div id="rightColumn">
         <h1>Edit Product</h1>
         <p><span id="updatedMemberLabel">Success placeholder</span> <span id="updatedMemberErrorLabel">Error placeholder</span></p>
         <fieldset class="inputFieldSet">
             <legend>Admin Details</legend>
-            <form id="userDetailsForm" action="members.html">
                 <div class="inputField"><label>ProductID:</label> <input class="textBox" type="text" value="<?php echo $product->getProductID(); ?>" disabled="true"/></div>
                 <div class="inputField"><label>Created By:</label> <input class="textBox" type="text" value="<?php echo $product->getCreatedBy(); ?>" disabled="true"/></div>
                 <div class="inputField"><label>Modified By:</label> <input class="textBox" type="text" value="<?php echo $product->getModifiedBy(); ?>" disabled="true"/></div>
                 <div class="inputField"><label>Creation Date:</label> <input class="textBox" type="text" value="<?php echo $product->getCreationDate(); ?>" disabled="true"/></div>
                 <div class="inputField"><label>Modified Date:</label> <input class="textBox" type="text" value="<?php echo $product->getModifiedDate(); ?>" disabled="true"/></div>
                 <div class="inputField"><input class="submitButton" type="submit" value="Delete" /></div>
-            </form>
         </fieldset>
 
         <fieldset class="inputFieldSet">
             <legend>Product Details</legend>
-            <form id="userDetailsForm" action="members.html">
                 <div class="inputField"><label>Primary Image :</label><img src="<?php echo $product->getPrimaryPicturePath(); ?>" alt="<?php echo $product->getModel(); ?>" width="100"><span class="imageInstructions"> (preferably square ratio)</span></div>
                 <div class="inputField"><label>Upload :</label> <input type="file" /></div>
                 <div class="inputField"><label>Model:</label> <input class="textBox" type="text" value="<?php echo $product->getModel(); ?>" placeholder="e.g. Fender Standard Stratocaster" /></div>
@@ -215,12 +217,10 @@ else
                     </select>
                 </div>
                 <div class="inputField"><input class="submitButton" type="submit" value="Update" /></div>
-            </form>
         </fieldset>
 
         <fieldset class="inputFieldSet" id="stockDetailsFieldSet">
             <legend>Stock Details</legend>
-            <form id="userDetailsForm" action="members.html">
                 <div class="inputField"><label>Status:</label> 
                     <select>
                         <?php
@@ -251,7 +251,6 @@ else
                 <div class="inputField"><label>Price:</label> <input class="textBox" type="text" value="<?php echo $product->getPrice(); ?>" placeholder="e.g. 1001.20" /></div>
                 <div class="inputField"><label>Quantity:</label> <input class="textBox" type="text" value="<?php echo $product->getQuantity(); ?>" placeholder="e.g. 1" /></div>
                 <div class="inputField"><input class="submitButton" type="submit" value="Update" /></div>
-            </form>
         </fieldset>
 
 
@@ -266,10 +265,12 @@ else
         </fieldset>
     </div>
     <div id="bottomButtonsBox">
-        <form action="admin.php"><button class="formCSSButtonButton">Update</button></form>
-        <form action="product.php?id=<?php echo $product->getProductID(); ?>" method="POST"><button class="formCSSButtonButton">View</button></form>
+        <button class="formCSSButtonButton">Update</button>
+    
+        <button type="submit" name="viewProductButton" value="<?php echo $product->getProductID(); ?>" class="formCSSButtonButton">View</button>
         <button type="button" onclick="window.history.back()" class="formCSSButtonButton">Back</button>
     </div>
+    </form>
     <?php else: ?>
     <span><?php echo htmlspecialchars($errorString); // Displays error message and strips special html characters ?></span>
     <?php endif; ?>
