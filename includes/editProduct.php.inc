@@ -42,36 +42,31 @@ else
         <!-- Image slider code goes in here -->
         <div id="sliderFrame">
             <div id="slider">
-                <a href="jackson_dk2_dinky_hot_rod_flames.html">
-                    <img src="images/guitars/jacksonDk2DinkyHotRodFlames/resized2.jpg" alt=""/>
-                </a>
-                <a href="bc_rich_kerry_king_metal_master_tribal_fire_warlock.html">
-                    <img src="images/guitars/bcRichKerryKingMetalMasterTribalFireWarlock/resized6.jpg" alt=""/>
-                </a>
-                <a href="gibson_les_paul_studio.html">
-                    <img src="images/guitars/gibsonLesPaultStudio/resized3.jpg" alt=""/>
-                </a>
-                <a href="fender_squire_mij_stratocaster.html">
-                    <img src="images/guitars/fenderSquireMijStratocaster/resized2.jpg" alt=""/>
-                </a>
-                <a href="jackson_kvmg_pro_series_king_v.html">
-                    <img src="images/guitars/jacksonKvmgProSeriesKingV/resized3.jpg" alt=""/>
-                </a>
-                <a href="bc_rich_mockingbird_pro.html">
-                    <img src="images/guitars/bcRichMockingBirdProX/resized3.jpg" alt=""/>
-                </a>
-                <a href="gibson_epiphone_limited_edition_les_paul_custom.html">
-                    <img src="images/guitars/gibsonEpiphoneLimitedEditionLesPaulCustom/resized3.jpg" alt=""/>
-                </a>
-                <a href="fender_american_standard_stratocaster.html">
-                    <img src="images/guitars/fenderAmericanStandardStratocaster/resized2.jpg" alt=""/>
-                </a>
-                <a href="jackson_pdx2_demmelition_king_v.html">
-                    <img src="images/guitars/jacksonPdx2DemmelitionKingV/resized7.jpg" alt=""/>
-                </a>
-                <a href="bc_rich_mockingbird_st.html">
-                    <img src="images/guitars/bcRichMockingbirdSt/resized3.jpg" alt=""/>
-                </a>
+                <?php
+                // Loop through images in databse and dispaly
+                
+                $query = "SELECT ImagePath FROM PICTURE WHERE ProductFK ='".$product->getProductID()."';";
+                // Execute query
+                $result = $dataConnection->query($query);
+                
+                // If query successfull
+                if ($result !== false)
+                {
+                    // If paths returned draw images
+                    if ($result->num_rows > 0)
+                    {
+                        // Loop through each row and draw image
+                        while ($row = $result->fetch_assoc())
+                        {
+                            echo '<img src="'.$row['ImagePath'].'" alt=""/>';
+                        }
+                    }
+                    else
+                    {
+                        // TODO: add the the "no-image" image.
+                    }
+                }
+                ?>
             </div>
             <div id="htmlcaption" style="display: none;">
                 <em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.

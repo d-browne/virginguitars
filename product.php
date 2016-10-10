@@ -80,26 +80,35 @@ else
             	<!-- Image slider code goes in here -->
             	<div id="sliderFrame">
         			<div id="slider">
-                		<a href="images/guitars/fenderAmericanStandardStratocaster/2.jpg">
-                        	<img src="images/guitars/fenderAmericanStandardStratocaster/resized2.jpg" alt=""/>
-                        </a>
-                        <a href="images/guitars/fenderAmericanStandardStratocaster/3.jpg">
-                        	<img src="images/guitars/fenderAmericanStandardStratocaster/resized3.jpg" alt=""/>
-                        </a>
-                        <a href="images/guitars/fenderAmericanStandardStratocaster/4.jpg">
-                        	<img src="images/guitars/fenderAmericanStandardStratocaster/resized4.jpg" alt=""/>
-                        </a>
-                        <a href="images/guitars/fenderAmericanStandardStratocaster/5.jpg">
-                        	<img src="images/guitars/fenderAmericanStandardStratocaster/resized5.jpg" alt=""/>
-                        </a>
-                        <a href="images/guitars/fenderAmericanStandardStratocaster/6.jpg">
-                        	<img src="images/guitars/fenderAmericanStandardStratocaster/resized6.jpg" alt=""/>
-                        </a>
+                		<?php
+                                // Loop through images in databse and dispaly
+
+                                $query = "SELECT ImagePath FROM PICTURE WHERE ProductFK ='".$product->getProductID()."';";
+                                // Execute query
+                                $result = $dataConnection->query($query);
+
+                                // If query successfull
+                                if ($result !== false)
+                                {
+                                    // If paths returned draw images
+                                    if ($result->num_rows > 0)
+                                    {
+                                        // Loop through each row and draw image
+                                        while ($row = $result->fetch_assoc())
+                                        {
+                                            echo '<img src="'.$row['ImagePath'].'" alt=""/>';
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // TODO: add the the "no-image" image.
+                                    }
+                                }
+                                ?>
             			
                         
         			</div>
     			</div> 
-                <div id="sliderInstruction">Click image for fullsize!</div>
             </div>
                 
             <div id="rightColumn">
