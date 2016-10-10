@@ -273,7 +273,7 @@ else
     <div id="bottomButtonsBox">
         <form action="members.php?signout"><button class="formCSSButtonButton">Update</button></form>
         <form action="cart.html"><button class="formCSSButtonButton">View</button></form>
-        <form action="orders.html"><button class="formCSSButtonButton">Back</button></form>
+        <button type="button" onclick="window.history.back()" class="formCSSButtonButton">Back</button>
     </div>
     <?php else: ?>
     <span><?php echo htmlspecialchars($errorString); // Displays error message and strips special html characters ?></span>
