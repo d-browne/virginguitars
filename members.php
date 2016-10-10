@@ -214,13 +214,10 @@ if (isset($_SESSION["currentCustomer"]))
             include 'includes/menubar.php.inc';
         ?>
         
-        <div id="categoryBox">
-        	<a href="fender.html"><div class="categoryImage" id="fenderCategory"></div></a>
-            <a href="gibson.html"><div class="categoryImage" id="gibsonCategory"></div></a>
-            <a href="bcrich.html"><div class="categoryImage" id="bcRichCategory"></div></a>
-            <a href="jackson.html"><div class="categoryImage" id="jacksonLogo"></div></a>
-            
-        </div>
+        <?php
+            // Display menu bar
+            include 'includes/categorybox.php.inc';
+        ?>
         
         <div id="contentBox">
             <?php
