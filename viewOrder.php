@@ -269,17 +269,17 @@ else
                     // Draw image column
                     echo '<td><a href="'.$row['PrimaryPicturePath'].'"><img src="'.$row['PrimaryPicturePath'].'" alt="'.$row['Description'].'" width="70"/></a></td>';
                     // Draw Model column
-                    echo '<td><a href="admin.php">'.$row['Description'].'</a></td>';
+                    echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Description'].'</a></td>';
                     // Draw Product ID column
-                    echo '<td><a href="admin.php">'.$row['ProductID'].'</a></td>';
+                    echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['ProductID'].'</a></td>';
                     // Draw Quantity column
-                    echo '<td><a href="admin.php">'.$row['Quantity'].'</a></td>';
+                    echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Quantity'].'</a></td>';
                     // Draw Price
-                    echo '<td><a href="admin.php">$'.$row['UnitPrice'].'</a></td>';
+                    echo '<td><a href="product.php?id='.$row['ProductID'].'">$'.$row['UnitPrice'].'</a></td>';
                     // Draw Shipping
-                    echo '<td><a href="admin.php">$'.$row['TotalShipping'].'</a></td>';
+                    echo '<td><a href="product.php?id='.$row['ProductID'].'">$'.$row['TotalShipping'].'</a></td>';
                     // Draw Total price
-                    echo '<td><a href="admin.php">$'.$row['Total'].'</a></td>';
+                    echo '<td><a href="product.php?id='.$row['ProductID'].'">$'.$row['Total'].'</a></td>';
                     
                     // End row
                     echo '</tr>';
