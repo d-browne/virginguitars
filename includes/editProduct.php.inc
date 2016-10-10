@@ -272,7 +272,7 @@ else
     </div>
     <div id="bottomButtonsBox">
         <form action="admin.php"><button class="formCSSButtonButton">Update</button></form>
-        <form action="cart.html"><button class="formCSSButtonButton">View</button></form>
+        <form action="product.php?id=<?php echo $product->getProductID(); ?>" method="POST"><button class="formCSSButtonButton">View</button></form>
         <button type="button" onclick="window.history.back()" class="formCSSButtonButton">Back</button>
     </div>
     <?php else: ?>
