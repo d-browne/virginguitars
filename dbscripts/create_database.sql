@@ -307,6 +307,13 @@ INSERT INTO ORDER_PRODUCT VALUES (NULL, 7, 14, '700.00', '50', 1, '750.00');
 INSERT INTO ORDER_PRODUCT VALUES (NULL, 8, 15, '700.00', '50', 1, '750.00');
 INSERT INTO ORDER_PRODUCT VALUES (NULL, 8, 16, '700.00', '50', 1, '750.00');
 
+INSERT INTO PICTURE VALUES (NULL, 1, 'images/guitars/1/1.jpg');
+INSERT INTO PICTURE VALUES (NULL, 1, 'images/guitars/1/2.jpg');
+INSERT INTO PICTURE VALUES (NULL, 1, 'images/guitars/1/3.jpg');
+INSERT INTO PICTURE VALUES (NULL, 1, 'images/guitars/1/4.jpg');
+INSERT INTO PICTURE VALUES (NULL, 1, 'images/guitars/1/5.jpg');
+
+
 # Views #
 
 # This Query Reutrns a list of all Customers, their details and number of open and closed orders.
