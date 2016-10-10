@@ -307,12 +307,22 @@ INSERT INTO ORDER_PRODUCT VALUES (NULL, 7, 14, '700.00', '50', 1, '750.00');
 INSERT INTO ORDER_PRODUCT VALUES (NULL, 8, 15, '700.00', '50', 1, '750.00');
 INSERT INTO ORDER_PRODUCT VALUES (NULL, 8, 16, '700.00', '50', 1, '750.00');
 
+# Product 1 images
 INSERT INTO PICTURE VALUES (NULL, 1, 'images/guitars/1/1.jpg');
 INSERT INTO PICTURE VALUES (NULL, 1, 'images/guitars/1/2.jpg');
 INSERT INTO PICTURE VALUES (NULL, 1, 'images/guitars/1/3.jpg');
 INSERT INTO PICTURE VALUES (NULL, 1, 'images/guitars/1/4.jpg');
 INSERT INTO PICTURE VALUES (NULL, 1, 'images/guitars/1/5.jpg');
 
+# Product 2 images
+INSERT INTO PICTURE VALUES (NULL, 2, 'images/guitars/2/1.jpg');
+INSERT INTO PICTURE VALUES (NULL, 2, 'images/guitars/2/2.jpg');
+INSERT INTO PICTURE VALUES (NULL, 2, 'images/guitars/2/3.jpg');
+INSERT INTO PICTURE VALUES (NULL, 2, 'images/guitars/2/4.jpg');
+INSERT INTO PICTURE VALUES (NULL, 2, 'images/guitars/2/5.jpg');
+INSERT INTO PICTURE VALUES (NULL, 2, 'images/guitars/2/6.jpg');
+INSERT INTO PICTURE VALUES (NULL, 2, 'images/guitars/2/7.jpg');
+INSERT INTO PICTURE VALUES (NULL, 2, 'images/guitars/2/8.jpg');
 
 # Views #
 
