@@ -333,6 +333,18 @@ INSERT INTO PICTURE VALUES (NULL, 3, 'images/guitars/3/5.jpg');
 INSERT INTO PICTURE VALUES (NULL, 3, 'images/guitars/3/6.jpg');
 INSERT INTO PICTURE VALUES (NULL, 3, 'images/guitars/3/7.jpg');
 
+# Product 4 images
+INSERT INTO PICTURE VALUES (NULL, 4, 'images/guitars/4/1.jpg');
+INSERT INTO PICTURE VALUES (NULL, 4, 'images/guitars/4/2.jpg');
+INSERT INTO PICTURE VALUES (NULL, 4, 'images/guitars/4/3.jpg');
+INSERT INTO PICTURE VALUES (NULL, 4, 'images/guitars/4/4.jpg');
+INSERT INTO PICTURE VALUES (NULL, 4, 'images/guitars/4/5.jpg');
+INSERT INTO PICTURE VALUES (NULL, 4, 'images/guitars/4/6.jpg');
+INSERT INTO PICTURE VALUES (NULL, 4, 'images/guitars/4/7.jpg');
+INSERT INTO PICTURE VALUES (NULL, 4, 'images/guitars/4/8.jpg');
+INSERT INTO PICTURE VALUES (NULL, 4, 'images/guitars/4/9.jpg');
+INSERT INTO PICTURE VALUES (NULL, 4, 'images/guitars/4/10.jpg');
+
 # Views #
 
 # This Query Reutrns a list of all Customers, their details and number of open and closed orders.
