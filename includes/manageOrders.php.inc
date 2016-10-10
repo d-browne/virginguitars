@@ -102,7 +102,7 @@ $searchString = "orderid=".$orderid."&invoicedate=".$invoicedate."&shippeddate="
                 <div class="inputField"><label>Shipping Record:</label> <input class="textBox" name="shippingrecord" type="text" placeholder="e.g. 23532" value="<?php echo $shippingrecord ?>"/></div>
                 <div class="inputField">
                     <label>Order Status:</label> 
-                    <select name="orderstatus">
+                    <select name="orderstatus" id="orderStatusSelector">
                         <option value="">Select...</option>
                         <option value="Requested" <?php if ($orderstatus === "Requested") {echo "selected";} ?>>Requested</option>
                         <option value="Processing" <?php if ($orderstatus === "Processing") {echo "selected";} ?>>Processing</option>

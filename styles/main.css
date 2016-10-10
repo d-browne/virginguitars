@@ -440,6 +440,10 @@ em {
 	color: #3A1355;
 }
 
+#orderStatusSelector {
+	width: inherit;
+}
+
 /*This element streches the bottom to make room for my button, hacky but can't think of a better way*/
 #stretcher {
 	width: 100px;
