@@ -13,7 +13,8 @@ class ProductTest extends TestCase
     public function updateModelDataProvider()
     {
         return array(
-            array(1, "test", true)
+            array(1, "test", true),
+            array(1, "testttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt", "Model Too Long")
         );
     }
     
