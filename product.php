@@ -127,6 +127,7 @@ else
                 <div id="stretcher"></div>
                 <div id="bottomButtonsBox">
                     <form action="cart.html"><button class="formCSSButtonButton">Add Cart</button></form>
+                    <button type="button" onclick="window.history.back()" class="formCSSButtonButton">Back</button>
                 </div>
 
             </div>
