@@ -139,7 +139,7 @@ create table ORDER_PRODUCT (
 create table PICTURE (
 	PictureID int(4) PRIMARY KEY AUTO_INCREMENT,
     ProductFK int(7) NOT NULL,
-    Image VarChar(100) NOT NULL,
+    ImagePath VarChar(100) NOT NULL,
     FOREIGN KEY (ProductFK) REFERENCES PRODUCT(ProductID)
 )ENGINE=InnoDB;
 
