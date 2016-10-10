@@ -10,12 +10,49 @@ require_once 'classes/Product.php';
 
 class ProductTest extends TestCase 
 {
+    public function updateModelDataProvider()
+    {
+        return array(
+            array(1, "test", true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider updateModelDataProvider
+     */
+    public function testUpdateModel($ProductID, $Model, $expected)
+    {
+        // Create product object
+        $product = new Product($ProductID);
+        
+        // backup current model
+        $modelBackup = $product->getModel();
+        
+        // Update model
+        $this->assertEquals($expected, $product->setModel($Model));
+        
+        // If true check in memory and in database
+        if ($expected === true)
+        {
+            // Check in memory
+            $this->assertEquals($Model, $product->getModel());
+            
+            // Check in database (using new object)
+            $product2 = new Product($ProductID);
+            $this->assertEquals($Model, $product2->getModel());
+        }
+        
+        // Restore backup
+        $product->setModel($modelBackup);
+    }
     
     public function getterDataProvider()
     {
         return array(
-            array(1, 1, "images/guitars/fenderAmericanStandardStratocaster/1.jpg", "Fender", "Electric Guitar", 4, "status1", "Specifications", "Brand New", 802.27, "Hard case",
-                "American Standard Stratocaster", "admin", "admin", "2016-09-14", "2016-09-14")
+            array(1, 1, "images/guitars/fenderAmericanStandardStratocaster/1.jpg", "Fender", "Electric Guitar", 4, "In Stock", "Gorgeous sounding 2006 American Standard Stratocaster. It has a very comfortable feel and the pickups sound stellar. This guitar features a few upgraded parts including a Callaham bridge and Sperzel tuners; both of which help with intonation and overall sustain. On top of all of that, the guitar is in great overall shape!",
+                "Brand New", 802.27, "Hard case",
+                "American Standard Stratocaster", "admin", "admin", "2016-10-10", "2016-10-10")
         );
     }
     
