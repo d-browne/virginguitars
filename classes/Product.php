@@ -29,6 +29,40 @@ class Product
     private $CreationDate;
     private $ModifiedDate;
     
+    public function setModel($inputModel)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // sanitize input
+        $Model = mysqli_real_escape_string($dataConnection, $inputModel);
+        
+        // Return error if input too long
+        if (iconv_strlen($Model) > 100)
+        {
+            return "Model Too Long";
+        }
+        
+        // Query to update model
+        $query = "UPDATE MODEL JOIN PRODUCT ON MODEL.ModelID = PRODUCT.ModelFK SET MODEL.Description='".$Model."' WHERE PRODUCT.ProductID='".$this->ProductID."'";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to update Model";
+        }
+        
+        // Update object in memory
+        $this->Model = $Model;
+        
+        // All OK return true
+        return true;
+    }
+    
     // Class constructor
     public function __construct($ProductIDInput) 
     {   
