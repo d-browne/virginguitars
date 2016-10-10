@@ -40,10 +40,34 @@ else
     $errorString = "A product ID must be specified...";
 }
 
+// places holder for success and error strings
+$updateSuccessString = "";
+$updateErrorString = "";
+
 ?>
 
 <div id="contentBox">
     <?php if (!isset($errorString)): // Display page if no erros ?>
+    <?php     // Handle updates
+    // Check if updated button pressed
+    if (isset($_POST['updateButton']))
+    {
+        // Update Model if changed
+        if ($product->getModel() !== $_POST['Model'])
+        {
+            // Try to update model
+            $updateModelResult = $product->setModel($_POST['Model']);
+            if ($updateModelResult === true)
+            {
+                $updateSuccessString = $updateSuccessString."Updated Model, ";
+            }
+            else
+            {
+                $updateErrorString = $updateErrorString.$updateModelResult;
+            }
+        }
+    }
+    ?>
     <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST">
     <div id="leftColumn">
         <!-- Image slider code goes in here -->
@@ -92,7 +116,7 @@ else
     
     <div id="rightColumn">
         <h1>Edit Product</h1>
-        <p><span id="updatedMemberLabel">Success placeholder</span> <span id="updatedMemberErrorLabel">Error placeholder</span></p>
+        <p><span id="updatedMemberLabel"><?php echo $updateSuccessString; ?></span> <span id="updatedMemberErrorLabel"><?php echo $updateErrorString; ?></span></p>
         <fieldset class="inputFieldSet">
             <legend>Admin Details</legend>
                 <div class="inputField"><label>ProductID:</label> <input class="textBox" type="text" value="<?php echo $product->getProductID(); ?>" disabled="true"/></div>
@@ -100,14 +124,14 @@ else
                 <div class="inputField"><label>Modified By:</label> <input class="textBox" type="text" value="<?php echo $product->getModifiedBy(); ?>" disabled="true"/></div>
                 <div class="inputField"><label>Creation Date:</label> <input class="textBox" type="text" value="<?php echo $product->getCreationDate(); ?>" disabled="true"/></div>
                 <div class="inputField"><label>Modified Date:</label> <input class="textBox" type="text" value="<?php echo $product->getModifiedDate(); ?>" disabled="true"/></div>
-                <div class="inputField"><input class="submitButton" type="submit" value="Delete" /></div>
+                <div class="inputField"><input class="submitButton" name="deleteButton" type="submit" value="Delete" /></div>
         </fieldset>
 
         <fieldset class="inputFieldSet">
             <legend>Product Details</legend>
                 <div class="inputField"><label>Primary Image :</label><img src="<?php echo $product->getPrimaryPicturePath(); ?>" alt="<?php echo $product->getModel(); ?>" width="100"><span class="imageInstructions"> (preferably square ratio)</span></div>
                 <div class="inputField"><label>Upload :</label> <input type="file" /></div>
-                <div class="inputField"><label>Model:</label> <input class="textBox" type="text" value="<?php echo $product->getModel(); ?>" placeholder="e.g. Fender Standard Stratocaster" /></div>
+                <div class="inputField"><label>Model:</label> <input class="textBox" type="text" name="Model" value="<?php echo $product->getModel(); ?>" placeholder="e.g. Fender Standard Stratocaster" /></div>
                 <div class="inputField"><label>Brand:</label> 
                     <select>
                         <?php
@@ -216,7 +240,7 @@ else
                         ?>
                     </select>
                 </div>
-                <div class="inputField"><input class="submitButton" type="submit" value="Update" /></div>
+                <div class="inputField"><input class="submitButton" name="updateButton" type="submit" value="Update" /></div>
         </fieldset>
 
         <fieldset class="inputFieldSet" id="stockDetailsFieldSet">
@@ -250,7 +274,7 @@ else
                 </div>
                 <div class="inputField"><label>Price:</label> <input class="textBox" type="text" value="<?php echo $product->getPrice(); ?>" placeholder="e.g. 1001.20" /></div>
                 <div class="inputField"><label>Quantity:</label> <input class="textBox" type="text" value="<?php echo $product->getQuantity(); ?>" placeholder="e.g. 1" /></div>
-                <div class="inputField"><input class="submitButton" type="submit" value="Update" /></div>
+                <div class="inputField"><input class="submitButton" type="submit" name="updateButton" value="Update" /></div>
         </fieldset>
 
 
@@ -265,7 +289,7 @@ else
         </fieldset>
     </div>
     <div id="bottomButtonsBox">
-        <button class="formCSSButtonButton">Update</button>
+        <button class="formCSSButtonButton" name="updateButton" type="submit">Update</button>
     
         <button type="submit" name="viewProductButton" value="<?php echo $product->getProductID(); ?>" class="formCSSButtonButton">View</button>
         <button type="button" onclick="window.history.back()" class="formCSSButtonButton">Back</button>
