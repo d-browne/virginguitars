@@ -222,7 +222,7 @@ INSERT INTO PRODUCT_STATUS VALUES (NULL, 'status2');
 INSERT INTO ADMINISTRATOR VALUES (NULL, 'admin', 'd23c1038532dc71d0a60a7fb3d330d7606b7520e9e5ee0ddcdb27ee1bd5bc0cd', '22');
 INSERT INTO ADMINISTRATOR VALUES (NULL, 'zerox', '2efe70f52e3b1d8dbc8b5325cf96e16d1cfbdb3dbb56cfd9dab51c735b0266fc', '34');
 
-INSERT INTO PRODUCT VALUES (NULL, 2, 1, 4, 1, 'Specifications', 1, '802.27', 1, 1, 1, 1, CURDATE(), CURDATE(), 'images/guitars/fenderAmericanStandardStratocaster/1.jpg');
+INSERT INTO PRODUCT VALUES (NULL, 2, 1, 4, 1, 'Gorgeous sounding 2006 American Standard Stratocaster. It has a very comfortable feel and the pickups sound stellar. This guitar features a few upgraded parts including a Callaham bridge and Sperzel tuners; both of which help with intonation and overall sustain. On top of all of that, the guitar is in great overall shape!', 1, '802.27', 1, 1, 1, 1, CURDATE(), CURDATE(), 'images/guitars/fenderAmericanStandardStratocaster/1.jpg');
 INSERT INTO PRODUCT VALUES (NULL, 2, 1, 5, 1, 'Specifications', 1, '789.00', 2, 2, 1, 1, CURDATE(), CURDATE(), 'images/guitars/fenderSquireMijStratocaster/1.jpg');
 INSERT INTO PRODUCT VALUES (NULL, 2, 3, 1, 1, 'Specifications', 1, '635.25', 2, 3, 1, 1, CURDATE(), CURDATE(), 'images/guitars/gibsonEpiphoneLimitedEditionLesPaulCustom/1.jpg');
 INSERT INTO PRODUCT VALUES (NULL, 2, 3, 2, 1, 'Specifications', 1, '731.86', 1, 4, 1, 1, CURDATE(), CURDATE(), 'images/guitars/gibsonLesPaultStudio/1.jpg');
