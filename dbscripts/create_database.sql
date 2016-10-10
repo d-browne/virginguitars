@@ -370,6 +370,12 @@ INSERT INTO PICTURE VALUES (NULL, 7, 'images/guitars/7/4.jpg');
 INSERT INTO PICTURE VALUES (NULL, 7, 'images/guitars/7/5.jpg');
 
 # Product 8 images
+INSERT INTO PICTURE VALUES (NULL, 9, 'images/guitars/9/1.jpg');
+INSERT INTO PICTURE VALUES (NULL, 9, 'images/guitars/9/2.jpg');
+INSERT INTO PICTURE VALUES (NULL, 9, 'images/guitars/9/3.jpg');
+INSERT INTO PICTURE VALUES (NULL, 9, 'images/guitars/9/4.jpg');
+
+# Product 9 images
 INSERT INTO PICTURE VALUES (NULL, 8, 'images/guitars/8/1.jpg');
 INSERT INTO PICTURE VALUES (NULL, 8, 'images/guitars/8/2.jpg');
 INSERT INTO PICTURE VALUES (NULL, 8, 'images/guitars/8/3.jpg');
