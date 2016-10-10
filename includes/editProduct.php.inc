@@ -34,23 +34,10 @@ else
     $errorString = "A product ID must be specified...";
 }
 
-
-
-
-
-if (isset($errorString))
-{
-    echo "Error: ".$errorString;
-}
-else
-{
-    echo "No errors occured";
-}
-
 ?>
 
 <div id="contentBox">
-
+    <?php if (!isset($errorString)): // Display page if no erros ?>
     <div id="leftColumn">
         <!-- Image slider code goes in here -->
         <div id="sliderFrame">
@@ -288,4 +275,7 @@ else
         <form action="cart.html"><button class="formCSSButtonButton">View</button></form>
         <form action="orders.html"><button class="formCSSButtonButton">Back</button></form>
     </div>
+    <?php else: ?>
+    <span><?php echo htmlspecialchars($errorString); // Displays error message and strips special html characters ?></span>
+    <?php endif; ?>
 </div>
