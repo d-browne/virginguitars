@@ -302,7 +302,11 @@ $updateErrorString = "";
                 $updateErrorString = $updateErrorString."Rotator image must be an image file of .jpg, .png or .gif, ";
             }
         }
-        
+        // Check if delete last button pressed
+        if ($_POST['updateButton'] === "deleteLastButton")
+        {
+            echo "delete last button pressed";
+        }
     }
     ?>
     <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST" enctype="multipart/form-data" style="display: inline;">
@@ -346,7 +350,8 @@ $updateErrorString = "";
                 <legend>Upload Rotator Image</legend>
                 <span class="imageInstructions">Images should be 255x600px</span>
                     <input type="file" name="RotatorImage" />
-                    <button type="submit" name="updateButton">Delete Last</button>
+                    <button type="submit" name="updateButton" hidden="true">Hidden Button</button>
+                    <button type="submit" name="updateButton" value="deleteLastButton">Delete Last</button>
             </fieldset>
         </div>
     </div>
