@@ -80,6 +80,20 @@ $updateErrorString = "";
                 $updateErrorString = $updateErrorString.$updateBrandResult.", ";
             }
         }
+        // Update Type if changed
+        if ($product->getType() !== $_POST['Type'])
+        {
+            // Try to update Type
+            $updateTypeResult = $product->setType($_POST['Type']);
+            if ($updateTypeResult === true)
+            {
+                $updateSuccessString = $updateSuccessString."Updated Type, ";
+            }
+            else
+            {
+                $updateErrorString = $updateErrorString.$updateTypeResult.", ";
+            }
+        }
     }
     ?>
     <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST">
@@ -174,7 +188,7 @@ $updateErrorString = "";
                     </select>
                 </div>
                 <div class="inputField"><label>Type:</label> 
-                    <select>
+                    <select name="Type">
                         <?php
                         // Query database for all Types
                         $query = "SELECT Type FROM CLASSIFICATION";
