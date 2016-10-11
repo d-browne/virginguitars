@@ -164,6 +164,20 @@ $updateErrorString = "";
                 $updateErrorString = $updateErrorString.$updateQuantityResult.", ";
             }
         }
+        // Update Description if changed
+        if ($product->getDescription() !== $_POST['Description'])
+        {
+            // Try to update Description
+            $updateDescriptionResult = $product->setDescription($_POST['Description']);
+            if ($updateDescriptionResult === true)
+            {
+                $updateSuccessString = $updateSuccessString."Updated Description, ";
+            }
+            else
+            {
+                $updateErrorString = $updateErrorString.$updateDescriptionResult.", ";
+            }
+        }
     }
     ?>
     <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST">
@@ -382,7 +396,7 @@ $updateErrorString = "";
         <fieldset class="inputFieldSet" id="aboutUsBlurbFieldSet">
             <legend>Edit Product Description</legend>
             <div class="controlPanelSection" id="faqEditorBox">
-                <textarea name="aboutUsBlurb"><?php echo $product->getDescription(); ?></textarea>
+                <textarea name="Description"><?php echo $product->getDescription(); ?></textarea>
             </div>
         </fieldset>
     </div>
