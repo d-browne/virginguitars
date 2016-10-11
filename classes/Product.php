@@ -29,6 +29,40 @@ class Product
     private $CreationDate;
     private $ModifiedDate;
     
+    public function setDescription($inputDescription)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // sanitize input
+        $Description = mysqli_real_escape_string($dataConnection, $inputDescription);
+        
+        // Return error if input too long
+        if (iconv_strlen($Description) > 65534)
+        {
+            return "Description Too Long";
+        }
+        
+        // Query to update Description
+        $query = "UPDATE PRODUCT SET PRODUCT.Description='".$Description."' WHERE PRODUCT.ProductID='".$this->ProductID."'";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to update Description";
+        }
+        
+        // Update object in memory
+        $this->Description = $Description;
+        
+        // All OK return true
+        return true;
+    }
+    
     public function setQuantity($inputQuantity)
     {
         // Create data connection
