@@ -63,7 +63,7 @@ $updateErrorString = "";
             }
             else
             {
-                $updateErrorString = $updateErrorString.$updateModelResult;
+                $updateErrorString = $updateErrorString.$updateModelResult.", ";
             }
         }
     }
@@ -109,7 +109,7 @@ $updateErrorString = "";
                 <legend>Upload Rotator Images</legend>
                 <span class="imageInstructions">Images should be 255x600px</span>
                     <input type="file" name="imageFiles" />
-                    <button>Clear</button>
+                    <button type="submit" name="updateButton">Clear</button>
             </fieldset>
         </div>
     </div>
@@ -124,7 +124,7 @@ $updateErrorString = "";
                 <div class="inputField"><label>Modified By:</label> <input class="textBox" type="text" value="<?php echo $product->getModifiedBy(); ?>" disabled="true"/></div>
                 <div class="inputField"><label>Creation Date:</label> <input class="textBox" type="text" value="<?php echo $product->getCreationDate(); ?>" disabled="true"/></div>
                 <div class="inputField"><label>Modified Date:</label> <input class="textBox" type="text" value="<?php echo $product->getModifiedDate(); ?>" disabled="true"/></div>
-                <div class="inputField"><input class="submitButton" name="deleteButton" type="submit" value="Delete" /></div>
+                <div class="inputField"><input class="submitButton" name="updateButton" type="submit" value="Delete" /></div>
         </fieldset>
 
         <fieldset class="inputFieldSet">
