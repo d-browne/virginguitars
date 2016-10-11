@@ -193,9 +193,7 @@ $updateErrorString = "";
             // Create directory if it doesn't yet exist
             if (!file_exists($imageDirectory))
             {
-                $old_umask = umask(0);
-                mkdir($imageDirectory, 0777);
-                umask($old_umask);
+                mkdir($imageDirectory);
             }
             
             // Get extension
