@@ -63,7 +63,7 @@ class Product
         }
         
         // Update object in memory
-        $this->Quantity = $Quantity;
+        $this->Quantity = round($Quantity);
         
         // All OK return true
         return true;
