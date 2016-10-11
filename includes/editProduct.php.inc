@@ -193,7 +193,7 @@ $updateErrorString = "";
             // Create directory if it doesn't yet exist
             if (!file_exists($imageDirectory))
             {
-                mkdir($imageDirectory);
+                mkdir($imageDirectory, 0777);
             }
             
             // Get extension
@@ -205,7 +205,7 @@ $updateErrorString = "";
             // Delete old image if already exists
             if (file_exists($imageLocation))
             {
-                unlink($imageLocation, 0777);
+                unlink($imageLocation);
             }
             
             // Check if file is an image
