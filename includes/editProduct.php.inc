@@ -318,7 +318,7 @@ $updateErrorString = "";
         if ($_POST['updateButton'] === "deleteLastButton")
         {
             // Query database for last added rotator image
-            $query = "SELECT * FROM Picture WHERE ProductFK='".$product->getProductID()."' ORDER BY PictureID desc";
+            $query = "SELECT * FROM PICTURE WHERE ProductFK='".$product->getProductID()."' ORDER BY PictureID desc";
             
             // Execute Query
             $result = $dataConnection->query($query);
