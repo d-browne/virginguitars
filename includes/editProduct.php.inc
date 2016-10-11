@@ -122,6 +122,20 @@ $updateErrorString = "";
                 $updateErrorString = $updateErrorString.$updateCaseTypeResult.", ";
             }
         }
+        // Update Status if changed
+        if ($product->getStatus() !== $_POST['Status'])
+        {
+            // Try to update Status
+            $updateStatusResult = $product->setStatus($_POST['Status']);
+            if ($updateStatusResult === true)
+            {
+                $updateSuccessString = $updateSuccessString."Updated Status, ";
+            }
+            else
+            {
+                $updateErrorString = $updateErrorString.$updateStatusResult.", ";
+            }
+        }
     }
     ?>
     <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST">
@@ -302,7 +316,7 @@ $updateErrorString = "";
         <fieldset class="inputFieldSet" id="stockDetailsFieldSet">
             <legend>Stock Details</legend>
                 <div class="inputField"><label>Status:</label> 
-                    <select>
+                    <select name="Status">
                         <?php
                         // Query database for status
                         $query = "SELECT Description FROM PRODUCT_STATUS";
