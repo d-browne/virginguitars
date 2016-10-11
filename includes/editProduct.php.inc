@@ -215,11 +215,11 @@ $updateErrorString = "";
                         $product->setPrimaryPicturePath($imageLocation);
                         
                         // Display uploaded correctly message
-                        $updateSuccessString = $updateSuccessString."File uploaded, ";
+                        $updateSuccessString = $updateSuccessString."Primrary image uploaded, ";
                     }
                     else
                     {
-                        $updateErrorString = $updateErrorString."File not uploaded, ";
+                        $updateErrorString = $updateErrorString."Primary image not uploaded, ";
                     }
                 }
                 else
