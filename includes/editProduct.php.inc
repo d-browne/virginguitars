@@ -136,6 +136,20 @@ $updateErrorString = "";
                 $updateErrorString = $updateErrorString.$updateStatusResult.", ";
             }
         }
+        // Update Price if changed
+        if ($product->getPrice() !== $_POST['Price'])
+        {
+            // Try to update Price
+            $updatePriceResult = $product->setPrice($_POST['Price']);
+            if ($updatePriceResult === true)
+            {
+                $updateSuccessString = $updateSuccessString."Updated Price, ";
+            }
+            else
+            {
+                $updateErrorString = $updateErrorString.$updatePriceResult.", ";
+            }
+        }
     }
     ?>
     <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST">
@@ -342,7 +356,7 @@ $updateErrorString = "";
                         ?>
                     </select>
                 </div>
-                <div class="inputField"><label>Price:</label> <input class="textBox" type="text" value="<?php echo $product->getPrice(); ?>" placeholder="e.g. 1001.20" /></div>
+                <div class="inputField"><label>Price:</label> <input class="textBox" type="text" name="Price" value="<?php echo $product->getPrice(); ?>" placeholder="e.g. 1001.20" /></div>
                 <div class="inputField"><label>Quantity:</label> <input class="textBox" type="text" value="<?php echo $product->getQuantity(); ?>" placeholder="e.g. 1" /></div>
                 <div class="inputField"><input class="submitButton" type="submit" name="updateButton" value="Update" /></div>
         </fieldset>
