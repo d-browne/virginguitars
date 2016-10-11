@@ -29,6 +29,55 @@ class Product
     private $CreationDate;
     private $ModifiedDate;
     
+    public function setStatus($inputStatus)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // sanitize input
+        $Status = mysqli_real_escape_string($dataConnection, $inputStatus);
+        
+        // Query to check if Status exists 
+        $query = "SELECT ProductStatusID FROM PRODUCT_STATUS WHERE Description = '".$Status."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to check if Status exists";
+        }
+        
+        // Return error if no result returned
+        if ($result->num_rows < 1)
+        {
+            return "Specified Status does not exist";
+        }
+        
+        // Get Status id
+        $StatusID = $result->fetch_assoc()['ProductStatusID'];
+        
+        // Query to update Status
+        $query = "UPDATE PRODUCT JOIN PRODUCT_STATUS ON PRODUCT_STATUS.ProductStatusID = PRODUCT.StatusFK SET PRODUCT.StatusFK = '".$StatusID."' WHERE PRODUCT.ProductID = '".$this->ProductID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return error if query fails
+        if ($result === false)
+        {
+            return "Unable to update Status";
+        }
+        
+        // update Status in memory
+        $this->Status = $Status;
+        
+        // All OK return true
+        return true;
+    }
+    
     public function setCaseType($inputCaseType)
     {
         // Create data connection
