@@ -11,6 +11,12 @@ if (isset($_POST['viewProductButton']))
     header("Location: product.php?id=".$_POST['viewProductButton']);
 }
 
+// Prevent resubmit form on back button press
+header_remove("Expires");
+header_remove("Cache-Control");
+header_remove("Pragma");
+header_remove("Last-Modified");
+
 // get a data connection
 $database = new Database();
 $dataConnection = $database->getDataConnection();
