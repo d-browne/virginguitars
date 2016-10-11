@@ -11,6 +11,47 @@ require_once 'classes/Product.php';
 class ProductTest extends TestCase 
 {
     
+    public function setPriceDataProvider()
+    {
+        return array(
+            array(1, 121, true),
+            array(1, "123", true),
+            array(1, "44434.344", "Unable to update Price"),
+            array(1, "blah blah", "Price Not Numeric"),
+            array(1, -100, true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setPriceDataProvider
+     */
+    public function testSetPrice($ProductID, $Price, $expected)
+    {
+        // Create product object
+        $product = new Product($ProductID);
+        
+        // backup current Price
+        $PriceBackup = $product->getPrice();
+        
+        // Update Price
+        $this->assertEquals($expected, $product->setPrice($Price));
+        
+        // If true check in memory and in database
+        if ($expected === true)
+        {
+            // Check in memory
+            $this->assertEquals($Price, $product->getPrice());
+            
+            // Check in database (using new object)
+            $product2 = new Product($ProductID);
+            $this->assertEquals($Price, $product2->getPrice());
+        }
+        
+        // Restore backup
+        $product->setPrice($PriceBackup);
+    }
+    
     public function setStatusDataProvider()
     {
         return array(
