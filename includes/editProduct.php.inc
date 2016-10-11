@@ -66,6 +66,20 @@ $updateErrorString = "";
                 $updateErrorString = $updateErrorString.$updateModelResult.", ";
             }
         }
+        // Update Brand if changed
+        if ($product->getBrand() !== $_POST['Brand'])
+        {
+            // Try to update brand
+            $updateBrandResult = $product->setBrand($_POST['Brand']);
+            if ($updateBrandResult === true)
+            {
+                $updateSuccessString = $updateSuccessString."Updated Brand, ";
+            }
+            else
+            {
+                $updateErrorString = $updateErrorString.$updateBrandResult.", ";
+            }
+        }
     }
     ?>
     <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST">
@@ -133,7 +147,7 @@ $updateErrorString = "";
                 <div class="inputField"><label>Upload :</label> <input type="file" /></div>
                 <div class="inputField"><label>Model:</label> <input class="textBox" type="text" name="Model" value="<?php echo $product->getModel(); ?>" placeholder="e.g. Fender Standard Stratocaster" /></div>
                 <div class="inputField"><label>Brand:</label> 
-                    <select>
+                    <select name="Brand">
                         <?php
                         // Query database for all Brands
                         $query = "SELECT BrandName FROM BRAND";
