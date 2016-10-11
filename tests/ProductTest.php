@@ -11,6 +11,46 @@ require_once 'classes/Product.php';
 class ProductTest extends TestCase 
 {
     
+    public function setQuantityDataProvider()
+    {
+        return array(
+            array(1, 121, true),
+            array(1, "123", true),
+            array(1, "blah blah", "Quantity Not Numeric"),
+            array(1, -100, "Quantity cannot be less than 0")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setQuantityDataProvider
+     */
+    public function testSetQuantity($ProductID, $Quantity, $expected)
+    {
+        // Create product object
+        $product = new Product($ProductID);
+        
+        // backup current Quantity
+        $QuantityBackup = $product->getQuantity();
+        
+        // Update Quantity
+        $this->assertEquals($expected, $product->setQuantity($Quantity));
+        
+        // If true check in memory and in database
+        if ($expected === true)
+        {
+            // Check in memory
+            $this->assertEquals($Quantity, $product->getQuantity());
+            
+            // Check in database (using new object)
+            $product2 = new Product($ProductID);
+            $this->assertEquals($Quantity, $product2->getQuantity());
+        }
+        
+        // Restore backup
+        $product->setQuantity($QuantityBackup);
+    }
+    
     public function setPriceDataProvider()
     {
         return array(
