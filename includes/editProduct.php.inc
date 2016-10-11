@@ -244,6 +244,12 @@ $updateErrorString = "";
             // Define Location of image directory
             $imageDirectory = "images/guitars/".$product->getProductID()."/";
             
+            // Create directory if it doesn't yet exist
+            if (!file_exists($imageDirectory))
+            {
+                mkdir($imageDirectory);
+            }
+            
             // Get extension
             $extention = pathinfo($_FILES['RotatorImage']['name'], PATHINFO_EXTENSION);
             
