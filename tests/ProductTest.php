@@ -18,7 +18,7 @@ class ProductTest extends TestCase
             array(1, "123", true),
             array(1, "44434.344", "Unable to update Price"),
             array(1, "blah blah", "Price Not Numeric"),
-            array(1, -100, true)
+            array(1, -100, "Price cannot be less than $0")
         );
     }
     

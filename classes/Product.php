@@ -44,6 +44,12 @@ class Product
             return "Price Not Numeric";
         }
         
+        // Return error if price is less than 0
+        if ($Price < 0)
+        {
+            return "Price cannot be less than $0";
+        }
+        
         // Query to update Price
         $query = "UPDATE PRODUCT SET UnitPrice='".$Price."' WHERE PRODUCT.ProductID='".$this->ProductID."'";
         
