@@ -29,6 +29,55 @@ class Product
     private $CreationDate;
     private $ModifiedDate;
     
+    public function setCaseType($inputCaseType)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // sanitize input
+        $CaseType = mysqli_real_escape_string($dataConnection, $inputCaseType);
+        
+        // Query to check if CaseType exists 
+        $query = "SELECT CaseTypeID FROM CASE_TYPE WHERE Description = '".$CaseType."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to check if CaseType exists";
+        }
+        
+        // Return error if no result returned
+        if ($result->num_rows < 1)
+        {
+            return "Specified CaseType does not exist";
+        }
+        
+        // Get CaseType id
+        $CaseTypeID = $result->fetch_assoc()['CaseTypeID'];
+        
+        // Query to update CaseType
+        $query = "UPDATE PRODUCT JOIN CASE_TYPE ON CASE_TYPE.CaseTypeID = PRODUCT.CaseTypeFK SET PRODUCT.CaseTypeFK = '".$CaseTypeID."' WHERE PRODUCT.ProductID = '".$this->ProductID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return error if query fails
+        if ($result === false)
+        {
+            return "Unable to update CaseType";
+        }
+        
+        // update CaseType in memory
+        $this->CaseType = $CaseType;
+        
+        // All OK return true
+        return true;
+    }
+    
     public function setCondition($inputCondition)
     {
         // Create data connection
