@@ -171,7 +171,8 @@ class Product
         }
         
         // Get Status id
-        $StatusID = $result->fetch_assoc()['ProductStatusID'];
+        $row = $result->fetch_assoc();
+        $StatusID = $row['ProductStatusID'];
         
         // Query to update Status
         $query = "UPDATE PRODUCT JOIN PRODUCT_STATUS ON PRODUCT_STATUS.ProductStatusID = PRODUCT.StatusFK SET PRODUCT.StatusFK = '".$StatusID."' WHERE PRODUCT.ProductID = '".$this->ProductID."';";
@@ -220,7 +221,8 @@ class Product
         }
         
         // Get CaseType id
-        $CaseTypeID = $result->fetch_assoc()['CaseTypeID'];
+        $row = $result->fetch_assoc();
+        $CaseTypeID = $row['CaseTypeID'];
         
         // Query to update CaseType
         $query = "UPDATE PRODUCT JOIN CASE_TYPE ON CASE_TYPE.CaseTypeID = PRODUCT.CaseTypeFK SET PRODUCT.CaseTypeFK = '".$CaseTypeID."' WHERE PRODUCT.ProductID = '".$this->ProductID."';";
@@ -269,7 +271,8 @@ class Product
         }
         
         // Get Condition id
-        $ConditionID = $result->fetch_assoc()['AppearenceID'];
+        $row = $result->fetch_assoc();
+        $ConditionID = $row['AppearenceID'];
         
         // Query to update Condition
         $query = "UPDATE PRODUCT JOIN APPEARENCE ON APPEARENCE.AppearenceID = PRODUCT.AppearenceFK SET PRODUCT.AppearenceFK = '".$ConditionID."' WHERE PRODUCT.ProductID = '".$this->ProductID."';";
@@ -318,7 +321,8 @@ class Product
         }
         
         // Get Type id
-        $TypeID = $result->fetch_assoc()['ClassificationID'];
+        $row = $result->fetch_assoc();
+        $TypeID = $row['ClassificationID'];
         
         // Query to update Type
         $query = "UPDATE PRODUCT JOIN CLASSIFICATION ON CLASSIFICATION.ClassificationID = PRODUCT.ClassificationFK SET PRODUCT.ClassificationFK = '".$TypeID."' WHERE PRODUCT.ProductID = '".$this->ProductID."';";
@@ -367,7 +371,8 @@ class Product
         }
         
         // Get brand id
-        $BrandID = $result->fetch_assoc()['BrandID'];
+        $row = $result->fetch_assoc();
+        $BrandID = $row['BrandID'];
         
         // Query to update brand
         $query = "UPDATE PRODUCT JOIN BRAND ON BRAND.BrandID = PRODUCT.BrandFK SET PRODUCT.BrandFK = '".$BrandID."' WHERE PRODUCT.ProductID = '".$this->ProductID."';";
