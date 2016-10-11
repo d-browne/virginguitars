@@ -205,7 +205,7 @@ $updateErrorString = "";
             // Delete old image if already exists
             if (file_exists($imageLocation))
             {
-                unlink($imageLocation);
+                unlink($imageLocation, 0644);
             }
             
             // Check if file is an image
