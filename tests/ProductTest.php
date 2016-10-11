@@ -11,6 +11,45 @@ require_once 'classes/Product.php';
 class ProductTest extends TestCase 
 {
     
+    public function setCaseTypeDataProvider()
+    {
+        return array(
+            array(1, "Hard case", true),
+            array(1, "Soft case", true),
+            array(1, "blah blah", "Specified CaseType does not exist")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setCaseTypeDataProvider
+     */
+    public function testSetCaseType($ProductID, $CaseType, $expected)
+    {
+        // Create product object
+        $product = new Product($ProductID);
+        
+        // backup current CaseType
+        $CaseTypeBackup = $product->getCaseType();
+        
+        // Update CaseType
+        $this->assertEquals($expected, $product->setCaseType($CaseType));
+        
+        // If true check in memory and in database
+        if ($expected === true)
+        {
+            // Check in memory
+            $this->assertEquals($CaseType, $product->getCaseType());
+            
+            // Check in database (using new object)
+            $product2 = new Product($ProductID);
+            $this->assertEquals($CaseType, $product2->getCaseType());
+        }
+        
+        // Restore backup
+        $product->setCaseType($CaseTypeBackup);
+    }
+    
     public function setConditionDataProvider()
     {
         return array(
