@@ -10,6 +10,46 @@ require_once 'classes/Product.php';
 
 class ProductTest extends TestCase 
 {
+    public function setDescriptionDataProvider()
+    {
+        return array(
+            array(1, 121, true),
+            array(1, "123", true),
+            array(1, "blah blah", true),
+            array(1, null, true),
+            array(1, str_repeat("a", 65535), "Description Too Long")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setDescriptionDataProvider
+     */
+    public function testSetDescription($ProductID, $Description, $expected)
+    {
+        // Create product object
+        $product = new Product($ProductID);
+        
+        // backup current Description
+        $DescriptionBackup = $product->getDescription();
+        
+        // Update Description
+        $this->assertEquals($expected, $product->setDescription($Description));
+        
+        // If true check in memory and in database
+        if ($expected === true)
+        {
+            // Check in memory
+            $this->assertEquals($Description, $product->getDescription());
+            
+            // Check in database (using new object)
+            $product2 = new Product($ProductID);
+            $this->assertEquals($Description, $product2->getDescription());
+        }
+        
+        // Restore backup
+        $product->setDescription($DescriptionBackup);
+    }
     
     public function setQuantityDataProvider()
     {
