@@ -11,6 +11,47 @@ require_once 'classes/Product.php';
 class ProductTest extends TestCase 
 {
     
+    public function setConditionDataProvider()
+    {
+        return array(
+            array(1, "Brand New", true),
+            array(1, "New: Never Used", true),
+            array(1, "Refurbished", true),
+            array(1, "Used", true),
+            array(1, "blah blah", "Specified Condition does not exist")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setConditionDataProvider
+     */
+    public function testSetCondition($ProductID, $Condition, $expected)
+    {
+        // Create product object
+        $product = new Product($ProductID);
+        
+        // backup current Condition
+        $ConditionBackup = $product->getCondition();
+        
+        // Update Condition
+        $this->assertEquals($expected, $product->setCondition($Condition));
+        
+        // If true check in memory and in database
+        if ($expected === true)
+        {
+            // Check in memory
+            $this->assertEquals($Condition, $product->getCondition());
+            
+            // Check in database (using new object)
+            $product2 = new Product($ProductID);
+            $this->assertEquals($Condition, $product2->getCondition());
+        }
+        
+        // Restore backup
+        $product->setCondition($ConditionBackup);
+    }
+    
     public function setTypeDataProvider()
     {
         return array(
