@@ -29,6 +29,46 @@ class Product
     private $CreationDate;
     private $ModifiedDate;
     
+    public function setQuantity($inputQuantity)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // sanitize input
+        $Quantity = mysqli_real_escape_string($dataConnection, $inputQuantity);
+        
+        // Return error if input not numeric
+        if (!is_numeric($Quantity))
+        {
+            return "Quantity Not Numeric";
+        }
+        
+        // Return error if Quantity is less than 0
+        if ($Quantity < 0)
+        {
+            return "Quantity cannot be less than 0";
+        }
+        
+        // Query to update Quantity
+        $query = "UPDATE PRODUCT SET Quantity='".$Quantity."' WHERE PRODUCT.ProductID='".$this->ProductID."'";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to update Quantity";
+        }
+        
+        // Update object in memory
+        $this->Quantity = $Quantity;
+        
+        // All OK return true
+        return true;
+    }
+    
     public function setPrice($inputPrice)
     {
         // Create data connection
