@@ -29,6 +29,55 @@ class Product
     private $CreationDate;
     private $ModifiedDate;
     
+    public function setType($inputType)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // sanitize input
+        $Type = mysqli_real_escape_string($dataConnection, $inputType);
+        
+        // Query to check if Type exists 
+        $query = "SELECT ClassificationID FROM CLASSIFICATION WHERE Type = '".$Type."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to check if Type exists";
+        }
+        
+        // Return error if no result returned
+        if ($result->num_rows < 1)
+        {
+            return "Specified Type does not exist";
+        }
+        
+        // Get Type id
+        $TypeID = $result->fetch_assoc()['ClassificationID'];
+        
+        // Query to update Type
+        $query = "UPDATE PRODUCT JOIN CLASSIFICATION ON CLASSIFICATION.ClassificationID = PRODUCT.ClassificationFK SET PRODUCT.ClassificationFK = '".$TypeID."' WHERE PRODUCT.ProductID = '".$this->ProductID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return error if query fails
+        if ($result === false)
+        {
+            return "Unable to update Type";
+        }
+        
+        // update Type in memory
+        $this->Type = $Type;
+        
+        // All OK return true
+        return true;
+    }
+    
     public function setBrand($inputBrand)
     {
         // Create data connection
