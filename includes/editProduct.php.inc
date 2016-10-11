@@ -108,6 +108,20 @@ $updateErrorString = "";
                 $updateErrorString = $updateErrorString.$updateConditionResult.", ";
             }
         }
+        // Update CaseType if changed
+        if ($product->getCaseType() !== $_POST['CaseType'])
+        {
+            // Try to update CaseType
+            $updateCaseTypeResult = $product->setCaseType($_POST['CaseType']);
+            if ($updateCaseTypeResult === true)
+            {
+                $updateSuccessString = $updateSuccessString."Updated CaseType, ";
+            }
+            else
+            {
+                $updateErrorString = $updateErrorString.$updateCaseTypeResult.", ";
+            }
+        }
     }
     ?>
     <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST">
@@ -256,7 +270,7 @@ $updateErrorString = "";
                     </select>
                 </div>
                 <div class="inputField"><label>Case:</label> 
-                    <select>
+                    <select name="CaseType">
                         <?php
                         // Query database for case types
                         $query = "SELECT Description FROM CASE_TYPE";
