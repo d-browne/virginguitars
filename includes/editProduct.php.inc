@@ -195,7 +195,7 @@ $updateErrorString = "";
             {
                 $old_umask = umask(0);
                 mkdir($imageDirectory, 0777);
-                umask($old_unmask);
+                umask($old_umask);
             }
             
             // Get extension
