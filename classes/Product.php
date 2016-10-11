@@ -29,6 +29,55 @@ class Product
     private $CreationDate;
     private $ModifiedDate;
     
+    public function setBrand($inputBrand)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // sanitize input
+        $Brand = mysqli_real_escape_string($dataConnection, $inputBrand);
+        
+        // Query to check if brand exists 
+        $query = "SELECT BrandID FROM BRAND WHERE BrandName = '".$Brand."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to check if brand exists";
+        }
+        
+        // Return error if no result returned
+        if ($result->num_rows < 1)
+        {
+            return "Specified brand does not exist";
+        }
+        
+        // Get brand id
+        $BrandID = $result->fetch_assoc()['BrandID'];
+        
+        // Query to update brand
+        $query = "UPDATE PRODUCT JOIN BRAND ON BRAND.BrandID = PRODUCT.BrandFK SET PRODUCT.BrandFK = '".$BrandID."' WHERE PRODUCT.ProductID = '".$this->ProductID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return error if query fails
+        if ($result === false)
+        {
+            return "Unable to update Brand";
+        }
+        
+        // update brand in memory
+        $this->Brand = $Brand;
+        
+        // All OK return true
+        return true;
+    }
+    
     public function setModel($inputModel)
     {
         // Create data connection
