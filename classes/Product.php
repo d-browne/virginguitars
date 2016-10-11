@@ -29,6 +29,55 @@ class Product
     private $CreationDate;
     private $ModifiedDate;
     
+    public function setCondition($inputCondition)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // sanitize input
+        $Condition = mysqli_real_escape_string($dataConnection, $inputCondition);
+        
+        // Query to check if Condition exists 
+        $query = "SELECT AppearenceID FROM APPEARENCE WHERE Description = '".$Condition."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to check if Condition exists";
+        }
+        
+        // Return error if no result returned
+        if ($result->num_rows < 1)
+        {
+            return "Specified Condition does not exist";
+        }
+        
+        // Get Condition id
+        $ConditionID = $result->fetch_assoc()['AppearenceID'];
+        
+        // Query to update Condition
+        $query = "UPDATE PRODUCT JOIN APPEARENCE ON APPEARENCE.AppearenceID = PRODUCT.AppearenceFK SET PRODUCT.AppearenceFK = '".$ConditionID."' WHERE PRODUCT.ProductID = '".$this->ProductID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return error if query fails
+        if ($result === false)
+        {
+            return "Unable to update Condition";
+        }
+        
+        // update Condition in memory
+        $this->Condition = $Condition;
+        
+        // All OK return true
+        return true;
+    }
+    
     public function setType($inputType)
     {
         // Create data connection
