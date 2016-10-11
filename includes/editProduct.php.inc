@@ -94,6 +94,20 @@ $updateErrorString = "";
                 $updateErrorString = $updateErrorString.$updateTypeResult.", ";
             }
         }
+        // Update Condition if changed
+        if ($product->getCondition() !== $_POST['Condition'])
+        {
+            // Try to update Condition
+            $updateConditionResult = $product->setCondition($_POST['Condition']);
+            if ($updateConditionResult === true)
+            {
+                $updateSuccessString = $updateSuccessString."Updated Condition, ";
+            }
+            else
+            {
+                $updateErrorString = $updateErrorString.$updateConditionResult.", ";
+            }
+        }
     }
     ?>
     <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST">
@@ -215,7 +229,7 @@ $updateErrorString = "";
                     </select>
                 </div>
                 <div class="inputField"><label>Condition:</label> 
-                    <select>
+                    <select name="Condition">
                         <?php
                         // Query database for Description of appearance (condition)
                         $query = "SELECT Description FROM APPEARENCE";
