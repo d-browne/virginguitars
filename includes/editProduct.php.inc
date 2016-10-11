@@ -235,7 +235,7 @@ $updateErrorString = "";
         }
     }
     ?>
-    <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST" enctype="multipart/form-data">
+    <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST" enctype="multipart/form-data" style="display: inline;">
     <div id="leftColumn">
         <!-- Image slider code goes in here -->
         <div id="sliderFrame">
