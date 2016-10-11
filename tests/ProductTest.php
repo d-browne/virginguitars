@@ -10,6 +10,46 @@ require_once 'classes/Product.php';
 
 class ProductTest extends TestCase 
 {
+    
+    public function setBrandDataProvider()
+    {
+        return array(
+            array(1, "Fender", true),
+            array(1, "Gibson", true),
+            array(1, "blah blah", "Specified brand does not exist"),
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setBrandDataProvider
+     */
+    public function testSetBrand($ProductID, $Brand, $expected)
+    {
+        // Create product object
+        $product = new Product($ProductID);
+        
+        // backup current brand
+        $brandBackup = $product->getBrand();
+        
+        // Update brand
+        $this->assertEquals($expected, $product->setBrand($Brand));
+        
+        // If true check in memory and in database
+        if ($expected === true)
+        {
+            // Check in memory
+            $this->assertEquals($Brand, $product->getBrand());
+            
+            // Check in database (using new object)
+            $product2 = new Product($ProductID);
+            $this->assertEquals($Brand, $product2->getBrand());
+        }
+        
+        // Restore backup
+        $product->setBrand($brandBackup);
+    }
+    
     public function updateModelDataProvider()
     {
         return array(
