@@ -11,12 +11,51 @@ require_once 'classes/Product.php';
 class ProductTest extends TestCase 
 {
     
+    public function setTypeDataProvider()
+    {
+        return array(
+            array(1, "Acoustic Guitar", true),
+            array(1, "Electric Guitar", true),
+            array(1, "blah blah", "Specified Type does not exist")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setTypeDataProvider
+     */
+    public function testSetType($ProductID, $Type, $expected)
+    {
+        // Create product object
+        $product = new Product($ProductID);
+        
+        // backup current Type
+        $TypeBackup = $product->getType();
+        
+        // Update Type
+        $this->assertEquals($expected, $product->setType($Type));
+        
+        // If true check in memory and in database
+        if ($expected === true)
+        {
+            // Check in memory
+            $this->assertEquals($Type, $product->getType());
+            
+            // Check in database (using new object)
+            $product2 = new Product($ProductID);
+            $this->assertEquals($Type, $product2->getType());
+        }
+        
+        // Restore backup
+        $product->setType($TypeBackup);
+    }
+    
     public function setBrandDataProvider()
     {
         return array(
             array(1, "Fender", true),
             array(1, "Gibson", true),
-            array(1, "blah blah", "Specified brand does not exist"),
+            array(1, "blah blah", "Specified brand does not exist")
         );
     }
     
