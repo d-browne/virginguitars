@@ -178,9 +178,58 @@ $updateErrorString = "";
                 $updateErrorString = $updateErrorString.$updateDescriptionResult.", ";
             }
         }
+        // Check if Primary Image upload is requested
+        if ($_FILES['PrimaryImage']['name'] !== "")
+        {
+            // Define Location of image directory
+            $imageDirectory = "images/guitars/".$product->getProductID()."/";
+            
+            // Get extension
+            $extention = pathinfo($_FILES['PrimaryImage']['name'], PATHINFO_EXTENSION);
+                    
+            // image location
+            $imageLocation = $imageDirectory.'PrimageImage.'.$extention;
+            
+            // Delete old image if already exists
+            if (file_exists($imageLocation))
+            {
+                unlink($imageLocation);
+            }
+            
+            // Check if file is an image
+            if (getimagesize($_FILES['PrimaryImage']['tmp_name']))
+            {
+                // Check that exention is valid extention
+                if ($extention === "jpg" || $extention === "png" || $extention === "jpeg" || $extention === "gif")
+                {
+                    // Attempt to move file from temp into specified location
+                    if (move_uploaded_file($_FILES['PrimaryImage']['tmp_name'], $imageLocation))
+                    {
+                        // File uploaded successfully update path in object and database
+                        $product->setPrimaryPicturePath($imageLocation);
+                        
+                        // Display uploaded correctly message
+                        $updateSuccessString = $updateSuccessString."File uploaded, ";
+                    }
+                    else
+                    {
+                        $updateErrorString = $updateErrorString."File not uploaded, ";
+                    }
+                }
+                else
+                {
+                    $updateErrorString = $updateErrorString."Primary image must be a .jpg, .png or .gif file, ";
+                }
+            }
+            else
+            {
+                $updateErrorString = $updateErrorString."Primary image must be an image file of .jpg, .png or .gif, ";
+            }
+            
+        }
     }
     ?>
-    <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST">
+    <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST" enctype="multipart/form-data">
     <div id="leftColumn">
         <!-- Image slider code goes in here -->
         <div id="sliderFrame">
@@ -242,7 +291,7 @@ $updateErrorString = "";
         <fieldset class="inputFieldSet">
             <legend>Product Details</legend>
                 <div class="inputField"><label>Primary Image :</label><img src="<?php echo $product->getPrimaryPicturePath(); ?>" alt="<?php echo $product->getModel(); ?>" width="100"><span class="imageInstructions"> (preferably square ratio)</span></div>
-                <div class="inputField"><label>Upload :</label> <input type="file" /></div>
+                <div class="inputField"><label>Upload :</label> <input type="file" name="PrimaryImage" /></div>
                 <div class="inputField"><label>Model:</label> <input class="textBox" type="text" name="Model" value="<?php echo $product->getModel(); ?>" placeholder="e.g. Fender Standard Stratocaster" /></div>
                 <div class="inputField"><label>Brand:</label> 
                     <select name="Brand">

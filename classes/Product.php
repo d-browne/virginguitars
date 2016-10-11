@@ -29,6 +29,40 @@ class Product
     private $CreationDate;
     private $ModifiedDate;
     
+    public function setPrimaryPicturePath($inputPrimaryPicturePath)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // sanitize input
+        $PrimaryPicturePath = mysqli_real_escape_string($dataConnection, $inputPrimaryPicturePath);
+        
+        // Return error if input too long
+        if (iconv_strlen($PrimaryPicturePath) > 200)
+        {
+            return "PrimaryPicturePath Too Long";
+        }
+        
+        // Query to update PrimaryPicturePath
+        $query = "UPDATE PRODUCT SET PRODUCT.PrimaryPicturePath='".$PrimaryPicturePath."' WHERE PRODUCT.ProductID='".$this->ProductID."'";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to update PrimaryPicturePath";
+        }
+        
+        // Update object in memory
+        $this->PrimaryPicturePath = $PrimaryPicturePath;
+        
+        // All OK return true
+        return true;
+    }
+    
     public function setDescription($inputDescription)
     {
         // Create data connection
