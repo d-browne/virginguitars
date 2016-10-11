@@ -193,7 +193,9 @@ $updateErrorString = "";
             // Create directory if it doesn't yet exist
             if (!file_exists($imageDirectory))
             {
+                $old_unmask = unmask(0);
                 mkdir($imageDirectory, 0777);
+                unmask($old_unmask);
             }
             
             // Get extension
