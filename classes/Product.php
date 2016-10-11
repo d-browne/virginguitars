@@ -29,6 +29,40 @@ class Product
     private $CreationDate;
     private $ModifiedDate;
     
+    public function setPrice($inputPrice)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // sanitize input
+        $Price = mysqli_real_escape_string($dataConnection, $inputPrice);
+        
+        // Return error if input not numeric
+        if (!is_numeric($Price))
+        {
+            return "Price Not Numeric";
+        }
+        
+        // Query to update Price
+        $query = "UPDATE PRODUCT SET UnitPrice='".$Price."' WHERE PRODUCT.ProductID='".$this->ProductID."'";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to update Price";
+        }
+        
+        // Update object in memory
+        $this->Price = $Price;
+        
+        // All OK return true
+        return true;
+    }
+    
     public function setStatus($inputStatus)
     {
         // Create data connection
