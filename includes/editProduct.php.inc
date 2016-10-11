@@ -231,8 +231,78 @@ $updateErrorString = "";
             {
                 $updateErrorString = $updateErrorString."Primary image must be an image file of .jpg, .png or .gif, ";
             }
-            
         }
+        // Check if Primary Image upload is requested
+        if ($_FILES['RotatorImage']['name'] !== "")
+        {
+            // Define Location of image directory
+            $imageDirectory = "images/guitars/".$product->getProductID()."/";
+            
+            // Get extension
+            $extention = pathinfo($_FILES['RotatorImage']['name'], PATHINFO_EXTENSION);
+            
+            // Query for the highest current rotator image
+            $query = "SELECT COUNT(*) As Count FROM PICTURE WHERE ProductFK ='".$product->getProductID()."';";
+            
+            // Execute query
+            $result = $dataConnection->query($query);
+            
+            $highestID = 0;
+            
+            // Check if query succeeded
+            if ($result !== false)
+            {
+                // Get the highest ID
+                if ($result->num_rows > 0)
+                {
+                    $row = $result->fetch_assoc();
+                    $highestID = $row['Count'];
+                }
+            }
+            
+            // image location
+            $imageLocation = $imageDirectory.($highestID+1).'.'.$extention;
+            
+            // Delete old image if already exists
+            if (file_exists($imageLocation))
+            {
+                unlink($imageLocation);
+            }
+            
+            // Check if file is an image
+            if (getimagesize($_FILES['RotatorImage']['tmp_name']))
+            {
+                // Check that exention is valid extention
+                if ($extention === "jpg" || $extention === "png" || $extention === "jpeg" || $extention === "gif")
+                {
+                    // Attempt to move file from temp into specified location
+                    if (move_uploaded_file($_FILES['RotatorImage']['tmp_name'], $imageLocation))
+                    {
+                        // Query to add image path to database table
+                        $query = "INSERT INTO PICTURE VALUES (NULL, '".$product->getProductID()."', '".$imageLocation."');";
+                        
+                        // Execute query
+                        $dataConnection->query($query);
+                        
+                        // Display uploaded correctly message
+                        $updateSuccessString = $updateSuccessString."Rotator image uploaded, ";
+                    }
+                    else
+                    {
+                        $updateErrorString = $updateErrorString."Rotator image not uploaded, ";
+                    }
+                }
+                else
+                {
+                    $updateErrorString = $updateErrorString."Rotator image must be a .jpg, .png or .gif file, ";
+                }
+            }
+            else
+            {
+                $updateErrorString = $updateErrorString."Rotator image must be an image file of .jpg, .png or .gif, ";
+            }
+        }
+        
     }
     ?>
     <form action="admin.php?editProduct&id=<?php echo $product->getProductID(); ?>" method="POST" enctype="multipart/form-data" style="display: inline;">
@@ -273,10 +343,10 @@ $updateErrorString = "";
         </div> 
         <div id="underRotatorDiv">
             <fieldset class="inputFieldSet" id="underRotatorFieldSet">
-                <legend>Upload Rotator Images</legend>
+                <legend>Upload Rotator Image</legend>
                 <span class="imageInstructions">Images should be 255x600px</span>
-                    <input type="file" name="imageFiles" />
-                    <button type="submit" name="updateButton">Clear</button>
+                    <input type="file" name="RotatorImage" />
+                    <button type="submit" name="updateButton">Delete Last</button>
             </fieldset>
         </div>
     </div>
