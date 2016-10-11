@@ -305,7 +305,49 @@ $updateErrorString = "";
         // Check if delete last button pressed
         if ($_POST['updateButton'] === "deleteLastButton")
         {
-            echo "delete last button pressed";
+            // Query database for last added rotator image
+            $query = "SELECT * FROM Picture WHERE ProductFK='".$product->getProductID()."' ORDER BY PictureID desc";
+            
+            // Execute Query
+            $result = $dataConnection->query($query);
+            
+            // Check if query executed successfully
+            if ($result !== false)
+            {
+                // Check if results returned
+                if ($result->num_rows > 0)
+                {
+                    // Get the first row (the last image uploaded)
+                    $row = $result->fetch_assoc();
+                    
+                    // Attempt to delete record from database
+                    $deleteQuery = "DELETE FROM PICTURE WHERE PictureID='".$row["PictureID"]."';";
+                    
+                    // Execute query
+                    $deleteResult = $dataConnection->query($deleteQuery);
+                    
+                    // If delete successfull
+                    if ($deleteResult !== false)
+                    {
+                        // delete file from disk
+                        unlink($row['ImagePath']);
+                        
+                        $updateSuccessString = $updateSuccessString."Last rotator image deleted, ";     
+                    }
+                    else
+                    {
+                        $updateErrorString = $updateErrorString."Unable to delete rotator image from database, ";
+                    }
+                }
+                else
+                {
+                    $updateErrorString = $updateErrorString."No images in rotator to delete, ";
+                }
+            }
+            else
+            {
+                $updateErrorString = $updateErrorString."Unable to query for last image, ";
+            }
         }
     }
     ?>
