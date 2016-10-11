@@ -11,6 +11,46 @@ require_once 'classes/Product.php';
 class ProductTest extends TestCase 
 {
     
+    public function setStatusDataProvider()
+    {
+        return array(
+            array(1, "In Stock", true),
+            array(1, "Out Of Stock", true),
+            array(1, "Backorder", true),
+            array(1, "blah blah", "Specified Status does not exist")
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setStatusDataProvider
+     */
+    public function testSetStatus($ProductID, $Status, $expected)
+    {
+        // Create product object
+        $product = new Product($ProductID);
+        
+        // backup current Status
+        $StatusBackup = $product->getStatus();
+        
+        // Update Status
+        $this->assertEquals($expected, $product->setStatus($Status));
+        
+        // If true check in memory and in database
+        if ($expected === true)
+        {
+            // Check in memory
+            $this->assertEquals($Status, $product->getStatus());
+            
+            // Check in database (using new object)
+            $product2 = new Product($ProductID);
+            $this->assertEquals($Status, $product2->getStatus());
+        }
+        
+        // Restore backup
+        $product->setStatus($StatusBackup);
+    }
+    
     public function setCaseTypeDataProvider()
     {
         return array(
