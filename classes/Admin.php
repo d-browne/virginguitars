@@ -6,7 +6,12 @@ class Admin
 {
     private $isAuthenticated;
     private $connection;
+    private $AdministratorID; 
     
+    function getAdministratorID() {
+        return $this->AdministratorID;
+    }
+ 
     // Construct
     function __construct($username, $password)
     {
@@ -22,7 +27,7 @@ class Admin
     // Function to authenticate admin
     public function authenticate($username, $password)
     {
-        $query = "SELECT UserName,EncryptedPassword,Salt FROM ADMINISTRATOR";
+        $query = "SELECT AdministratorID,UserName,EncryptedPassword,Salt FROM ADMINISTRATOR";
         $result = $this->connection->query($query);
            
         
@@ -43,6 +48,7 @@ class Admin
                 if ($row["UserName"] == $username && $row["EncryptedPassword"] == $hashedPassword)
                 {
                     $this->isAuthenticated = TRUE;
+                    $this->AdministratorID = $row['AdministratorID'];
                 }
             }
         }
