@@ -14,7 +14,7 @@
 
     <div id="checkOutBox">
         <span id="cartItems"><a href="cart.html">4</a></span>
-        <a href="cart.html"><img src="images/cartIcon.png" id="cartIcon" width="32" height="42" alt="Cart"></a>
+        <a href="cart.php"><img src="images/cartIcon.png" id="cartIcon" width="32" height="42" alt="Cart"></a>
         <a href="checkout.html" id="checkoutLink">checkout</a>
     </div>
 </div>
