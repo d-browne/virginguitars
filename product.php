@@ -19,6 +19,12 @@ if (isset($_GET['id']))
     try {
     // Try to create product object using given id
     $product = new Product($ProductID);
+    
+    // Error if product is deleted
+    if ($product->getIsDeleted())
+    {
+        $errorString = "'".$ProductID."' has been deleted...";
+    }
     } catch (Exception $ex) {
         if ($ex->getMessage() == "ProductID not found")
         {
@@ -35,8 +41,6 @@ else
     // error message id not specified
     $errorString = "A product ID must be specified...";
 }
-
-
 ?>
 
 <!doctype html>
