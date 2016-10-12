@@ -69,6 +69,11 @@ if (isset($_GET['delete']))
         $errorString = $errorString.$deleteResult.", ";
     }
 }
+
+if (isset($_POST['updateCart']))
+{
+    $successString = $successString."Update cart detected";
+}
 ?>
 
 <!doctype html>
@@ -102,6 +107,7 @@ if (isset($_GET['delete']))
         	<h1>Cart</h1>
                 <p><span id="updatedMemberLabel"><?php echo $successString; ?></span> <span id="updatedMemberErrorLabel"><?php echo $errorString; ?></span></p>
             <div id="tableContainer">
+                <form action="cart.php" method="POST">
                 <table class="cartTable" border="1">
                     <tr class="headerRow">
                         <td></td>
@@ -163,19 +169,52 @@ if (isset($_GET['delete']))
                         }
                         else
                         {
-                            echo "The cart is empty";
+                            echo "</table>The cart is empty";
                         }
                     }
                     else
                     {
-                        echo "Error querying for cart";
+                        echo "</table>Error querying for cart";
                     }
                     ?>
                 </table>
+                <button type="submit" name="updateCart" hidden="true" />
+                </form>
             </div>
             
             <div id="totalLabelStretcher"></div>
-            <div id="totalLabel">Total: 2828.75</div>
+            <div id="totalLabel">Total: $
+            <?php // Get total
+            // Query to calculate total
+            $query = "SELECT SUM(Total) As 'Sumtotal' FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
+            
+            // Execute query
+            $result = $dataConnection->query($query);
+            
+            // if query successfull
+            if ($result !== false)
+            {
+                // Check if result resturned
+                if ($result->num_rows > 0)
+                {
+                    // Get first row
+                    $row = $result->fetch_assoc();
+                    
+                    // show the total
+                    echo $row['Sumtotal'];
+                }
+                else
+                {
+                    echo "0";
+                }
+            }
+            else
+            {
+                // Error querying for total
+                echo "ERR";
+            }
+            ?>
+            </div>
             <a href="checkout.html"><div id="checkoutButton">Checkout</div></a>
             
         </div>
