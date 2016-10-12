@@ -389,7 +389,7 @@ $updateErrorString = "";
                     }
                     else
                     {
-                        // TODO: add the the "no-image" image.
+                        // Possible future update: add the the "no-image" image.
                     }
                 }
                 ?>
