@@ -130,7 +130,7 @@ class Cart
         $ProductID = mysqli_real_escape_string($dataConnection, $ProductIDInput);
         
         // Query to check if product is in cart
-        $query = "SELECT * FROM CART WHERE ProductFK='".$ProductID."';";
+        $query = "SELECT * FROM CART WHERE ProductFK='".$ProductID."' AND CustomerFK='".$this->CustomerID."';";
         
         // Execute query
         $result = $dataConnection->query($query);
