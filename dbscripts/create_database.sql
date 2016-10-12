@@ -501,3 +501,10 @@ INNER JOIN MODEL As m ON p.ModelFK = m.ModelID
 INNER JOIN ADMINISTRATOR As a ON p.CreatedByFK = a.AdministratorID
 INNER JOIN ADMINISTRATOR As a2 ON p.ModifiedByFK = a2.AdministratorID
 ORDER BY p.ProductID;
+
+# This view returns products in their cart
+CREATE VIEW CART_VIEW AS
+SELECT CART.CustomerFK, PRODUCT.PrimaryPicturePath, MODEL.Description, PRODUCT.ProductID, CART.Quantity, PRODUCT.UnitPrice As Price, (CART.Quantity*product.UnitPrice) As 'Total'
+FROM PRODUCT
+JOIN CART on CART.ProductFK = PRODUCT.ProductID
+JOIN MODEL on MODEL.ModelID = PRODUCT.ModelFK;
