@@ -158,6 +158,15 @@ CREATE TABLE CONTACT_US (
   `privacy_policy_path` varchar(60) DEFAULT NULL
 ) ENGINE=InnoDB;
 
+create table CART (
+    ItemID int(4) PRIMARY KEY AUTO_INCREMENT,
+    CustomerFK int(7) NOT NULL,
+    ProductFK int(7) NOT NULL,
+    Quantity int(4) NOT NULL,
+    FOREIGN KEY (CustomerFK) REFERENCES CUSTOMER(CustomerID),
+    FOREIGN KEY (ProductFK) REFERENCES PRODUCT(ProductID)
+)ENGINE=InnoDB;
+
 INSERT INTO CONTACT_US (`ID`, `blurb_path`, `contact_email`, `contact_telephone`, `contact_address_line_1`, `contact_address_line_2`, `contact_address_line_3`, `facebook_url`, `twitter_url`, `youtube_url`, `privacy_policy_path`) VALUES
 (1, 'includes/contact_us_blurb.html', 'sales@virginguitars.com', '02 66 901 56', 'Virgin Guitars,', '26 Music Lane,', 'Lismore, NSW. 2480.', 'http://facebook.com/', 'http://twitter.com/', 'http://youtube.com/', 'includes/privacy_policy_blurb.html');
 
