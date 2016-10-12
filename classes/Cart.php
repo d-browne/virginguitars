@@ -13,6 +13,38 @@ class Cart
 {
     private $CustomerID;
     
+    // Function to remove item from cart
+    public function delItem($ProductIDInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $ProductID = mysqli_real_escape_string($dataConnection, $ProductIDInput);
+        
+        // Error if specified item is not in cart
+        if (!$this->isInCart($ProductID))
+        {
+            return "Specified Item is not in cart";
+        }
+        
+        // Query to delete item
+        $query = "DELETE FROM CART WHERE ProductFK='".$ProductID."' AND CustomerFK='".$this->CustomerID."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to delete item from cart";
+        }
+        
+        // Return true (all OK)
+        return true;
+    }
+    
     // Function to set quantity of item in cart
     public function setQuantity($ProductIDInput, $QuantityInput)
     {

@@ -10,6 +10,29 @@ require_once 'classes/Cart.php';
 
 class CartTest extends TestCase 
 { 
+    
+    
+    public function delItemDataProvider()
+    {
+        return array(
+            array(1, 99, "Specified Item is not in cart"),
+            array(1, 2, true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider delItemDataProvider
+     */
+    public function testDelItem($CustomerID, $ProductID, $expected)
+    {
+        // Create cart object
+        $cart = new Cart($CustomerID);
+
+        // Attempt to delete item
+        $this->assertEquals($expected, $cart->delItem($ProductID));
+    }
+    
     public function setQuantityDataProvider()
     {
         return array(
