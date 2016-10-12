@@ -16,6 +16,37 @@ if ($_SESSION["currentCustomer"]->getIsInitialized() != true)
     header("Location: members.php");
 }
 
+// Create data connection
+$database = new Database();
+$dataConnection = $database->getDataConnection();
+
+// Hold error and success strings
+$successString = "";
+$errorString = "";
+
+// "Add Cart" button click on product.php page
+if (isset($_POST['addCartButton']))
+{
+    // Sanitize input
+    $addProductID = mysqli_real_escape_string($dataConnection, $_POST['addCartButton']);
+    
+    // Create cart object
+    $cart = new Cart($_SESSION["currentCustomer"]->getCustomerID());
+    
+    // Add product to cart
+    $addToCartResult = $cart->addToCart($addProductID);
+    
+    // set success message if successful
+    if ($addToCartResult === true)
+    {
+        $successString = $successString."Product '".$addProductID."' added to cart";
+    }
+    else
+    {
+        $errorString = $errorString.$addToCartResult.", ";
+    }
+}
+
 ?>
 
 <!doctype html>
@@ -47,6 +78,7 @@ if ($_SESSION["currentCustomer"]->getIsInitialized() != true)
         
         <div id="contentBox">
         	<h1>Cart</h1>
+                <p><span id="updatedMemberLabel"><?php echo $successString; ?></span> <span id="updatedMemberErrorLabel"><?php echo $errorString; ?></span></p>
             <div id="tableContainer">
                 <table class="cartTable" border="1">
                     <tr class="headerRow">
@@ -60,10 +92,7 @@ if ($_SESSION["currentCustomer"]->getIsInitialized() != true)
                     </tr>
                     <?php
                     // Query cart and display each row
-                    // Create data connection
-                    $database = new Database();
-                    $dataConnection = $database->getDataConnection();
-                    
+
                     // Query to get all cart items for this signed in member
                     $query = "SELECT * FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
                     
@@ -92,8 +121,19 @@ if ($_SESSION["currentCustomer"]->getIsInitialized() != true)
                                 }
                                 
                                 // Draw image
-                                echo '<td><img src="'.$row['PrimaryPicturePath'].'" alt="'.$row['Description'].'" width="100"/></td>';
-                                
+                                echo '<td><a href="product.php?id='.$row['ProductID'].'"><img src="'.$row['PrimaryPicturePath'].'" alt="'.$row['Description'].'" width="100"/></a></td>';
+                                // Draw description
+                                echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Description'].'</a></td>';
+                                // Draw product id
+                                echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['ProductID'].'</a></td>';
+                                // Draw Quantity
+                                echo '<td><input type="text" style="width: 4em;" value="'.$row['Quantity'].'" /></a></td>';
+                                // Draw price
+                                echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Price'].'</a></td>';
+                                // Draw total
+                                echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Total'].'</a></td>';
+                                // Draw del
+                                echo '<td><a href="product.php?id='.$row['ProductID'].'"><span class="delButton">Del</span></a></td>';
                                 
                                 // Close row
                                 echo '</tr>';
@@ -109,75 +149,6 @@ if ($_SESSION["currentCustomer"]->getIsInitialized() != true)
                         echo "Error querying for cart";
                     }
                     ?>
-                    <tr>
-                        <td>
-                        	<a href="images/guitars/jacksonDk2DinkyHotRodFlames/1.jpg">
-                        		<img src="images/guitars/jacksonDk2DinkyHotRodFlames/1.jpg" alt="Jackson DK2 Dinky Hot Rod Flames" width="100"/>
-                            </a>
-                        </td>
-                        <td>
-                        	<a href="jackson_dk2_dinky_hot_rod_flames.html">
-                            	Jackson DK2 Dinky Hot Rod Flames
-                            </a>
-                        </td>
-                        <td>234</td>
-                        <td>1</td>
-                        <td>AU $970.34</td>
-                        <td>AU $970.34</td>
-                        <td><span class="delButton">Del</span></td>
-                    </tr>
-                    <tr class="altRow">
-                        <td>
-                        	<a href="images/guitars/bcRichKerryKingMetalMasterTribalFireWarlock/1.jpg">
-                        		<img src="images/guitars/bcRichKerryKingMetalMasterTribalFireWarlock/1.jpg" alt="Kerry King Metal Master Tribal Fire Warlock" width="100"/>
-                            </a>
-                        </td>
-                        <td>
-                        	<a href="bc_rich_kerry_king_metal_master_tribal_fire_warlock.html">
-                            	Kerry King Metal Master Tribal Fire Warlock
-                            </a>
-                        </td>
-                        <td>134</td>
-                        <td>1</td>
-                        <td>AU $420.89</td>
-                        <td>AU $420.89</td>
-                        <td><span class="delButton">Del</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                        	<a href="images/guitars/gibsonEpiphoneLimitedEditionLesPaulCustom/1.jpg">
-                        		<img src="images/guitars/gibsonEpiphoneLimitedEditionLesPaulCustom/1.jpg" alt="Gibson Epiphone Limited Edition Les Paul Custom" width="100"/>
-                            </a>
-                        </td>
-                        <td>
-                        	<a href="gibson_epiphone_limited_edition_les_paul_custom.html">
-                            	Gibson Epiphone Limited Edition Les Paul Custom
-                            </a>
-                        </td>
-                        <td>34</td>
-                        <td>1</td>
-                        <td>AU $635.25</td>
-                        <td>AU $635.25</td>
-                        <td><span class="delButton">Del</span></td>
-                    </tr>
-                    <tr class="altRow">
-                        <td>
-                        	<a href="images/guitars/fenderAmericanStandardStratocaster/1.jpg">
-                        		<img src="images/guitars/fenderAmericanStandardStratocaster/1.jpg" alt="American Standard Stratocaster" width="100"/>
-                            </a>
-                        </td>
-                        <td>
-                        	<a href="fender_american_standard_stratocaster.html">
-                            	American Standard Stratocaster
-                            </a>
-                        </td>
-                        <td>12</td>
-                        <td>1</td>
-                        <td>AU $802.27</td>
-                        <td>AU $802.27</td>
-                        <td><span class="delButton">Del</span></td>
-                    </tr>
-                    
                 </table>
             </div>
             
