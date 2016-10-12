@@ -72,7 +72,7 @@ if (isset($_GET['delete']))
 
 if (isset($_POST['updateCart']))
 {
-    $successString = $successString."Update cart detected";
+    $successString = $successString."Hi warren, haven't put the change quantity feature in yet. Coming soon ( ͡° ͜ʖ ͡°)";
 }
 ?>
 
