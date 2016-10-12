@@ -1,0 +1,101 @@
+<?php
+
+/* 
+ * The class represents the cart object
+ */
+
+require_once 'classes/Database.php';
+require_once 'classes/Customer.php';
+require_once 'classes/Product.php';
+
+
+class Cart 
+{
+    private $CustomerID;
+    
+    // Function to check if specified product is in cart
+    public function isInCart($ProductIDInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $ProductID = mysqli_real_escape_string($dataConnection, $ProductIDInput);
+        
+        // Query to check if product is in cart
+        $query = "SELECT * FROM CART WHERE ProductFK='".$ProductID."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to query for product in cart";
+        }
+        
+        // Check if the number of results is > 0
+        // If so that means the item is already in cart
+        if ($result->num_rows > 0)
+        {
+            return true;
+        }
+        
+        // Return false, item is not yet in cart
+        return false;
+    }
+    
+    public function addToCart($ProductID)
+    {
+        // Return error if item already in cart
+        if ($this->isInCart($ProductID))
+        {
+            return "Item already in cart";
+        }
+        else
+        {   
+            // Create data connection
+            $database = new Database();
+            $dataConnection = $database->getDataConnection();
+            
+            // Check if product exists by attempting to instantiate it
+            try {
+                $product = new Product($ProductID);
+            } catch (Exception $ex) {
+                return $ex->getMessage();
+            }
+            
+            // Query to add item to cart
+            $query = "INSERT INTO CART VALUES (NULL, '".$this->CustomerID."', '".$product->getProductID()."', 1);";
+            
+            // Execute query
+            $result = $dataConnection->query($query);
+            
+            // Return error if query fails
+            if ($result === false)
+            {
+                return "Unable to add item to cart";
+            }
+            
+            // All ok
+            return true;
+        }
+    }
+    
+    public function __construct($CustomerID) 
+    {
+        // Throw if customer doesn't exist
+        if (!Customer::doesCustomerExistID($CustomerID))
+        {
+            throw new Exception("Specified customer doesn't exist");
+        }
+        
+        // Set customer id
+        $this->CustomerID = $CustomerID;
+    }
+    
+    function getCustomerID() {
+        return $this->CustomerID;
+    }
+}
