@@ -15,6 +15,7 @@ if (isset($_POST['submit'])) {
     if ($admin->getAuthenticated() == true)
     {
         $_SESSION["isAdmin"] = true;
+        $_SESSION["adminID"] = $admin->getAdministratorID();
     }
 }
 
