@@ -30,6 +30,47 @@ class Product
     private $ModifiedDate;
     private $isDeleted;
     
+    public function updateModifiedDate()
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to update modified date to current date using the CURDATE function
+        $query = "UPDATE PRODUCT SET ModifiedDate=CURDATE() WHERE ProductID = '".$this->ProductID."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query fails
+        if ($result === false)
+        {
+            return "Unable to set modified date";
+        }
+        
+        // Query to retrieve presently set modified date
+        $query = "SELECT ModifiedDate FROM PRODUCT WHERE ProductID='".$this->ProductID."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        if ($result === false)
+        {
+            return "Unable to query for modified date";
+        }
+        
+        if ($result->num_rows < 1)
+        {
+            return "Unable to retrieve modified date";
+        }
+        
+        $row = $result->fetch_assoc();
+        
+        // All okay update object in memory and return true
+        $this->ModifiedDate = $row['ModifiedDate'];
+        return true;
+    }
+    
     public static function createNewProduct($adminID)
     {
         // Create data connection

@@ -58,6 +58,14 @@ $updateErrorString = "";
     // Check if updated button pressed
     if (isset($_POST['updateButton']))
     {
+        // Update modified date
+        $updateProductResult = $product->updateModifiedDate();
+        if ($updateProductResult !== true)
+        {
+            // Show error message
+            $updateErrorString = $updateErrorString.$updateProductResult;
+        }
+        
         // If delete button pessed
         if ($_POST['updateButton'] === "Delete")
         {
@@ -71,7 +79,7 @@ $updateErrorString = "";
                 }
                 else
                 {
-                    $updateErrorString = "Unable to un-delete, ";
+                    $updateErrorString = $updateErrorString."Unable to un-delete, ";
                 }
             }
             else
@@ -83,7 +91,7 @@ $updateErrorString = "";
                 }
                 else
                 {
-                    $updateErrorString = "Unable to delete, ";
+                    $updateErrorString = $updateErrorString."Unable to delete, ";
                 }
             }
         }
