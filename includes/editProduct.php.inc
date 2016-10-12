@@ -58,12 +58,20 @@ $updateErrorString = "";
     // Check if updated button pressed
     if (isset($_POST['updateButton']))
     {
+        // Update Modified By
+        $setModifiedByResult = $product->setModifiedBy($_SESSION['adminID']);
+        // If failed display error
+        if ($setModifiedByResult !== true)
+        {
+            $updateErrorString = $updateErrorString.$setModifiedByResult.", ";
+        }
+        
         // Update modified date
         $updateProductResult = $product->updateModifiedDate();
         if ($updateProductResult !== true)
         {
             // Show error message
-            $updateErrorString = $updateErrorString.$updateProductResult;
+            $updateErrorString = $updateErrorString.$updateProductResult.", ";
         }
         
         // If delete button pessed

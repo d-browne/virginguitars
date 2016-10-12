@@ -30,6 +30,32 @@ class Product
     private $ModifiedDate;
     private $isDeleted;
     
+    public function setModifiedBy($AdministratorID)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to update product 
+        $query = "UPDATE PRODUCT SET ModifiedByFK='".$AdministratorID."' WHERE ProductID='".$this->ProductID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // return error if query failed
+        if ($result === false)
+        {
+            return "Unable to update ModifiedBy record";
+        }
+        
+        // Set variable in memory
+        $product = new Product($this->ProductID);
+        $this->ModifiedBy = $product->getModifiedBy();
+        
+        // All okay return true
+        return true;
+    }
+    
     public function updateModifiedDate()
     {
         // Create data connection
