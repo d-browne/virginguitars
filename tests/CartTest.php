@@ -10,6 +10,29 @@ require_once 'classes/Cart.php';
 
 class CartTest extends TestCase 
 { 
+    public function setQuantityDataProvider()
+    {
+        return array(
+            array(1, 1, 3, true),
+            array(1, 1, 1, true),
+            array(1, 1, -1, "Quantity must not be less than zero"),
+            array(1, 2, 3, true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setQuantityDataProvider
+     */
+    public function testSetQuantity($CustomerID, $ProductID, $newQuantity, $expected)
+    {
+        // Create cart object
+        $cart = new Cart($CustomerID);
+        
+        // Attempt to update quantity
+        $this->assertEquals($expected, $cart->setQuantity($ProductID, $newQuantity));
+    }
+    
     public function addToCartDataProvider()
     {
         return array(

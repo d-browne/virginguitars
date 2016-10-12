@@ -13,6 +13,57 @@ class Cart
 {
     private $CustomerID;
     
+    // Function to set quantity of item in cart
+    public function setQuantity($ProductIDInput, $QuantityInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $ProductID = mysqli_real_escape_string($dataConnection, $ProductIDInput);
+        $Quantity = mysqli_real_escape_string($dataConnection, $QuantityInput);
+        
+        // Return if quantity is not numeric
+        if (!is_numeric($Quantity))
+        {
+            return "Quantity must be a number";
+        }
+        
+        // Return if quantity is less than 0
+        if ($Quantity < 0)
+        {
+            return "Quantity must not be less than zero";
+        }
+        
+        // If item is not is cart, add it
+        if (!$this->isInCart($ProductID))
+        {
+            $addResult = $this->addToCart($ProductID);
+            
+            // If add to cart error return error
+            if (!$addResult)
+            {
+                return $addResult;
+            }
+        }
+        
+        // Query to update quantity
+        $query = "UPDATE CART SET Quantity='".$Quantity."' WHERE CustomerFK='".$this->CustomerID."' AND ProductFK='".$ProductID."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to update quantity";
+        }
+        
+        // All ok return true
+        return true;
+    }
+    
     // Function to check if specified product is in cart
     public function isInCart($ProductIDInput)
     {
