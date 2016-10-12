@@ -13,6 +13,29 @@ class Cart
 {
     private $CustomerID;
     
+    // Function to empty cart
+    public function emptyCart()
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to empty cart
+        $query = "DELETE FROM CART WHERE CustomerFK='".$this->CustomerID."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // Return error if query failed
+        if ($result === false)
+        {
+            return "Unable to clear cart";
+        }
+        
+        // All ok return true
+        return true;
+    }
+    
     // Function to remove item from cart
     public function delItem($ProductIDInput)
     {

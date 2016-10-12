@@ -11,6 +11,25 @@ require_once 'classes/Cart.php';
 class CartTest extends TestCase 
 { 
     
+    public function emptyCartDataProvider()
+    {
+        return array(
+            array(1, true)
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider emptyCartDataProvider
+     */
+    public function testEmptyCart($CustomerID, $expected)
+    {
+        // Create cart object
+        $cart = new Cart($CustomerID);
+
+        // Attempt to delete item
+        $this->assertEquals($expected, $cart->emptyCart());
+    }
     
     public function delItemDataProvider()
     {
