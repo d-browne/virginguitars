@@ -13,7 +13,7 @@ $dataConnection = $database->getDataConnection();
 // New product button clicked
 if (isset($_POST['newProductButton']))
 {
-    $newProductID = Product::createNewProduct(1);
+    $newProductID = Product::createNewProduct($_SESSION['adminID']);
     
     // Redirect to edit rpoduct page
     header("Location: admin.php?editProduct&id=".$newProductID);
