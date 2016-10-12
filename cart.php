@@ -47,6 +47,28 @@ if (isset($_POST['addCartButton']))
     }
 }
 
+// Handle delete button clicked
+if (isset($_GET['delete']))
+{
+    // Sanitize input
+    $deleteID = mysqli_real_escape_string($dataConnection, $_GET['delete']);
+    
+    // Create cart object
+    $cart = new Cart($_SESSION["currentCustomer"]->getCustomerID());
+    
+    // Delete item from cart
+    $deleteResult = $cart->delItem($deleteID);
+    
+    // set success or error message
+    if ($deleteResult === true)
+    {
+        $successString = $successString."Product '".$deleteID."' deleted from cart";
+    }
+    else
+    {
+        $errorString = $errorString.$deleteResult.", ";
+    }
+}
 ?>
 
 <!doctype html>
@@ -133,7 +155,7 @@ if (isset($_POST['addCartButton']))
                                 // Draw total
                                 echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Total'].'</a></td>';
                                 // Draw del
-                                echo '<td><a href="product.php?id='.$row['ProductID'].'"><span class="delButton">Del</span></a></td>';
+                                echo '<td><a href="cart.php?delete='.$row['ProductID'].'"><span class="delButton">Del</span></a></td>';
                                 
                                 // Close row
                                 echo '</tr>';
