@@ -58,6 +58,57 @@ if ($_SESSION["currentCustomer"]->getIsInitialized() != true)
                         <td><span class="tableHeader">Total</span></td>
                         <td><span class="tableHeader">Del</span></td>
                     </tr>
+                    <?php
+                    // Query cart and display each row
+                    // Create data connection
+                    $database = new Database();
+                    $dataConnection = $database->getDataConnection();
+                    
+                    // Query to get all cart items for this signed in member
+                    $query = "SELECT * FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
+                    
+                    // Execute query 
+                    $result = $dataConnection->query($query);
+                    
+                    // Check if query successfull 
+                    if ($result !== false)
+                    {
+                        // Check that there are items in the cart
+                        if ($result->num_rows > 0)
+                        {
+                            // Loop through each row retruned and draw table
+                            $isAltRow = false;
+                            while($row = $result->fetch_assoc())
+                            {
+                                if ($isAltRow)
+                                {
+                                    echo '<tr class="altRow">';
+                                    $isAltRow = false;
+                                }
+                                else
+                                {
+                                    echo '<tr>';
+                                    $isAltRow = true;
+                                }
+                                
+                                // Draw image
+                                echo '<td><img src="'.$row['PrimaryPicturePath'].'" alt="'.$row['Description'].'" width="100"/></td>';
+                                
+                                
+                                // Close row
+                                echo '</tr>';
+                            }
+                        }
+                        else
+                        {
+                            echo "The cart is empty";
+                        }
+                    }
+                    else
+                    {
+                        echo "Error querying for cart";
+                    }
+                    ?>
                     <tr>
                         <td>
                         	<a href="images/guitars/jacksonDk2DinkyHotRodFlames/1.jpg">
