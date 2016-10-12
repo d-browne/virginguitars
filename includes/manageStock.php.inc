@@ -10,6 +10,15 @@
 $database = new Database();
 $dataConnection = $database->getDataConnection();
 
+// New product button clicked
+if (isset($_POST['newProductButton']))
+{
+    $newProductID = Product::createNewProduct(1);
+    
+    // Redirect to edit rpoduct page
+    header("Location: admin.php?editProduct&id=".$newProductID);
+}
+
 // Flags to determine how the columns should be ordered
 $orderBy = "none";  // Determains how to order results
 $desc = false;      // Determins if results should be ordered descending
@@ -577,7 +586,7 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
 
     <div id="manageCustomersStretcher"></div>
     <div id="bottomButtonsBox">
-        <form action="admin.php?manageCustomers&newCustomer"><button class="formCSSButtonButton">New</button></form>
+        <form action="admin.php?manageStock" method="POST"><button class="formCSSButtonButton" name="newProductButton">New</button></form>
         <button type="button" onclick="window.history.back()" class="formCSSButtonButton">Back</button>
     </div>
 

@@ -30,6 +30,40 @@ class Product
     private $ModifiedDate;
     private $isDeleted;
     
+    public static function createNewProduct($adminID)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query to create a new model
+        $newModelQuery = "INSERT INTO MODEL VALUES (NULL, '', 0);";
+        
+        // Execute new model query
+        $newModelResult = $dataConnection->query($newModelQuery);
+        
+        if ($newModelQuery === false)
+        {
+            return "Unable to create new model";
+        }
+        
+        $newModelID = $dataConnection->insert_id;
+        
+        // Query to create product
+        $query = "INSERT INTO PRODUCT VALUES (NULL, 2, 1, 1, 1, '<p>Description goes here</p>', 1, '100.00', 2, ".$newModelID.", ".$adminID.", ".$adminID.", CURDATE(), CURDATE(), NULL, 0);";
+        
+        $result = $dataConnection->query($query);
+        
+        // Return error if unable to query
+        if ($result === false)
+        {
+            return "Unable to create new product";
+        }
+        
+        // return new product id
+        return $dataConnection->insert_id;
+    }
+    
     public function setIsDeleted($isDeleted)
     {
         // Create data connection
