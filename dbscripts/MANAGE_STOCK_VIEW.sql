@@ -10,7 +10,8 @@ ap.Description As 'Condition',
 ct.Description As 'CaseType',
 ps.Description As 'Status', 
 p.Quantity, 
-p.UnitPrice As 'Price'
+p.UnitPrice As 'Price',
+p.isDeleted
 FROM PRODUCT As p
 INNER JOIN BRAND As b ON p.BrandFK = b.BrandID
 INNER JOIN CLASSIFICATION As c ON p.ClassificationFK = c.ClassificationID

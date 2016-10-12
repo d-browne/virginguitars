@@ -58,6 +58,35 @@ $updateErrorString = "";
     // Check if updated button pressed
     if (isset($_POST['updateButton']))
     {
+        // If delete button pessed
+        if ($_POST['updateButton'] === "Delete")
+        {
+            // Check if product is already deleted
+            if ($product->getIsDeleted())
+            {
+                // Undelete product
+                if($product->setIsDeleted(false))
+                {
+                    $updateSuccessString = $updateSuccessString."Product un-deleted, ";
+                }
+                else
+                {
+                    $updateErrorString = "Unable to un-delete, ";
+                }
+            }
+            else
+            {
+                // Delete product
+                if($product->setIsDeleted(true))
+                {
+                    $updateSuccessString = $updateSuccessString."Product deleted, ";
+                }
+                else
+                {
+                    $updateErrorString = "Unable to delete, ";
+                }
+            }
+        }
         // Update Model if changed
         if ($product->getModel() !== $_POST['Model'])
         {
@@ -420,7 +449,7 @@ $updateErrorString = "";
                 <div class="inputField"><label>Modified By:</label> <input class="textBox" type="text" value="<?php echo $product->getModifiedBy(); ?>" disabled="true"/></div>
                 <div class="inputField"><label>Creation Date:</label> <input class="textBox" type="text" value="<?php echo $product->getCreationDate(); ?>" disabled="true"/></div>
                 <div class="inputField"><label>Modified Date:</label> <input class="textBox" type="text" value="<?php echo $product->getModifiedDate(); ?>" disabled="true"/></div>
-                <div class="inputField"><input class="submitButton" name="updateButton" type="submit" value="Delete" /></div>
+                <div class="inputField"><label>Delete/ Restore:</label><button class="submitButton" name="updateButton" type="submit" value="Delete" /><?php if ($product->getIsDeleted()) {echo "Restore";} else {echo "Delete";} ?></button></div>
         </fieldset>
 
         <fieldset class="inputFieldSet">

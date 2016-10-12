@@ -10,8 +10,6 @@
 $database = new Database();
 $dataConnection = $database->getDataConnection();
 
-
-
 // Flags to determine how the columns should be ordered
 $orderBy = "none";  // Determains how to order results
 $desc = false;      // Determins if results should be ordered descending
@@ -38,8 +36,38 @@ $condition = "";
 $case = "";
 $status = "";
 $quantity = "";
+$viewDeleted = "";
+
+// Handle delete and restore
+if (isset($_GET['Restore']))
+{
+    try {
+        $product = new Product(mysqli_real_escape_string($dataConnection, $_GET['Restore']));
+        $product->setIsDeleted(false);
+    } catch (Exception $ex) {
+
+    }
+}
+if (isset($_GET['Delete']))
+{
+    try {
+        $product = new Product(mysqli_real_escape_string($dataConnection, $_GET['Delete']));
+        $product->setIsDeleted(true);
+        $viewDeleted = "on"; // Show the deleted products after delete
+    } catch (Exception $ex) {
+
+    }
+}
 
 // Get search values from get request
+if (isset($_GET['viewDeleted']))
+{
+    try {
+        $viewDeleted = mysqli_real_escape_string($dataConnection, $_GET['viewDeleted']);
+    } catch (Exception $ex) {
+
+    }
+}
 if (isset($_GET['quantity']))
 {
     try {
@@ -106,7 +134,7 @@ if (isset($_GET['condition']))
 }
 
 // Set search string
-$searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type=".$type."&condition=".$condition."&case=".$case."&status=".$status."&quantity=".$quantity."&SearchButton";
+$searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type=".$type."&condition=".$condition."&case=".$case."&status=".$status."&quantity=".$quantity."&viewDeleted=".$viewDeleted."&SearchButton";
 
 ?>
 
@@ -128,6 +156,7 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
                 <div class="inputField"><label>Case:</label> <input class="textBox" name="case" type="text" placeholder="e.g. Hard" value="<?php echo $case ?>" /></div>
                 <div class="inputField"><label>Status:</label> <input class="textBox" name="status" type="text" placeholder="e.g. Back" value="<?php echo $status ?>" /></div>
                 <div class="inputField"><label>Quantity:</label> <input class="textBox" name="quantity" type="text" placeholder="e.g. 1" value="<?php echo $quantity ?>" /></div>
+                <div class="inputField"><label>View Deleted:</label> <input type="checkbox" name="viewDeleted" <?php if ($viewDeleted === "on") {echo "checked";} ?>></div>
                 <div class="inputField"><input class="submitButton" type="submit" name="searchButton" value="Search" /></div>
             </form>
         </fieldset>
@@ -407,6 +436,32 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
                 }
             }
             
+            // Append view deleted
+            if ($viewDeleted === "on")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND isDeleted=1";
+                }
+                else
+                {
+                    $query = $query." WHERE isDeleted=1";
+                    $hasSearch = true;
+                }
+            }
+            else
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND isDeleted=0";
+                }
+                else
+                {
+                    $query = $query." WHERE isDeleted=0";
+                    $hasSearch = true;
+                }
+            }
+            
             // Append order by
             switch($orderBy)
             {
@@ -490,9 +545,16 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
                         echo '<td><a href="admin.php?editProduct&id='.$row['ProductID'].'">'.$row['Quantity'].'</a></td>';
                         // Draw price column
                         echo '<td><a href="admin.php?editProduct&id='.$row['ProductID'].'">'.$row['Price'].'</a></td>';
-                        // Draw del button
-                        echo '<td><a href="admin.php?editProduct&id='.$row['ProductID'].'" class="delButton">Del</a></td>';
-                        
+                        // Draw del/res button
+                        if ($row['isDeleted'])
+                        {
+                            echo '<td><a href="admin.php?manageStock&Restore='.$row['ProductID'].'" class="editButton">Res</a></td>';
+                        }
+                        else
+                        {
+                            echo '<td><a href="admin.php?manageStock&Delete='.$row['ProductID'].'" class="delButton">Del</a></td>';
+                        }
+
                         // Close table row
                         echo '</tr>';
                     }

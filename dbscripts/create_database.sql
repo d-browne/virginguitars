@@ -114,6 +114,7 @@ create table PRODUCT (
     CreationDate DATE NOT NULL,
     ModifiedDate DATE,
     PrimaryPicturePath VarChar(200) NULL,
+    isDeleted int(1) DEFAULT 0 NOT NULL,
     FOREIGN KEY (AppearenceFK) REFERENCES APPEARENCE(AppearenceID),
     FOREIGN KEY (ClassificationFK) REFERENCES CLASSIFICATION(ClassificationID),
     FOREIGN KEY (BrandFK) REFERENCES BRAND(BrandID),
@@ -223,38 +224,38 @@ INSERT INTO PRODUCT_STATUS VALUES (NULL, 'Backorder');
 INSERT INTO ADMINISTRATOR VALUES (NULL, 'admin', 'd23c1038532dc71d0a60a7fb3d330d7606b7520e9e5ee0ddcdb27ee1bd5bc0cd', '22');
 INSERT INTO ADMINISTRATOR VALUES (NULL, 'zerox', '2efe70f52e3b1d8dbc8b5325cf96e16d1cfbdb3dbb56cfd9dab51c735b0266fc', '34');
 
-INSERT INTO PRODUCT VALUES (NULL, 2, 1, 4, 1, 'Gorgeous sounding 2006 American Standard Stratocaster. It has a very comfortable feel and the pickups sound stellar. This guitar features a few upgraded parts including a Callaham bridge and Sperzel tuners; both of which help with intonation and overall sustain. On top of all of that, the guitar is in great overall shape!', 1, '802.27', 1, 1, 1, 1, CURDATE(), CURDATE(), 'images/guitars/fenderAmericanStandardStratocaster/1.jpg');
-INSERT INTO PRODUCT VALUES (NULL, 2, 1, 5, 2, 'This guitar comes from a unique and underrated part of Fenders history where surprisingly good quality guitars were leaving the Japanese factory stamped with the Squier name. Modern players are continuing to notice the exceptional bang-for-the-buck quality of these guitars, which look, play, and sound like their Fender counterparts. This guitar has a distinct vintage vibe between the slight tint the neck has sustained from graceful aging, the light overall wear, and the classic pickups. In addition, this guitar is in fantastic shape for its age and still plays like champ.', 1, '789.00', 2, 2, 1, 1, CURDATE(), CURDATE(), 'images/guitars/fenderSquireMijStratocaster/1.jpg');
-INSERT INTO PRODUCT VALUES (NULL, 2, 3, 1, 3, 'Specifications', 1, '635.25', 2, 3, 1, 1, CURDATE(), CURDATE(), 'images/guitars/gibsonEpiphoneLimitedEditionLesPaulCustom/1.jpg');
-INSERT INTO PRODUCT VALUES (NULL, 2, 3, 2, 1, 'Specifications', 1, '731.86', 1, 4, 1, 1, CURDATE(), CURDATE(), 'images/guitars/gibsonLesPaultStudio/1.jpg');
-INSERT INTO PRODUCT VALUES (NULL, 2, 7, 2, 2, 'Specifications', 1, '420.00', 1, 5, 1, 1, CURDATE(), CURDATE(), 'images/guitars/bcRichKerryKingMetalMasterTribalFireWarlock/1.jpg');
-INSERT INTO PRODUCT VALUES (NULL, 2, 7, 2, 3, 'Specifications', 1, '950.00', 1, 6, 1, 1, CURDATE(), CURDATE(), 'images/guitars/bcRichMockingBirdProX/1.jpg');
-INSERT INTO PRODUCT VALUES (NULL, 2, 7, 4, 1, 'Specifications', 1, '888.00', 1, 7, 1, 1, CURDATE(), CURDATE(), 'images/guitars/bcRichMockingbirdSt/1.png');
-INSERT INTO PRODUCT VALUES (NULL, 2, 6, 4, 2, 'Specifications', 1, '1001.00', 1, 8, 1, 1, CURDATE(), CURDATE(), 'images/guitars/jacksonDk2DinkyHotRodFlames/1.jpg');
-INSERT INTO PRODUCT VALUES (NULL, 2, 6, 4, 3, 'Specifications', 1, '1200.00', 2, 9, 1, 1, CURDATE(), CURDATE(), 'images/guitars/jacksonKvmgProSeriesKingV/1.jpg');
-INSERT INTO PRODUCT VALUES (NULL, 2, 6, 6, 1, 'Specifications', 1, '600.00', 1, 10, 1, 1, CURDATE(), CURDATE(), 'images/guitars/jacksonPdx2DemmelitionKingV/1.jpg');
-INSERT INTO PRODUCT VALUES (NULL, 2, 3, 3, 2, 'Specifications', 1, '3250.00', 1, 11, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 3, 1, 3, 'Specifications', 1, '3999.00', 2, 12, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 4, 1, 1, 'Specifications', 1, '1500.00', 2, 13, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 4, 4, 2, 'Specifications', 1, '1990.00', 2, 14, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 4, 3, 3, 'Specifications', 1, '1990.00', 1, 15, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 3, 4, 3, 1, 'Specifications', 1, '1990.00', 1, 16, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 1, 5, 3, 2, 'Specifications', 1, '1990.00', 1, 17, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 5, 2, 3, 'Specifications', 1, '1990.00', 1, 18, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 5, 1, 1, 'Specifications', 1, '1550.00', 2, 19, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 5, 4, 2, 'Specifications', 1, '1559.00', 1, 20, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 6, 5, 3, 'Specifications', 1, '1670.00', 1, 21, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 6, 6, 1, 'Specifications', 1, '1115.00', 2, 22, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 6, 6, 2, 'Specifications', 1, '1700.00', 1, 23, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 6, 4, 3, 'Specifications', 1, '1720.00', 1, 24, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 7, 3, 1, 'Specifications', 1, '1740.00', 1, 25, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 7, 4, 2, 'Specifications', 1, '1000.00', 2, 26, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 7, 2, 3, 'Specifications', 1, '1200.00', 2, 27, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 7, 2, 1, 'Specifications', 1, '1899.00', 2, 28, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 8, 3, 2, 'Specifications', 1, '1990.00', 2, 29, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 8, 1, 3, 'Specifications', 1, '1525.00', 2, 30, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 8, 4, 1, 'Specifications', 1, '2599.50', 1, 31, 1, 1, CURDATE(), CURDATE(), NULL);
-INSERT INTO PRODUCT VALUES (NULL, 2, 8, 5, 2, 'Specifications', 1, '2110.00', 2, 32, 1, 1, CURDATE(), CURDATE(), NULL);
+INSERT INTO PRODUCT VALUES (NULL, 2, 1, 4, 1, 'Gorgeous sounding 2006 American Standard Stratocaster. It has a very comfortable feel and the pickups sound stellar. This guitar features a few upgraded parts including a Callaham bridge and Sperzel tuners; both of which help with intonation and overall sustain. On top of all of that, the guitar is in great overall shape!', 1, '802.27', 1, 1, 1, 1, CURDATE(), CURDATE(), 'images/guitars/fenderAmericanStandardStratocaster/1.jpg', 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 1, 5, 2, 'This guitar comes from a unique and underrated part of Fenders history where surprisingly good quality guitars were leaving the Japanese factory stamped with the Squier name. Modern players are continuing to notice the exceptional bang-for-the-buck quality of these guitars, which look, play, and sound like their Fender counterparts. This guitar has a distinct vintage vibe between the slight tint the neck has sustained from graceful aging, the light overall wear, and the classic pickups. In addition, this guitar is in fantastic shape for its age and still plays like champ.', 1, '789.00', 2, 2, 1, 1, CURDATE(), CURDATE(), 'images/guitars/fenderSquireMijStratocaster/1.jpg', 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 3, 1, 3, 'Specifications', 1, '635.25', 2, 3, 1, 1, CURDATE(), CURDATE(), 'images/guitars/gibsonEpiphoneLimitedEditionLesPaulCustom/1.jpg', 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 3, 2, 1, 'Specifications', 1, '731.86', 1, 4, 1, 1, CURDATE(), CURDATE(), 'images/guitars/gibsonLesPaultStudio/1.jpg', 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 7, 2, 2, 'Specifications', 1, '420.00', 1, 5, 1, 1, CURDATE(), CURDATE(), 'images/guitars/bcRichKerryKingMetalMasterTribalFireWarlock/1.jpg', 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 7, 2, 3, 'Specifications', 1, '950.00', 1, 6, 1, 1, CURDATE(), CURDATE(), 'images/guitars/bcRichMockingBirdProX/1.jpg', 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 7, 4, 1, 'Specifications', 1, '888.00', 1, 7, 1, 1, CURDATE(), CURDATE(), 'images/guitars/bcRichMockingbirdSt/1.png', 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 6, 4, 2, 'Specifications', 1, '1001.00', 1, 8, 1, 1, CURDATE(), CURDATE(), 'images/guitars/jacksonDk2DinkyHotRodFlames/1.jpg', 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 6, 4, 3, 'Specifications', 1, '1200.00', 2, 9, 1, 1, CURDATE(), CURDATE(), 'images/guitars/jacksonKvmgProSeriesKingV/1.jpg', 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 6, 6, 1, 'Specifications', 1, '600.00', 1, 10, 1, 1, CURDATE(), CURDATE(), 'images/guitars/jacksonPdx2DemmelitionKingV/1.jpg', 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 3, 3, 2, 'Specifications', 1, '3250.00', 1, 11, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 3, 1, 3, 'Specifications', 1, '3999.00', 2, 12, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 4, 1, 1, 'Specifications', 1, '1500.00', 2, 13, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 4, 4, 2, 'Specifications', 1, '1990.00', 2, 14, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 4, 3, 3, 'Specifications', 1, '1990.00', 1, 15, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 3, 4, 3, 1, 'Specifications', 1, '1990.00', 1, 16, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 1, 5, 3, 2, 'Specifications', 1, '1990.00', 1, 17, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 5, 2, 3, 'Specifications', 1, '1990.00', 1, 18, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 5, 1, 1, 'Specifications', 1, '1550.00', 2, 19, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 5, 4, 2, 'Specifications', 1, '1559.00', 1, 20, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 6, 5, 3, 'Specifications', 1, '1670.00', 1, 21, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 6, 6, 1, 'Specifications', 1, '1115.00', 2, 22, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 6, 6, 2, 'Specifications', 1, '1700.00', 1, 23, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 6, 4, 3, 'Specifications', 1, '1720.00', 1, 24, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 7, 3, 1, 'Specifications', 1, '1740.00', 1, 25, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 7, 4, 2, 'Specifications', 1, '1000.00', 2, 26, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 7, 2, 3, 'Specifications', 1, '1200.00', 2, 27, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 7, 2, 1, 'Specifications', 1, '1899.00', 2, 28, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 8, 3, 2, 'Specifications', 1, '1990.00', 2, 29, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 8, 1, 3, 'Specifications', 1, '1525.00', 2, 30, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 8, 4, 1, 'Specifications', 1, '2599.50', 1, 31, 1, 1, CURDATE(), CURDATE(), NULL, 0);
+INSERT INTO PRODUCT VALUES (NULL, 2, 8, 5, 2, 'Specifications', 1, '2110.00', 2, 32, 1, 1, CURDATE(), CURDATE(), NULL, 0);
 
 INSERT INTO CUSTOMER VALUES (NULL, 'Morrison', 'Ben', '', 1, 'ben@mail.com', 'd46b5cd9c1456e3059258a411faf8bbb0253c190cc5acb488f999e1b1421f83b', 12, '0000111222', '11112222');
 INSERT INTO CUSTOMER VALUES (NULL, 'Hogan', 'Dale', '', 0, 'dale@mail.com', 'f55d74e275c773678f3750573bcd70b14d44e082045e227e5c1d571dccfab624', 665, '1111222333', '22223333');
@@ -449,7 +450,8 @@ ap.Description As 'Condition',
 ct.Description As 'CaseType',
 ps.Description As 'Status', 
 p.Quantity, 
-p.UnitPrice As 'Price'
+p.UnitPrice As 'Price',
+p.isDeleted
 FROM PRODUCT As p
 INNER JOIN BRAND As b ON p.BrandFK = b.BrandID
 INNER JOIN CLASSIFICATION As c ON p.ClassificationFK = c.ClassificationID
@@ -478,7 +480,8 @@ m.Description As 'Model',
 a.UserName As 'CreatedBy',
 a2.UserName As 'ModifiedBy',
 p.CreationDate,
-p.ModifiedDate
+p.ModifiedDate,
+p.isDeleted
 FROM PRODUCT As p
 INNER JOIN BRAND As b ON p.BrandFK = b.BrandID
 INNER JOIN CLASSIFICATION As c ON p.ClassificationFK = c.ClassificationID

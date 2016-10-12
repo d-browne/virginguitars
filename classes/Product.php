@@ -28,7 +28,60 @@ class Product
     private $ModifiedBy;
     private $CreationDate;
     private $ModifiedDate;
+    private $isDeleted;
     
+    public function setIsDeleted($isDeleted)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        if ($isDeleted === true)
+        {
+            // query to set flag to true
+            $query = "UPDATE PRODUCT SET isDeleted=1 WHERE ProductID='".$this->ProductID."';";
+            
+            // Execute query
+            $result = $dataConnection->query($query);
+            
+            if ($result === false)
+            {
+                return "Unable to set isDeleted flag";
+            }
+            else
+            {
+                $this->isDeleted = true;
+                return true;
+            }
+        }
+        
+        if ($isDeleted === false)
+        {
+            // query to set flag to true
+            $query = "UPDATE PRODUCT SET isDeleted=0 WHERE ProductID='".$this->ProductID."';";
+            
+            // Execute query
+            $result = $dataConnection->query($query);
+            
+            if ($result === false)
+            {
+                return "Unable to set isDeleted flag";
+            }
+            else
+            {
+                $this->isDeleted = false;
+                return true;
+            }
+        }
+        
+        return "Invalid input";
+    }
+    
+    // is deleted getter
+    function getIsDeleted() {
+        return $this->isDeleted;
+    }
+
     public function setPrimaryPicturePath($inputPrimaryPicturePath)
     {
         // Create data connection
@@ -508,6 +561,7 @@ class Product
         $this->ModifiedBy = $row['ModifiedBy'];
         $this->CreationDate = $row['CreationDate'];
         $this->ModifiedDate = $row['ModifiedDate'];
+        $this->isDeleted = $row['isDeleted'];
     }
     function getProductID() {
         return $this->ProductID;

@@ -10,6 +10,45 @@ require_once 'classes/Product.php';
 
 class ProductTest extends TestCase 
 {
+    public function setisDeletedDataProvider()
+    {
+        return array(
+            array(1, true, true),
+            array(1, false, true),
+            array(1, "blah blah", "Invalid input"),
+        );
+    }
+    
+    /**
+     * 
+     * @dataProvider setisDeletedDataProvider
+     */
+    public function testSetisDeleted($ProductID, $isDeleted, $expected)
+    {
+        // Create product object
+        $product = new Product($ProductID);
+        
+        // backup current isDeleted
+        $isDeletedBackup = $product->getisDeleted();
+        
+        // Update isDeleted
+        $this->assertEquals($expected, $product->setisDeleted($isDeleted));
+        
+        // If true check in memory and in database
+        if ($expected === true)
+        {
+            // Check in memory
+            $this->assertEquals($isDeleted, $product->getisDeleted());
+            
+            // Check in database (using new object)
+            $product2 = new Product($ProductID);
+            $this->assertEquals($isDeleted, $product2->getisDeleted());
+        }
+        
+        // Restore backup
+        $product->setisDeleted($isDeletedBackup);
+    }
+    
     public function setPrimaryPicturePathDataProvider()
     {
         return array(

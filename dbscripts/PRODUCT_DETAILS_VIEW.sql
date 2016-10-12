@@ -15,7 +15,8 @@ m.Description As 'Model',
 a.UserName As 'CreatedBy',
 a2.UserName As 'ModifiedBy',
 p.CreationDate,
-p.ModifiedDate
+p.ModifiedDate,
+p.isDeleted
 FROM PRODUCT As p
 INNER JOIN BRAND As b ON p.BrandFK = b.BrandID
 INNER JOIN CLASSIFICATION As c ON p.ClassificationFK = c.ClassificationID
