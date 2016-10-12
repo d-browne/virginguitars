@@ -434,6 +434,17 @@ $searchString = "productid=".$productid."&model=".$model."&brand=".$brand."&type
                 }
             }
             
+            // Append Query to only show stock that hasn't been deleted
+            if ($hasSearch)
+            {
+                $query = $query." AND isDeleted=0";
+            }
+            else
+            {
+                $query = $query." WHERE isDeleted=0";
+                $hasSearch = true;
+            }
+            
             // Append order by
             switch($orderBy)
             {
