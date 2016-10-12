@@ -136,7 +136,7 @@ else
                 
                 <div id="stretcher"></div>
                 <div id="bottomButtonsBox">
-                    <form action="cart.html"><button class="formCSSButtonButton">Add Cart</button></form>
+                    <form action="cart.php" method="POST"><button class="formCSSButtonButton" name="addCartButton" value="<?php echo $product->getProductID(); ?>">Add Cart</button></form>
                     <button type="button" onclick="window.history.back()" class="formCSSButtonButton">Back</button>
                 </div>
 
