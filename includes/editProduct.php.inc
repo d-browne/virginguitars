@@ -180,7 +180,28 @@ $updateErrorString = "";
             $updateStatusResult = $product->setStatus($_POST['Status']);
             if ($updateStatusResult === true)
             {
+                // Updated status message
                 $updateSuccessString = $updateSuccessString."Updated Status, ";
+                
+                // If product status changed to "Out of Stock" delete product from all carts
+                if ($product->getStatus() === "Out Of Stock")
+                {
+                    // Query to delete
+                    $deleteFromCartQuery = "DELETE FROM CART WHERE ProductFK='".$product->getProductID()."';";
+                    
+                    // Execute query
+                    $deleteFromCartResult = $dataConnection->query($deleteFromCartQuery);
+                    
+                    if ($deleteFromCartResult === true)
+                    {
+                        // Successfully deleted from cart message
+                        $updateSuccessString = $updateSuccessString."removed out of stock products from carts, ";
+                    }
+                    else
+                    {
+                        $updateErrorString = $updateErrorString."unable to delete 'out of stock' product from carts, ";
+                    }
+                }
             }
             else
             {
