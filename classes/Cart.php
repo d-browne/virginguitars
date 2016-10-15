@@ -68,6 +68,45 @@ class Cart
         return true;
     }
     
+    // If the number of items available is lowered below what a user has specified in their cart, 
+    // this function will lowre the number of items in the cart to the number of items available
+    public function refreshQuantity()
+    {
+        // Get data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Query quantity of all items in cart
+        $query = "SELECT * FROM CART_VIEW WHERE CustomerFK='".$this->CustomerID."';";
+        
+        // Execute query 
+        $result = $dataConnection->query($query);
+        
+        // Return error if unable to query
+        if ($result === false)
+        {
+            return "Unable to query for quantities";
+        }
+        
+        // If result is returned
+        if ($result->num_rows > 0)
+        {
+            // Loop through each row
+            while ($row = $result->fetch_assoc())
+            {
+                // Create a product object
+                $product = new Product($row['ProductID']);
+                
+                // If the cart has more than is available
+                if ($row['Quantity'] > $product->getQuantity())
+                {
+                    // Set to max available
+                    $this->setQuantity($row['ProductID'], $product->getQuantity());
+                }
+            }
+        }
+    }
+    
     // Function to set quantity of item in cart
     public function setQuantity($ProductIDInput, $QuantityInput)
     {

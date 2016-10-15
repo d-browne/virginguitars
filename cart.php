@@ -16,6 +16,10 @@ if ($_SESSION["currentCustomer"]->getIsInitialized() != true)
     header("Location: members.php");
 }
 
+// Refresh cart
+$cart = new Cart($_SESSION["currentCustomer"]->getCustomerID());
+$cart->refreshQuantity();
+
 // Create data connection
 $database = new Database();
 $dataConnection = $database->getDataConnection();
