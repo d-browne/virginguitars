@@ -86,9 +86,9 @@ class Cart
         }
         
         // Return if quantity is less than 0
-        if ($Quantity < 0)
+        if ($Quantity < 1)
         {
-            return "Quantity must not be less than zero";
+            return "Quantity must not be less than one";
         }
         
         // If item is not is cart, add it
