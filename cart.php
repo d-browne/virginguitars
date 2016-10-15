@@ -70,9 +70,39 @@ if (isset($_GET['delete']))
     }
 }
 
+// Check for update number of items in cart
 if (isset($_POST['updateCart']))
 {
-    $successString = $successString."Hi warren, haven't put the change quantity feature in yet. Coming soon ( ͡° ͜ʖ ͡°)";
+    // Check if productid and desired number of items recieved
+    if (isset($_POST['ProductID']) && isset($_POST['ProductID']))
+    {
+        // Create cart object
+        $cart = new Cart($_SESSION["currentCustomer"]->getCustomerID());
+        
+        // Get id of item to be updated and it's desired new number of items
+        $CartProductID = mysqli_real_escape_string($dataConnection, $_POST['ProductID']);
+        $numberOfItems = mysqli_real_escape_string($dataConnection, $_POST['numberOfItems']);
+        
+        // Update the cart
+        $updateCartResult = $cart->setQuantity($CartProductID, $numberOfItems);
+        if($updateCartResult === true)
+        {
+            // Display success message
+            $successString = $successString."Updated product '".$CartProductID."' quantity to: '".$numberOfItems."', ";
+        }
+        else
+        {
+            $errorString = $errorString.$updateCartResult.", ";
+        }
+    }
+    else
+    {
+        $errorString = $errorString.", unable to update item in cart";
+    }
+    
+    
+    
+    
 }
 ?>
 
@@ -107,7 +137,6 @@ if (isset($_POST['updateCart']))
         	<h1>Cart</h1>
                 <p><span id="updatedMemberLabel"><?php echo $successString; ?></span> <span id="updatedMemberErrorLabel"><?php echo $errorString; ?></span></p>
             <div id="tableContainer">
-                <form action="cart.php" method="POST">
                 <table class="cartTable" border="1">
                     <tr class="headerRow">
                         <td></td>
@@ -155,7 +184,7 @@ if (isset($_POST['updateCart']))
                                 // Draw product id
                                 echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['ProductID'].'</a></td>';
                                 // Draw Quantity
-                                echo '<td><input type="text" style="width: 4em;" value="'.$row['Quantity'].'" /></a></td>';
+                                echo '<form action="cart.php" method="POST"><td><input type="text" style="width: 4em;" name="numberOfItems" value="'.$row['Quantity'].'" /></a></td><input type="hidden" name="ProductID" value="'.$row['ProductID'].'" /><button type="submit" name="updateCart" hidden="true" /></form>';
                                 // Draw price
                                 echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Price'].'</a></td>';
                                 // Draw total
@@ -178,8 +207,7 @@ if (isset($_POST['updateCart']))
                     }
                     ?>
                 </table>
-                <button type="submit" name="updateCart" hidden="true" />
-                </form>
+                
             </div>
             
             <div id="totalLabelStretcher"></div>
