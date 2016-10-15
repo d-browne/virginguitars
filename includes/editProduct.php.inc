@@ -182,7 +182,7 @@ $updateErrorString = "";
             {
                 // Updated status message
                 $updateSuccessString = $updateSuccessString."Updated Status, ";
-                
+
                 // If product status changed to "Out of Stock" delete product from all carts
 //                if ($product->getStatus() === "Out Of Stock")
 //                {
@@ -426,6 +426,11 @@ $updateErrorString = "";
             {
                 $updateErrorString = $updateErrorString."Unable to query for last image, ";
             }
+        }
+        // If product changed to "Out Of Stock" set quantity to 0
+        if ($product->getStatus() === "Out Of Stock")
+        {
+            $product->setQuantity(0);
         }
     }
     ?>
