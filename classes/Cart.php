@@ -168,6 +168,12 @@ class Cart
             // Check if product exists by attempting to instantiate it
             try {
                 $product = new Product($ProductID);
+                
+                // return error if product is out of stock
+                if ($product->getStatus() === "Out Of Stock")
+                {
+                    return "Unable to add product, out of stock and not on backorder";
+                }
             } catch (Exception $ex) {
                 return $ex->getMessage();
             }
