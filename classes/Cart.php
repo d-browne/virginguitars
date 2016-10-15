@@ -98,7 +98,7 @@ class Cart
                 $product = new Product($row['ProductID']);
                 
                 // If the cart has more than is available
-                if ($row['Quantity'] > $product->getQuantity())
+                if ($row['Quantity'] > $product->getQuantity() && $row['Status'] != "Backorder")
                 {
                     // Set to max available
                     $this->setQuantity($row['ProductID'], $product->getQuantity());
