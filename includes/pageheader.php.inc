@@ -56,11 +56,13 @@ if (isset($_SESSION["currentCustomer"]))
     </form>
 
     <div id="checkOutBox">
+        <?php if ($itemsInCart > 0): ?>
         <span id="cartItems"><a href="cart.php"><?php echo $itemsInCart; ?></a></span>
         <?php else: ?>
         <?php endif; ?>
         <a href="cart.php"><img src="images/cartIcon.png" id="cartIcon" width="32" height="42" alt="Cart"></a>
         <?php if ($isCustomerLoggedIn == true): ?>
+        <a href="members.php?signOut" id="checkoutLink">Sign Out</a>
         <?php else: ?>
         <a href="members.php" id="checkoutLink">Sign In</a>
         <?php endif; ?>
