@@ -1,3 +1,46 @@
+<?php
+// This file displays the page header box
+
+$isCustomerLoggedIn = false;    // Flag to check if cusomter is logged in
+$itemsInCart = 0;               // Hold number of items in cart
+
+// Check if customer defined in session
+if (isset($_SESSION["currentCustomer"]))
+{
+    // check if customer is logged it
+    if($_SESSION["currentCustomer"]->getIsInitialized())
+    {
+        // Set logged flag true
+        $isCustomerLoggedIn = true;
+    }
+    
+    // Get number of items in cart
+    // Create data connection
+    $database = new Database();
+    $dataConnection = $database->getDataConnection();
+    
+    // Query to count number of items in cart
+    $query = "SELECT SUM(Quantity) As Count FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
+    
+    // Execute query
+    $result = $dataConnection->query($query);
+    
+    // If query executed successfully
+    if ($result !== false)
+    {
+        // If result returned
+        if ($result->num_rows > 0)
+        {
+            // get row
+            $row = $result->fetch_assoc();
+            
+            // Get value from row
+            $itemsInCart = $row['Count'];
+        }
+    }
+}
+?>
+
 <div id="headerBox">
     <?php
         // If admin Display "signed in as admin" label in header box
@@ -13,8 +56,13 @@
     </form>
 
     <div id="checkOutBox">
-        <span id="cartItems"><a href="cart.html">4</a></span>
+        <span id="cartItems"><a href="cart.php"><?php echo $itemsInCart; ?></a></span>
+        <?php else: ?>
+        <?php endif; ?>
         <a href="cart.php"><img src="images/cartIcon.png" id="cartIcon" width="32" height="42" alt="Cart"></a>
-        <a href="checkout.html" id="checkoutLink">checkout</a>
+        <?php if ($isCustomerLoggedIn == true): ?>
+        <?php else: ?>
+        <a href="members.php" id="checkoutLink">Sign In</a>
+        <?php endif; ?>
     </div>
 </div>
