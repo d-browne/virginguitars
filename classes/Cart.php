@@ -91,6 +91,14 @@ class Cart
             return "Quantity must not be less than one";
         }
         
+        // Return error if quantity is greater than in stock products
+        // Unless status is "Backorder"
+        $product = new Product($ProductID);
+        if ($Quantity > $product->getQuantity() && $product->getStatus() != "Backorder")
+        {
+            return "Cannot set quantity to ".$Quantity." only ".$product->getQuantity()." left";
+        }
+        
         // If item is not is cart, add it
         if (!$this->isInCart($ProductID))
         {
