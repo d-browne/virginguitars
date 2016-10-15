@@ -151,7 +151,7 @@ if (isset($_POST['updateCart']))
                     // Query cart and display each row
 
                     // Query to get all cart items for this signed in member
-                    $query = "SELECT * FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
+                    $query = "SELECT * FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."' AND isDeleted='0';";
                     
                     // Execute query 
                     $result = $dataConnection->query($query);
@@ -214,7 +214,7 @@ if (isset($_POST['updateCart']))
             <div id="totalLabel">Total: $
             <?php // Get total
             // Query to calculate total
-            $query = "SELECT SUM(Total) As 'Sumtotal' FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
+            $query = "SELECT SUM(Total) As 'Sumtotal' FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."' AND isDeleted='0';";
             
             // Execute query
             $result = $dataConnection->query($query);
