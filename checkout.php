@@ -171,7 +171,7 @@
         </div>
         
         	<div id="summaryDetailsBox">
-            	<span id="signInLink"><a href="signin.html">Member Sign in</a></span>
+                    <form action="cart.php"><button class="formCSSButtonButton" style="left: 0.5em;">Back</button></form>
             	<div id="shippingLabel">Shipping: $200</div>
             	<div id="totalLabel">Total: $3028.75</div>
             </div>
