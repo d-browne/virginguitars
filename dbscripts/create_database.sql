@@ -11,7 +11,8 @@ create table CUSTOMER (
     EncryptedPassword VarChar(256) NOT NULL,
     Salt INT NOT NULL,
     MobilePhone VarChar(15),
-    HomePhone VarCHar(15)
+    HomePhone VarCHar(15),
+    isDeleted int(1) DEFAULT 0 NOT NULL
 )ENGINE=InnoDB;
 
 create table HOMEADDRESS (
@@ -266,10 +267,10 @@ INSERT INTO PRODUCT VALUES (NULL, 2, 8, 1, 3, 'Specifications', 1, '1525.00', 2,
 INSERT INTO PRODUCT VALUES (NULL, 2, 8, 4, 1, 'Specifications', 1, '2599.50', 1, 31, 1, 1, CURDATE(), CURDATE(), NULL, 0);
 INSERT INTO PRODUCT VALUES (NULL, 2, 8, 5, 2, 'Specifications', 1, '2110.00', 2, 32, 1, 1, CURDATE(), CURDATE(), NULL, 0);
 
-INSERT INTO CUSTOMER VALUES (NULL, 'Morrison', 'Ben', '', 1, 'ben@mail.com', 'd46b5cd9c1456e3059258a411faf8bbb0253c190cc5acb488f999e1b1421f83b', 12, '0000111222', '11112222');
-INSERT INTO CUSTOMER VALUES (NULL, 'Hogan', 'Dale', '', 0, 'dale@mail.com', 'f55d74e275c773678f3750573bcd70b14d44e082045e227e5c1d571dccfab624', 665, '1111222333', '22223333');
-INSERT INTO CUSTOMER VALUES (NULL, 'Norris', 'Warren', '', 1, 'warren@mail.com', 'acec2d49992381a162de7b6b66ce9cbd3d3336de55abcc0cb3350b3335575f9c', 928, '2222333444', '33334444');
-INSERT INTO CUSTOMER VALUES (NULL, 'Browne', 'Dominic', '', 0, 'dominic@mail.com', 'cf3f90f70affced11fe6236c20b879447b54fe5779a8225d061a9b7c9b948fd3', 923, '3333444555', '44445555');
+INSERT INTO CUSTOMER VALUES (NULL, 'Morrison', 'Ben', '', 1, 'ben@mail.com', 'd46b5cd9c1456e3059258a411faf8bbb0253c190cc5acb488f999e1b1421f83b', 12, '0000111222', '11112222', DEFAULT);
+INSERT INTO CUSTOMER VALUES (NULL, 'Hogan', 'Dale', '', 0, 'dale@mail.com', 'f55d74e275c773678f3750573bcd70b14d44e082045e227e5c1d571dccfab624', 665, '1111222333', '22223333', DEFAULT);
+INSERT INTO CUSTOMER VALUES (NULL, 'Norris', 'Warren', '', 1, 'warren@mail.com', 'acec2d49992381a162de7b6b66ce9cbd3d3336de55abcc0cb3350b3335575f9c', 928, '2222333444', '33334444', DEFAULT);
+INSERT INTO CUSTOMER VALUES (NULL, 'Browne', 'Dominic', '', 0, 'dominic@mail.com', 'cf3f90f70affced11fe6236c20b879447b54fe5779a8225d061a9b7c9b948fd3', 923, '3333444555', '44445555', DEFAULT);
 
 INSERT INTO HOMEADDRESS VALUES (NULL, 1, '123 Fake Street', 'Sydney', 'NSW', 0000, 'Australia');
 INSERT INTO HOMEADDRESS VALUES (NULL, 2, '456 Fake Street', 'Gosford', 'NSW', 1111, 'Australia');
@@ -414,7 +415,7 @@ INSERT INTO PICTURE VALUES (NULL, 10, 'images/guitars/10/12.jpg');
 # This Query Reutrns a list of all Customers, their details and number of open and closed orders.
 # For use in displaying a list of customers in the Administration panel
 CREATE VIEW CUSTOMERS_AND_ORDERS_VIEW AS
-SELECT CustomerID, FirstName, LastName, Email, COUNT(SALES_ORDER.CustomerFK) as 'All Orders', SUM(case when ORDER_STATUS.Description = 'Requested' then 1 else 0 end) as 'New Orders'
+SELECT CustomerID, FirstName, LastName, Email, COUNT(SALES_ORDER.CustomerFK) as 'All Orders', SUM(case when ORDER_STATUS.Description = 'Requested' then 1 else 0 end) as 'New Orders', isDeleted
 FROM CUSTOMER
 LEFT JOIN SALES_ORDER ON SALES_ORDER.CustomerFK = CustomerID
 LEFT JOIN ORDER_STATUS ON ORDER_STATUS.OrderStatusID = SALES_ORDER.OrderStatusFK
