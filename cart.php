@@ -248,7 +248,7 @@ if (isset($_POST['updateCart']))
             ?>
             </div>
             <a href="checkout.php"><div id="checkoutButton">Checkout</div></a>
-            
+            <button class="formCSSButtonButton" style="left: 0.5em;" onclick="window.history.back()" type="button">Back</button>
         </div>
             <?php
             // Display the page footer
