@@ -387,8 +387,7 @@ class Customer
             return "Unable to set deleted status";
         }
         
-        // All okay updated in memory and return true
-        $this->isDeleted = true;
+        $this->isDeleted = $isDeleted;
         
         return true;
     }

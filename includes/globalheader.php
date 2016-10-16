@@ -26,3 +26,24 @@ if (!isset($_SESSION["currentCustomer"]))
 {
     $_SESSION["currentCustomer"] = new Customer();
 }
+
+
+// refresh customer object on each pageload
+// This ensures that the customer objects is always up-to-date 
+// Check if customer is in session
+if (isset($_SESSION["currentCustomer"]))
+{
+    // Check if customer initialized
+    if ($_SESSION["currentCustomer"]->getIsInitialized())
+    {
+        // Reinitialize 
+        $_SESSION["currentCustomer"]->initializeID($_SESSION["currentCustomer"]->getCustomerID());
+    }
+    
+    // Check if customer deleted
+    if ($_SESSION['currentCustomer']->getIsDeleted())
+    {
+        // Uninitialize
+        $_SESSION['currentCustomer'] = new Customer();
+    }
+}
