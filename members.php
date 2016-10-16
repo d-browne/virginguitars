@@ -23,7 +23,7 @@ if(isset($_POST['signIn']))
         if ($_SESSION['currentCustomer']->getIsDeleted())
         {
             // Show error
-            $signInError = "This account has been deleted";
+            $signInError = "This account has been deleted...";
             
             // Un-initialize
             $_SESSION['currentCustomer'] = new Customer();
