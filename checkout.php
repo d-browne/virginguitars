@@ -60,7 +60,7 @@
         </div>
         
         <div id="contentBox">
-        	<h1>Cart</h1>
+        	<h1>Checkout</h1>
             <div id="tableContainer">
                 <table class="cartTable" border="1">
                     <tr class="headerRow">
@@ -171,7 +171,7 @@
         </div>
         
         	<div id="summaryDetailsBox">
-                    <form action="cart.php"><button class="formCSSButtonButton" style="left: 0.5em;">Back</button></form>
+                        <form action="cart.php"><button class="formCSSButtonButton" style="left: 0.5em;">Back</button></form>
             	<div id="shippingLabel">Shipping: $200</div>
             	<div id="totalLabel">Total: $3028.75</div>
             </div>
