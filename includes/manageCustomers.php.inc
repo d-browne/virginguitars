@@ -38,8 +38,55 @@ $customerid = "";
 $firstname = "";
 $lastname = "";
 $email = "";
+$viewDeleted = "";
+
+// Handle delete and resotre requests
+if (isset($_GET['res']))
+{
+    try {
+        $customer = new Customer();
+        $customer->initializeID(mysqli_real_escape_string($dataConnection, $_GET['res']));
+        
+        // Check if customer initialized
+        if ($customer->getIsInitialized())
+        {
+            // set deleted to true
+            $customer->setIsDeleted(false);
+            
+            $viewDeleted = ""; // Show all customers after restore
+        }
+    } catch (Exception $ex) {
+
+    }
+}
+if (isset($_GET['del']))
+{
+    try {
+        $customer = new Customer();
+        $customer->initializeID(mysqli_real_escape_string($dataConnection, $_GET['del']));
+        
+        // Check if customer initialized
+        if ($customer->getIsInitialized())
+        {
+            // set deleted to true
+            $customer->setIsDeleted(true);
+            
+            $viewDeleted = "on"; // Show the deleted customers after delete
+        }
+    } catch (Exception $ex) {
+
+    }
+}
 
 // Try to set search values from get requests
+if (isset($_GET['viewDeleted']))
+{
+    try {
+        $viewDeleted = mysqli_real_escape_string($dataConnection, $_GET['viewDeleted']);
+    } catch (Exception $ex) {
+
+    }
+}
 if (isset($_GET['CustomerID']))
 {
         // Get search form values
@@ -83,7 +130,7 @@ if (isset($_GET['Email']))
 }
 // End setting search values from get requests. 
 
-$searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.$lastname.'&Email='.$email.'&searchButton';
+$searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.$lastname.'&Email='.$email.'&viewDeleted='.$viewDeleted.'&searchButton';
 ?>
 
 <div id="contentBox">
@@ -99,6 +146,7 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                 <div class="inputField"><label>First Name:</label> <input class="textBox" name="FirstName" type="text" placeholder="e.g. Kev" value="<?php echo $firstname; ?>"/></div>
                 <div class="inputField"><label>Last Name:</label> <input class="textBox" name="LastName" type="text" placeholder="e.g. Smith" value="<?php echo $lastname; ?>"/></div>
                 <div class="inputField"><label>Email:</label> <input class="textBox" name="Email" type="text" placeholder="mail@ne.com" value="<?php echo $email; ?>"/></div>
+                <div class="inputField"><label>View Deleted:</label> <input type="checkbox" name="viewDeleted" <?php if ($viewDeleted === "on") {echo "checked";} ?>></div>
                 <div class="inputField"><input class="submitButton" type="submit" name="searchButton" value="Search" /></div>
             </form>
         </fieldset>
@@ -280,6 +328,30 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                 }
             }
             
+            // view deleted customers
+            if ($viewDeleted !== "")
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND isDeleted='1'";
+                }
+                else
+                {
+                    $query = $query." WHERE isDeleted='1'";
+                }
+            }
+            else
+            {
+                if ($hasSearch)
+                {
+                    $query = $query." AND isDeleted<>'1'";
+                }
+                else
+                {
+                    $query = $query." WHERE isDeleted<>'1'";
+                }
+            }
+            
             // Appened the order options
             switch ($orderBy)
             {
@@ -358,7 +430,15 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                         // Print Edit button
                         print "<td><a class=\"editButton\" href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">Edit</a></td>";
                         // Print Delete button
-                        print "<td><a class=\"delButton\" href=\"admin.php?manageCustomers&del=".$row['CustomerID']."\">Del</a></td>";
+                        if ($row['isDeleted'] == 0)
+                        {
+                            print "<td><a class=\"delButton\" href=\"admin.php?manageCustomers&del=".$row['CustomerID']."\">Del</a></td>";
+                        }
+                        else
+                        {
+                            print "<td><a class=\"editButton\" href=\"admin.php?manageCustomers&res=".$row['CustomerID']."\">Res</a></td>";
+                        }
+                        
                         
                         // Close table row
                         print "</tr>";
