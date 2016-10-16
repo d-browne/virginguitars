@@ -247,7 +247,7 @@ if (isset($_POST['updateCart']))
             }
             ?>
             </div>
-            <a href="checkout.html"><div id="checkoutButton">Checkout</div></a>
+            <a href="checkout.php"><div id="checkoutButton">Checkout</div></a>
             
         </div>
             <?php
