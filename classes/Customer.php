@@ -17,7 +17,12 @@ class Customer
     private $salt;
     private $isInitialized = false; // Tells whether or not this object is initialized with data form the database
     private $homeAddress;           // Holds home address object
+    private $isDeleted;             // Holds isDeleted value
     
+    function getIsDeleted() {
+        return $this->isDeleted;
+    }
+
     public function getHomeAddress()
     {
         return $this->homeAddress;
@@ -341,6 +346,53 @@ class Customer
         return true;
     }
     
+    public function setIsDeleted($isDeleted)
+    {
+        // Return error if not initialized member
+        if (!$this->isInitialized)
+        {
+            return "member not initialized";
+        }
+        
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        $isDeletedForQuery = 0;
+        
+        // if true set to 1
+        if ($isDeleted == true)
+        {
+            $isDeletedForQuery = 1;
+        }
+        elseif ($isDeleted == false)
+        {
+            $isDeletedForQuery = 0;
+        }
+        else
+        {
+            // Must be true or false return error message
+            return "Must be true or false";
+        }
+        
+        // query to change isDeleted value
+        $query = "UPDATE CUSTOMER SET isDeleted='".$isDeletedForQuery."' WHERE Email='".$this->Email."';";
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // if query fails return error 
+        if ($result === false)
+        {
+            return "Unable to set deleted status";
+        }
+        
+        // All okay updated in memory and return true
+        $this->isDeleted = true;
+        
+        return true;
+    }
+    
     // Function to initialize the object from ID
     public function initializeID($ID)
     {
@@ -374,6 +426,7 @@ class Customer
         $this->HomePhone = $row["HomePhone"];
         $this->hashedPassword = $row["EncryptedPassword"];
         $this->salt = $row["Salt"];
+        $this->isDeleted = $row['isDeleted'];
         
         // set home address object
         $this->homeAddress = new HomeAddress($this->CustomerID);
@@ -417,6 +470,7 @@ class Customer
         $this->HomePhone = $row["HomePhone"];
         $this->hashedPassword = $row["EncryptedPassword"];
         $this->salt = $row["Salt"];
+        $this->isDeleted = $row['isDeleted'];
         
         // set home address object
         $this->homeAddress = new HomeAddress($this->CustomerID);
@@ -509,7 +563,7 @@ class Customer
                 mysqli_real_escape_string($dataConnection, $MailingList) .", '".
                 mysqli_real_escape_string($dataConnection, $Email) ."', '".
                 mysqli_real_escape_string($dataConnection, $hashedPassword) ."', ".
-                mysqli_real_escape_string($dataConnection, $salt) .", NULL, NULL)";
+                mysqli_real_escape_string($dataConnection, $salt) .", NULL, NULL, DEFAULT)";
 
         // Execute query
         $dataConnection->query($query);
