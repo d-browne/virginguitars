@@ -73,74 +73,65 @@ $dataConnection = $database->getDataConnection();
                         <td><span class="tableHeader">Total</span></td>
                         <td><span class="tableHeader">Del</span></td>
                     </tr>
-                    <tr>
-                        <td>
-                        	<a href="images/guitars/jacksonDk2DinkyHotRodFlames/1.jpg">
-                        		<img src="images/guitars/jacksonDk2DinkyHotRodFlames/1.jpg" alt="Jackson DK2 Dinky Hot Rod Flames" width="100"/>
-                            </a>
-                        </td>
-                        <td>
-                        	<a href="jackson_dk2_dinky_hot_rod_flames.html">
-                            	Jackson DK2 Dinky Hot Rod Flames
-                            </a>
-                        </td>
-                        <td>234</td>
-                        <td>1</td>
-                        <td>AU $970.34</td>
-                        <td>AU $970.34</td>
-                        <td><span class="delButton">Del</span></td>
-                    </tr>
-                    <tr class="altRow">
-                        <td>
-                        	<a href="images/guitars/bcRichKerryKingMetalMasterTribalFireWarlock/1.jpg">
-                        		<img src="images/guitars/bcRichKerryKingMetalMasterTribalFireWarlock/1.jpg" alt="Kerry King Metal Master Tribal Fire Warlock" width="100"/>
-                            </a>
-                        </td>
-                        <td>
-                        	<a href="bc_rich_kerry_king_metal_master_tribal_fire_warlock.html">
-                            	Kerry King Metal Master Tribal Fire Warlock
-                            </a>
-                        </td>
-                        <td>134</td>
-                        <td>1</td>
-                        <td>AU $420.89</td>
-                        <td>AU $420.89</td>
-                        <td><span class="delButton">Del</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                        	<a href="images/guitars/gibsonEpiphoneLimitedEditionLesPaulCustom/1.jpg">
-                        		<img src="images/guitars/gibsonEpiphoneLimitedEditionLesPaulCustom/1.jpg" alt="Gibson Epiphone Limited Edition Les Paul Custom" width="100"/>
-                            </a>
-                        </td>
-                        <td>
-                        	<a href="gibson_epiphone_limited_edition_les_paul_custom.html">
-                            	Gibson Epiphone Limited Edition Les Paul Custom
-                            </a>
-                        </td>
-                        <td>34</td>
-                        <td>1</td>
-                        <td>AU $635.25</td>
-                        <td>AU $635.25</td>
-                        <td><span class="delButton">Del</span></td>
-                    </tr>
-                    <tr class="altRow">
-                        <td>
-                        	<a href="images/guitars/fenderAmericanStandardStratocaster/1.jpg">
-                        		<img src="images/guitars/fenderAmericanStandardStratocaster/1.jpg" alt="American Standard Stratocaster" width="100"/>
-                            </a>
-                        </td>
-                        <td>
-                        	<a href="fender_american_standard_stratocaster.html">
-                            	American Standard Stratocaster
-                            </a>
-                        </td>
-                        <td>12</td>
-                        <td>1</td>
-                        <td>AU $802.27</td>
-                        <td>AU $802.27</td>
-                        <td><span class="delButton">Del</span></td>
-                    </tr>
+                    <?php
+                    // Query cart and display each row
+
+                    // Query to get all cart items for this signed in member
+                    $query = "SELECT * FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."' AND isDeleted='0' AND Status<>'Out Of Stock';";
+                    
+                    // Execute query 
+                    $result = $dataConnection->query($query);
+                    
+                    // Check if query successfull 
+                    if ($result !== false)
+                    {
+                        // Check that there are items in the cart
+                        if ($result->num_rows > 0)
+                        {
+                            // Loop through each row retruned and draw table
+                            $isAltRow = false;
+                            while($row = $result->fetch_assoc())
+                            {
+                                if ($isAltRow)
+                                {
+                                    echo '<tr class="altRow">';
+                                    $isAltRow = false;
+                                }
+                                else
+                                {
+                                    echo '<tr>';
+                                    $isAltRow = true;
+                                }
+                                
+                                // Draw image
+                                echo '<td><a href="product.php?id='.$row['ProductID'].'"><img src="'.$row['PrimaryPicturePath'].'" alt="'.$row['Description'].'" width="100"/></a></td>';
+                                // Draw description
+                                echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Description'].'</a></td>';
+                                // Draw product id
+                                echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['ProductID'].'</a></td>';
+                                // Draw Quantity
+                                echo '<form action="cart.php" method="POST"><td><input type="text" style="width: 4em;" name="numberOfItems" value="'.$row['Quantity'].'" /></a></td><input type="hidden" name="ProductID" value="'.$row['ProductID'].'" /><button type="submit" name="updateCart" hidden="true" /></form>';
+                                // Draw price
+                                echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Price'].'</a></td>';
+                                // Draw total
+                                echo '<td><a href="product.php?id='.$row['ProductID'].'">'.$row['Total'].'</a></td>';
+                                // Draw del
+                                echo '<td><a href="cart.php?delete='.$row['ProductID'].'"><span class="delButton">Del</span></a></td>';
+                                
+                                // Close row
+                                echo '</tr>';
+                            }
+                        }
+                        else
+                        {
+                            echo "</table>The cart is empty";
+                        }
+                    }
+                    else
+                    {
+                        echo "</table>Error querying for cart";
+                    }
+                    ?>
                     
                 </table>
             </div>
@@ -159,7 +150,7 @@ $dataConnection = $database->getDataConnection();
                     <div id="rightForm" class="formDiv">
                         <fieldset class="checkoutFieldSet" id="checkoutPaymentMethod">
                             <legend>Payment method</legend>
-                            <div><label>Method:</label> Bitcoin <input type="radio" name="payment" /> Paypal <input type="radio" name="payment" checked/></div>
+                            <?php //<div><label>Method:</label> Bitcoin <input type="radio" name="payment" /> Paypal <input type="radio" name="payment" checked/></div> ?>
                             <div><label>Paypal Email: </label><input type="text" /></div>
                             
                            	<div id="payButton">Pay</div>
@@ -173,8 +164,70 @@ $dataConnection = $database->getDataConnection();
         
         	<div id="summaryDetailsBox">
                         <form action="cart.php"><button class="formCSSButtonButton" style="left: 0.5em;">Back</button></form>
-            	<div id="shippingLabel">Shipping: $200</div>
-            	<div id="totalLabel">Total: $3028.75</div>
+            	<div id="shippingLabel">Shipping: $
+                    <?php // Get total
+                    // Query to calculate total
+                    $query = "SELECT SUM(Quantity)*50 As 'Sumtotal' FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."' AND isDeleted='0' AND Status<>'Out Of Stock';";
+
+                    // Execute query
+                    $result = $dataConnection->query($query);
+
+                    // if query successfull
+                    if ($result !== false)
+                    {
+                        // Check if result resturned
+                        if ($result->num_rows > 0)
+                        {
+                            // Get first row
+                            $row = $result->fetch_assoc();
+
+                            // show the total
+                            echo $row['Sumtotal'];
+                        }
+                        else
+                        {
+                            echo "0";
+                        }
+                    }
+                    else
+                    {
+                        // Error querying for total
+                        echo "ERR";
+                    }
+                    ?>
+                    </div>
+            	<div id="totalLabel">Total: $
+                    <?php // Get total
+                    // Query to calculate total
+                    $query = "SELECT SUM(Total)+SUM(Quantity)*50 As 'Sumtotal' FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."' AND isDeleted='0' AND Status<>'Out Of Stock';";
+
+                    // Execute query
+                    $result = $dataConnection->query($query);
+
+                    // if query successfull
+                    if ($result !== false)
+                    {
+                        // Check if result resturned
+                        if ($result->num_rows > 0)
+                        {
+                            // Get first row
+                            $row = $result->fetch_assoc();
+
+                            // show the total
+                            echo $row['Sumtotal'];
+                        }
+                        else
+                        {
+                            echo "0";
+                        }
+                    }
+                    else
+                    {
+                        // Error querying for total
+                        echo "ERR";
+                    }
+                    ?>
+                </div>
             </div>
         
         
