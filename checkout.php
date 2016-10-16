@@ -11,6 +11,26 @@
  * Author: Dominic Browne
  */
 
+// Include the global header
+include "includes/globalheader.php";
+
+// Include the database
+require_once 'classes/Database.php';
+
+// if member is not signed in redirect to member signin page
+if ($_SESSION["currentCustomer"]->getIsInitialized() != true)
+{
+    header("Location: members.php");
+}
+
+// Refresh cart
+$cart = new Cart($_SESSION["currentCustomer"]->getCustomerID());
+$cart->refreshQuantity();
+
+// Create data connection
+$database = new Database();
+$dataConnection = $database->getDataConnection();
+
 ?>
 
 <!doctype html>
@@ -25,39 +45,20 @@
 
 <body>
 	<div id="mainBox">
-    	<div id="headerBox">
-        	<a href="index.html"><img src="images/logo.png" width="213" height="200" alt="Virgin Guitars" class="logoImage"></a>
-			<h1 class="mainHeader">Virgin Guitars</h1>
-            <form action="search.html">
-            	<input type="text" id="searchBox" placeholder="Site Search..." />
-             </form>
-        	
-            <div id="checkOutBox">
-            	<span id="cartItems"><a href="cart.html">4</a></span>
-            	<a href="cart.html"><img src="images/cartIcon.png" id="cartIcon" width="32" height="42" alt="Cart"></a>
-                <a href="checkout.html" id="checkoutLink">checkout</a>
-            </div>
-      </div>
+    	<?php
+            // Display Page header
+            include 'includes/pageheader.php.inc';
+        ?>
         
-        <div id="menuBox">
-       	  <nav id="menuList">
-          	<ul>
-            	<li id="homeItem"><a href="index.html">Home</a></li>
-                <li><a href="catalog.html">Catalog</a></li>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="members.html">Members</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-            </ul>
-          </nav>
-        </div>
+        <?php
+            // Display menu bar
+            include 'includes/menubar.php.inc';
+        ?>
         
-        <div id="categoryBox">
-        	<a href="fender.html"><div class="categoryImage" id="fenderCategory"></div></a>
-            <a href="gibson.html"><div class="categoryImage" id="gibsonCategory"></div></a>
-            <a href="bcrich.html"><div class="categoryImage" id="bcRichCategory"></div></a>
-            <a href="jackson.html"><div class="categoryImage" id="jacksonLogo"></div></a>
-            
-        </div>
+        <?php
+            // Display menu bar
+            include 'includes/categorybox.php.inc';
+        ?>
         
         <div id="contentBox">
         	<h1>Checkout</h1>
@@ -178,7 +179,10 @@
         
         
         
-            <footer id="pageFooter">Copyright © 2015 <a href="mailto:admin@virginguitars.com">Virgin Guitars</a></footer>
+            <?php
+            // Display the page footer
+            include("includes/pagefooter.php.inc");
+            ?>
             
         </div>
 </body>
