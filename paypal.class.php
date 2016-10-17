@@ -127,7 +127,7 @@
 			
 		function DoExpressCheckoutPayment(){
 			
-			if(!empty(_SESSION('ppl_products'))&&!empty(_SESSION('ppl_charges'))){
+			if(!empty($_SESSION('ppl_products'))&&!empty($_SESSION('ppl_charges'))){
 				
 				$products=_SESSION('ppl_products');
 				
