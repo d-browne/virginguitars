@@ -27,17 +27,21 @@ class Order
     private $PostCode;
     private $Country;
     
-    public static function createNewOrder($CustomerIDInput)
+    public static function createNewOrder($CustomerIDInput, $SubTotalInput, $ShippingInput)
     {
         // Create data connection
         $database = new Database();
         $dataConnection = $database->getDataConnection();
         
         // Sanitize input
-        $CustomerID = mysqli_real_escape_string($CustomerIDInput);
+        $CustomerID = mysqli_real_escape_string($dataConnection, $CustomerIDInput);
+        $SubTotal = mysqli_real_escape_string($dataConnection, $SubTotalInput);
+        $Shipping = mysqli_real_escape_string($dataConnection, $ShippingInput);
+        $Total = $SubTotal+$Shipping;
+        
         
         // Create new delivery address record
-        $createDeliveryAddressQuery = "INSERT INTO DELIVERYADDRESS VALUES (NULL, '', '', '', , '')";
+        $createDeliveryAddressQuery = "INSERT INTO DELIVERYADDRESS VALUES (NULL, '', '', '', '', '')";
         
         // Execute query
         $createDeliverAddressResult = $dataConnection->query($createDeliveryAddressQuery);
@@ -49,10 +53,10 @@ class Order
         }
         
         // Get the ID of newcreated alivery address
-        $DeliveryAddressID = mysql_insert_id();
+        $DeliveryAddressID = mysqli_insert_id($dataConnection);
         
         // Query to create new SALES_ORDER
-        $createSalesOrderQuery = "INSERT INTO SALES_ORDER VALUES (NULL, '".$CustomerID."', '".$DeliveryAddressID."', CURDATE(), '', '', '', NULL, NULL, 1);";
+        $createSalesOrderQuery = "INSERT INTO SALES_ORDER VALUES (NULL, '".$CustomerID."', '".$DeliveryAddressID."', CURDATE(), '".$SubTotal."', '".$Shipping."', '".$Total."', NULL, NULL, 1);";
         
         // Execute query to create new sales order
         $createSalesOrderResult = $dataConnection->query($createSalesOrderQuery);
@@ -65,7 +69,7 @@ class Order
         
         // All OK
         // Return the ID of the newly created order
-        return mysql_insert_id();
+        return mysqli_insert_id($dataConnection);
     }
     
     function setOrderStatus($OrderStatusInput)
