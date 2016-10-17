@@ -27,6 +27,10 @@ include_once("paypal.class.php");
 		$products[0]['ItemNumber'] = _POST('itemnumber'); //Item Number
 		$products[0]['ItemDesc'] = _POST('itemdesc'); //Item Number
 		$products[0]['ItemQty']	= _POST('itemQty'); // Item Quantity
+                
+                // Shipping
+                $shipping = [];
+                $shipping['shippingName'] = _POST('shippingName');
 		
 		/*
 		$products[0]['ItemName'] = 'my item 1'; //Item Name
@@ -61,7 +65,7 @@ include_once("paypal.class.php");
 		
 		//We need to execute the "SetExpressCheckOut" method to obtain paypal token
 
-		$paypal->SetExpressCheckOut($products, $charges);		
+		$paypal->SetExpressCheckOut($products, $charges, $shipping);		
 	}
 	elseif(_GET('token')!=''&&_GET('PayerID')!=''){
 		

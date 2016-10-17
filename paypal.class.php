@@ -34,7 +34,7 @@
 			return $GrandTotal;
 		}
 		
-		function SetExpressCheckout($products, $charges, $noshipping='1'){
+		function SetExpressCheckout($products, $charges, $shipping, $noshipping='0'){
 			
 			//Parameters for SetExpressCheckout, which will be sent to PayPal
 			
@@ -53,12 +53,12 @@
 				$padata .=	'&L_PAYMENTREQUEST_0_QTY'.$p.'='. urlencode($item['ItemQty']);
 			}		
 
-			/* 
+			
 			
 			//Override the buyer's shipping address stored on PayPal, The buyer cannot edit the overridden address.
 			
 			$padata .=	'&ADDROVERRIDE=1';
-			$padata .=	'&PAYMENTREQUEST_0_SHIPTONAME=J Smith';
+			$padata .=	'&PAYMENTREQUEST_0_SHIPTONAME='.urlencode($shipping['shippingName']);
 			$padata .=	'&PAYMENTREQUEST_0_SHIPTOSTREET=1 Main St';
 			$padata .=	'&PAYMENTREQUEST_0_SHIPTOCITY=San Jose';
 			$padata .=	'&PAYMENTREQUEST_0_SHIPTOSTATE=CA';
@@ -66,7 +66,7 @@
 			$padata .=	'&PAYMENTREQUEST_0_SHIPTOZIP=95131';
 			$padata .=	'&PAYMENTREQUEST_0_SHIPTOPHONENUM=408-967-4444';
 			
-			*/
+			
 						
 			$padata .=	'&NOSHIPPING='.$noshipping; //set 1 to hide buyer's shipping address, in-case products that does not require shipping
 						
