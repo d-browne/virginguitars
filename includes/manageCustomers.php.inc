@@ -418,11 +418,11 @@ $searchString = 'CustomerID='.$customerid.'&FirstName='.$firstname.'&LastName='.
                         // Print CustomerID column
                         print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".$row['CustomerID']."</a></td>";
                         // Print First name Column
-                        print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".$row['FirstName']."</a></td>";
+                        print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".htmlspecialchars($row['FirstName'])."</a></td>";
                         // Print Last Name Column
-                        print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".$row['LastName']."</a></td>";
+                        print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".htmlspecialchars($row['LastName'])."</a></td>";
                         // Print email column
-                        print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".$row['Email']."</a></td>";
+                        print "<td><a href=\"admin.php?manageCustomers&edit=".$row['CustomerID']."\">".htmlspecialchars($row['Email'])."</a></td>";
                         // Print All Orders
                         print "<td><a href=\"admin.php?customerOrders&CustomerID=".$row['CustomerID']."\">".$row['All Orders']."</a></td>";
                         // Print All Orders
