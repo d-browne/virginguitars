@@ -58,9 +58,9 @@ $customer->initializeID($CustomerID);
         <fieldset class="inputFieldSet" id="userDetailsFieldset">
             <legend>Customer</legend>
             <div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="customerid" type="text" value="<?php echo $customer->getCustomerID(); ?>" disabled="true"/></div>
-            <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" value="<?php echo $customer->getFirstName(); ?>" disabled="true"/></div>
-            <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" value="<?php echo $customer->getLastName(); ?>" disabled="true"/></div>
-            <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" value="<?php echo $customer->getEmail(); ?>" disabled="true"/></div>
+            <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" value="<?php echo htmlspecialchars($customer->getFirstName()); ?>" disabled="true"/></div>
+            <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" value="<?php echo htmlspecialchars($customer->getLastName()); ?>" disabled="true"/></div>
+            <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" value="<?php echo htmlspecialchars($customer->getEmail()); ?>" disabled="true"/></div>
         </fieldset>
     </div>
     <div id="tableContainer">
@@ -330,9 +330,9 @@ $customer->initializeID($CustomerID);
                         // Create total cost row
                         echo '<td><a href="admin.php?editOrder&id='.$row['SalesOrderID'].'">$'.$row['Total'].'</a></td>';
                         // Create shipped Date row
-                        echo '<td><a  href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.$row['ShippedDate'].'</a></td>';
+                        echo '<td><a  href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.htmlspecialchars($row['ShippedDate']).'</a></td>';
                         // Create shipped Date row
-                        echo '<td><a href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.$row['ShippingRecord'].'</a></td>';
+                        echo '<td><a href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.htmlspecialchars($row['ShippingRecord']).'</a></td>';
                         // Create order status row
                         echo '<td><a class="'.$orderColor.'"href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.$row['Order Status'].'</a></td>';
                         // Draw edit row
