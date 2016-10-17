@@ -27,7 +27,7 @@
         <form action="members.php" method="POST">
             <div><label>Email:</label><span class="inputSpan"><input type="email" class="inputTextBox" name="email" placeholder="example@example.com" /></span></div>
             <div><label>Password:</label><span class="inputSpan"><input type="password" class="inputTextBox" name="password" placeholder="••••••••••"/></span></div>
-            <div><label>Remember:</label><input type="checkbox" name="remember" checked/></div>
+            <?php //<div><label>Remember:</label><input type="checkbox" name="remember" checked/></div> ?>
             <span class="errorMessage">
                 <?php
                     // Check if there was a signIn error
