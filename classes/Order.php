@@ -27,6 +27,47 @@ class Order
     private $PostCode;
     private $Country;
     
+    public static function createNewOrder($CustomerIDInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize input
+        $CustomerID = mysqli_real_escape_string($CustomerIDInput);
+        
+        // Create new delivery address record
+        $createDeliveryAddressQuery = "INSERT INTO DELIVERYADDRESS VALUES (NULL, '', '', '', , '')";
+        
+        // Execute query
+        $createDeliverAddressResult = $dataConnection->query($createDeliveryAddressQuery);
+        
+        // Throw if unable to create new delivery address
+        if ($createDeliverAddressResult === false)
+        {
+            throw new Exception("Unable to create delivery address record");
+        }
+        
+        // Get the ID of newcreated alivery address
+        $DeliveryAddressID = mysql_insert_id();
+        
+        // Query to create new SALES_ORDER
+        $createSalesOrderQuery = "INSERT INTO SALES_ORDER VALUES (NULL, '".$CustomerID."', '".$DeliveryAddressID."', CURDATE(), '', '', '', NULL, NULL, 1);";
+        
+        // Execute query to create new sales order
+        $createSalesOrderResult = $dataConnection->query($createSalesOrderQuery);
+        
+        // Throw if query fails
+        if ($createSalesOrderResult === false)
+        {
+            throw new Exception("Unable to create sales order record");
+        }
+        
+        // All OK
+        // Return the ID of the newly created order
+        return mysql_insert_id();
+    }
+    
     function setOrderStatus($OrderStatusInput)
     {
         // Create data connection
