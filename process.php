@@ -123,7 +123,7 @@ include_once("paypal.class.php");
                 {
                     die("PostCode too long");
                 }
-                if (iconv_strlen($Country) > 2)
+                if (iconv_strlen(_POST('shippingCountry')) > 2)
                 {
                     die("Country too long");
                 }
@@ -158,7 +158,7 @@ include_once("paypal.class.php");
 		$charges = [];
                 
                 // Query calculate shipping cost
-                $calculateShippingQuery = "SELECT SUM(Price) As 'TotalShipping' FROM CART_VIEW WHERE CustomerFK='"._SESSION('currentCustomer')->getCustomerID()."' AND isDeleted='0';";
+                $calculateShippingQuery = "SELECT SUM(Quantity)*50 As 'TotalShipping' FROM CART_VIEW WHERE CustomerFK='"._SESSION('currentCustomer')->getCustomerID()."' AND isDeleted='0';";
                 
                 // Execute query 
                 $calculateShippingResult = $dataConnection->query($calculateShippingQuery);
@@ -179,7 +179,7 @@ include_once("paypal.class.php");
                 {
                     die('Unable to calculate shipping cost');
                 }
-		
+		              
 		//Other important variables like tax, shipping cost
 		$charges['TotalTaxAmount'] = 0;  //Sum of tax for all items in this order. 
 		$charges['HandalingCost'] = 0;  //Handling cost for this order.
