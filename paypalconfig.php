@@ -1,8 +1,8 @@
 <?php
 
   //start session in all pages
-  if (session_status() == PHP_SESSION_NONE) { session_start(); } //PHP >= 5.4.0
-  //if(session_id() == '') { session_start(); } //uncomment this line if PHP < 5.4.0 and comment out line above
+  //if (session_status() == PHP_SESSION_NONE) { session_start(); } //PHP >= 5.4.0
+  if(session_id() == '') { session_start(); } //uncomment this line if PHP < 5.4.0 and comment out line above
 
 	// sandbox or live
 	define('PPL_MODE', 'sandbox');
