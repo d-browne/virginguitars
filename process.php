@@ -70,8 +70,7 @@ include_once("paypal.class.php");
                     die('done');
                 }
                 
-                
-                
+                               
                 // Shipping
                 $shipping = [];
                 //$shipping['shippingName'] = _POST('shippingName'); // Get this from customer details
@@ -102,13 +101,36 @@ include_once("paypal.class.php");
 		//-------------------- prepare charges -------------------------
 		
 		$charges = [];
+                
+                // Query calculate shipping cost
+                $calculateShippingQuery = "SELECT SUM(Price) As 'TotalShipping' FROM CART_VIEW WHERE CustomerFK='"._SESSION('currentCustomer')->getCustomerID()."' AND isDeleted='0';";
+                
+                // Execute query 
+                $calculateShippingResult = $dataConnection->query($calculateShippingQuery);
+                
+                // Die if query fails
+                if ($result === false)
+                {
+                    die('Unable to calculate shipping cost');
+                }
+                
+                // Ensure row retrieved
+                if ($calculateShippingResult->num_rows > 0)
+                {
+                    $shippingCostRow = $calculateShippingResult->fetch_assoc();
+                    $shippingCost = $shippingCostRow["TotalShipping"];
+                }
+                else
+                {
+                    die('Unable to calculate shipping cost');
+                }
 		
 		//Other important variables like tax, shipping cost
 		$charges['TotalTaxAmount'] = 0;  //Sum of tax for all items in this order. 
 		$charges['HandalingCost'] = 0;  //Handling cost for this order.
 		$charges['InsuranceCost'] = 0;  //shipping insurance cost for this order.
 		$charges['ShippinDiscount'] = 0; //Shipping discount for this order. Specify this as negative number.
-		$charges['ShippinCost'] = 0; //Although you may change the value later, try to pass in a shipping amount that is reasonably accurate.
+		$charges['ShippinCost'] = $shippingCost; //Although you may change the value later, try to pass in a shipping amount that is reasonably accurate.
 		
 		//------------------SetExpressCheckOut-------------------
 		
