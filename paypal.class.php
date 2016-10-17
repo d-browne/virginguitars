@@ -218,7 +218,7 @@
 
 			if("SUCCESS" == strtoupper($httpParsedResponseAr["ACK"]) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])){
 				
-				echo '<br /><b>Stuff to store in database :</b><br /><pre>';
+				//echo '<br /><b>Stuff to store in database :</b><br /><pre>';
 				/*
 				#### SAVE BUYER INFORMATION IN DATABASE ###
 				//see (http://www.sanwebe.com/2013/03/basic-php-mysqli-usage) for mysqli usage
@@ -248,7 +248,7 @@
 				
 				echo '<pre>';
 				
-					print_r($httpParsedResponseAr);
+					//print_r($httpParsedResponseAr);
 					
 				echo '</pre>';
                                 
@@ -294,8 +294,6 @@
                                         }
                                         // Set the new Quantity
                                         $product->setQuantity($newQuantity);
-                                        
-                                        header("Location: orders.php?transid=".urldecode($httpParsedResponseAr["PAYMENTINFO_0_TRANSACTIONID"]));
                                     }
                                     
                                 } catch (Exception $ex) {
