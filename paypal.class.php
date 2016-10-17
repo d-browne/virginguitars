@@ -163,7 +163,7 @@
 				if("SUCCESS" == strtoupper($httpParsedResponseAr["ACK"]) || "SUCCESSWITHWARNING" == strtoupper($httpParsedResponseAr["ACK"])){
 
 					echo '<h2>Success</h2>';
-					echo 'Your Transaction ID : '.urldecode($httpParsedResponseAr["PAYMENTINFO_0_TRANSACTIONID"]);
+					echo 'Your Transaction ID : <em>'.urldecode($httpParsedResponseAr["PAYMENTINFO_0_TRANSACTIONID"]).'</em><br>';
 				
 					/*
 					//Sometimes Payment are kept pending even when transaction is complete. 
@@ -172,7 +172,7 @@
 					
 					if('Completed' == $httpParsedResponseAr["PAYMENTINFO_0_PAYMENTSTATUS"]){
 						
-						echo '<div style="color:green">Payment Received! Your product will be sent to you very soon!</div>';
+						echo '<div><span id="updatedMemberLabel">Payment Received! Your product will be sent to you very soon!</span></div>';
 					}
 					elseif('Pending' == $httpParsedResponseAr["PAYMENTINFO_0_PAYMENTSTATUS"]){
 						
