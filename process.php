@@ -50,7 +50,7 @@ include_once("paypal.class.php");
 		//In practical world you must fetch actual price from database using item id. Eg: 
 		//$products[0]['ItemPrice'] = $mysqli->query("SELECT item_price FROM products WHERE id = Product_Number");
 		
-		$products = [];
+		$products = array();
 		
 		
 		
@@ -103,7 +103,7 @@ include_once("paypal.class.php");
                 
                                
                 // Shipping
-                $shipping = [];
+                $shipping = array();
                 //$shipping['shippingName'] = _POST('shippingName'); // Get this from customer details
                 
                 // Validate shipping inputs
@@ -155,7 +155,7 @@ include_once("paypal.class.php");
 		
 		//-------------------- prepare charges -------------------------
 		
-		$charges = [];
+		$charges = array();
                 
                 // Query calculate shipping cost
                 $calculateShippingQuery = "SELECT SUM(Quantity)*50 As 'TotalShipping' FROM CART_VIEW WHERE CustomerFK='"._SESSION('currentCustomer')->getCustomerID()."' AND isDeleted='0' AND Status<>'Out Of Stock';";
