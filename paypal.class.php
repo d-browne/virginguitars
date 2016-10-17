@@ -245,6 +245,24 @@
 					print_r($httpParsedResponseAr);
 					
 				echo '</pre>';
+                                
+                                // Code to store in database
+                                try {
+                                    $orderid = Order::createNewOrder($_SESSION['currentCustomer']->getCustomerID(), urldecode($httpParsedResponseAr['ITEMAMT']), urldecode($httpParsedResponseAr['SHIPPINGAMT']));
+                                    
+                                    // Instantiate order object to add details
+                                    $order = new Order($orderid);
+                                    
+                                    // Set details
+                                    $order->setCity(urldecode($httpParsedResponseAr['SHIPTOCITY']));
+                                    $order->setCountry(urldecode($httpParsedResponseAr['SHIPTOCOUNTRYNAME']));
+                                    $order->setPostCode(urldecode($httpParsedResponseAr['SHIPTOZIP']));
+                                    $order->setState(urldecode($httpParsedResponseAr['SHIPTOSTATE']));
+                                    $order->setStreetAddress(urldecode($httpParsedResponseAr['SHIPTOSTREET']));
+                                    
+                                } catch (Exception $ex) {
+                                    die($ex->getMessage());
+                                }
 			} 
 			else  {
 				
