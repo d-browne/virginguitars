@@ -27,6 +27,34 @@ class Order
     private $PostCode;
     private $Country;
     
+    public function addProduct($ProductIDInput, $PriceInput, $UnitShippingInput, $QuantityInput, $TotalInput)
+    {
+        // Create data connection
+        $database = new Database();
+        $dataConnection = $database->getDataConnection();
+        
+        // Sanitize inputs
+        $ProductID = mysqli_real_escape_string($dataConnection, $ProductIDInput);
+        $Price = mysqli_real_escape_string($dataConnection, $PriceInput);
+        $UnitShipping = mysqli_real_escape_string($dataConnection, $UnitShippingInput);
+        $Quantity = mysqli_real_escape_string($dataConnection, $QuantityInput);
+        $Total = mysqli_real_escape_string($dataConnection, $TotalInput);
+        
+        // Query to add product
+        $query = "INSERT INTO ORDER_PRODUCT VALUES (NULL, '".$this->SalesOrderID."', '".$ProductID."', '".$Price."', '".$UnitShipping."', '".$Quantity."', '".$Total."');";
+        
+        echo $query;
+        
+        // Execute query
+        $result = $dataConnection->query($query);
+        
+        // if query fails throw
+        if ($result === false)
+        {
+            throw new Exception("Unable insert product in order");
+        }
+    }
+    
     public static function createNewOrder($CustomerIDInput, $SubTotalInput, $ShippingInput)
     {
         // Create data connection

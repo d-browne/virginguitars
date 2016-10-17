@@ -1,7 +1,11 @@
 <?php
 
 	class MyPayPal {
-		
+            
+                function preg_grep_keys($pattern, $input, $flags = 0) {
+                    return array_intersect_key($input, array_flip(preg_grep($pattern, array_keys($input), $flags)));
+                }
+                        
 		function GetItemTotalPrice($item){
 		
 			//(Item Price x Quantity = Total) Get total amount of product;
@@ -200,6 +204,8 @@
 				$this->GetTransactionDetails();
 			}
 		}
+                
+                
 				
 		function GetTransactionDetails(){
 		
@@ -259,6 +265,22 @@
                                     $order->setPostCode(urldecode($httpParsedResponseAr['SHIPTOZIP']));
                                     $order->setState(urldecode($httpParsedResponseAr['SHIPTOSTATE']));
                                     $order->setStreetAddress(urldecode($httpParsedResponseAr['SHIPTOSTREET']));
+                                    
+                                    // count the number of products in order
+                                    $orderNumbers = $this->preg_grep_keys("/L_PAYMENTREQUEST_0_NUMBER\d/", $httpParsedResponseAr);
+                                    $numberOfProducts = count($orderNumbers);
+                                    
+                                    // Loop through each product in callback, get info and add to order
+                                    for ($i = 0; $i < $numberOfProducts; $i = $i+1)
+                                    {
+                                        $ProductID      = urldecode($httpParsedResponseAr['L_PAYMENTREQUEST_0_NUMBER'.$i]);
+                                        $Price          = urldecode($httpParsedResponseAr['L_PAYMENTREQUEST_0_AMT'.$i]);
+                                        $UnitShipping   = 50;                                                                               // hard coded for now
+                                        $Quantity       = urldecode($httpParsedResponseAr['L_QTY'.$i]);
+                                        $Total          = urldecode($httpParsedResponseAr['L_PAYMENTREQUEST_0_AMT'.$i])*$Quantity+50;       // Multipty ammount by quantity and add 50 for total
+                                        
+                                        $order->addProduct($ProductID, $Price, $UnitShipping, $Quantity, $Total);
+                                    }
                                     
                                 } catch (Exception $ex) {
                                     die($ex->getMessage());
