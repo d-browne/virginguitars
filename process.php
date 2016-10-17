@@ -79,6 +79,7 @@ include_once("paypal.class.php");
                 $shipping['shippingState'] = _POST('shippingState');
 		$shipping['shippingZip'] = _POST('shippingZip');
                 $shipping['shippingPhone'] = _POST('shippingPhone');
+                $shipping['shippingCountry'] = _POST('shippingCountry');
                 
 		/*
 		$products[0]['ItemName'] = 'my item 1'; //Item Name
