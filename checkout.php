@@ -137,6 +137,7 @@ $dataConnection = $database->getDataConnection();
             </div>
             
             <div id="formsContainer">
+                <form method="POST" action="process.php?paypal=checkout">
                 <div id="leftForm" class="formDiv">
                         <fieldset class="checkoutFieldSet" id="checkoutShippingDetails">
                             <legend>Shipping Detials</legend>
@@ -151,11 +152,12 @@ $dataConnection = $database->getDataConnection();
                         <fieldset class="checkoutFieldSet" id="checkoutPaymentMethod">
                             <legend>Payment method</legend>
                             <?php //<div><label>Method:</label> Bitcoin <input type="radio" name="payment" /> Paypal <input type="radio" name="payment" checked/></div> ?>
-                            <div><label>Paypal Email: </label><input type="text" /></div>
+                            <div><label>Paypal Email: </label><input type="text" disabled="true" value="Login On Next Page"/></div>
                             
-                           	<div id="payButton">Pay</div>
+                                <button id="payButton" class="formCSSButtonButton" type="submit" name="submitbutt">Pay</button>
                         </fieldset>
                     </div>
+                </form>
                 </div>
                 
                 
