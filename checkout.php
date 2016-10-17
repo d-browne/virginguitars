@@ -141,11 +141,12 @@ $dataConnection = $database->getDataConnection();
                 <div id="leftForm" class="formDiv">
                         <fieldset class="checkoutFieldSet" id="checkoutShippingDetails">
                             <legend>Shipping Detials</legend>
-                            <div><label>Street Address:</label><input type="text" required/></div>
-                            <div><label>City:</label><input type="text" required/></div>
-                            <div><label>Post Code:</label><input type="text" required/></div>
-                            <div><label>Country:</label><input type="text" required/></div>
-                            <div><label>Telephone:</label><input type="text" required/></div>
+                            <div><label>Street Address:</label><input type="text" name="shippingStreet" required/></div>
+                            <div><label>City:</label><input type="text" name="shippingCity" required/></div>
+                            <div><label>State:</label><input type="text" name="shippingState" required/></div>
+                            <div><label>Post Code:</label><input type="text" name="shippingZip" required/></div>
+                            <div><label>Country:</label><input type="text" name="shippingCountry" required/></div>
+                            <div><label>Telephone:</label><input type="text" name="shippingPhone" required/></div>
                         </fieldset>
                     </div>
                     <div id="rightForm" class="formDiv">
