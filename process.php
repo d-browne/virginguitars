@@ -67,8 +67,8 @@ include_once("paypal.class.php");
                 $dataConnection = $database->getDataConnection();
                 
                 // Query for cart items
-                $query = "SELECT * FROM CART_VIEW WHERE CustomerFK='"._SESSION('currentCustomer')->getCustomerID()."' AND isDeleted='0';";
-                
+                $query = "SELECT * FROM CART_VIEW WHERE CustomerFK='"._SESSION('currentCustomer')->getCustomerID()."' AND isDeleted='0' AND Status<>'Out Of Stock';";
+
                 // Execute query
                 $result = $dataConnection->query($query);
                 
@@ -158,7 +158,7 @@ include_once("paypal.class.php");
 		$charges = [];
                 
                 // Query calculate shipping cost
-                $calculateShippingQuery = "SELECT SUM(Quantity)*50 As 'TotalShipping' FROM CART_VIEW WHERE CustomerFK='"._SESSION('currentCustomer')->getCustomerID()."' AND isDeleted='0';";
+                $calculateShippingQuery = "SELECT SUM(Quantity)*50 As 'TotalShipping' FROM CART_VIEW WHERE CustomerFK='"._SESSION('currentCustomer')->getCustomerID()."' AND isDeleted='0' AND Status<>'Out Of Stock';";
                 
                 // Execute query 
                 $calculateShippingResult = $dataConnection->query($calculateShippingQuery);
