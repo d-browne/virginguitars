@@ -9,9 +9,9 @@
 
 	if(PPL_MODE=='sandbox'){
 		
-		define('PPL_API_USER', 'testsales_api1.virginguitars.com');
-		define('PPL_API_PASSWORD', 'TK3GB3W6LKNJCAET');
-		define('PPL_API_SIGNATURE', 'AFcWxV21C7fd0v3bYYYRCpSSRl31ALh993dB8d5ClOpfR1fdnWUMuFvx');
+		define('PPL_API_USER', 'biz_api1.virginguitars.com');
+		define('PPL_API_PASSWORD', 'KQJAVTN7258LNV86');
+		define('PPL_API_SIGNATURE', 'AFcWxV21C7fd0v3bYYYRCpSSRl31Aj.azKVtnSa08N07-FfgtkxKFisk');
 	}
 	else{
 		
