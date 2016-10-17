@@ -108,9 +108,9 @@ else
         <fieldset class="inputFieldSet" id="userDetailsFieldset">
             <legend>Customer</legend>
             <div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="customerid" type="text" value="<?php echo $_SESSION["currentCustomer"]->getCustomerID(); ?>" disabled="true"/></div>
-            <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" value="<?php echo $_SESSION["currentCustomer"]->getFirstName(); ?>" disabled="true"/></div>
-            <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" value="<?php echo $_SESSION["currentCustomer"]->getLastName(); ?>" disabled="true"/></div>
-            <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" value="<?php echo $_SESSION["currentCustomer"]->getEmail(); ?>" disabled="true"/></div>
+            <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" value="<?php echo htmlspecialchars($_SESSION["currentCustomer"]->getFirstName()); ?>" disabled="true"/></div>
+            <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" value="<?php echo htmlspecialchars($_SESSION["currentCustomer"]->getLastName()); ?>" disabled="true"/></div>
+            <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" value="<?php echo htmlspecialchars($_SESSION["currentCustomer"]->getEmail()); ?>" disabled="true"/></div>
         </fieldset>
     </div>
     <div id="tableContainer">
@@ -125,19 +125,19 @@ else
             </tr>
             <tr>
                 <td>
-                    <input type="text" name="streetaddress" placeholder="e.g. 123 Fake Street" value="<?php echo $order->getStreetAddress(); ?>" disabled="true"/>
+                    <input type="text" name="streetaddress" placeholder="e.g. 123 Fake Street" value="<?php echo htmlspecialchars($order->getStreetAddress()); ?>" disabled="true"/>
                 </td>
                 <td>
-                    <input type="text" name="city" placeholder="Sydney" value="<?php echo $order->getCity(); ?>" disabled="true"/>
+                    <input type="text" name="city" placeholder="Sydney" value="<?php echo htmlspecialchars($order->getCity()); ?>" disabled="true"/>
                 </td>
                 <td>
-                    <input type="text" name="state" placeholder="e.g. NSW" value="<?php echo $order->getState(); ?>" disabled="true"/>
+                    <input type="text" name="state" placeholder="e.g. NSW" value="<?php echo htmlspecialchars($order->getState()); ?>" disabled="true"/>
                 </td>
                 <td>
-                    <input type="text" name="postcode" placeholder="e.g. 2000" value="<?php echo $order->getPostCode(); ?>" disabled="true"/>
+                    <input type="text" name="postcode" placeholder="e.g. 2000" value="<?php echo htmlspecialchars($order->getPostCode()); ?>" disabled="true"/>
                 </td>
                 <td>
-                    <input type="text" name="country" placeholder="Australia" value="<?php echo $order->getCountry(); ?>" disabled="true"/>
+                    <input type="text" name="country" placeholder="Australia" value="<?php echo htmlspecialchars($order->getCountry()); ?>" disabled="true"/>
                 </td>
             </tr>
         </table>
