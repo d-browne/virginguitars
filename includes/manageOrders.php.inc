@@ -432,9 +432,9 @@ $searchString = "orderid=".$orderid."&invoicedate=".$invoicedate."&shippeddate="
                         // Create total cost row
                         echo '<td><a href="admin.php?editOrder&id='.$row['SalesOrderID'].'">$'.$row['Total'].'</a></td>';
                         // Create shipped Date row
-                        echo '<td><a  href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.$row['ShippedDate'].'</a></td>';
+                        echo '<td><a  href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.htmlspecialchars($row['ShippedDate']).'</a></td>';
                         // Create shipped Date row
-                        echo '<td><a href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.$row['ShippingRecord'].'</a></td>';
+                        echo '<td><a href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.htmlspecialchars($row['ShippingRecord']).'</a></td>';
                         // Create order status row
                         echo '<td><a class="'.$orderColor.'"href="admin.php?editOrder&id='.$row['SalesOrderID'].'">'.$row['Order Status'].'</a></td>';
                         // Draw edit row
