@@ -43,8 +43,6 @@ class Order
         // Query to add product
         $query = "INSERT INTO ORDER_PRODUCT VALUES (NULL, '".$this->SalesOrderID."', '".$ProductID."', '".$Price."', '".$UnitShipping."', '".$Quantity."', '".$Total."');";
         
-        echo $query;
-        
         // Execute query
         $result = $dataConnection->query($query);
         
