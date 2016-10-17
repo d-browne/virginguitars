@@ -211,7 +211,7 @@ include_once("paypal.class.php");
 	}
 ?>
 <div id="bottomButtonsBox">
-    <form action="orders.php"><button type="button" class="formCSSButtonButton">Orders</button></form>
+    <form action="orders.php"><button type="submit" class="formCSSButtonButton">Orders</button></form>
     </div>
     </div>
             <?php
