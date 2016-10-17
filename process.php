@@ -1,4 +1,7 @@
 <?php
+include_once("includes/globalheader.php");
+include_once("classes/Database.php");
+
 include_once("paypalconfig.php");
 include_once("paypalfunctions.php");
 include_once("paypal.class.php");
@@ -22,16 +25,62 @@ include_once("paypal.class.php");
 		
 		// set an item via POST request
 		
-		$products[0]['ItemName'] = _POST('itemname'); //Item Name
-		$products[0]['ItemPrice'] = _POST('itemprice'); //Item Price
-		$products[0]['ItemNumber'] = _POST('itemnumber'); //Item Number
-		$products[0]['ItemDesc'] = _POST('itemdesc'); //Item Number
-		$products[0]['ItemQty']	= _POST('itemQty'); // Item Quantity
+//		$products[0]['ItemName'] = _POST('itemname'); //Item Name
+//		$products[0]['ItemPrice'] = _POST('itemprice'); //Item Price
+//		$products[0]['ItemNumber'] = _POST('itemnumber'); //Item Number
+//		$products[0]['ItemDesc'] = _POST('itemdesc'); //Item Number
+//		$products[0]['ItemQty']	= _POST('itemQty'); // Item Quantity
+                
+                // Create data connection to get items
+                $database = new Database();
+                $dataConnection = $database->getDataConnection();
+                
+                // Query for cart items
+                $query = "SELECT * FROM CART_VIEW WHERE CustomerFK='"._SESSION('currentCustomer')->getCustomerID()."' AND isDeleted='0';";
+                
+                // Execute query
+                $result = $dataConnection->query($query);
+                
+                // Die if query fails
+                if ($result === false)
+                {
+                    die("Cannot query for cart items");
+                }
+                
+                // Check if there are items in cart
+                if ($result->num_rows > 0)
+                {
+                    while ($row = $result->fetch_assoc())
+                    {
+                        $rowData = array(
+                            'ItemName' => $row['Description'],
+                            'ItemPrice' => $row['Price'],
+                            'ItemNumber' => $row['ProductID'],
+                            'ItemDesc' => $row['Description'],
+                            'ItemQty' => $row['Quantity']
+                        );
+                        
+                        // push to products
+                        array_push($products, $rowData);
+                    }
+                }
+                else
+                {
+                    // Handle nothing in cart
+                    die('done');
+                }
+                
+                
                 
                 // Shipping
                 $shipping = [];
-                $shipping['shippingName'] = _POST('shippingName');
-		
+                //$shipping['shippingName'] = _POST('shippingName'); // Get this from customer details
+                $shipping['shippingStreet'] = _POST('shippingStreet');
+                $shipping['shippingCity'] = _POST('shippingCity');
+                $shipping['shippingState'] = _POST('shippingState');
+		$shipping['shippingZip'] = _POST('shippingZip');
+                $shipping['shippingPhone'] = _POST('shippingPhone');
+                
 		/*
 		$products[0]['ItemName'] = 'my item 1'; //Item Name
 		$products[0]['ItemPrice'] = 0.5; //Item Price

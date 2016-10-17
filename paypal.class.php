@@ -58,13 +58,13 @@
 			//Override the buyer's shipping address stored on PayPal, The buyer cannot edit the overridden address.
 			
 			$padata .=	'&ADDROVERRIDE=1';
-			$padata .=	'&PAYMENTREQUEST_0_SHIPTONAME='.urlencode($shipping['shippingName']);
-			$padata .=	'&PAYMENTREQUEST_0_SHIPTOSTREET=1 Main St';
-			$padata .=	'&PAYMENTREQUEST_0_SHIPTOCITY=San Jose';
-			$padata .=	'&PAYMENTREQUEST_0_SHIPTOSTATE=CA';
-			$padata .=	'&PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE=US';
-			$padata .=	'&PAYMENTREQUEST_0_SHIPTOZIP=95131';
-			$padata .=	'&PAYMENTREQUEST_0_SHIPTOPHONENUM=408-967-4444';
+			//$padata .=	'&PAYMENTREQUEST_0_SHIPTONAME='.urlencode($shipping['shippingName']);
+			$padata .=	'&PAYMENTREQUEST_0_SHIPTOSTREET='.urlencode($shipping['shippingStreet']);
+			$padata .=	'&PAYMENTREQUEST_0_SHIPTOCITY='.urlencode($shipping['shippingCity']);
+			$padata .=	'&PAYMENTREQUEST_0_SHIPTOSTATE='.urlencode($shipping['shippingState']);
+			$padata .=	'&PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE='.urlencode($shipping['shippingCountry']);
+			$padata .=	'&PAYMENTREQUEST_0_SHIPTOZIP='.urlencode($shipping['shippingZip']);
+			$padata .=	'&PAYMENTREQUEST_0_SHIPTOPHONENUM='.urlencode($shipping['shippingPhone']);
 			
 			
 						
