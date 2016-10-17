@@ -280,6 +280,22 @@
                                         $Total          = urldecode($httpParsedResponseAr['L_PAYMENTREQUEST_0_AMT'.$i])*$Quantity+50;       // Multipty ammount by quantity and add 50 for total
                                         
                                         $order->addProduct($ProductID, $Price, $UnitShipping, $Quantity, $Total);
+                                        
+                                        // Create product object to decrement number remaining in stock
+                                        $product = new Product($ProductID);
+                                        
+                                        // Determine the number remaining
+                                        $numberRemaining = $product->getQuantity();
+                                        $newQuantity = $numberRemaining-$Quantity; 
+                                        // If new quantity is 0 set status to out of stock
+                                        if ($newQuantity == 0)
+                                        {
+                                            $product->setStatus("Out Of Stock");
+                                        }
+                                        // Set the new Quantity
+                                        $product->setQuantity($newQuantity);
+                                        
+                                        header("Location: orders.php?transid=".urldecode($httpParsedResponseAr["PAYMENTINFO_0_TRANSACTIONID"]));
                                     }
                                     
                                 } catch (Exception $ex) {
