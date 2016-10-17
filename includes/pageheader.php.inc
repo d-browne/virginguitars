@@ -20,7 +20,7 @@ if (isset($_SESSION["currentCustomer"]))
     $dataConnection = $database->getDataConnection();
     
     // Query to count number of items in cart
-    $query = "SELECT SUM(Quantity) As Count FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."';";
+    $query = "SELECT SUM(Quantity) As Count FROM CART_VIEW WHERE CustomerFK='".$_SESSION["currentCustomer"]->getCustomerID()."' AND isDeleted='0' AND Status<>'Out Of Stock';";
     
     // Execute query
     $result = $dataConnection->query($query);
