@@ -6,6 +6,8 @@ $dataConnection = $database->getDataConnection();
 $errorString = '';      // holds the error string
 $customer;              // hold customer object
 
+$updateMemberError = ''; // placeholder for updateMemberError
+
 // check if id supplied
 if (isset($_GET['edit']))
 {
