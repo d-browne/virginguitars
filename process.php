@@ -74,6 +74,29 @@ include_once("paypal.class.php");
                 // Shipping
                 $shipping = [];
                 //$shipping['shippingName'] = _POST('shippingName'); // Get this from customer details
+                
+                // Validate shipping inputs
+                if (iconv_strlen(_POST('shippingStreet')) > 50)
+                {
+                    die("StreetAddress too long");
+                }
+                if (iconv_strlen(_POST('shippingCity')) > 50)
+                {
+                    die("City too long");
+                }
+                if (iconv_strlen(_POST('shippingState')) > 50)
+                {
+                    die("State too long");
+                }
+                if (iconv_strlen(_POST('shippingZip')) > 4)
+                {
+                    die("PostCode too long");
+                }
+                if (iconv_strlen($Country) > 2)
+                {
+                    die("Country too long");
+                }
+                
                 $shipping['shippingStreet'] = _POST('shippingStreet');
                 $shipping['shippingCity'] = _POST('shippingCity');
                 $shipping['shippingState'] = _POST('shippingState');
