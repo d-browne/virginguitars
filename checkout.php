@@ -141,13 +141,13 @@ $dataConnection = $database->getDataConnection();
                 <div id="leftForm" class="formDiv">
                         <fieldset class="checkoutFieldSet" id="checkoutShippingDetails">
                             <legend>Shipping Detials</legend>
-                            <div><label>Street Address:</label><input type="text" name="shippingStreet" required/></div>
-                            <div><label>City:</label><input type="text" name="shippingCity" required/></div>
-                            <div><label>State:</label><input type="text" name="shippingState" required/></div>
-                            <div><label>Post Code:</label><input type="text" name="shippingZip" required/></div>
-                            <div><label>Telephone:</label><input type="text" name="shippingPhone" required/></div>
+                            <div><label>Street Address:</label><input type="text" value="<?php echo $_SESSION['currentCustomer']->getHomeAddress()->getStreetAddress(); ?>" name="shippingStreet" required/></div>
+                            <div><label>City:</label><input type="text" value="<?php echo $_SESSION['currentCustomer']->getHomeAddress()->getCity(); ?>" name="shippingCity" required/></div>
+                            <div><label>State:</label><input type="text" value="<?php $customer = new Customer(); $customer->getHomeAddress(); ?>" name="shippingState" required/></div>
+                            <div><label>Post Code:</label><input type="text" value="<?php echo $_SESSION['currentCustomer']->getHomeAddress()->getPostCode(); ?>" name="shippingZip" required/></div>
+                            <div><label>Telephone:</label><input type="text" value="<?php echo $_SESSION['currentCustomer']->getHomePhone(); ?>" name="shippingPhone" required/></div>
                             <div><label>Country:</label>
-                                <select style="width: 9em; margin-left: -0.35em;" required>
+                                <select style="width: 9em; margin-left: -0.35em;" name="shippingCountry" required>
                                     <option value="AF">Afghanistan</option>
                                     <option value="AX">Åland Islands</option>
                                     <option value="AL">Albania</option>
