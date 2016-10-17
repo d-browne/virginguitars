@@ -34,9 +34,9 @@ $order = new Order($SalesOrderID);
         <fieldset class="inputFieldSet" id="userDetailsFieldset">
             <legend>Customer</legend>
             <div class="inputField"><label>Customer.ID:</label> <input class="textBox" name="customerid" type="text" value="<?php echo $customer->getCustomerID(); ?>" disabled="true"/></div>
-            <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" value="<?php echo $customer->getFirstName(); ?>" disabled="true"/></div>
-            <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" value="<?php echo $customer->getLastName(); ?>" disabled="true"/></div>
-            <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" value="<?php echo $customer->getEmail(); ?>" disabled="true"/></div>
+            <div class="inputField"><label>First Name:</label> <input class="textBox" name="firstname" type="text" value="<?php echo htmlspecialchars($customer->getFirstName()); ?>" disabled="true"/></div>
+            <div class="inputField"><label>Last Name:</label> <input class="textBox" name="lastname" type="text" value="<?php echo htmlspecialchars($customer->getLastName()); ?>" disabled="true"/></div>
+            <div class="inputField"><label>Email:</label> <input class="textBox" name="email" type="email" value="<?php echo htmlspecialchars($customer->getEmail()); ?>" disabled="true"/></div>
             <div class="inputField"><input class="submitButton viewButton" type="button" onclick="window.location.href='admin.php?manageCustomers&edit=<?php echo $customer->getCustomerID(); ?>'" value="View" /></div>
         </fieldset>
     </div>
@@ -52,19 +52,19 @@ $order = new Order($SalesOrderID);
             </tr>
             <tr>
                 <td>
-                    <input type="text" name="streetaddress" placeholder="e.g. 123 Fake Street" value="<?php echo $order->getStreetAddress(); ?>"/>
+                    <input type="text" name="streetaddress" placeholder="e.g. 123 Fake Street" value="<?php echo htmlspecialchars($order->getStreetAddress()); ?>"/>
                 </td>
                 <td>
-                    <input type="text" name="city" placeholder="Sydney" value="<?php echo $order->getCity(); ?>"/>
+                    <input type="text" name="city" placeholder="Sydney" value="<?php echo htmlspecialchars($order->getCity()); ?>"/>
                 </td>
                 <td>
-                    <input type="text" name="state" placeholder="e.g. NSW" value="<?php echo $order->getState(); ?>" />
+                    <input type="text" name="state" placeholder="e.g. NSW" value="<?php echo htmlspecialchars($order->getState()); ?>" />
                 </td>
                 <td>
-                    <input type="text" name="postcode" placeholder="e.g. 2000" value="<?php echo $order->getPostCode(); ?>"/>
+                    <input type="text" name="postcode" placeholder="e.g. 2000" value="<?php echo htmlspecialchars($order->getPostCode()); ?>"/>
                 </td>
                 <td>
-                    <input type="text" name="country" placeholder="Australia" value="<?php echo $order->getCountry(); ?>"/>
+                    <input type="text" name="country" placeholder="Australia" value="<?php echo htmlspecialchars($order->getCountry()); ?>"/>
                 </td>
             </tr>
         </table>
@@ -96,10 +96,10 @@ $order = new Order($SalesOrderID);
                     <span class="tableText greenLink"><?php echo $order->getTotal(); ?></span>
                 </td>
                 <td>
-                    <input type="text" name="shippeddate" placeholder="yyyy-mm-dd" value="<?php echo $order->getShippedDate(); ?>" />
+                    <input type="text" name="shippeddate" placeholder="yyyy-mm-dd" value="<?php echo htmlspecialchars($order->getShippedDate()); ?>" />
                 </td>
                 <td>
-                    <input type="text" name="shippingrecord" placeholder="TN: 234823406" value="<?php echo $order->getShippingRecord(); ?>"/>
+                    <input type="text" name="shippingrecord" placeholder="TN: 234823406" value="<?php echo htmlspecialchars($order->getShippingRecord()); ?>"/>
                 </td>
                 <td>
                     <select name="orderstatus">
