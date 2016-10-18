@@ -22,7 +22,7 @@
 	
 	define('PPL_LANG', 'EN');
 	
-	define('PPL_LOGO_IMG', 'http://www.sanwebe.com/wp-content/themes/sanwebe/img/logo.png');
+	define('PPL_LOGO_IMG', 'http://bytecube.net/vgpplogo.png');
 	
 	define('PPL_RETURN_URL', 'http://localhost/virginguitars/process.php');
 	define('PPL_CANCEL_URL', 'http://localhost/virginguitars/checkout.php');
